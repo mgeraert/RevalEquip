@@ -1,0 +1,63 @@
+#eq_name_label {
+  position: absolute;
+  left: 20px;
+  top: 28px;
+  width: 80px;
+}
+
+#eq_name {
+  position: absolute;
+  left: 100px;
+  top: 28px;
+  width: 500px;
+}
+
+#eq_desc_label {
+  position: absolute;
+  left: 20px;
+  top: 56px;
+  width: 80px;
+}
+
+#eq_desc {
+  position: absolute;
+  left: 100px;
+  top: 56px;
+  width: 800px;
+}
+
+#eq_outcome_label {
+  position: absolute;
+  left: 20px;
+  top: 84px;
+  width: 80px;
+}
+
+#eq_outcome {
+  position: absolute;
+  left: 100px;
+  top: 84px;
+  width: 300px;
+}
+
+#save {
+  position: absolute;
+  left: 700px;
+  top: 112px;
+  width: 100px;
+}
+
+#new {
+  position: absolute;
+  left: 810px;
+  top: 112px;
+  width: 100px;
+}
+
+#delete {
+  position: absolute;
+  left: 920px;
+  top: 112px;
+  width: 100px;
+}
+/*# sourceMappingURL=equipment_form.css.map */

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+
+<style>
+    .loginlabel {
+        width: 120px;
+        font-family: sans-serif;
+        font-weight: bold;
+        display:inline-block;
+    }
+
+    .logintext {
+        width: 200px;
+        font-family: sans-serif;
+    }
+
+    .loginPanel {
+        position: absolute;
+    top: 50%;
+    left: 40%;
+    margin-top: -50px;
+    margin-left: -40px;
+    width: 400px;
+    height: 100px;
+
+    }
+</style>
+
+
+<script>
+    $(document).ready(function () {
+
+    });
+</script>
+
+<head>
+    <meta charset="UTF-8">
+    <title>RevalEquip Login</title>
+</head>
+
+<body>
+
+
+
+
+    <div class="loginPanel">
+        <div style="margin-top: 10px;">
+            <label for="email" class="loginlabel">Email</label>
+            <input type="text" class="logintext" id="email">
+        </div>
+        <div style="margin-top: 10px;">
+            <label for="email" class="loginlabel">Password</label>
+            <input type="text" class="logintext" id="password">
+        </div>
+
+    </div>
+
+</body>
+
+</html>

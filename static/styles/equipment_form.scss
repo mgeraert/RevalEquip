@@ -1,0 +1,69 @@
+
+$margin1: 20px;
+$margin2: 100px;
+$rowSpacing: 28px;
+$ButtonWidth: 100px;
+$ButtonSpacing: 10px;
+
+#eq_name_label{
+    position: absolute;
+    left:$margin1;
+    top:$rowSpacing;
+    width: 80px;
+}
+
+#eq_name{
+    position: absolute;
+    left:$margin2;
+    top:$rowSpacing;
+    width: 500px;
+}
+
+#eq_desc_label{
+    position: absolute;
+    left:$margin1;
+    top:$rowSpacing * 2;
+    width: 80px;
+}
+
+#eq_desc{
+    position: absolute;
+    left:$margin2;
+    top:$rowSpacing * 2;
+    width: 800px;
+}
+
+#eq_outcome_label{
+    position: absolute;
+    left:$margin1;
+    top: $rowSpacing * 3;
+    width: 80px;
+}
+
+#eq_outcome{
+    position: absolute;
+    left:$margin2;
+    top:$rowSpacing * 3;
+    width: 300px;
+}
+
+#save{
+    position: absolute;
+    left:$margin2+600;
+    top:$rowSpacing * 4;
+    width: $ButtonWidth;
+}
+
+#new{
+    position: absolute;
+    left:$margin2+600+ $ButtonWidth + $ButtonSpacing ;
+    top:$rowSpacing * 4;
+    width: $ButtonWidth;
+}
+
+#delete{
+    position: absolute;
+    left:$margin2+600+ 2*($ButtonWidth + $ButtonSpacing);
+    top:$rowSpacing * 4;
+    width: $ButtonWidth;
+}

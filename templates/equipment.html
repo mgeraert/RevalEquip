@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Reval - Equipment</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/revalStyle.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/blue_table.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/equipment_form.css') }}">
+
+  <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+  <script src="{{url_for('static', filename='js/equipment.js')}}"></script>
+
+
+  <!--Font Awesome-->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+  <!--Google Fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+  <!--Kite Menu CSS-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/menu2.css') }}">
+
+</head>
+
+<body>
+
+
+  <!--Start Kite Menu-->
+  {% include 'menu.html' %}
+  <!--End Kite Menu-->
+  <script src="{{url_for('static', filename='js/menu2.js')}}"></script>
+
+
+  <script>
+    $(document).ready(function () {
+      $(".kite-menu").kiteMenu();
+    }); //jQuery
+  </script>
+
+  <div id="equipmentTable" style="width: 1200px;height: 540px;overflow: scroll;margin: auto;padding-top: 10px;"></div>
+
+  <div class="widePanel" style="width:1200px;height:500px;">
+
+    <label id="eq_name_label" for="eq_name" >Name</label>
+    <input id="eq_name" />
+
+    <label id="eq_desc_label" for="eq_desc">Description</label>
+    <input id="eq_desc" />
+
+    <label id="eq_outcome_label" for="eq_outcome">Outcome</label>
+    <input id="eq_outcome"  name="Outcome"  />
+
+    <button id="save" class="mlbutton">Save</button>
+    <button id="new" class="mlbutton">New</button>
+    <button id="delete" class="mlbutton">Delete</button>
+
+  </div>
+
+
+
+
+
+</body>
+
+</html>
