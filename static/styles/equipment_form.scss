@@ -1,69 +1,225 @@
 
 $margin1: 20px;
 $margin2: 100px;
+$widthEqLabel: 140px;
 $rowSpacing: 28px;
+$spaceBetweenLabelAndTextBox: 140px;
 $ButtonWidth: 100px;
 $ButtonSpacing: 10px;
+
+#eq_inventory_number_label{
+    position: absolute;
+    left:$margin1;
+    top:$rowSpacing * 1;
+    width: $widthEqLabel;
+}
+
+#eq_inventory_number{
+    position: absolute;
+    left:$spaceBetweenLabelAndTextBox;
+    top:$rowSpacing * 1;
+    width: 500px;
+}
+
+#eq_label_label{
+    position: absolute;
+    left:$margin1;
+    top:$rowSpacing * 2;
+    width: $widthEqLabel;
+}
+
+#eq_label{
+    position: absolute;
+    left:$spaceBetweenLabelAndTextBox;
+    top:$rowSpacing * 2;
+    width: 500px;
+}
 
 #eq_name_label{
     position: absolute;
     left:$margin1;
-    top:$rowSpacing;
-    width: 80px;
+    top:$rowSpacing * 3;
+    width: $widthEqLabel;
 }
 
 #eq_name{
     position: absolute;
-    left:$margin2;
-    top:$rowSpacing;
+    left:$spaceBetweenLabelAndTextBox;
+    top:$rowSpacing * 3;
+    width: 500px;
+}
+
+#eq_amount_label{
+    position: absolute;
+    left:$margin1;
+    top:$rowSpacing * 4;
+    width: $widthEqLabel;
+}
+
+#eq_amount{
+    position: absolute;
+    left:$spaceBetweenLabelAndTextBox;
+    top:$rowSpacing * 4;
     width: 500px;
 }
 
 #eq_desc_label{
     position: absolute;
     left:$margin1;
-    top:$rowSpacing * 2;
-    width: 80px;
+    top:$rowSpacing * 5;
+    width: $widthEqLabel;
 }
 
 #eq_desc{
     position: absolute;
-    left:$margin2;
-    top:$rowSpacing * 2;
+    left:$spaceBetweenLabelAndTextBox;
+    top:$rowSpacing * 5;
     width: 800px;
 }
 
 #eq_outcome_label{
     position: absolute;
     left:$margin1;
-    top: $rowSpacing * 3;
-    width: 80px;
+    top: $rowSpacing * 6;
+    width: $widthEqLabel;
 }
 
 #eq_outcome{
     position: absolute;
-    left:$margin2;
-    top:$rowSpacing * 3;
+    left:$spaceBetweenLabelAndTextBox;
+    top:$rowSpacing * 6;
+    width: 300px;
+}
+
+#eq_purchase_date_label{
+    position: absolute;
+    left:$margin1;
+    top: $rowSpacing * 7;
+    width: $widthEqLabel;
+}
+
+#eq_purchase_date{
+    position: absolute;
+    left:$spaceBetweenLabelAndTextBox;
+    top:$rowSpacing * 7;
+    width: 300px;
+}
+
+#eq_base_location_label {
+    position: absolute;
+    left:$margin1;
+    top: $rowSpacing * 8;
+    width: $widthEqLabel;
+}
+
+#eq_base_location {
+    position: absolute;
+    left:$spaceBetweenLabelAndTextBox;
+    top:$rowSpacing * 8;
+    width: 300px;
+}
+
+#eq_is_mobile_label {
+    position: absolute;
+    left:$margin1;
+    top: $rowSpacing * 9;
+    width: $widthEqLabel;
+}
+
+#eq_is_mobile {
+    position: absolute;
+    left:$spaceBetweenLabelAndTextBox;
+    top:$rowSpacing * 9;
+    width: 20px;
+}
+
+#eq_owner_id_label {
+    position: absolute;
+    left:$margin1;
+    top: $rowSpacing * 10;
+    width: $widthEqLabel;
+}
+
+#eq_owner_id {
+    position: absolute;
+    left:$spaceBetweenLabelAndTextBox;
+    top:$rowSpacing * 10;
+    width: 300px;
+}
+
+#eq_co_owner_id_label {
+    position: absolute;
+    left:$margin1;
+    top: $rowSpacing * 11;
+    width: $widthEqLabel;
+}
+
+#eq_co_owner_id {
+    position: absolute;
+    left:$spaceBetweenLabelAndTextBox;
+    top:$rowSpacing * 11;
+    width: 300px;
+}
+
+#eq_purchase_price_label {
+    position: absolute;
+    left:$margin1;
+    top: $rowSpacing * 12;
+    width: $widthEqLabel;
+}
+
+#eq_purchase_price{
+    position: absolute;
+    left:$spaceBetweenLabelAndTextBox;
+    top:$rowSpacing * 12;
+    width: 300px;
+}
+
+#eq_annual_cost_label {
+    position: absolute;
+    left:$margin1;
+    top: $rowSpacing * 13;
+    width: $widthEqLabel;
+}
+
+#eq_annual_cost{
+    position: absolute;
+    left:$spaceBetweenLabelAndTextBox;
+    top:$rowSpacing * 13;
+    width: 300px;
+}
+
+#eq_annual_cost_budget_label {
+    position: absolute;
+    left:$margin1;
+    top: $rowSpacing * 14;
+    width: $widthEqLabel;
+}
+
+#eq_annual_cost_budget{
+    position: absolute;
+    left:$spaceBetweenLabelAndTextBox;
+    top:$rowSpacing * 14;
     width: 300px;
 }
 
 #save{
     position: absolute;
     left:$margin2+600;
-    top:$rowSpacing * 4;
+    top:$rowSpacing * 14;
     width: $ButtonWidth;
 }
 
 #new{
     position: absolute;
     left:$margin2+600+ $ButtonWidth + $ButtonSpacing ;
-    top:$rowSpacing * 4;
+    top:$rowSpacing * 14;
     width: $ButtonWidth;
 }
 
 #delete{
     position: absolute;
     left:$margin2+600+ 2*($ButtonWidth + $ButtonSpacing);
-    top:$rowSpacing * 4;
+    top:$rowSpacing * 14;
     width: $ButtonWidth;
 }

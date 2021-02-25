@@ -43,8 +43,17 @@
 
   <div class="widePanel" style="width:1200px;height:500px;">
 
-    <label id="eq_name_label" for="eq_name" >Name</label>
+    <label id="eq_inventory_number_label" for="eq_inventory_number" >Inventory Number</label>
+    <input id="eq_inventory_number" />
+
+    <label id="eq_label_label" for="eq_label">Label</label>
+    <input id="eq_label" />
+
+    <label id="eq_name_label" for="eq_name">Name</label>
     <input id="eq_name" />
+
+    <label id="eq_amount_label" for="eq_amount">Amount</label>
+    <input id="eq_amount" />
 
     <label id="eq_desc_label" for="eq_desc">Description</label>
     <input id="eq_desc" />
@@ -52,8 +61,32 @@
     <label id="eq_outcome_label" for="eq_outcome">Outcome</label>
     <input id="eq_outcome"  name="Outcome"  />
 
-    <button id="save" class="mlbutton">Save</button>
-    <button id="new" class="mlbutton">New</button>
+    <label id="eq_purchase_date_label" for="eq_purchase_date">Purchase Date</label>
+    <input id="eq_purchase_date" />
+
+    <label id="eq_base_location_label" for="eq_base_location">Base Location</label>
+    <input id="eq_base_location" />
+
+    <label id="eq_is_mobile_label" for="eq_is_mobile">Mobile</label>
+    <input type= "checkbox" id="eq_is_mobile" />
+
+    <label id="eq_owner_id_label" for="eq_owner_id">Owner ID</label>
+    <input id="eq_owner_id" />
+
+    <label id="eq_co_owner_id_label" for="eq_co_owner_id">Co-owner ID</label>
+    <input id="eq_co_owner_id" />
+
+    <label id="eq_purchase_price_label" for="eq_purchase_price">Purchase Price</label>
+    <input id="eq_purchase_price" />
+
+    <label id="eq_annual_cost_label" for="eq_annual_cost">Annual Cost</label>
+    <input id="eq_annual_cost" />
+
+    <label id="eq_annual_cost_budget_label" for="eq_annual_cost_budget">Annual Cost Budget</label>
+    <input id="eq_annual_cost_budget" />
+
+    <button id="save" onclick='UpdateEquip()' class="mlbutton">Save</button>
+    <button id="new" onclick='testNew()' class="mlbutton">New</button>
     <button id="delete" class="mlbutton">Delete</button>
 
   </div>
