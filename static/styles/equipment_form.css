@@ -2,216 +2,245 @@
   position: absolute;
   left: 20px;
   top: 28px;
-  width: 140px;
+  width: 130px;
 }
 
 #eq_inventory_number {
   position: absolute;
-  left: 140px;
+  left: 150px;
   top: 28px;
-  width: 500px;
+  width: 420px;
 }
 
 #eq_label_label {
   position: absolute;
-  left: 20px;
-  top: 56px;
-  width: 140px;
+  left: 610px;
+  top: 28px;
+  width: 130px;
 }
 
 #eq_label {
   position: absolute;
-  left: 140px;
-  top: 56px;
-  width: 500px;
+  left: 740px;
+  top: 28px;
+  width: 420px;
 }
 
 #eq_name_label {
   position: absolute;
   left: 20px;
-  top: 84px;
-  width: 140px;
+  top: 70px;
+  width: 130px;
 }
 
 #eq_name {
   position: absolute;
-  left: 140px;
-  top: 84px;
-  width: 500px;
+  left: 150px;
+  top: 70px;
+  width: 420px;
 }
 
 #eq_amount_label {
   position: absolute;
-  left: 20px;
-  top: 112px;
-  width: 140px;
+  left: 610px;
+  top: 70px;
+  width: 130px;
 }
 
 #eq_amount {
   position: absolute;
-  left: 140px;
-  top: 112px;
-  width: 500px;
+  left: 740px;
+  top: 70px;
+  width: 420px;
 }
 
 #eq_desc_label {
   position: absolute;
   left: 20px;
-  top: 140px;
-  width: 140px;
+  top: 98px;
+  width: 130px;
 }
 
 #eq_desc {
   position: absolute;
-  left: 140px;
-  top: 140px;
-  width: 800px;
+  left: 150px;
+  top: 98px;
+  width: 420px;
 }
 
 #eq_outcome_label {
   position: absolute;
-  left: 20px;
-  top: 168px;
-  width: 140px;
+  left: 610px;
+  top: 98px;
+  width: 130px;
 }
 
 #eq_outcome {
   position: absolute;
-  left: 140px;
-  top: 168px;
-  width: 300px;
+  left: 740px;
+  top: 98px;
+  width: 420px;
 }
 
 #eq_purchase_date_label {
   position: absolute;
   left: 20px;
-  top: 196px;
-  width: 140px;
+  top: 140px;
+  width: 130px;
 }
 
 #eq_purchase_date {
   position: absolute;
-  left: 140px;
-  top: 196px;
-  width: 300px;
-}
-
-#eq_base_location_label {
-  position: absolute;
-  left: 20px;
-  top: 224px;
-  width: 140px;
-}
-
-#eq_base_location {
-  position: absolute;
-  left: 140px;
-  top: 224px;
-  width: 300px;
-}
-
-#eq_is_mobile_label {
-  position: absolute;
-  left: 20px;
-  top: 252px;
-  width: 140px;
-}
-
-#eq_is_mobile {
-  position: absolute;
-  left: 140px;
-  top: 252px;
-  width: 20px;
-}
-
-#eq_owner_id_label {
-  position: absolute;
-  left: 20px;
-  top: 280px;
-  width: 140px;
-}
-
-#eq_owner_id {
-  position: absolute;
-  left: 140px;
-  top: 280px;
-  width: 300px;
-}
-
-#eq_co_owner_id_label {
-  position: absolute;
-  left: 20px;
-  top: 308px;
-  width: 140px;
-}
-
-#eq_co_owner_id {
-  position: absolute;
-  left: 140px;
-  top: 308px;
-  width: 300px;
+  left: 150px;
+  top: 140px;
+  width: 420px;
 }
 
 #eq_purchase_price_label {
   position: absolute;
-  left: 20px;
-  top: 336px;
-  width: 140px;
+  left: 610px;
+  top: 140px;
+  width: 130px;
 }
 
 #eq_purchase_price {
   position: absolute;
-  left: 140px;
-  top: 336px;
-  width: 300px;
+  left: 740px;
+  top: 140px;
+  width: 420px;
 }
 
 #eq_annual_cost_label {
   position: absolute;
   left: 20px;
-  top: 364px;
-  width: 140px;
+  top: 168px;
+  width: 130px;
 }
 
 #eq_annual_cost {
   position: absolute;
-  left: 140px;
-  top: 364px;
-  width: 300px;
+  left: 150px;
+  top: 168px;
+  width: 420px;
 }
 
 #eq_annual_cost_budget_label {
   position: absolute;
-  left: 20px;
-  top: 392px;
-  width: 140px;
+  left: 610px;
+  top: 168px;
+  width: 130px;
 }
 
 #eq_annual_cost_budget {
   position: absolute;
-  left: 140px;
-  top: 392px;
-  width: 300px;
+  left: 740px;
+  top: 168px;
+  width: 420px;
 }
 
-#save {
+#eq_base_location_label {
   position: absolute;
-  left: 700px;
+  left: 20px;
+  top: 210px;
+  width: 130px;
+}
+
+#eq_base_location {
+  position: absolute;
+  left: 150px;
+  top: 210px;
+  width: 420px;
+}
+
+#eq_is_mobile_label {
+  position: absolute;
+  left: 610px;
+  top: 210px;
+  width: 130px;
+}
+
+#eq_is_mobile {
+  position: absolute;
+  left: 540px;
+  top: 210px;
+  width: 420px;
+}
+
+#eq_owner_id_label {
+  position: absolute;
+  left: 20px;
+  top: 238px;
+  width: 130px;
+}
+
+#eq_owner_id {
+  position: absolute;
+  left: 150px;
+  top: 238px;
+  width: 420px;
+}
+
+#eq_co_owner_id_label {
+  position: absolute;
+  left: 610px;
+  top: 238px;
+  width: 130px;
+}
+
+#eq_co_owner_id {
+  position: absolute;
+  left: 740px;
+  top: 238px;
+  width: 420px;
+}
+
+#suggestions_owner {
+  position: absolute;
+  left: 150px;
+  top: 257px;
+  width: 420px;
+}
+
+#suggestions_co_owner {
+  position: absolute;
+  left: 740px;
+  top: 257px;
+  width: 420px;
+}
+
+#update {
+  position: absolute;
+  left: 495px;
   top: 392px;
   width: 100px;
 }
 
 #new {
   position: absolute;
-  left: 810px;
-  top: 392px;
+  left: 495px;
+  top: 434px;
+  width: 100px;
+}
+
+#reset {
+  position: absolute;
+  left: 605px;
+  top: 434px;
   width: 100px;
 }
 
 #delete {
   position: absolute;
-  left: 920px;
+  left: 605px;
   top: 392px;
   width: 100px;
+}
+
+#toast_pop_up {
+  left: 495px;
+  width: 210px;
+  position: absolute;
+  background-color: gray;
+  top: 350px;
 }
 /*# sourceMappingURL=equipment_form.css.map */

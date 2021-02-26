@@ -68,13 +68,15 @@
     <input id="eq_base_location" />
 
     <label id="eq_is_mobile_label" for="eq_is_mobile">Mobile</label>
-    <input type= "checkbox" id="eq_is_mobile" />
+    <input type="checkbox" id="eq_is_mobile" />
 
-    <label id="eq_owner_id_label" for="eq_owner_id">Owner ID</label>
-    <input id="eq_owner_id" />
+    <label id="eq_owner_id_label"for="eq_owner_id">Owner ID</label>
+    <input id="eq_owner_id" oninput="updateSuggestionOwner()"/>
+    <div id="suggestions_owner"></div>
 
-    <label id="eq_co_owner_id_label" for="eq_co_owner_id">Co-owner ID</label>
-    <input id="eq_co_owner_id" />
+    <label id="eq_co_owner_id_label"for="eq_co_owner_id">Co-owner ID</label>
+    <input id="eq_co_owner_id" oninput="updateSuggestionCoOwner()" />
+    <div id="suggestions_co_owner"></div>
 
     <label id="eq_purchase_price_label" for="eq_purchase_price">Purchase Price</label>
     <input id="eq_purchase_price" />
@@ -85,15 +87,13 @@
     <label id="eq_annual_cost_budget_label" for="eq_annual_cost_budget">Annual Cost Budget</label>
     <input id="eq_annual_cost_budget" />
 
-    <button id="save" onclick='UpdateEquip()' class="mlbutton">Save</button>
-    <button id="new" onclick='testNew()' class="mlbutton">New</button>
-    <button id="delete" class="mlbutton">Delete</button>
+    <button id="update" onclick="updateEquip()" class="mlbutton">Update</button>
+    <button id="new" onclick="newEquip()" class="mlbutton">New</button>
+    <button id="reset" onclick="resetTextBox()" class="mlbutton">Reset</button>
+    <button id="delete" onclick="deleteEquip()" class="mlbutton">Delete</button>
 
+    <div id="toast_message"></div>
   </div>
-
-
-
-
 
 </body>
 

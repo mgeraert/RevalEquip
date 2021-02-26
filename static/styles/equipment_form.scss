@@ -1,225 +1,257 @@
 
 $margin1: 20px;
 $margin2: 100px;
-$widthEqLabel: 140px;
+$labelWidth: 130px;
 $rowSpacing: 28px;
-$spaceBetweenLabelAndTextBox: 140px;
+$textBoxWidth: 420px;
 $ButtonWidth: 100px;
 $ButtonSpacing: 10px;
+
+$textBoxColumn1Left: $margin1+$labelWidth;
+$labelColumn2Left: $margin1+$labelWidth+$textBoxWidth+2*$margin1;
+$textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidth+2*$margin1+$labelWidth;
 
 #eq_inventory_number_label{
     position: absolute;
     left:$margin1;
     top:$rowSpacing * 1;
-    width: $widthEqLabel;
+    width: $labelWidth;
 }
 
 #eq_inventory_number{
     position: absolute;
-    left:$spaceBetweenLabelAndTextBox;
+    left: $textBoxColumn1Left;
     top:$rowSpacing * 1;
-    width: 500px;
+    width: $textBoxWidth;
 }
 
 #eq_label_label{
     position: absolute;
-    left:$margin1;
-    top:$rowSpacing * 2;
-    width: $widthEqLabel;
+    left: $labelColumn2Left;
+    top:$rowSpacing * 1;
+    width: $labelWidth;
 }
 
 #eq_label{
     position: absolute;
-    left:$spaceBetweenLabelAndTextBox;
-    top:$rowSpacing * 2;
-    width: 500px;
+    left: $textBoxColumn2Left;
+    top:$rowSpacing * 1;
+    width: $textBoxWidth;
 }
 
 #eq_name_label{
     position: absolute;
     left:$margin1;
-    top:$rowSpacing * 3;
-    width: $widthEqLabel;
+    top:$rowSpacing * 2.5;
+    width: $labelWidth;
 }
 
 #eq_name{
     position: absolute;
-    left:$spaceBetweenLabelAndTextBox;
-    top:$rowSpacing * 3;
-    width: 500px;
+    left: $textBoxColumn1Left;
+    top:$rowSpacing * 2.5;
+    width: $textBoxWidth;
 }
 
 #eq_amount_label{
     position: absolute;
-    left:$margin1;
-    top:$rowSpacing * 4;
-    width: $widthEqLabel;
+    left: $labelColumn2Left;
+    top:$rowSpacing * 2.5;
+    width: $labelWidth;
 }
 
 #eq_amount{
     position: absolute;
-    left:$spaceBetweenLabelAndTextBox;
-    top:$rowSpacing * 4;
-    width: 500px;
+    left: $textBoxColumn2Left;
+    top:$rowSpacing * 2.5;
+    width: $textBoxWidth;
 }
 
 #eq_desc_label{
     position: absolute;
     left:$margin1;
-    top:$rowSpacing * 5;
-    width: $widthEqLabel;
+    top:$rowSpacing * 3.5;
+    width: $labelWidth;
 }
 
 #eq_desc{
     position: absolute;
-    left:$spaceBetweenLabelAndTextBox;
-    top:$rowSpacing * 5;
-    width: 800px;
+    left: $textBoxColumn1Left;
+    top:$rowSpacing * 3.5;
+    width: $textBoxWidth;
 }
 
 #eq_outcome_label{
     position: absolute;
-    left:$margin1;
-    top: $rowSpacing * 6;
-    width: $widthEqLabel;
+    left: $labelColumn2Left;
+    top:$rowSpacing * 3.5;
+    width: $labelWidth;
 }
 
 #eq_outcome{
     position: absolute;
-    left:$spaceBetweenLabelAndTextBox;
-    top:$rowSpacing * 6;
-    width: 300px;
+    left: $textBoxColumn2Left;
+    top:$rowSpacing * 3.5;
+    width: $textBoxWidth;
 }
 
 #eq_purchase_date_label{
     position: absolute;
     left:$margin1;
-    top: $rowSpacing * 7;
-    width: $widthEqLabel;
+    top:$rowSpacing * 5;
+    width: $labelWidth;
 }
 
 #eq_purchase_date{
     position: absolute;
-    left:$spaceBetweenLabelAndTextBox;
-    top:$rowSpacing * 7;
-    width: 300px;
-}
-
-#eq_base_location_label {
-    position: absolute;
-    left:$margin1;
-    top: $rowSpacing * 8;
-    width: $widthEqLabel;
-}
-
-#eq_base_location {
-    position: absolute;
-    left:$spaceBetweenLabelAndTextBox;
-    top:$rowSpacing * 8;
-    width: 300px;
-}
-
-#eq_is_mobile_label {
-    position: absolute;
-    left:$margin1;
-    top: $rowSpacing * 9;
-    width: $widthEqLabel;
-}
-
-#eq_is_mobile {
-    position: absolute;
-    left:$spaceBetweenLabelAndTextBox;
-    top:$rowSpacing * 9;
-    width: 20px;
-}
-
-#eq_owner_id_label {
-    position: absolute;
-    left:$margin1;
-    top: $rowSpacing * 10;
-    width: $widthEqLabel;
-}
-
-#eq_owner_id {
-    position: absolute;
-    left:$spaceBetweenLabelAndTextBox;
-    top:$rowSpacing * 10;
-    width: 300px;
-}
-
-#eq_co_owner_id_label {
-    position: absolute;
-    left:$margin1;
-    top: $rowSpacing * 11;
-    width: $widthEqLabel;
-}
-
-#eq_co_owner_id {
-    position: absolute;
-    left:$spaceBetweenLabelAndTextBox;
-    top:$rowSpacing * 11;
-    width: 300px;
+    left: $textBoxColumn1Left;
+    top:$rowSpacing * 5;
+    width: $textBoxWidth;
 }
 
 #eq_purchase_price_label {
     position: absolute;
-    left:$margin1;
-    top: $rowSpacing * 12;
-    width: $widthEqLabel;
+    left: $labelColumn2Left;
+    top:$rowSpacing * 5;
+    width: $labelWidth;
 }
 
 #eq_purchase_price{
     position: absolute;
-    left:$spaceBetweenLabelAndTextBox;
-    top:$rowSpacing * 12;
-    width: 300px;
+    left: $textBoxColumn2Left;
+    top:$rowSpacing * 5;
+    width: $textBoxWidth;
 }
 
 #eq_annual_cost_label {
     position: absolute;
     left:$margin1;
-    top: $rowSpacing * 13;
-    width: $widthEqLabel;
+    top:$rowSpacing * 6;
+    width: $labelWidth;
 }
 
 #eq_annual_cost{
     position: absolute;
-    left:$spaceBetweenLabelAndTextBox;
-    top:$rowSpacing * 13;
-    width: 300px;
+    left: $textBoxColumn1Left;
+    top:$rowSpacing * 6;
+    width: $textBoxWidth;
 }
 
 #eq_annual_cost_budget_label {
     position: absolute;
-    left:$margin1;
-    top: $rowSpacing * 14;
-    width: $widthEqLabel;
+    left: $labelColumn2Left;
+    top:$rowSpacing * 6;
+    width: $labelWidth;
 }
 
 #eq_annual_cost_budget{
     position: absolute;
-    left:$spaceBetweenLabelAndTextBox;
-    top:$rowSpacing * 14;
-    width: 300px;
+    left: $textBoxColumn2Left;
+    top:$rowSpacing * 6;
+    width: $textBoxWidth;
 }
 
-#save{
+#eq_base_location_label {
     position: absolute;
-    left:$margin2+600;
+    left:$margin1;
+    top:$rowSpacing * 7.5;
+    width: $labelWidth;
+}
+
+#eq_base_location {
+    position: absolute;
+    left: $textBoxColumn1Left;
+    top:$rowSpacing * 7.5;
+    width: $textBoxWidth;
+}
+
+#eq_is_mobile_label {
+    position: absolute;
+    left: $labelColumn2Left;
+    top:$rowSpacing * 7.5;
+    width: $labelWidth;
+}
+
+#eq_is_mobile {
+    position: absolute;
+    left: $textBoxColumn2Left - 200px;
+    top:$rowSpacing * 7.5;
+    width: $textBoxWidth;
+}
+
+#eq_owner_id_label {
+    position: absolute;
+    left:$margin1;
+    top:$rowSpacing * 8.5;
+    width: $labelWidth;
+}
+
+#eq_owner_id {
+    position: absolute;
+    left: $textBoxColumn1Left;
+    top:$rowSpacing * 8.5;
+    width: $textBoxWidth;
+}
+
+#eq_co_owner_id_label {
+    position: absolute;
+    left: $labelColumn2Left;
+    top:$rowSpacing * 8.5;
+    width: $labelWidth;
+}
+
+#eq_co_owner_id {
+    position: absolute;
+    left: $textBoxColumn2Left;
+    top:$rowSpacing * 8.5;
+    width: $textBoxWidth;
+}
+
+#suggestions_owner {
+    position: absolute;
+    left: $textBoxColumn1Left;
+    top:$rowSpacing * 9.5 - 9px;
+    width: $textBoxWidth;
+}
+
+#suggestions_co_owner {
+    position: absolute;
+    left: $textBoxColumn2Left;
+    top:$rowSpacing * 9.5 - 9px;
+    width: $textBoxWidth;
+}
+
+#update{
+    position: absolute;
+    left:495px;
     top:$rowSpacing * 14;
     width: $ButtonWidth;
 }
 
 #new{
     position: absolute;
-    left:$margin2+600+ $ButtonWidth + $ButtonSpacing ;
-    top:$rowSpacing * 14;
+    left:495px;
+    top:$rowSpacing * 14 + 32px + $ButtonSpacing;
+    width: $ButtonWidth;
+}
+#reset{
+    position: absolute;
+    left:495px+ $ButtonWidth + $ButtonSpacing ;
+    top:$rowSpacing * 14 + 32px + $ButtonSpacing;
     width: $ButtonWidth;
 }
 
 #delete{
     position: absolute;
-    left:$margin2+600+ 2*($ButtonWidth + $ButtonSpacing);
+    left:495px+ $ButtonWidth + $ButtonSpacing ;
     top:$rowSpacing * 14;
     width: $ButtonWidth;
+}
+
+#toast_pop_up {
+    left:495px;
+    width: $ButtonWidth*2+$ButtonSpacing*1;
+    position: absolute;
+    background-color: gray;
+    top: $rowSpacing*14 - 32px - $ButtonSpacing;
 }
