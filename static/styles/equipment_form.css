@@ -243,4 +243,18 @@
   background-color: gray;
   top: 350px;
 }
+
+.table-sortable th {
+  cursor: pointer;
+}
+
+.table-sortable .th-sort-asc::after {
+  content: "\25b4";
+  margin-left: 4px;
+}
+
+.table-sortable .th-sort-desc::after {
+  content: "\25be";
+  margin-left: 4px;
+}
 /*# sourceMappingURL=equipment_form.css.map */

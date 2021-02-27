@@ -1,7 +1,7 @@
 
 var g_equipment;
 var g_selectedEquipment;
-var g_SelectedRow = -1;
+var g_selectedRow = -1;
 
 var g_owner;
 var g_selectedOwner;
@@ -12,46 +12,48 @@ $(document).ready(function () {
     getEquipment(false);
 });
 
-function getEquipment(selectRow) {
+function getEquipment(enableSelectedRow) {
     $.get("/getEquipment", function (data, status) {
         g_equipment = JSON.parse(data);
         if (g_equipment.length > 0) {
-            tableHTML = "<table class='blueTable'>"
+            tableHTML = "<table id='blue_table' class='blueTable table-sortable'>"
             tableHTML = tableHTML.concat(generateTableHeader());
+            tableHTML = tableHTML.concat("<tbody>");
             $.each(g_equipment, function (i, item) {
                 tableHTML = tableHTML.concat(generateTabelRow(i + 1, item));
             });
+            tableHTML = tableHTML.concat("<tbody>");
             tableHTML = tableHTML.concat("</table>");
 
             $("#equipmentTable").html(tableHTML);
             // addRowHandlers();
-            if (selectRow) {
-                selectRowEquipment(g_SelectedRow);
+            if (enableSelectedRow) {
+                selectRowEquipment(g_selectedRow);
             }
         }
     });
 }
 
 function generateTableHeader() {
-    out = "<tr>";
+    out = "<thead><tr>";
 
-    out = out.concat('<th>');
+    out = out.concat("<th onclick='sortColumnEquipment(0)'>");
     out = out.concat("#");
     out = out.concat("</th>");
 
-    out = out.concat('<th>');
+    out = out.concat("<th onclick='sortColumnEquipment(1)'>");
     out = out.concat('Name');
     out = out.concat("</th>");
 
-    out = out.concat('<th>');
+    out = out.concat("<th onclick='sortColumnEquipment(2)'>");
     out = out.concat('Outcome');
     out = out.concat("</th>");
 
-    out = out.concat('<th>');
+    out = out.concat("<th onclick='sortColumnEquipment(3)'>");
     out = out.concat('Purchase Price');
     out = out.concat("</th>");
 
-    out = out.concat("</tr>");
+    out = out.concat("</tr></thead>");
 
     return out;
 }
@@ -59,7 +61,7 @@ function generateTableHeader() {
 
 function generateTabelRow(rownNr, equipment) {
 
-    out = "<tr onclick='selectRowEquipment(" + rownNr.toString() + ")'>";
+    out = "<tr onclick='selectRowEquipment(this)'>";
 
     out = out.concat('<td>');
     out = out.concat(getTableDiv(rownNr.toString(), 32, rownNr));
@@ -88,24 +90,29 @@ function getTableDiv(content, width, rownNr) {
         content = '';
     }
 
-    out = '<div style="overflow:hidden; width:' + width.toString() + 'px;';
-    out = out.concat('title:"' + content + '"');
-    out = out.concat(' onclick="">');
+    out = '<div style="overflow:hidden; width:' + width.toString() + 'px;">';
     out = out.concat(content);
     out = out.concat('</div>');
     return out;
 }
 
-function selectRowEquipment(rownNr) {
+function selectRowEquipment(row) {
+    if(typeof row == 'number') {
+        rownNr = row
+    } else {
+        rownNr = row.rowIndex;
+    }
+    
     var table = document.getElementById("equipmentTable");
     var rows = table.getElementsByTagName("tr");
-    if (g_SelectedRow > -1) {
-        PreviouslyselectedRow = rows[g_SelectedRow];
-        selectedRow.style.backgroundColor = null;
+
+    if (g_selectedRow > -1 && g_selectedRow < rows.length) {
+        previouslySelectedRow = rows[g_selectedRow];
+        previouslySelectedRow.style.backgroundColor = null;
     }
     selectedRow = rows[rownNr];
     selectedRow.style.backgroundColor = '#A7DF62';
-    g_SelectedRow = rownNr;
+    g_selectedRow = rownNr;
     g_selectedEquipment = g_equipment[rownNr - 1];
     $("#eq_inventory_number").val(g_selectedEquipment.equipment_inventory_number);
     $("#eq_label").val(g_selectedEquipment.equipment_label);
@@ -229,7 +236,7 @@ function updateEquip() {
     var equipment_annual_cost_budget = $("#eq_annual_cost_budget").val();
     argString = argString + "&equipment_annual_cost_budget=" + equipment_annual_cost_budget;
 
-    if (g_SelectedRow > -1) {
+    if (g_selectedRow > -1) {
         $.get("/updateEquipment" + argString, function (data, status) {
             if (data.localeCompare("http200") == 0) {
                 getEquipment(true);
@@ -469,4 +476,55 @@ function deleteEquip() {
             showToast('ID:' + ID + ' is verwijderd', '#B04934');
         }
     });
+}
+
+// https://www.youtube.com/watch?v=8SL_hM1a0yo
+function sortTableByColumn(inputType, table, column, asc = true) {
+    const dirModifier = asc ? 1 : -1;
+    const tBody = table.tBodies[0];
+    const rows = Array.from(tBody.querySelectorAll("tr"));
+    
+    // sort each row
+    const sortedRows = rows.sort((a, b) => {
+        if (inputType == "names") {
+            const aColText = a.querySelector(`td:nth-child(${column+1})`).textContent.trim();
+            const bColText = b.querySelector(`td:nth-child(${column+1})`).textContent.trim();
+            return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
+        } else {
+            const aColText = a.querySelector(`td:nth-child(${column+1})`).textContent.trim();
+            const bColText = b.querySelector(`td:nth-child(${column+1})`).textContent.trim();
+            return parseFloat(aColText) > parseFloat(bColText) ? (1 * dirModifier) : (-1 * dirModifier);
+        }
+    });
+    
+    // remove all resisting tr from table
+    while (tBody.firstChild) {
+        tBody.removeChild(tBody.firstChild);
+    }
+
+    // add sorted rows
+    tBody.append(...sortedRows);
+
+    // remember current sorting type (asc or decs)
+    table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
+    table.querySelector(`th:nth-child(${column+1})`).classList.toggle("th-sort-asc", asc);
+    table.querySelector(`th:nth-child(${column+1})`).classList.toggle("th-sort-desc", !asc);
+}
+
+function sortColumnEquipment(column) {
+    var inputType;
+    if (column == 0) {
+        inputType = "numbers";
+    } else {
+        inputType = "names";
+    }
+    var table = document.querySelector("table");
+    var currentIsAscending = table.querySelectorAll("th")[column].className;
+    if (currentIsAscending == "") {
+        sortTableByColumn(inputType, table, column);
+    } else if (currentIsAscending == "th-sort-desc") {
+        sortTableByColumn(inputType, table, column, true);
+    } else {
+        sortTableByColumn(inputType, table, column, false);
+    }
 }

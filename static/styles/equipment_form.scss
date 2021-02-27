@@ -255,3 +255,17 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidth+2*$margin1+$labelWidth;
     background-color: gray;
     top: $rowSpacing*14 - 32px - $ButtonSpacing;
 }
+
+.table-sortable th {
+    cursor: pointer;
+}
+
+.table-sortable .th-sort-asc::after {
+    content: "\25b4";
+    margin-left: 4px;
+}
+
+.table-sortable .th-sort-desc::after {
+    content: "\25be";
+    margin-left: 4px;
+}

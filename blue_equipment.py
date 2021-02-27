@@ -203,7 +203,7 @@ def delete_equipment():
     c = db.conn.cursor()
     c.execute(sql)
     db.conn.commit()
-    
+
     c.close()
     return 'http200'
 
