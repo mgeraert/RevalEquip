@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Reval - Users</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/revalStyle.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/blue_table.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/users_form.css') }}">
+
+  <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+  <script src="{{url_for('static', filename='js/users.js')}}"></script>
+
+
+  <!--Font Awesome-->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+  <!--Google Fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+  <!--Kite Menu CSS-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/menu2.css') }}">
+
+</head>
+
+<body>
+
+
+  <!--Start Kite Menu-->
+  {% include 'menu.html' %}
+  <!--End Kite Menu-->
+  <script src="{{url_for('static', filename='js/menu2.js')}}"></script>
+
+
+  <script>
+    $(document).ready(function () {
+      $(".kite-menu").kiteMenu();
+    }); //jQuery
+  </script>
+
+  <div id="usersTable" style="width: 1200px;height: 540px;overflow: scroll;margin: auto;padding-top: 10px;"></div>
+
+ <div class="widePanel" style="width:1200px;height:500px;">
+
+    <label id="user_last_name_label" for="user_last_name" >Last name</label>
+    <input id="user_last_name" />
+
+    <label id="user_name_label" for="user_name">Name</label>
+    <input id="user_name" />
+
+    <label id="user_sex_label" for="user_sex">Sex</label>
+    <input id="user_sex" />
+
+    <label id="user_is_pi_label" for="user_is_pi">Pi</label>
+    <input id="user_is_pi" type="checkbox"/>
+
+    <label id="user_is_phd_label" for="user_is_phd">PhD</label>
+    <input id="user_is_phd" type="checkbox"/>
+
+    <label id="user_title_label" for="user_title">Title</label>
+    <input id="user_title" />
+
+    <label id="user_category_label" for="user_category">Category</label>
+    <input id="user_category" />
+
+    <label id="user_function_label" for="user_function">Function</label>
+    <input id="user_function"/>
+
+    <label id="user_email_label" for="user_email">Email</label>
+    <input id="user_email" />
+
+    <label id="user_home_address_label" for="user_home_address">Home Address</label>
+    <input id="user_home_address" />
+
+    <label id="user_telephone_label" for="user_telephone">Telephone</label>
+    <input id="user_telephone" />
+
+    <label id="user_private_phone_label" for="user_private_phone">Private Phone</label>
+    <input id="user_private_phone" />
+
+    <label id="user_in_date_label" for="user_in_date">In Date</label>
+    <input id="user_in_date" />
+
+    <label id="user_out_date_label" for="user_out_date">Out Date</label>
+    <input id="user_out_date" />
+
+    <label id="user_pw_hash_label" for="user_pw_hash">Password Hash</label>
+    <input id="user_pw_hash" />
+
+    <label id="user_alternative_ID_label" for="user_alternative_ID">Alternative ID</label>
+    <input id="user_alternative_ID" />
+
+    <button id="update" onclick="updateUser()" class="mlbutton">Update</button>
+    <button id="new" onclick="newUser()" class="mlbutton">New</button>
+    <button id="reset" onclick="resetTextBox()" class="mlbutton">Reset</button>
+    <button id="delete" onclick="deleteUser()" class="mlbutton">Delete</button>
+
+    <div id="toast_message"></div>
+  </div>
+
+</body>
+
+</html>

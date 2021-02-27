@@ -3,7 +3,7 @@ $margin1: 20px;
 $margin2: 100px;
 $labelWidth: 130px;
 $rowSpacing: 28px;
-$textBoxWidth: 420px;
+$textBoxWidth: 430px;
 $ButtonWidth: 100px;
 $ButtonSpacing: 10px;
 
@@ -174,9 +174,10 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidth+2*$margin1+$labelWidth;
 
 #eq_is_mobile {
     position: absolute;
-    left: $textBoxColumn2Left - 200px;
+    left: $textBoxColumn2Left;
     top:$rowSpacing * 7.5;
-    width: $textBoxWidth;
+    height: 15px;
+    width: 15px;
 }
 
 #eq_owner_id_label {
@@ -253,7 +254,7 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidth+2*$margin1+$labelWidth;
     width: $ButtonWidth*2+$ButtonSpacing*1;
     position: absolute;
     background-color: gray;
-    top: $rowSpacing*14 - 32px - $ButtonSpacing;
+    top: $rowSpacing*14 - 50px - $ButtonSpacing;
 }
 
 .table-sortable th {

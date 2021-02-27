@@ -1,211 +1,226 @@
-#eq_inventory_number_label {
+#user_last_name_label {
   position: absolute;
   left: 20px;
   top: 28px;
   width: 130px;
 }
 
-#eq_inventory_number {
+#user_last_name {
   position: absolute;
   left: 150px;
   top: 28px;
   width: 430px;
 }
 
-#eq_label_label {
+#user_name_label {
   position: absolute;
   left: 620px;
   top: 28px;
   width: 130px;
 }
 
-#eq_label {
+#user_name {
   position: absolute;
   left: 750px;
   top: 28px;
   width: 430px;
 }
 
-#eq_name_label {
+#user_sex_label {
   position: absolute;
   left: 20px;
-  top: 70px;
+  top: 56px;
   width: 130px;
 }
 
-#eq_name {
+#user_sex {
   position: absolute;
   left: 150px;
-  top: 70px;
-  width: 430px;
+  top: 56px;
+  width: 230px;
 }
 
-#eq_amount_label {
+#user_is_pi_label {
   position: absolute;
-  left: 620px;
-  top: 70px;
+  left: 420px;
+  top: 56px;
   width: 130px;
 }
 
-#eq_amount {
+#user_is_pi {
   position: absolute;
-  left: 750px;
-  top: 70px;
-  width: 430px;
-}
-
-#eq_desc_label {
-  position: absolute;
-  left: 20px;
-  top: 98px;
-  width: 130px;
-}
-
-#eq_desc {
-  position: absolute;
-  left: 150px;
-  top: 98px;
-  width: 430px;
-}
-
-#eq_outcome_label {
-  position: absolute;
-  left: 620px;
-  top: 98px;
-  width: 130px;
-}
-
-#eq_outcome {
-  position: absolute;
-  left: 750px;
-  top: 98px;
-  width: 430px;
-}
-
-#eq_purchase_date_label {
-  position: absolute;
-  left: 20px;
-  top: 140px;
-  width: 130px;
-}
-
-#eq_purchase_date {
-  position: absolute;
-  left: 150px;
-  top: 140px;
-  width: 430px;
-}
-
-#eq_purchase_price_label {
-  position: absolute;
-  left: 620px;
-  top: 140px;
-  width: 130px;
-}
-
-#eq_purchase_price {
-  position: absolute;
-  left: 750px;
-  top: 140px;
-  width: 430px;
-}
-
-#eq_annual_cost_label {
-  position: absolute;
-  left: 20px;
-  top: 168px;
-  width: 130px;
-}
-
-#eq_annual_cost {
-  position: absolute;
-  left: 150px;
-  top: 168px;
-  width: 430px;
-}
-
-#eq_annual_cost_budget_label {
-  position: absolute;
-  left: 620px;
-  top: 168px;
-  width: 130px;
-}
-
-#eq_annual_cost_budget {
-  position: absolute;
-  left: 750px;
-  top: 168px;
-  width: 430px;
-}
-
-#eq_base_location_label {
-  position: absolute;
-  left: 20px;
-  top: 210px;
-  width: 130px;
-}
-
-#eq_base_location {
-  position: absolute;
-  left: 150px;
-  top: 210px;
-  width: 430px;
-}
-
-#eq_is_mobile_label {
-  position: absolute;
-  left: 620px;
-  top: 210px;
-  width: 130px;
-}
-
-#eq_is_mobile {
-  position: absolute;
-  left: 750px;
-  top: 210px;
+  left: 550px;
+  top: 56px;
   height: 15px;
   width: 15px;
 }
 
-#eq_owner_id_label {
+#user_is_phd_label {
+  position: absolute;
+  left: 820px;
+  top: 56px;
+  width: 130px;
+}
+
+#user_is_phd {
+  position: absolute;
+  left: 950px;
+  top: 56px;
+  height: 15px;
+  width: 15px;
+}
+
+#user_title_label {
   position: absolute;
   left: 20px;
-  top: 238px;
+  top: 84px;
   width: 130px;
 }
 
-#eq_owner_id {
+#user_title {
   position: absolute;
   left: 150px;
-  top: 238px;
+  top: 84px;
+  width: 230px;
+}
+
+#user_category_label {
+  position: absolute;
+  left: 420px;
+  top: 84px;
+  width: 130px;
+}
+
+#user_category {
+  position: absolute;
+  left: 550px;
+  top: 84px;
+  width: 230px;
+}
+
+#user_function_label {
+  position: absolute;
+  left: 820px;
+  top: 84px;
+  width: 130px;
+}
+
+#user_function {
+  position: absolute;
+  left: 950px;
+  top: 84px;
+  width: 230px;
+}
+
+#user_email_label {
+  position: absolute;
+  left: 20px;
+  top: 112px;
+  width: 130px;
+}
+
+#user_email {
+  position: absolute;
+  left: 150px;
+  top: 112px;
   width: 430px;
 }
 
-#eq_co_owner_id_label {
+#user_home_address_label {
   position: absolute;
   left: 620px;
-  top: 238px;
+  top: 112px;
   width: 130px;
 }
 
-#eq_co_owner_id {
+#user_home_address {
   position: absolute;
   left: 750px;
-  top: 238px;
+  top: 112px;
   width: 430px;
 }
 
-#suggestions_owner {
+#user_telephone_label {
+  position: absolute;
+  left: 20px;
+  top: 140px;
+  width: 130px;
+}
+
+#user_telephone {
   position: absolute;
   left: 150px;
-  top: 257px;
+  top: 140px;
   width: 430px;
 }
 
-#suggestions_co_owner {
+#user_private_phone_label {
+  position: absolute;
+  left: 620px;
+  top: 140px;
+  width: 130px;
+}
+
+#user_private_phone {
   position: absolute;
   left: 750px;
-  top: 257px;
+  top: 140px;
+  width: 430px;
+}
+
+#user_in_date_label {
+  position: absolute;
+  left: 20px;
+  top: 168px;
+  width: 130px;
+}
+
+#user_in_date {
+  position: absolute;
+  left: 150px;
+  top: 168px;
+  width: 430px;
+}
+
+#user_out_date_label {
+  position: absolute;
+  left: 620px;
+  top: 168px;
+  width: 130px;
+}
+
+#user_out_date {
+  position: absolute;
+  left: 750px;
+  top: 168px;
+  width: 430px;
+}
+
+#user_pw_hash_label {
+  position: absolute;
+  left: 20px;
+  top: 210px;
+  width: 130px;
+}
+
+#user_pw_hash {
+  position: absolute;
+  left: 150px;
+  top: 210px;
+  width: 430px;
+}
+
+#user_alternative_ID_label {
+  position: absolute;
+  left: 620px;
+  top: 210px;
+  width: 130px;
+}
+
+#user_alternative_ID {
+  position: absolute;
+  left: 750px;
+  top: 210px;
   width: 430px;
 }
 
@@ -258,4 +273,4 @@
   content: "\25be";
   margin-left: 4px;
 }
-/*# sourceMappingURL=equipment_form.css.map */
+/*# sourceMappingURL=users_form.css.map */

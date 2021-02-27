@@ -9,10 +9,10 @@ var g_coOwner;
 var g_selectedCoOwner;
 
 $(document).ready(function () {
-    getEquipment(false);
+    getEquipment();
 });
 
-function getEquipment(enableSelectedRow) {
+function getEquipment(enableSelectedRow = false, enableSort = false, sortAsc = false, sortColumn = 0) {
     $.get("/getEquipment", function (data, status) {
         g_equipment = JSON.parse(data);
         if (g_equipment.length > 0) {
@@ -27,6 +27,9 @@ function getEquipment(enableSelectedRow) {
 
             $("#equipmentTable").html(tableHTML);
             // addRowHandlers();
+            if (enableSort) {
+                sortTableByColumn(document.querySelector("table"), sortColumn, sortAsc);
+            }
             if (enableSelectedRow) {
                 selectRowEquipment(g_selectedRow);
             }
@@ -98,22 +101,27 @@ function getTableDiv(content, width, rownNr) {
 
 function selectRowEquipment(row) {
     if(typeof row == 'number') {
-        rownNr = row
+        rowNr = row
     } else {
-        rownNr = row.rowIndex;
+        rowNr = row.rowIndex;
     }
+
+    var rowNr_data = getJSONFromTable(rowNr);
     
     var table = document.getElementById("equipmentTable");
     var rows = table.getElementsByTagName("tr");
 
     if (g_selectedRow > -1 && g_selectedRow < rows.length) {
-        previouslySelectedRow = rows[g_selectedRow];
-        previouslySelectedRow.style.backgroundColor = null;
+        var table_temp = document.querySelector("table");
+        const tBody = table_temp.tBodies[0];
+        const rows_temp = Array.from(tBody.querySelectorAll("tr"));
+        rows_temp.forEach(tr => tr.style.backgroundColor = null);
     }
-    selectedRow = rows[rownNr];
+    selectedRow = rows[rowNr];
     selectedRow.style.backgroundColor = '#A7DF62';
-    g_selectedRow = rownNr;
-    g_selectedEquipment = g_equipment[rownNr - 1];
+    g_selectedRow = rowNr;
+    g_selectedEquipment = g_equipment[rowNr_data - 1];
+
     $("#eq_inventory_number").val(g_selectedEquipment.equipment_inventory_number);
     $("#eq_label").val(g_selectedEquipment.equipment_label);
     $("#eq_name").val(g_selectedEquipment.equipment_name);
@@ -239,8 +247,28 @@ function updateEquip() {
     if (g_selectedRow > -1) {
         $.get("/updateEquipment" + argString, function (data, status) {
             if (data.localeCompare("http200") == 0) {
-                getEquipment(true);
                 showToast('Equipment is geupdate', '#5DB034');
+
+                var table_temp = document.querySelector("table");
+                const tHead = table_temp.tHead;
+                var column = '';
+                tHead.querySelectorAll("th").forEach(th => {
+                    if (th.classList.contains("th-sort-asc") == true || th.classList.contains("th-sort-desc")) {
+                        column = th;
+                    }
+                });
+                if (column != '') {
+                    var columnNr = parseInt(getNumbersFromString(column.getAttribute('onclick'))[0]);
+                    if (column.classList[0] == "th-sort-asc") {
+                        getEquipment(true, true, true, columnNr)
+                    } else{
+                        getEquipment(true, true, false, columnNr)
+                    }
+                } else {
+                    getEquipment(true);
+                }
+                
+
             }
         });
     }
@@ -304,7 +332,6 @@ function selectRowOwner(rownNr) {
         $("#eq_owner_id").val(g_selectedOwner.user_last_name + ' ' + g_selectedOwner.user_name);
         $("#suggestions_owner").empty();
     }
-    console.log(g_selectedOwner)
 }
 
 function updateSuggestionCoOwner() {
@@ -365,12 +392,10 @@ function selectRowCoOwner(rownNr) {
         $("#eq_co_owner_id").val(g_selectedCoOwner.user_last_name + ' ' + g_selectedCoOwner.user_name);
         $("#suggestions_co_owner").empty();
     }
-    console.log(g_selectedCoOwner)
 }
 
 function showToast(text, color){
     const toastHTML = `<div id="toast_pop_up" style="background-color:${color};" class="mlbutton">${text}</div>`;
-    console.log(toastHTML);
 
     $("#toast_message").html(toastHTML);
 
@@ -397,7 +422,7 @@ function resetTextBox(){
     $("#eq_annual_cost").val("");
     $("#eq_annual_cost_budget").val("");
 
-    getEquipment(false);
+    getEquipment();
     showToast('Velden gereset', '#349BB0');
 }
 
@@ -456,11 +481,9 @@ function newEquip() {
     var equipment_annual_cost_budget = $("#eq_annual_cost_budget").val();
     argString = argString + "&equipment_annual_cost_budget=" + equipment_annual_cost_budget;
 
-    console.log(argString);
-
     $.get("/newEquipment" + argString, function (data, status) {
         if (data.localeCompare("http200") == 0) {
-            getEquipment(false);
+            getEquipment();
             showToast('Nieuw equipment is aangemaakt', '#8734B0');
         }
     });
@@ -472,18 +495,44 @@ function deleteEquip() {
 
     $.get("/deleteEquipment" + argString, function (data, status) {
         if (data.localeCompare("http200") == 0) {
-            getEquipment(false);
             showToast('ID:' + ID + ' is verwijderd', '#B04934');
+
+            var table_temp = document.querySelector("table");
+            const tHead = table_temp.tHead;
+            var column = '';
+            tHead.querySelectorAll("th").forEach(th => {
+                if (th.classList.contains("th-sort-asc") == true || th.classList.contains("th-sort-desc")) {
+                    column = th;
+                }
+            });
+            if (column != '') {
+                var columnNr = parseInt(getNumbersFromString(column.getAttribute('onclick'))[0]);
+                if (column.classList[0] == "th-sort-asc") {
+                    getUsers(false, true, true, columnNr)
+                } else{
+                    getUsers(false, true, false, columnNr)
+                }
+            } else {
+                getUsers();
+            }
         }
     });
 }
 
 // https://www.youtube.com/watch?v=8SL_hM1a0yo
-function sortTableByColumn(inputType, table, column, asc = true) {
+function sortTableByColumn(table, column, asc = true) {
     const dirModifier = asc ? 1 : -1;
     const tBody = table.tBodies[0];
     const rows = Array.from(tBody.querySelectorAll("tr"));
     
+    var inputType;
+    if (column == 0) {
+        inputType = "numbers";
+    } else {
+        inputType = "names";
+    }
+
+    console.log(rows);
     // sort each row
     const sortedRows = rows.sort((a, b) => {
         if (inputType == "names") {
@@ -512,19 +561,35 @@ function sortTableByColumn(inputType, table, column, asc = true) {
 }
 
 function sortColumnEquipment(column) {
-    var inputType;
-    if (column == 0) {
-        inputType = "numbers";
-    } else {
-        inputType = "names";
-    }
     var table = document.querySelector("table");
     var currentIsAscending = table.querySelectorAll("th")[column].className;
     if (currentIsAscending == "") {
-        sortTableByColumn(inputType, table, column);
+        sortTableByColumn(table, column);
     } else if (currentIsAscending == "th-sort-desc") {
-        sortTableByColumn(inputType, table, column, true);
+        sortTableByColumn(table, column, true);
     } else {
-        sortTableByColumn(inputType, table, column, false);
+        sortTableByColumn(table, column, false);
     }
+}
+
+function getJSONFromTable(rowNr) {
+    var table = document.getElementById('blue_table').tBodies[0];
+    var jsonArr = [];
+    for(var i =0,row;row = table.rows[i];i++){
+         var col = row.cells;
+         var jsonObj = {
+             elem : col[0].innerHTML
+           }
+  
+        jsonArr.push(jsonObj);
+    }
+
+    var ID = getNumbersFromString(jsonArr[rowNr-1].elem)[1];
+    return ID;
+}
+
+function getNumbersFromString(string) {    
+    var regex = /\d+/g;
+    var matches = string.match(regex);
+    return matches;
 }

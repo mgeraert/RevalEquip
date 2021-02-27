@@ -21,9 +21,9 @@ db.create_db()
 def beneden():
     return 'Hi'
 
-@app.route("/user")
+@app.route("/users")
 def user():
-    return render_template('user.html')
+    return render_template('users.html')
 
 @app.route("/test")
 def test():

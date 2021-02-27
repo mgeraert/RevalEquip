@@ -1,0 +1,288 @@
+
+$margin1: 20px;
+$margin2: 100px;
+$labelWidth: 130px;
+$rowSpacing: 28px;
+$textBoxWidthSmall: 230px;
+$textBoxWidthLarge: 430px;
+$ButtonWidth: 100px;
+$ButtonSpacing: 10px;
+
+$textBoxColumn1Left: $margin1+$labelWidth;
+$labelColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1;
+$textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWidth;
+
+#user_last_name_label{
+    position: absolute;
+    left:$margin1;
+    top:$rowSpacing * 1;
+    width: $labelWidth;
+}
+
+#user_last_name{
+    position: absolute;
+    left: $textBoxColumn1Left;
+    top:$rowSpacing * 1;
+    width: $textBoxWidthLarge;
+}
+
+#user_name_label{
+    position: absolute;
+    left: $labelColumn2Left;
+    top:$rowSpacing * 1;
+    width: $labelWidth;
+}
+
+#user_name{
+    position: absolute;
+    left: $textBoxColumn2Left;
+    top:$rowSpacing * 1;
+    width: $textBoxWidthLarge;
+}
+
+#user_sex_label{
+    position: absolute;
+    left:$margin1;
+    top:$rowSpacing * 2;
+    width: $labelWidth;
+}
+
+#user_sex{
+    position: absolute;
+    left: $textBoxColumn1Left;
+    top:$rowSpacing * 2;
+    width: $textBoxWidthSmall;
+}
+
+#user_is_pi_label{
+    position: absolute;
+    left:$margin1+$labelWidth+$textBoxWidthSmall+2*$margin1;
+    top:$rowSpacing * 2;
+    width: $labelWidth;
+}
+
+#user_is_pi{
+    position: absolute;
+    left: $margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth;
+    top:$rowSpacing * 2;
+    height: 15px;
+    width: 15px;
+}
+
+#user_is_phd_label{
+    position: absolute;
+    left: $margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth+$textBoxWidthSmall+2*$margin1;
+    top:$rowSpacing * 2;
+    width: $labelWidth;
+}
+
+#user_is_phd{
+    position: absolute;
+    left: $margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth;
+    top:$rowSpacing * 2;
+    height: 15px;
+    width: 15px;
+}
+
+#user_title_label{
+    position: absolute;
+    left:$margin1;
+    top:$rowSpacing * 3;
+    width: $labelWidth;
+}
+
+#user_title{
+    position: absolute;
+    left: $textBoxColumn1Left;
+    top:$rowSpacing * 3;
+    width: $textBoxWidthSmall;
+}
+
+#user_category_label{
+    position: absolute;
+    left:$margin1+$labelWidth+$textBoxWidthSmall+2*$margin1;
+    top:$rowSpacing * 3;
+    width: $labelWidth;
+}
+
+#user_category{
+    position: absolute;
+    left: $margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth;
+    top:$rowSpacing * 3;
+    width: $textBoxWidthSmall;
+}
+
+#user_function_label{
+    position: absolute;
+    left: $margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth+$textBoxWidthSmall+2*$margin1;
+    top:$rowSpacing * 3;
+    width: $labelWidth;
+}
+
+#user_function{
+    position: absolute;
+    left: $margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth;
+    top:$rowSpacing * 3;
+    width: $textBoxWidthSmall;
+}
+
+#user_email_label{
+    position: absolute;
+    left:$margin1;
+    top:$rowSpacing * 4;
+    width: $labelWidth;
+}
+
+#user_email{
+    position: absolute;
+    left: $textBoxColumn1Left;
+    top:$rowSpacing * 4;
+    width: $textBoxWidthLarge;
+}
+
+#user_home_address_label{
+    position: absolute;
+    left: $labelColumn2Left;
+    top:$rowSpacing * 4;
+    width: $labelWidth;
+}
+
+#user_home_address{
+    position: absolute;
+    left: $textBoxColumn2Left;
+    top:$rowSpacing * 4;
+    width: $textBoxWidthLarge;
+}
+
+#user_telephone_label{
+    position: absolute;
+    left:$margin1;
+    top:$rowSpacing * 5;
+    width: $labelWidth;
+}
+
+#user_telephone{
+    position: absolute;
+    left: $textBoxColumn1Left;
+    top:$rowSpacing * 5;
+    width: $textBoxWidthLarge;
+}
+
+#user_private_phone_label{
+    position: absolute;
+    left: $labelColumn2Left;
+    top:$rowSpacing * 5;
+    width: $labelWidth;
+}
+
+#user_private_phone{
+    position: absolute;
+    left: $textBoxColumn2Left;
+    top:$rowSpacing * 5;
+    width: $textBoxWidthLarge;
+}
+
+#user_in_date_label{
+    position: absolute;
+    left:$margin1;
+    top:$rowSpacing * 6;
+    width: $labelWidth;
+}
+
+#user_in_date{
+    position: absolute;
+    left: $textBoxColumn1Left;
+    top:$rowSpacing * 6;
+    width: $textBoxWidthLarge;
+}
+
+#user_out_date_label{
+    position: absolute;
+    left: $labelColumn2Left;
+    top:$rowSpacing * 6;
+    width: $labelWidth;
+}
+
+#user_out_date{
+    position: absolute;
+    left: $textBoxColumn2Left;
+    top:$rowSpacing * 6;
+    width: $textBoxWidthLarge;
+}
+
+#user_pw_hash_label{
+    position: absolute;
+    left:$margin1;
+    top:$rowSpacing * 7.5;
+    width: $labelWidth;
+}
+
+#user_pw_hash{
+    position: absolute;
+    left: $textBoxColumn1Left;
+    top:$rowSpacing * 7.5;
+    width: $textBoxWidthLarge;
+}
+
+#user_alternative_ID_label{
+    position: absolute;
+    left: $labelColumn2Left;
+    top:$rowSpacing * 7.5;
+    width: $labelWidth;
+}
+
+#user_alternative_ID{
+    position: absolute;
+    left: $textBoxColumn2Left;
+    top:$rowSpacing * 7.5;
+    width: $textBoxWidthLarge;
+}
+
+#update{
+    position: absolute;
+    left:495px;
+    top:$rowSpacing * 14;
+    width: $ButtonWidth;
+}
+
+#new{
+    position: absolute;
+    left:495px;
+    top:$rowSpacing * 14 + 32px + $ButtonSpacing;
+    width: $ButtonWidth;
+}
+#reset{
+    position: absolute;
+    left:495px+ $ButtonWidth + $ButtonSpacing ;
+    top:$rowSpacing * 14 + 32px + $ButtonSpacing;
+    width: $ButtonWidth;
+}
+
+#delete{
+    position: absolute;
+    left:495px+ $ButtonWidth + $ButtonSpacing ;
+    top:$rowSpacing * 14;
+    width: $ButtonWidth;
+}
+
+#toast_pop_up {
+    left:495px;
+    width: $ButtonWidth*2+$ButtonSpacing*1;
+    position: absolute;
+    background-color: gray;
+    top: $rowSpacing*14 - 50px - $ButtonSpacing;
+}
+
+.table-sortable th {
+    cursor: pointer;
+}
+
+.table-sortable .th-sort-asc::after {
+    content: "\25b4";
+    margin-left: 4px;
+}
+
+.table-sortable .th-sort-desc::after {
+    content: "\25be";
+    margin-left: 4px;
+}

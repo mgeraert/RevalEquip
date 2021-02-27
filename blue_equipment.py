@@ -22,7 +22,7 @@ def get_equipment():
     c.close()
     return json.dumps(data)
 
-@equipment.route('/newEquipment', methods=['GET', 'HOST'])
+@equipment.route('/newEquipment', methods=['GET'])
 def new_equipment():
     sql_string = 'INSERT INTO equipment '
     sql_parameters = '('
@@ -96,7 +96,7 @@ def new_equipment():
     equipment_annual_cost_budget = request.args.get('equipment_annual_cost_budget')
     if equipment_annual_cost_budget != '':
         sql_parameters = sql_parameters + 'equipment_annual_cost_budget,'
-        sql_values = sql_values + '"' + equipment_annual_cost_budget
+        sql_values = sql_values + '"' + equipment_annual_cost_budget + '",'
 
     db = Database()
 
@@ -195,9 +195,9 @@ def update_equipment():
 @equipment.route('/deleteEquipment', methods=['GET'])
 def delete_equipment():
     db = Database()
-    user_id = request.args.get('ID')
+    ID = request.args.get('ID')
 
-    sql = 'DELETE FROM equipment WHERE ID = "'+user_id+'"'
+    sql = 'DELETE FROM equipment WHERE ID = "'+ID+'"'
     print(sql)
     db.conn.row_factory = db.dict_factory
     c = db.conn.cursor()
