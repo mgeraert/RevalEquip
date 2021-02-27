@@ -137,6 +137,7 @@ function selectRowEquipment(row) {
     } else {
         $("#eq_is_mobile").prop("checked", false);
     }
+    $("#suggestions_owner").empty();
     if (g_selectedEquipment.equipment_owner_id == -1 || g_selectedEquipment.equipment_owner_id == "") {
         $("#eq_owner_id").val("");
     } else {
@@ -147,6 +148,7 @@ function selectRowEquipment(row) {
             g_selectedOwner = owner;
         });
     }
+    $("#suggestions_co_owner").empty();
     if (g_selectedEquipment.equipment_co_owner_id == -1 || g_selectedEquipment.equipment_co_owner_id == "") {
         $("#eq_co_owner_id").val("");
     } else {
@@ -423,6 +425,7 @@ function resetTextBox(){
     $("#eq_annual_cost_budget").val("");
 
     getEquipment();
+    $("#suggestions_owner").empty();
     showToast('Velden gereset', '#349BB0');
 }
 
