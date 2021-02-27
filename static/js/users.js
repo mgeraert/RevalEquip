@@ -126,7 +126,13 @@ function selectRowUser(row) {
 
     $("#user_last_name").val(g_selectedUser.user_last_name);
     $("#user_name").val(g_selectedUser.user_name);
-    $("#user_sex").val(g_selectedUser.user_sex);
+    if (g_selectedUser.user_sex == "m") {
+        $("#user_sex").val("m").change();
+    } else if (g_selectedUser.user_sex == "v") {
+        $("#user_sex").val("v").change();
+    } else {
+        $("#user_sex").val("x").change();
+    }
     if (g_selectedUser.user_is_pi == 1) {
         $("#user_is_pi").prop("checked", true);
     } else if (g_selectedUser.equipment_is_mobile == -1) {

@@ -51,7 +51,7 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     position: absolute;
     left: $textBoxColumn1Left;
     top:$rowSpacing * 2;
-    width: $textBoxWidthSmall;
+    width: $textBoxWidthSmall/ 1.75;
 }
 
 #user_is_pi_label{
