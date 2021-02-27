@@ -107,7 +107,6 @@ function selectRowUser(row) {
     } else {
         rowNr = row.rowIndex;
     }
-
     var rowNr_data = getJSONFromTable(rowNr);
     
     var table = document.getElementById("usersTable");
