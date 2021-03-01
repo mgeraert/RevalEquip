@@ -42,6 +42,8 @@ def new_equipment():
     if equipment_name != '':
         sql_parameters = sql_parameters + 'equipment_name,'
         sql_values = sql_values + '"' + equipment_name + '",'
+    else:
+        return 'http400'
 
     equipment_amount = request.args.get('equipment_amount')
     if equipment_amount != '':
@@ -98,6 +100,11 @@ def new_equipment():
         sql_parameters = sql_parameters + 'equipment_annual_cost_budget,'
         sql_values = sql_values + '"' + equipment_annual_cost_budget + '",'
 
+    equipment_supplier_id = request.args.get('equipment_supplier_id')
+    if equipment_supplier_id != '':
+        sql_parameters = sql_parameters + 'equipment_supplier_id,'
+        sql_values = sql_values + '"' + equipment_supplier_id + '",'
+
     db = Database()
 
     if sql_parameters[len(sql_parameters)-1] == ',':
@@ -132,6 +139,8 @@ def update_equipment():
     equipment_name = request.args.get('equipment_name')
     if equipment_name != '':
         sql_parameters = sql_parameters + ',equipment_name="' + equipment_name + '"'
+    else:
+        return 'http400'
 
     equipment_amount = request.args.get('equipment_amount')
     if equipment_amount != '':
@@ -177,6 +186,10 @@ def update_equipment():
     if equipment_annual_cost_budget != '':
         sql_parameters = sql_parameters + ',equipment_annual_cost_budget="' + equipment_annual_cost_budget + '"'
 
+    equipment_supplier_id = request.args.get('equipment_supplier_id')
+    if equipment_supplier_id != '':
+        sql_parameters = sql_parameters + ',equipment_supplier_id="' + equipment_supplier_id + '"'
+
     db = Database()
     print(sql_parameters)
 
@@ -208,8 +221,8 @@ def delete_equipment():
     return 'http200'
 
 
-@equipment.route('/updateSuggestion', methods=['GET'])
-def update_suggestion():
+@equipment.route('/updateSuggestionOwner', methods=['GET'])
+def update_suggestion_owner():
     owner_name = request.args.get('owner_name')
     db = Database()
 
@@ -230,12 +243,45 @@ def update_suggestion():
     c.close()
     return json.dumps(list_of_all_names)
 
+@equipment.route('/updateSuggestionSupplier', methods=['GET'])
+def update_suggestion_supplier():
+    supplier_name = request.args.get('supplier_name')
+    db = Database()
+
+    sql_string_last_name = 'SELECT ID, supplier_last_name, supplier_name FROM suppliers WHERE supplier_last_name LIKE "%'+supplier_name+'%"'
+    db.conn.row_factory = db.dict_factory
+    c = db.conn.cursor()
+    c.execute(sql_string_last_name)
+    data_last_name = c.fetchall()
+
+    sql_string_first_name = 'SELECT ID, supplier_last_name, supplier_name FROM suppliers WHERE supplier_name LIKE "%'+supplier_name+'%"'
+    c.execute(sql_string_first_name)
+    data_first_name = c.fetchall()
+    print(data_first_name)
+
+    list_of_all_names = data_first_name+data_last_name
+    print(list_of_all_names)
+
+    c.close()
+    return json.dumps(list_of_all_names)
+
 @equipment.route('/getUserByID', methods=['GET'])
 def get_user_by_id():
     db = Database()
     user_id = request.args.get('ID')
 
     sql = 'SELECT * FROM users WHERE ID = "'+user_id+'"'
+    db.conn.row_factory = db.dict_factory
+    c = db.conn.cursor()
+    c.execute(sql)
+    return json.dumps(c.fetchall())
+
+@equipment.route('/getSupplierByID', methods=['GET'])
+def get_supplier_by_id():
+    db = Database()
+    user_id = request.args.get('ID')
+
+    sql = 'SELECT * FROM suppliers WHERE ID = "'+user_id+'"'
     db.conn.row_factory = db.dict_factory
     c = db.conn.cursor()
     c.execute(sql)

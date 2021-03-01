@@ -10,6 +10,12 @@
   left: 150px;
   top: 28px;
   width: 430px;
+  height: 19.2px;
+  border-width: 0.3px;
+  border-style: solid;
+  border-radius: 0.5px;
+  border-color: grey;
+  padding-left: 3px;
 }
 
 #user_name_label {
@@ -24,6 +30,12 @@
   left: 750px;
   top: 28px;
   width: 430px;
+  height: 19.2px;
+  border-width: 0.3px;
+  border-style: solid;
+  border-radius: 0.5px;
+  border-color: grey;
+  padding-left: 3px;
 }
 
 #user_sex_label {
@@ -38,6 +50,13 @@
   left: 150px;
   top: 56px;
   width: 131.42857px;
+  height: 19.2px;
+  border-width: 0.3px;
+  border-style: solid;
+  border-radius: 0.5px;
+  border-color: grey;
+  padding-left: 3px;
+  padding-left: 0px;
 }
 
 #user_is_pi_label {
@@ -82,6 +101,12 @@
   left: 150px;
   top: 84px;
   width: 230px;
+  height: 19.2px;
+  border-width: 0.3px;
+  border-style: solid;
+  border-radius: 0.5px;
+  border-color: grey;
+  padding-left: 3px;
 }
 
 #user_category_label {
@@ -96,6 +121,12 @@
   left: 550px;
   top: 84px;
   width: 230px;
+  height: 19.2px;
+  border-width: 0.3px;
+  border-style: solid;
+  border-radius: 0.5px;
+  border-color: grey;
+  padding-left: 3px;
 }
 
 #user_function_label {
@@ -110,6 +141,12 @@
   left: 950px;
   top: 84px;
   width: 230px;
+  height: 19.2px;
+  border-width: 0.3px;
+  border-style: solid;
+  border-radius: 0.5px;
+  border-color: grey;
+  padding-left: 3px;
 }
 
 #user_email_label {
@@ -124,6 +161,12 @@
   left: 150px;
   top: 112px;
   width: 430px;
+  height: 19.2px;
+  border-width: 0.3px;
+  border-style: solid;
+  border-radius: 0.5px;
+  border-color: grey;
+  padding-left: 3px;
 }
 
 #user_home_address_label {
@@ -138,6 +181,12 @@
   left: 750px;
   top: 112px;
   width: 430px;
+  height: 19.2px;
+  border-width: 0.3px;
+  border-style: solid;
+  border-radius: 0.5px;
+  border-color: grey;
+  padding-left: 3px;
 }
 
 #user_telephone_label {
@@ -152,6 +201,12 @@
   left: 150px;
   top: 140px;
   width: 430px;
+  height: 19.2px;
+  border-width: 0.3px;
+  border-style: solid;
+  border-radius: 0.5px;
+  border-color: grey;
+  padding-left: 3px;
 }
 
 #user_private_phone_label {
@@ -166,6 +221,12 @@
   left: 750px;
   top: 140px;
   width: 430px;
+  height: 19.2px;
+  border-width: 0.3px;
+  border-style: solid;
+  border-radius: 0.5px;
+  border-color: grey;
+  padding-left: 3px;
 }
 
 #user_in_date_label {
@@ -179,7 +240,13 @@
   position: absolute;
   left: 150px;
   top: 168px;
-  width: 430px;
+  width: 131.42857px;
+  height: 19.2px;
+  border-width: 0.3px;
+  border-style: solid;
+  border-radius: 0.5px;
+  border-color: grey;
+  padding-left: 3px;
 }
 
 #user_out_date_label {
@@ -193,7 +260,13 @@
   position: absolute;
   left: 750px;
   top: 168px;
-  width: 430px;
+  width: 131.42857px;
+  height: 19.2px;
+  border-width: 0.3px;
+  border-style: solid;
+  border-radius: 0.5px;
+  border-color: grey;
+  padding-left: 3px;
 }
 
 #user_pw_hash_label {
@@ -208,6 +281,12 @@
   left: 150px;
   top: 210px;
   width: 430px;
+  height: 19.2px;
+  border-width: 0.3px;
+  border-style: solid;
+  border-radius: 0.5px;
+  border-color: grey;
+  padding-left: 3px;
 }
 
 #user_alternative_ID_label {
@@ -222,6 +301,12 @@
   left: 750px;
   top: 210px;
   width: 430px;
+  height: 19.2px;
+  border-width: 0.3px;
+  border-style: solid;
+  border-radius: 0.5px;
+  border-color: grey;
+  padding-left: 3px;
 }
 
 #update {

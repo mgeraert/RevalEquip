@@ -7,10 +7,12 @@ import json
 import platform
 import os
 
+from blue_suppliers import suppliers
 from blue_users import users
 from blue_equipment import equipment
 
 app = Flask(__name__)
+app.register_blueprint(suppliers)
 app.register_blueprint(users)
 app.register_blueprint(equipment)
 
@@ -20,10 +22,6 @@ db.create_db()
 @app.route("/hello")
 def beneden():
     return 'Hi'
-
-@app.route("/users")
-def user():
-    return render_template('users.html')
 
 @app.route("/test")
 def test():

@@ -1,0 +1,160 @@
+
+$margin1: 20px;
+$margin2: 100px;
+$labelWidth: 130px;
+$rowSpacing: 28px;
+$textBoxWidth: 430px;
+$ButtonWidth: 100px;
+$ButtonSpacing: 10px;
+
+$textBoxColumn1Left: $margin1+$labelWidth;
+$labelColumn2Left: $margin1+$labelWidth+$textBoxWidth+2*$margin1;
+$textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidth+2*$margin1+$labelWidth;
+
+@mixin textBoxStyle {
+    height: 19.2px;
+    border-width: 0.3px;
+    border-style: solid;
+    border-radius: 0.5px;
+    border-color: grey;
+    padding-left: 3px;
+}
+
+#supplier_last_name_label{
+    position: absolute;
+    left:$margin1;
+    top:$rowSpacing * 1;
+    width: $labelWidth;
+}
+
+#supplier_last_name{
+    position: absolute;
+    left: $textBoxColumn1Left;
+    top:$rowSpacing * 1;
+    width: $textBoxWidth;
+    @include textBoxStyle();
+}
+
+#supplier_name_label{
+    position: absolute;
+    left: $labelColumn2Left;
+    top:$rowSpacing * 1;
+    width: $labelWidth;
+}
+
+#supplier_name{
+    position: absolute;
+    left: $textBoxColumn2Left;
+    top:$rowSpacing * 1;
+    width: $textBoxWidth;
+    @include textBoxStyle();
+}
+
+#supplier_email_label{
+    position: absolute;
+    left:$margin1;
+    top:$rowSpacing * 2;
+    width: $labelWidth;
+}
+
+#supplier_email{
+    position: absolute;
+    left: $textBoxColumn1Left;
+    top:$rowSpacing * 2;
+    width: $textBoxWidth;
+    @include textBoxStyle();
+}
+
+#supplier_phone_label{
+    position: absolute;
+    left: $labelColumn2Left;
+    top:$rowSpacing * 2;
+    width: $labelWidth;
+}
+
+#supplier_phone{
+    position: absolute;
+    left: $textBoxColumn2Left;
+    top:$rowSpacing * 2;
+    width: $textBoxWidth;
+    @include textBoxStyle();
+}
+
+#supplier_company_label{
+    position: absolute;
+    left:$margin1;
+    top:$rowSpacing * 3;
+    width: $labelWidth;
+}
+
+#supplier_company{
+    position: absolute;
+    left: $textBoxColumn1Left;
+    top:$rowSpacing * 3;
+    width: $textBoxWidth;
+    @include textBoxStyle();
+}
+
+#supplier_comment_label{
+    position: absolute;
+    left: $labelColumn2Left;
+    top:$rowSpacing * 3;
+    width: $labelWidth;
+}
+
+#supplier_comment{
+    position: absolute;
+    left: $textBoxColumn2Left;
+    top:$rowSpacing * 3;
+    width: $textBoxWidth;
+    @include textBoxStyle();
+}
+
+#update{
+    position: absolute;
+    left:495px;
+    top:$rowSpacing * 7;
+    width: $ButtonWidth;
+}
+
+#new{
+    position: absolute;
+    left:495px;
+    top: $rowSpacing * 7 + 32px + $ButtonSpacing;
+    width: $ButtonWidth;
+}
+#reset{
+    position: absolute;
+    left:495px+ $ButtonWidth + $ButtonSpacing ;
+    top:$rowSpacing * 7 + 32px + $ButtonSpacing;
+    width: $ButtonWidth;
+}
+
+#delete{
+    position: absolute;
+    left:495px+ $ButtonWidth + $ButtonSpacing ;
+    top:$rowSpacing * 7;
+    width: $ButtonWidth;
+}
+
+#toast_pop_up {
+    left:495px;
+    width: $ButtonWidth*2+$ButtonSpacing*1;
+    position: absolute;
+    background-color: gray;
+    top: $rowSpacing*7 - 50px - $ButtonSpacing;
+}
+
+.table-sortable th {
+    cursor: pointer;
+}
+
+.table-sortable .th-sort-asc::after {
+    content: "\25b4";
+    margin-left: 4px;
+}
+
+.table-sortable .th-sort-desc::after {
+    content: "\25be";
+    margin-left: 4px;
+}

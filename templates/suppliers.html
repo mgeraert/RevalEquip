@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Reval - Users</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/revalStyle.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/blue_table.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/suppliers_form.css') }}">
+
+  <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+  <script src="{{url_for('static', filename='js/suppliers.js')}}"></script>
+
+
+  <!--Font Awesome-->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+  <!--Google Fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+  <!--Kite Menu CSS-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/menu2.css') }}">
+
+</head>
+
+<body>
+
+
+  <!--Start Kite Menu-->
+  {% include 'menu.html' %}
+  <!--End Kite Menu-->
+  <script src="{{url_for('static', filename='js/menu2.js')}}"></script>
+
+
+  <script>
+    $(document).ready(function () {
+      $(".kite-menu").kiteMenu();
+    }); //jQuery
+  </script>
+
+  <div id="suppliersTable" style="width: 1200px;height: 540px;overflow: scroll;margin: auto;padding-top: 10px;"></div>
+
+ <div class="widePanel" style="width:1200px;height:500px;">
+
+    <label id="supplier_last_name_label" for="supplier_last_name" >Last name</label>
+    <input id="supplier_last_name" />
+
+    <label id="supplier_name_label" for="supplier_name" >Name</label>
+    <input id="supplier_name" />
+    
+    <label id="supplier_email_label" for="supplier_email" >Email</label>
+    <input id="supplier_email" />
+    
+    <label id="supplier_phone_label" for="supplier_phone" >Phone Number</label>
+    <input id="supplier_phone" />
+    
+    <label id="supplier_company_label" for="supplier_company" >Company</label>
+    <input id="supplier_company" />
+    
+    <label id="supplier_comment_label" for="supplier_comment" >Comment</label>
+    <input id="supplier_comment" />
+
+    <button id="update" onclick="updateSupplier()" class="mlbutton">Update</button>
+    <button id="new" onclick="newSupplier()" class="mlbutton">New</button>
+    <button id="reset" onclick="resetSupplier()" class="mlbutton">Reset</button>
+    <button id="delete" onclick="deleteSupplier()" class="mlbutton">Delete</button>
+
+    <div id="toast_message"></div>
+  </div>
+
+</body>
+
+</html>

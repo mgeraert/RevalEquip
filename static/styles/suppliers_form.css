@@ -1,0 +1,170 @@
+#supplier_last_name_label {
+  position: absolute;
+  left: 20px;
+  top: 28px;
+  width: 130px;
+}
+
+#supplier_last_name {
+  position: absolute;
+  left: 150px;
+  top: 28px;
+  width: 430px;
+  height: 19.2px;
+  border-width: 0.3px;
+  border-style: solid;
+  border-radius: 0.5px;
+  border-color: grey;
+  padding-left: 3px;
+}
+
+#supplier_name_label {
+  position: absolute;
+  left: 620px;
+  top: 28px;
+  width: 130px;
+}
+
+#supplier_name {
+  position: absolute;
+  left: 750px;
+  top: 28px;
+  width: 430px;
+  height: 19.2px;
+  border-width: 0.3px;
+  border-style: solid;
+  border-radius: 0.5px;
+  border-color: grey;
+  padding-left: 3px;
+}
+
+#supplier_email_label {
+  position: absolute;
+  left: 20px;
+  top: 56px;
+  width: 130px;
+}
+
+#supplier_email {
+  position: absolute;
+  left: 150px;
+  top: 56px;
+  width: 430px;
+  height: 19.2px;
+  border-width: 0.3px;
+  border-style: solid;
+  border-radius: 0.5px;
+  border-color: grey;
+  padding-left: 3px;
+}
+
+#supplier_phone_label {
+  position: absolute;
+  left: 620px;
+  top: 56px;
+  width: 130px;
+}
+
+#supplier_phone {
+  position: absolute;
+  left: 750px;
+  top: 56px;
+  width: 430px;
+  height: 19.2px;
+  border-width: 0.3px;
+  border-style: solid;
+  border-radius: 0.5px;
+  border-color: grey;
+  padding-left: 3px;
+}
+
+#supplier_company_label {
+  position: absolute;
+  left: 20px;
+  top: 84px;
+  width: 130px;
+}
+
+#supplier_company {
+  position: absolute;
+  left: 150px;
+  top: 84px;
+  width: 430px;
+  height: 19.2px;
+  border-width: 0.3px;
+  border-style: solid;
+  border-radius: 0.5px;
+  border-color: grey;
+  padding-left: 3px;
+}
+
+#supplier_comment_label {
+  position: absolute;
+  left: 620px;
+  top: 84px;
+  width: 130px;
+}
+
+#supplier_comment {
+  position: absolute;
+  left: 750px;
+  top: 84px;
+  width: 430px;
+  height: 19.2px;
+  border-width: 0.3px;
+  border-style: solid;
+  border-radius: 0.5px;
+  border-color: grey;
+  padding-left: 3px;
+}
+
+#update {
+  position: absolute;
+  left: 495px;
+  top: 196px;
+  width: 100px;
+}
+
+#new {
+  position: absolute;
+  left: 495px;
+  top: 238px;
+  width: 100px;
+}
+
+#reset {
+  position: absolute;
+  left: 605px;
+  top: 238px;
+  width: 100px;
+}
+
+#delete {
+  position: absolute;
+  left: 605px;
+  top: 196px;
+  width: 100px;
+}
+
+#toast_pop_up {
+  left: 495px;
+  width: 210px;
+  position: absolute;
+  background-color: gray;
+  top: 136px;
+}
+
+.table-sortable th {
+  cursor: pointer;
+}
+
+.table-sortable .th-sort-asc::after {
+  content: "\25b4";
+  margin-left: 4px;
+}
+
+.table-sortable .th-sort-desc::after {
+  content: "\25be";
+  margin-left: 4px;
+}
+/*# sourceMappingURL=suppliers_form.css.map */

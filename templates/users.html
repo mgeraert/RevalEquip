@@ -84,10 +84,10 @@
     <input id="user_private_phone" />
 
     <label id="user_in_date_label" for="user_in_date">In Date</label>
-    <input id="user_in_date" />
+    <input id="user_in_date" type="date"/>
 
     <label id="user_out_date_label" for="user_out_date">Out Date</label>
-    <input id="user_out_date" />
+    <input id="user_out_date"  type="date"/>
 
     <label id="user_pw_hash_label" for="user_pw_hash">Password Hash</label>
     <input id="user_pw_hash" />
@@ -97,7 +97,7 @@
 
     <button id="update" onclick="updateUser()" class="mlbutton">Update</button>
     <button id="new" onclick="newUser()" class="mlbutton">New</button>
-    <button id="reset" onclick="resetTextBox()" class="mlbutton">Reset</button>
+    <button id="reset" onclick="resetUser()" class="mlbutton">Reset</button>
     <button id="delete" onclick="deleteUser()" class="mlbutton">Delete</button>
 
     <div id="toast_message"></div>

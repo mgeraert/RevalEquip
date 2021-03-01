@@ -5,6 +5,11 @@ import json
 users = Blueprint('users', __name__)
 
 
+@users.route('/users', methods=['GET'])
+def reval_users():
+    return render_template('users.html')
+
+
 @users.route('/getUsers', methods=['GET'])
 def get_users():
     db = Database()

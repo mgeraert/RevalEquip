@@ -91,6 +91,7 @@ class Database(object):
                    "equipment_name TEXT DEFAULT ''",
                    "equipment_owner_id NUMBER DEFAULT -1",
                    "equipment_co_owner_id NUMBER DEFAULT -1",
+                   "equipment_supplier_id NUMBER DEFAULT -1",
                    "equipment_base_location TEXT DEFAULT ''",
                    "equipment_outcome TEXT DEFAULT ''",
                    "equipment_purchase_price NUMBER",
@@ -99,7 +100,22 @@ class Database(object):
                    "equipment_amount NUMBER DEFAULT 1",
                    "equipment_annual_cost NUMBER",
                    "equipment_annual_cost_budget TEXT DEFAULT ''",
-                   "equipment_purchase_date DATE"]
+                   "equipment_purchase_date DATE",
+                   "equipment_supplier_id NUMBER DEFAULT -1"]
+
+        self.insert_columns(table_name, columns)
+
+    def create_suppliers(self):
+
+        table_name = 'suppliers'
+        self.create_table(table_name)
+
+        columns = ["supplier_last_name TEXT DEFAULT ''",
+                   "supplier_name TEXT DEFAULT ''",
+                   "supplier_email TEXT DEFAULT ''",
+                   "supplier_phone TEXT DEFAULT ''",
+                   "supplier_company TEXT DEFAULT ''",
+                   "supplier_comment TEXT DEFAULT ''"]
 
         self.insert_columns(table_name, columns)
 
@@ -120,3 +136,4 @@ class Database(object):
         self.create_users()
         self.create_permissions()
         self.create_equipment()
+        self.create_suppliers()

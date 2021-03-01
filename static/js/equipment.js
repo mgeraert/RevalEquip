@@ -1,4 +1,3 @@
-
 var g_equipment;
 var g_selectedEquipment;
 var g_selectedRow = -1;
@@ -7,6 +6,8 @@ var g_owner;
 var g_selectedOwner;
 var g_coOwner;
 var g_selectedCoOwner;
+var g_supplier;
+var g_selectedSupplier;
 
 $(document).ready(function () {
     getEquipment();
@@ -60,7 +61,6 @@ function generateTableHeader() {
 
     return out;
 }
-
 
 function generateTabelRow(rownNr, equipment) {
 
@@ -162,11 +162,26 @@ function selectRowEquipment(row) {
     $("#eq_purchase_price").val(g_selectedEquipment.equipment_purchase_price);
     $("#eq_annual_cost").val(g_selectedEquipment.equipment_annual_cost);
     $("#eq_annual_cost_budget").val(g_selectedEquipment.equipment_annual_cost_budget);
+    $("#suggestions_owner").empty();
 
+    if (g_selectedEquipment.equipment_supplier_id == -1 || g_selectedEquipment.equipment_supplier_id == "") {
+        $("#eq_supplier_id").val("");
+    } else {
+        argString = "?ID=" + g_selectedEquipment.equipment_supplier_id;
+        $.get("/getSupplierByID" + argString, function (data, status) {
+            var supplier = JSON.parse(data)[0];
+            $("#eq_supplier_id").val(supplier.supplier_last_name + ' ' + supplier.supplier_name);
+            g_selectedSupplier = supplier;
+        });
+    }
 }
 
 function updateEquip() {
     // g_selectedEquipment = g_equipment[rownNr - 1];
+    if (g_selectedEquipment == undefined) {
+        showToast('Gelieve een toestel aan te duiden.', '#B08734');
+        return;
+    }
     var ID = g_selectedEquipment.ID;
     argString = "?ID=" + ID;
 
@@ -246,6 +261,12 @@ function updateEquip() {
     var equipment_annual_cost_budget = $("#eq_annual_cost_budget").val();
     argString = argString + "&equipment_annual_cost_budget=" + equipment_annual_cost_budget;
 
+    var equipment_supplier_id = -1;
+    if ($("#eq_supplier_id").val() != "") {
+        equipment_supplier_id = g_selectedSupplier.ID;
+    }
+    argString = argString + "&equipment_supplier_id=" + equipment_supplier_id;
+
     if (g_selectedRow > -1) {
         $.get("/updateEquipment" + argString, function (data, status) {
             if (data.localeCompare("http200") == 0) {
@@ -269,8 +290,9 @@ function updateEquip() {
                 } else {
                     getEquipment(true);
                 }
-                
-
+            } else if (data.localeCompare("http400") == 0) {
+                giveInputWarning("eq_name");
+                showToast('Gelieve het toestel een naam te geven', '#B08734');
             }
         });
     }
@@ -279,7 +301,7 @@ function updateEquip() {
 function updateSuggestionOwner() {
     if ($("#eq_owner_id").val().length > 1) {
         argString = "?owner_name=" + $("#eq_owner_id").val();
-        $.get("/updateSuggestion" + argString, function (data, status) {
+        $.get("/updateSuggestionOwner" + argString, function (data, status) {
             var suggestedUsers = JSON.parse(data);
             
             if (suggestedUsers.length > 0) {
@@ -320,7 +342,7 @@ function generateOwnerRow(rownNr, user) {
     out = "<tr onclick='selectRowOwner(" + rownNr.toString() + ")'>";
 
     out = out.concat('<td>');
-    out = out.concat(getTableDiv(user.user_last_name +' '+ user.user_name, 400, rownNr));
+    out = out.concat(getTableDiv(user.user_last_name +' '+ user.user_name, 220, rownNr));
     out = out.concat("</td>");
 
     out = out + "</tr>";
@@ -339,7 +361,7 @@ function selectRowOwner(rownNr) {
 function updateSuggestionCoOwner() {
     if ($("#eq_co_owner_id").val().length > 1) {
         argString = "?owner_name=" + $("#eq_co_owner_id").val();
-        $.get("/updateSuggestion" + argString, function (data, status) {
+        $.get("/updateSuggestionOwner" + argString, function (data, status) {
             var suggestedUsers = JSON.parse(data);
             
             if (suggestedUsers.length > 0) {
@@ -380,7 +402,7 @@ function generateCoOwnerRow(rownNr, user) {
     out = "<tr onclick='selectRowCoOwner(" + rownNr.toString() + ")'>";
 
     out = out.concat('<td>');
-    out = out.concat(getTableDiv(user.user_last_name +' '+ user.user_name, 400, rownNr));
+    out = out.concat(getTableDiv(user.user_last_name +' '+ user.user_name, 220, rownNr));
     out = out.concat("</td>");
 
     out = out + "</tr>";
@@ -396,6 +418,66 @@ function selectRowCoOwner(rownNr) {
     }
 }
 
+function updateSuggestionSupplier() {
+    if ($("#eq_supplier_id").val().length > 1) {
+        argString = "?supplier_name=" + $("#eq_supplier_id").val();
+        $.get("/updateSuggestionSupplier" + argString, function (data, status) {
+            var suggestedSuppliers = JSON.parse(data);
+            
+            if (suggestedSuppliers.length > 0) {
+
+                // remove duplicates https://www.geeksforgeeks.org/how-to-remove-duplicates-from-an-array-of-objects-using-javascript/
+                g_supplier = []; 
+                let uniqueSupplier = {}; 
+                for (let i in suggestedSuppliers) { 
+                    if (i < 5) {
+                        suggestedSupplier = suggestedSuppliers[i]['ID']; 
+                        uniqueSupplier[suggestedSupplier] = suggestedSuppliers[i];
+                    } else {
+                        break;
+                    }
+                } 
+                for (i in uniqueSupplier) { 
+                    g_supplier.push(uniqueSupplier[i]); 
+                } 
+                
+                tableHTML = "<table class='blueTable'>"
+                $.each(g_supplier, function (i, item) {
+                    tableHTML = tableHTML.concat(generateSupplierRow(i + 1, item));
+                });
+                tableHTML = tableHTML.concat("</table>");
+
+                $("#suggestions_supplier").html(tableHTML);
+            } else {
+                $("#suggestions_supplier").empty();
+            }
+        });
+    } else if ($("#eq_supplier_id").val().length == 0 || $("#eq_supplier_id").val() == -1) {
+        $("#suggestions_supplier").empty();
+    }
+}
+
+function generateSupplierRow(rownNr, supplier) {
+
+    out = "<tr onclick='selectRowSupplier(" + rownNr.toString() + ")'>";
+
+    out = out.concat('<td>');
+    out = out.concat(getTableDiv(supplier.supplier_last_name +' '+ supplier.supplier_name, 220, rownNr));
+    out = out.concat("</td>");
+
+    out = out + "</tr>";
+
+    return out;
+}
+
+function selectRowSupplier(rownNr) {
+    if (rownNr > 0) {
+        g_selectedSupplier = g_supplier[rownNr-1];
+        $("#eq_supplier_id").val(g_selectedSupplier.supplier_last_name + ' ' + g_selectedSupplier.supplier_name);
+        $("#suggestions_supplier").empty();
+    }
+}
+
 function showToast(text, color){
     const toastHTML = `<div id="toast_pop_up" style="background-color:${color};" class="mlbutton">${text}</div>`;
 
@@ -408,7 +490,30 @@ function showToast(text, color){
     },1500);
 }
 
-function resetTextBox(){
+function giveInputWarning(inputID){
+    console.log('#'+inputID)
+    var input = $('#'+inputID);
+
+    input.css("border-color", "#BA604D");
+    input.css("background-color","#E1BBB3");
+    input.css("transition","0.2s");
+
+    setTimeout(function(){
+        input.css("border-color", "");
+        input.css("background-color", "");
+    },1500);
+}
+
+function resetEquip(){
+    clearTextBox();
+    g_selectedEquipment = undefined;
+    g_selectedRow = -1;
+
+    getEquipment();
+    showToast('Velden gereset', '#349BB0');
+}
+
+function clearTextBox() {
     $("#eq_inventory_number").val("");
     $("#eq_label").val("");
     $("#eq_name").val("");
@@ -424,9 +529,9 @@ function resetTextBox(){
     $("#eq_annual_cost").val("");
     $("#eq_annual_cost_budget").val("");
 
-    getEquipment();
     $("#suggestions_owner").empty();
-    showToast('Velden gereset', '#349BB0');
+    $("#suggestions_co_owner").empty();
+    $("#suggestions_supplier").empty();
 }
 
 function newEquip() {
@@ -463,13 +568,13 @@ function newEquip() {
         argString = argString + "&equipment_is_mobile=" + equipment_is_mobile;
     }
 
-    var equipment_owner_id = -1;
+    var equipment_owner_id = "";
     if ($("#eq_owner_id").val() != "") {
         equipment_owner_id = g_selectedOwner.ID;
     }
     argString = argString + "&equipment_owner_id=" + equipment_owner_id;
     
-    var equipment_co_owner_id = -1;
+    var equipment_co_owner_id = "";
     if ($("#eq_co_owner_id").val() != "") {
         equipment_co_owner_id = g_selectedCoOwner.ID;
     }
@@ -483,16 +588,30 @@ function newEquip() {
 
     var equipment_annual_cost_budget = $("#eq_annual_cost_budget").val();
     argString = argString + "&equipment_annual_cost_budget=" + equipment_annual_cost_budget;
+    
+    var equipment_supplier_id = "";
+    if ($("#eq_co_owner_id").val() != "") {
+        equipment_supplier_id = g_selectedSupplier.ID;
+    }
+    argString = argString + "&equipment_supplier_id=" + equipment_supplier_id;
 
     $.get("/newEquipment" + argString, function (data, status) {
         if (data.localeCompare("http200") == 0) {
             getEquipment();
+            clearTextBox();
             showToast('Nieuw equipment is aangemaakt', '#8734B0');
+        } else if (data.localeCompare("http400") == 0) {
+            giveInputWarning("eq_name");
+            showToast('Gelieve het toestel een naam te geven', '#B08734');
         }
     });
 }
 
 function deleteEquip() {
+    if (g_selectedEquipment == undefined) {
+        showToast('Gelieve een toestel aan te duiden.', '#B08734');
+        return;
+    }
     var ID = g_selectedEquipment.ID;
     argString = "?ID=" + ID;
 
@@ -511,19 +630,22 @@ function deleteEquip() {
             if (column != '') {
                 var columnNr = parseInt(getNumbersFromString(column.getAttribute('onclick'))[0]);
                 if (column.classList[0] == "th-sort-asc") {
-                    getUsers(false, true, true, columnNr)
+                    clearTextBox();
+                    getEquipment(false, true, true, columnNr)
                 } else{
-                    getUsers(false, true, false, columnNr)
+                    clearTextBox();
+                    getEquipment(false, true, false, columnNr)
                 }
             } else {
-                getUsers();
+                clearTextBox();
+                getEquipment();
             }
         }
     });
 }
 
-// https://www.youtube.com/watch?v=8SL_hM1a0yo
 function sortTableByColumn(table, column, asc = true) {
+    // https://www.youtube.com/watch?v=8SL_hM1a0yo
     const dirModifier = asc ? 1 : -1;
     const tBody = table.tBodies[0];
     const rows = Array.from(tBody.querySelectorAll("tr"));
@@ -535,7 +657,6 @@ function sortTableByColumn(table, column, asc = true) {
         inputType = "names";
     }
 
-    console.log(rows);
     // sort each row
     const sortedRows = rows.sort((a, b) => {
         if (inputType == "names") {
@@ -548,6 +669,17 @@ function sortTableByColumn(table, column, asc = true) {
             return parseFloat(aColText) > parseFloat(bColText) ? (1 * dirModifier) : (-1 * dirModifier);
         }
     });
+    for (i = 0; i<sortedRows.length; i++) {
+        var innerText = sortedRows[i].innerText.split("\n\t\n");
+        var name = innerText[1];
+        console.log(i, sortedRows[i].innerText.split("\n\t\n")[0], name);
+        if (g_selectedEquipment != undefined) {
+            if (name == g_selectedEquipment.equipment_name) {
+                g_selectedRow = i+1;
+            }
+        }
+    }
+    console.log(g_selectedRow-1);
     
     // remove all resisting tr from table
     while (tBody.firstChild) {

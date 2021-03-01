@@ -12,6 +12,15 @@ $textBoxColumn1Left: $margin1+$labelWidth;
 $labelColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1;
 $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWidth;
 
+@mixin textBoxStyle {
+    height: 19.2px;
+    border-width: 0.3px;
+    border-style: solid;
+    border-radius: 0.5px;
+    border-color: grey;
+    padding-left: 3px;
+}
+
 #user_last_name_label{
     position: absolute;
     left:$margin1;
@@ -24,6 +33,7 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     left: $textBoxColumn1Left;
     top:$rowSpacing * 1;
     width: $textBoxWidthLarge;
+    @include textBoxStyle();
 }
 
 #user_name_label{
@@ -38,6 +48,7 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     left: $textBoxColumn2Left;
     top:$rowSpacing * 1;
     width: $textBoxWidthLarge;
+    @include textBoxStyle();
 }
 
 #user_sex_label{
@@ -52,6 +63,8 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     left: $textBoxColumn1Left;
     top:$rowSpacing * 2;
     width: $textBoxWidthSmall/ 1.75;
+    @include textBoxStyle();
+    padding-left: 0px;
 }
 
 #user_is_pi_label{
@@ -96,6 +109,7 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     left: $textBoxColumn1Left;
     top:$rowSpacing * 3;
     width: $textBoxWidthSmall;
+    @include textBoxStyle();
 }
 
 #user_category_label{
@@ -110,6 +124,7 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     left: $margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth;
     top:$rowSpacing * 3;
     width: $textBoxWidthSmall;
+    @include textBoxStyle();
 }
 
 #user_function_label{
@@ -124,6 +139,7 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     left: $margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth;
     top:$rowSpacing * 3;
     width: $textBoxWidthSmall;
+    @include textBoxStyle();
 }
 
 #user_email_label{
@@ -138,6 +154,7 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     left: $textBoxColumn1Left;
     top:$rowSpacing * 4;
     width: $textBoxWidthLarge;
+    @include textBoxStyle();
 }
 
 #user_home_address_label{
@@ -152,6 +169,7 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     left: $textBoxColumn2Left;
     top:$rowSpacing * 4;
     width: $textBoxWidthLarge;
+    @include textBoxStyle();
 }
 
 #user_telephone_label{
@@ -166,6 +184,7 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     left: $textBoxColumn1Left;
     top:$rowSpacing * 5;
     width: $textBoxWidthLarge;
+    @include textBoxStyle();
 }
 
 #user_private_phone_label{
@@ -180,6 +199,7 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     left: $textBoxColumn2Left;
     top:$rowSpacing * 5;
     width: $textBoxWidthLarge;
+    @include textBoxStyle();
 }
 
 #user_in_date_label{
@@ -193,7 +213,8 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     position: absolute;
     left: $textBoxColumn1Left;
     top:$rowSpacing * 6;
-    width: $textBoxWidthLarge;
+    width: $textBoxWidthSmall/ 1.75;
+    @include textBoxStyle();
 }
 
 #user_out_date_label{
@@ -207,7 +228,8 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     position: absolute;
     left: $textBoxColumn2Left;
     top:$rowSpacing * 6;
-    width: $textBoxWidthLarge;
+    width: $textBoxWidthSmall/ 1.75;
+    @include textBoxStyle();
 }
 
 #user_pw_hash_label{
@@ -222,6 +244,7 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     left: $textBoxColumn1Left;
     top:$rowSpacing * 7.5;
     width: $textBoxWidthLarge;
+    @include textBoxStyle();
 }
 
 #user_alternative_ID_label{
@@ -236,6 +259,7 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     left: $textBoxColumn2Left;
     top:$rowSpacing * 7.5;
     width: $textBoxWidthLarge;
+    @include textBoxStyle();
 }
 
 #update{

@@ -101,6 +101,7 @@ function getTableDiv(content, width, rowNr) {
     out = out.concat('</div>');
     return out;
 }
+
 function selectRowUser(row) {
     if(typeof row == 'number') {
         rowNr = row
@@ -153,8 +154,29 @@ function selectRowUser(row) {
     $("#user_home_address").val(g_selectedUser.user_home_address);
     $("#user_telephone").val(g_selectedUser.user_telephone);
     $("#user_private_phone").val(g_selectedUser.user_private_phone);
-    $("#user_in_date").val(g_selectedUser.user_in_date);
-    $("#user_out_date").val(g_selectedUser.user_out_date);
+
+    if (g_selectedUser.user_in_date != "-1") {
+        var inDate = g_selectedUser.user_in_date.split("/");
+        if (inDate[0].length == 1) {
+            $("#user_in_date").val(inDate[2]+'-'+inDate[1]+'-0'+inDate[0]);
+        } else {
+            $("#user_in_date").val(inDate[2]+'-'+inDate[1]+'-'+inDate[0]);
+        }
+    } else {
+        $("#user_in_date").val("");
+    }
+
+    if (g_selectedUser.user_out_date != "-1") {
+        var outDate = g_selectedUser.user_out_date.split("/");
+        if (outDate[0].length == 1) {
+            $("#user_out_date").val(outDate[2]+'-'+outDate[1]+'-0'+outDate[0]);
+        } else {
+            $("#user_out_date").val(outDate[2]+'-'+outDate[1]+'-'+outDate[0]);
+        }
+    } else {
+        $("#user_out_date").val("");
+    }
+
     $("#user_pw_hash").val(g_selectedUser.user_pw_hash);
     $("#user_alternative_ID").val(g_selectedUser.user_alternative_ID);
     
@@ -173,13 +195,28 @@ function showToast(text, color){
 }
 
 function updateUser() {
+    if (g_selectedUser == undefined) {
+        showToast('Gelieve een gebruiker aan te duiden.', '#B08734');
+        return;
+    }
     var ID = g_selectedUser.ID;
     argString = "?ID=" + ID;
 
     var user_last_name = $("#user_last_name").val();
-    argString = argString + "&user_last_name=" + user_last_name;
+    argString = argString + "&user_last_name=" + user_last_name.toUpperCase();
 
-    var user_name = $("#user_name").val();
+    var user_name = "";
+    var name = $("#user_name").val().split(' ');
+    for (i = 0; i<name.length; i++) {
+        for (j = 0; j<name[i].length; j++) {
+            if (j == 0) {
+                user_name = user_name + name[i][j].toUpperCase();
+            } else {
+                user_name = user_name + name[i][j];
+            }
+        }
+        user_name = user_name + " ";
+    }
     argString = argString + "&user_name=" + user_name;
 
     var user_sex = $("#user_sex").val();
@@ -232,11 +269,19 @@ function updateUser() {
     var user_private_phone = $("#user_private_phone").val();
     argString = argString + "&user_private_phone=" + user_private_phone;
 
-    var user_in_date = $("#user_in_date").val();
-    argString = argString + "&user_in_date=" + user_in_date;
+    if ($("#user_in_date").val() == "") {
+        argString = argString + "&user_in_date=-1";
+    } else {
+        var user_in_date = $("#user_in_date").val().split("-");
+        argString = argString + "&user_in_date=" + user_in_date[2]+'/'+user_in_date[1]+'/'+user_in_date[0];
+    }
 
-    var user_out_date = $("#user_out_date").val();
-    argString = argString + "&user_out_date=" + user_out_date;
+    if ($("#user_out_date").val() == "") {
+        argString = argString + "&user_out_date=-1";
+    } else {
+        var user_out_date = $("#user_out_date").val().split("-");
+        argString = argString + "&user_out_date=" + user_out_date[2]+'/'+user_out_date[1]+'/'+user_out_date[0];
+    }
 
     var user_pw_hash = $("#user_pw_hash").val();
     argString = argString + "&user_pw_hash=" + user_pw_hash;
@@ -270,13 +315,28 @@ function updateUser() {
                 
 
             } else if (data.localeCompare("http400") == 0) {
+                if (user_last_name == "") {
+                    giveInputWarning("user_last_name");
+                }
+                if (user_name == "") {
+                    giveInputWarning("user_name");
+                }
                 showToast('Gelieve de velden correct in te vullen', '#B08734');
             }
         });
     }
 }
 
-function resetTextBox(){
+function resetUser(){
+    clearTextBox();
+    g_selectedUser = undefined;
+    g_selectedRow = -1;
+
+    getUsers();
+    showToast('Velden gereset', '#349BB0');
+}
+
+function clearTextBox() {
     $("#user_last_name").val("");
     $("#user_name").val("");
     $("#user_sex").val("");
@@ -293,18 +353,24 @@ function resetTextBox(){
     $("#user_out_date").val("");
     $("#user_pw_hash").val("");
     $("#user_alternative_ID").val("");
-
-    getUsers();
-    showToast('Velden gereset', '#349BB0');
 }
-
-
 
 function newUser() {
     var user_last_name = $("#user_last_name").val();
-    argString = "?user_last_name=" + user_last_name;
+    argString = "?user_last_name=" + user_last_name.toUpperCase();
 
-    var user_name = $("#user_name").val();
+    var user_name = "";
+    var name = $("#user_name").val().split(' ');
+    for (i = 0; i<name.length; i++) {
+        for (j = 0; j<name[i].length; j++) {
+            if (j == 0) {
+                user_name = user_name + name[i][j].toUpperCase();
+            } else {
+                user_name = user_name + name[i][j];
+            }
+        }
+        user_name = user_name + " ";
+    }
     argString = argString + "&user_name=" + user_name;
 
     var user_sex = $("#user_sex").val();
@@ -349,11 +415,19 @@ function newUser() {
     var user_private_phone = $("#user_private_phone").val();
     argString = argString + "&user_private_phone=" + user_private_phone;
 
-    var user_in_date = $("#user_in_date").val();
-    argString = argString + "&user_in_date=" + user_in_date;
+    if ($("#user_in_date").val() == "") {
+        argString = argString + "&user_in_date=-1";
+    } else {
+        var user_in_date = $("#user_in_date").val().split("-");
+        argString = argString + "&user_in_date=" + user_in_date[2]+'/'+user_in_date[1]+'/'+user_in_date[0];
+    }
 
-    var user_out_date = $("#user_out_date").val();
-    argString = argString + "&user_out_date=" + user_out_date;
+    if ($("#user_out_date").val() == "") {
+        argString = argString + "&user_out_date=-1";
+    } else {
+        var user_out_date = $("#user_out_date").val().split("-");
+        argString = argString + "&user_out_date=" + user_out_date[2]+'/'+user_out_date[1]+'/'+user_out_date[0];
+    }
 
     var user_pw_hash = $("#user_pw_hash").val();
     argString = argString + "&user_pw_hash=" + user_pw_hash;
@@ -364,14 +438,25 @@ function newUser() {
     $.get("/newUser" + argString, function (data, status) {
         if (data.localeCompare("http200") == 0) {
             getUsers();
+            clearTextBox();
             showToast('Nieuwe user is aangemaakt', '#8734B0');
         } else if (data.localeCompare("http400") == 0) {
+            if (user_last_name == "") {
+                giveInputWarning("user_last_name");
+            }
+            if (user_name == "") {
+                giveInputWarning("user_name");
+            }
             showToast('Gelieve de velden correct in te vullen', '#B08734');
         }
     });
 }
 
 function deleteUser() {
+    if (g_selectedUser == undefined) {
+        showToast('Gelieve een gebruiker aan te duiden.', '#B08734');
+        return;
+    }
     var ID = g_selectedUser.ID;
     argString = "?ID=" + ID;
 
@@ -390,12 +475,15 @@ function deleteUser() {
             if (column != '') {
                 var columnNr = parseInt(getNumbersFromString(column.getAttribute('onclick'))[0]);
                 if (column.classList[0] == "th-sort-asc") {
-                    getUsers(false, true, true, columnNr)
+                    getUsers(false, true, true, columnNr);
+                    clearTextBox();
                 } else{
-                    getUsers(false, true, false, columnNr)
+                    getUsers(false, true, false, columnNr);
+                    clearTextBox();
                 }
             } else {
                 getUsers();
+                clearTextBox();
             }
         }
     });
@@ -425,6 +513,22 @@ function sortTableByColumn(table, column, asc = true) {
             return parseFloat(aColText) > parseFloat(bColText) ? (1 * dirModifier) : (-1 * dirModifier);
         }
     });
+    for (i = 0; i<sortedRows.length; i++) {
+        var innerText = sortedRows[i].innerText.split("\n\t\n");
+        var nameArray = innerText[1].split(" ");
+        var lastName = "";
+        for (j = 0; j<nameArray.length; j++) {
+            if (nameArray[j] == nameArray[j].toUpperCase()) {
+                lastName = lastName + nameArray[j]+ " ";
+            }
+        }
+        lastName = lastName.slice(0, -1);
+        if (g_selectedUser != undefined) {
+            if (lastName == g_selectedUser.user_last_name) {
+                g_selectedRow = i+1;
+            }
+        }
+    }
     
     // remove all resisting tr from table
     while (tBody.firstChild) {
@@ -472,4 +576,18 @@ function getNumbersFromString(string) {
     var regex = /\d+/g;
     var matches = string.match(regex);
     return matches;
+}
+
+function giveInputWarning(inputID){
+    console.log('#'+inputID)
+    var input = $('#'+inputID);
+
+    input.css("border-color", "#BA604D");
+    input.css("background-color","#E1BBB3");
+    input.css("transition","0.2s");
+
+    setTimeout(function(){
+        input.css("border-color", "");
+        input.css("background-color", "");
+    },1500);
 }
