@@ -10,7 +10,7 @@ function getSuppliers(enableSelectedRow = false, enableSort = false, sortAsc = f
     $.get("/getSuppliers", function (data, status) {
         g_supplier = JSON.parse(data);
         if (g_supplier.length > 0) {
-            tableHTML = "<table id='blue_table' class='blueTable table-sortable'>"
+            tableHTML = "<table id='blue_table' class='table_design table-sortable js-pscroll'>"
             tableHTML = tableHTML.concat(generateTableHeader());
             tableHTML = tableHTML.concat("<tbody>");
             $.each(g_supplier, function (i, item) {
@@ -109,10 +109,10 @@ function selectRowSupplier(row) {
         var table_temp = document.querySelector("table");
         const tBody = table_temp.tBodies[0];
         const rows_temp = Array.from(tBody.querySelectorAll("tr"));
-        rows_temp.forEach(tr => tr.style.backgroundColor = null);
+        rows_temp.forEach(tr => tr.classList.remove("active-row"));
     }
     selectedRow = rows[rowNr];
-    selectedRow.style.backgroundColor = '#A7DF62';
+    selectedRow.classList.add("active-row");
     g_selectedRow = rowNr;
     g_selectedSupplier = g_supplier[rowNr_data - 1];
 
@@ -147,7 +147,7 @@ function updateSupplier() {
         }
         supplier_name = supplier_name + " ";
     }
-    argString = argString + "&supplier_name=" + supplier_name;
+    argString = argString + "&supplier_name=" + supplier_name.slice(0, -1);
 
     var supplier_email = $("#supplier_email").val();
     argString = argString + "&supplier_email=" + supplier_email;
@@ -213,7 +213,7 @@ function newSupplier() {
         }
         supplier_name = supplier_name + " ";
     }
-    argString = argString + "&supplier_name=" + supplier_name;
+    argString = argString + "&supplier_name=" + supplier_name.slice(0, -1);
 
     var supplier_email = $("#supplier_email").val();
     argString = argString + "&supplier_email=" + supplier_email;
@@ -367,7 +367,7 @@ function sortColumnSupplier(column) {
 }
 
 function showToast(text, color){
-    const toastHTML = `<div id="toast_pop_up" style="background-color:${color};" class="mlbutton">${text}</div>`;
+    const toastHTML = `<div id="toast_pop_up" style="height:32px;background-color:${color};" class="mlbutton">${text}</div>`;
 
     $("#toast_message").html(toastHTML);
 

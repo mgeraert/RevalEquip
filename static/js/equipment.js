@@ -17,7 +17,7 @@ function getEquipment(enableSelectedRow = false, enableSort = false, sortAsc = f
     $.get("/getEquipment", function (data, status) {
         g_equipment = JSON.parse(data);
         if (g_equipment.length > 0) {
-            tableHTML = "<table id='blue_table' class='blueTable table-sortable'>"
+            tableHTML = "<table id='blue_table' class='table_design table-sortable'>"
             tableHTML = tableHTML.concat(generateTableHeader());
             tableHTML = tableHTML.concat("<tbody>");
             $.each(g_equipment, function (i, item) {
@@ -67,19 +67,19 @@ function generateTabelRow(rownNr, equipment) {
     out = "<tr onclick='selectRowEquipment(this)'>";
 
     out = out.concat('<td>');
-    out = out.concat(getTableDiv(rownNr.toString(), 32, rownNr));
+    out = out.concat(getTableDiv(rownNr.toString(), 50, rownNr));
     out = out.concat("</td>");
 
     out = out.concat('<td>');
-    out = out.concat(getTableDiv(equipment.equipment_name, 400, rownNr));
+    out = out.concat(getTableDiv(equipment.equipment_name, 600, rownNr));
     out = out.concat("</td>");
 
     out = out.concat('<td>');
-    out = out.concat(getTableDiv(equipment.equipment_outcome, 200, rownNr));
+    out = out.concat(getTableDiv(equipment.equipment_outcome, 250, rownNr));
     out = out.concat("</td>");
 
     out = out.concat('<td>');
-    out = out.concat(getTableDiv(equipment.equipment_purchase_price, 75, rownNr));
+    out = out.concat(getTableDiv(equipment.equipment_purchase_price, 150, rownNr));
     out = out.concat("</td>");
 
     out = out + "</tr>";
@@ -115,10 +115,10 @@ function selectRowEquipment(row) {
         var table_temp = document.querySelector("table");
         const tBody = table_temp.tBodies[0];
         const rows_temp = Array.from(tBody.querySelectorAll("tr"));
-        rows_temp.forEach(tr => tr.style.backgroundColor = null);
+        rows_temp.forEach(tr => tr.classList.remove("active-row"));
     }
     selectedRow = rows[rowNr];
-    selectedRow.style.backgroundColor = '#A7DF62';
+    selectedRow.classList.add("active-row");
     g_selectedRow = rowNr;
     g_selectedEquipment = g_equipment[rowNr_data - 1];
 
@@ -225,30 +225,12 @@ function updateEquip() {
     var equipment_owner_id = -1;
     if ($("#eq_owner_id").val() != "") {
         equipment_owner_id = g_selectedOwner.ID;
-        // var ownerFullName = $("#eq_owner_id").val();
-        // // naam in hoofdletters = achternaam
-        // var ownerLastName = ownerFullName.match(/(\b[A-Z][A-Z]+|\b[A-Z]\b)/g)[0];
-        // var ownerName = ownerFullName.split(" ").splice(-1);
-        // argString = "?user_last_name=" + ownerLastName + "&user_name=" + ownerName
-        // $.get("/getUserIDByUserName" + argString, function (data, status) {
-        //     var ID = JSON.parse(data)[0].ID;
-        //     window.equipment_owner_id = ID;
-        // });
     }
     argString = argString + "&equipment_owner_id=" + equipment_owner_id;
     
     var equipment_co_owner_id = -1;
     if ($("#eq_co_owner_id").val() != "") {
         equipment_co_owner_id = g_selectedCoOwner.ID;
-        // var coOwnerFullName = $("#eq_co_owner_id").val();
-        // // naam in hoofdletters = achternaam
-        // var coOwnerLastName = coOwnerFullName.match(/(\b[A-Z][A-Z]+|\b[A-Z]\b)/g)[0];
-        // var coOwnerName = coOwnerFullName.split(" ").splice(-1);
-        // argString = "?user_last_name=" + coOwnerLastName + "&user_name=" + coOwnerName
-        // $.get("/getUserIDByUserName" + argString, function (data, status) {
-        //     var ID = JSON.parse(data)[0].ID;
-        //     window.equipment_co_owner_id = ID;
-        // });
     }
     argString = argString + "&equipment_co_owner_id=" + equipment_co_owner_id;
 
@@ -321,7 +303,7 @@ function updateSuggestionOwner() {
                     g_owner.push(uniqueUser[i]); 
                 } 
                 
-                tableHTML = "<table class='blueTable'>"
+                tableHTML = "<table class='table_design'>"
                 $.each(g_owner, function (i, item) {
                     tableHTML = tableHTML.concat(generateOwnerRow(i + 1, item));
                 });
@@ -381,7 +363,7 @@ function updateSuggestionCoOwner() {
                     g_coOwner.push(uniqueUser[i]); 
                 } 
                 
-                tableHTML = "<table class='blueTable'>"
+                tableHTML = "<table class='table_design'>"
                 $.each(g_coOwner, function (i, item) {
                     tableHTML = tableHTML.concat(generateCoOwnerRow(i + 1, item));
                 });
@@ -441,7 +423,7 @@ function updateSuggestionSupplier() {
                     g_supplier.push(uniqueSupplier[i]); 
                 } 
                 
-                tableHTML = "<table class='blueTable'>"
+                tableHTML = "<table class='table_design'>"
                 $.each(g_supplier, function (i, item) {
                     tableHTML = tableHTML.concat(generateSupplierRow(i + 1, item));
                 });
@@ -479,7 +461,7 @@ function selectRowSupplier(rownNr) {
 }
 
 function showToast(text, color){
-    const toastHTML = `<div id="toast_pop_up" style="background-color:${color};" class="mlbutton">${text}</div>`;
+    const toastHTML = `<div id="toast_pop_up" style="height:32px;background-color:${color};" class="mlbutton">${text}</div>`;
 
     $("#toast_message").html(toastHTML);
 
@@ -495,12 +477,10 @@ function giveInputWarning(inputID){
     var input = $('#'+inputID);
 
     input.css("border-color", "#BA604D");
-    input.css("background-color","#E1BBB3");
     input.css("transition","0.2s");
 
     setTimeout(function(){
         input.css("border-color", "");
-        input.css("background-color", "");
     },1500);
 }
 
@@ -569,13 +549,13 @@ function newEquip() {
     }
 
     var equipment_owner_id = "";
-    if ($("#eq_owner_id").val() != "") {
+    if ($("#eq_owner_id").val() != "" && g_selectedOwner != undefined) {
         equipment_owner_id = g_selectedOwner.ID;
     }
     argString = argString + "&equipment_owner_id=" + equipment_owner_id;
     
     var equipment_co_owner_id = "";
-    if ($("#eq_co_owner_id").val() != "") {
+    if ($("#eq_co_owner_id").val() != "" && g_selectedCoOwner != undefined) {
         equipment_co_owner_id = g_selectedCoOwner.ID;
     }
     argString = argString + "&equipment_co_owner_id=" + equipment_co_owner_id;
@@ -590,7 +570,7 @@ function newEquip() {
     argString = argString + "&equipment_annual_cost_budget=" + equipment_annual_cost_budget;
     
     var equipment_supplier_id = "";
-    if ($("#eq_co_owner_id").val() != "") {
+    if ($("#eq_co_owner_id").val() != "" && g_selectedSupplier != undefined) {
         equipment_supplier_id = g_selectedSupplier.ID;
     }
     argString = argString + "&equipment_supplier_id=" + equipment_supplier_id;
@@ -602,6 +582,9 @@ function newEquip() {
             showToast('Nieuw equipment is aangemaakt', '#8734B0');
         } else if (data.localeCompare("http400") == 0) {
             giveInputWarning("eq_name");
+            $("#suggestions_owner").empty();
+            $("#suggestions_co_owner").empty();
+            $("#suggestions_supplier").empty();
             showToast('Gelieve het toestel een naam te geven', '#B08734');
         }
     });

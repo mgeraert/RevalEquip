@@ -58,7 +58,6 @@ class Database(object):
 
 
     def create_users(self):
-
         table_name = 'users'
         self.create_table(table_name)
 
@@ -82,7 +81,6 @@ class Database(object):
         self.insert_columns(table_name, columns)
 
     def create_equipment(self):
-
         table_name = 'equipment'
         self.create_table(table_name)
 
@@ -106,7 +104,6 @@ class Database(object):
         self.insert_columns(table_name, columns)
 
     def create_suppliers(self):
-
         table_name = 'suppliers'
         self.create_table(table_name)
 

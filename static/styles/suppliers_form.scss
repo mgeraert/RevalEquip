@@ -1,15 +1,18 @@
 
-$margin1: 20px;
+$margin1: 30px;
 $margin2: 100px;
+$tabelHeight: 34.653px;
 $labelWidth: 130px;
 $rowSpacing: 28px;
-$textBoxWidth: 430px;
+$textBoxWidthSmall: 360px;
+$textBoxWidthLarge: 555px;
+$buttonHeight: 31.528px;
 $ButtonWidth: 100px;
 $ButtonSpacing: 10px;
 
 $textBoxColumn1Left: $margin1+$labelWidth;
-$labelColumn2Left: $margin1+$labelWidth+$textBoxWidth+2*$margin1;
-$textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidth+2*$margin1+$labelWidth;
+$labelColumn2Left: $margin1+$textBoxWidthLarge+$margin1;
+$textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWidth;
 
 @mixin textBoxStyle {
     height: 19.2px;
@@ -20,141 +23,128 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidth+2*$margin1+$labelWidth;
     padding-left: 3px;
 }
 
-#supplier_last_name_label{
-    position: absolute;
-    left:$margin1;
-    top:$rowSpacing * 1;
-    width: $labelWidth;
-}
-
-#supplier_last_name{
-    position: absolute;
-    left: $textBoxColumn1Left;
-    top:$rowSpacing * 1;
-    width: $textBoxWidth;
-    @include textBoxStyle();
-}
-
-#supplier_name_label{
-    position: absolute;
-    left: $labelColumn2Left;
-    top:$rowSpacing * 1;
-    width: $labelWidth;
-}
-
-#supplier_name{
-    position: absolute;
-    left: $textBoxColumn2Left;
-    top:$rowSpacing * 1;
-    width: $textBoxWidth;
-    @include textBoxStyle();
-}
-
-#supplier_email_label{
-    position: absolute;
-    left:$margin1;
-    top:$rowSpacing * 2;
-    width: $labelWidth;
-}
-
-#supplier_email{
-    position: absolute;
-    left: $textBoxColumn1Left;
-    top:$rowSpacing * 2;
-    width: $textBoxWidth;
-    @include textBoxStyle();
-}
-
-#supplier_phone_label{
-    position: absolute;
-    left: $labelColumn2Left;
-    top:$rowSpacing * 2;
-    width: $labelWidth;
-}
-
-#supplier_phone{
-    position: absolute;
-    left: $textBoxColumn2Left;
-    top:$rowSpacing * 2;
-    width: $textBoxWidth;
-    @include textBoxStyle();
-}
-
-#supplier_company_label{
-    position: absolute;
-    left:$margin1;
-    top:$rowSpacing * 3;
-    width: $labelWidth;
-}
-
-#supplier_company{
-    position: absolute;
-    left: $textBoxColumn1Left;
-    top:$rowSpacing * 3;
-    width: $textBoxWidth;
-    @include textBoxStyle();
-}
-
-#supplier_comment_label{
-    position: absolute;
-    left: $labelColumn2Left;
-    top:$rowSpacing * 3;
-    width: $labelWidth;
-}
-
-#supplier_comment{
-    position: absolute;
-    left: $textBoxColumn2Left;
-    top:$rowSpacing * 3;
-    width: $textBoxWidth;
-    @include textBoxStyle();
-}
-
 #update{
     position: absolute;
-    left:495px;
-    top:$rowSpacing * 7;
+    left:355px;
+    top: $margin1;
     width: $ButtonWidth;
 }
 
 #new{
     position: absolute;
-    left:495px;
-    top: $rowSpacing * 7 + 32px + $ButtonSpacing;
-    width: $ButtonWidth;
-}
-#reset{
-    position: absolute;
-    left:495px+ $ButtonWidth + $ButtonSpacing ;
-    top:$rowSpacing * 7 + 32px + $ButtonSpacing;
+    left:355px+$margin1+$ButtonWidth;
+    top: $margin1;
     width: $ButtonWidth;
 }
 
 #delete{
     position: absolute;
-    left:495px+ $ButtonWidth + $ButtonSpacing ;
-    top:$rowSpacing * 7;
+    left:355px+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
+    top: $margin1;
+    width: $ButtonWidth;
+}
+
+#reset{
+    position: absolute;
+    left:355px+$margin1+$ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
+    top: $margin1;
     width: $ButtonWidth;
 }
 
 #toast_pop_up {
-    left:495px;
-    width: $ButtonWidth*2+$ButtonSpacing*1;
+    left: 355px;
+    width: $ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
     position: absolute;
     background-color: gray;
-    top: $rowSpacing*7 - 50px - $ButtonSpacing;
+    top: $margin1;
 }
 
-.table-sortable th {
-    cursor: pointer;
+#supplier_last_name_label{
+    position: absolute;
+    left: $margin1;
+    top: $margin1+$buttonHeight+$margin1;
+    width: $textBoxWidthLarge;
 }
 
-.table-sortable .th-sort-asc::after {
-    content: "\25b4";
-    margin-left: 4px;
+// #supplier_last_name{
+//     position: absolute;
+//     left: $textBoxColumn1Left;
+//     top:$rowSpacing * 1;
+//     width: $textBoxWidth;
+//     @include textBoxStyle();
+// }
+
+#supplier_name_label{
+    position: absolute;
+    left: $labelColumn2Left;
+    top: $margin1+$buttonHeight+$margin1;
+    width: $textBoxWidthLarge;
 }
 
-.table-sortable .th-sort-desc::after {
-    content: "\25be";
-    margin-left: 4px;
+// #supplier_name{
+//     position: absolute;
+//     left: $textBoxColumn2Left;
+//     top:$rowSpacing * 1;
+//     width: $textBoxWidth;
+//     @include textBoxStyle();
+// }
+
+#supplier_email_label{
+    position: absolute;
+    left: $margin1;
+    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5;
+    width: $textBoxWidthLarge;
 }
+
+// #supplier_email{
+//     position: absolute;
+//     left: $textBoxColumn1Left;
+//     top:$rowSpacing * 2;
+//     width: $textBoxWidth;
+//     @include textBoxStyle();
+// }
+
+#supplier_phone_label{
+    position: absolute;
+    left: $labelColumn2Left;
+    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5;
+    width: $textBoxWidthLarge;
+}
+
+// #supplier_phone{
+//     position: absolute;
+//     left: $textBoxColumn2Left;
+//     top:$rowSpacing * 2;
+//     width: $textBoxWidth;
+//     @include textBoxStyle();
+// }
+
+#supplier_company_label{
+    position: absolute;
+    left: $margin1;
+    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
+    width: $textBoxWidthLarge;
+}
+
+// #supplier_company{
+//     position: absolute;
+//     left: $textBoxColumn1Left;
+//     top:$rowSpacing * 3;
+//     width: $textBoxWidth;
+//     @include textBoxStyle();
+// }
+
+#supplier_comment_label{
+    position: absolute;
+    left: $labelColumn2Left;
+    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
+    width: $textBoxWidthLarge;
+}
+
+// #supplier_comment{
+//     position: absolute;
+//     left: $textBoxColumn2Left;
+//     top:$rowSpacing * 3;
+//     width: $textBoxWidth;
+//     @include textBoxStyle();
+// }

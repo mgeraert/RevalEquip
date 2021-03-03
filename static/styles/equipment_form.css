@@ -1,366 +1,162 @@
-#eq_inventory_number_label {
-  position: absolute;
-  left: 20px;
-  top: 28px;
-  width: 130px;
-}
-
-#eq_inventory_number {
-  position: absolute;
-  left: 150px;
-  top: 28px;
-  width: 430px;
-  height: 19.2px;
-  border-width: 0.3px;
-  border-style: solid;
-  border-radius: 0.5px;
-  border-color: grey;
-  padding-left: 3px;
-}
-
-#eq_label_label {
-  position: absolute;
-  left: 620px;
-  top: 28px;
-  width: 130px;
-}
-
-#eq_label {
-  position: absolute;
-  left: 750px;
-  top: 28px;
-  width: 430px;
-  height: 19.2px;
-  border-width: 0.3px;
-  border-style: solid;
-  border-radius: 0.5px;
-  border-color: grey;
-  padding-left: 3px;
-}
-
-#eq_name_label {
-  position: absolute;
-  left: 20px;
-  top: 70px;
-  width: 130px;
-}
-
-#eq_name {
-  position: absolute;
-  left: 150px;
-  top: 70px;
-  width: 430px;
-  height: 19.2px;
-  border-width: 0.3px;
-  border-style: solid;
-  border-radius: 0.5px;
-  border-color: grey;
-  padding-left: 3px;
-}
-
-#eq_amount_label {
-  position: absolute;
-  left: 620px;
-  top: 70px;
-  width: 130px;
-}
-
-#eq_amount {
-  position: absolute;
-  left: 750px;
-  top: 70px;
-  width: 430px;
-  height: 19.2px;
-  border-width: 0.3px;
-  border-style: solid;
-  border-radius: 0.5px;
-  border-color: grey;
-  padding-left: 3px;
-}
-
-#eq_desc_label {
-  position: absolute;
-  left: 20px;
-  top: 98px;
-  width: 130px;
-}
-
-#eq_desc {
-  position: absolute;
-  left: 150px;
-  top: 98px;
-  width: 430px;
-  height: 19.2px;
-  border-width: 0.3px;
-  border-style: solid;
-  border-radius: 0.5px;
-  border-color: grey;
-  padding-left: 3px;
-}
-
-#eq_outcome_label {
-  position: absolute;
-  left: 620px;
-  top: 98px;
-  width: 130px;
-}
-
-#eq_outcome {
-  position: absolute;
-  left: 750px;
-  top: 98px;
-  width: 430px;
-  height: 19.2px;
-  border-width: 0.3px;
-  border-style: solid;
-  border-radius: 0.5px;
-  border-color: grey;
-  padding-left: 3px;
-}
-
-#eq_purchase_date_label {
-  position: absolute;
-  left: 20px;
-  top: 140px;
-  width: 130px;
-}
-
-#eq_purchase_date {
-  position: absolute;
-  left: 150px;
-  top: 140px;
-  width: 430px;
-  height: 19.2px;
-  border-width: 0.3px;
-  border-style: solid;
-  border-radius: 0.5px;
-  border-color: grey;
-  padding-left: 3px;
-}
-
-#eq_purchase_price_label {
-  position: absolute;
-  left: 620px;
-  top: 140px;
-  width: 130px;
-}
-
-#eq_purchase_price {
-  position: absolute;
-  left: 750px;
-  top: 140px;
-  width: 430px;
-  height: 19.2px;
-  border-width: 0.3px;
-  border-style: solid;
-  border-radius: 0.5px;
-  border-color: grey;
-  padding-left: 3px;
-}
-
-#eq_annual_cost_label {
-  position: absolute;
-  left: 20px;
-  top: 168px;
-  width: 130px;
-}
-
-#eq_annual_cost {
-  position: absolute;
-  left: 150px;
-  top: 168px;
-  width: 430px;
-  height: 19.2px;
-  border-width: 0.3px;
-  border-style: solid;
-  border-radius: 0.5px;
-  border-color: grey;
-  padding-left: 3px;
-}
-
-#eq_annual_cost_budget_label {
-  position: absolute;
-  left: 620px;
-  top: 168px;
-  width: 130px;
-}
-
-#eq_annual_cost_budget {
-  position: absolute;
-  left: 750px;
-  top: 168px;
-  width: 430px;
-  height: 19.2px;
-  border-width: 0.3px;
-  border-style: solid;
-  border-radius: 0.5px;
-  border-color: grey;
-  padding-left: 3px;
-}
-
-#eq_base_location_label {
-  position: absolute;
-  left: 20px;
-  top: 210px;
-  width: 130px;
-}
-
-#eq_base_location {
-  position: absolute;
-  left: 150px;
-  top: 210px;
-  width: 430px;
-  height: 19.2px;
-  border-width: 0.3px;
-  border-style: solid;
-  border-radius: 0.5px;
-  border-color: grey;
-  padding-left: 3px;
-}
-
-#eq_is_mobile_label {
-  position: absolute;
-  left: 620px;
-  top: 210px;
-  width: 130px;
-}
-
-#eq_is_mobile {
-  position: absolute;
-  left: 750px;
-  top: 210px;
-  height: 15px;
-  width: 15px;
-}
-
-#eq_owner_id_label {
-  position: absolute;
-  left: 20px;
-  top: 238px;
-  width: 130px;
-}
-
-#eq_owner_id {
-  position: absolute;
-  left: 150px;
-  top: 238px;
-  width: 230px;
-  height: 19.2px;
-  border-width: 0.3px;
-  border-style: solid;
-  border-radius: 0.5px;
-  border-color: grey;
-  padding-left: 3px;
-}
-
-#eq_co_owner_id_label {
-  position: absolute;
-  left: 420px;
-  top: 238px;
-  width: 130px;
-}
-
-#eq_co_owner_id {
-  position: absolute;
-  left: 550px;
-  top: 238px;
-  width: 230px;
-  height: 19.2px;
-  border-width: 0.3px;
-  border-style: solid;
-  border-radius: 0.5px;
-  border-color: grey;
-  padding-left: 3px;
-}
-
-#eq_supplier_id_label {
-  position: absolute;
-  left: 820px;
-  top: 238px;
-  width: 130px;
-}
-
-#eq_supplier_id {
-  position: absolute;
-  left: 950px;
-  top: 238px;
-  width: 230px;
-  height: 19.2px;
-  border-width: 0.3px;
-  border-style: solid;
-  border-radius: 0.5px;
-  border-color: grey;
-  padding-left: 3px;
-}
-
-#suggestions_owner {
-  position: absolute;
-  left: 150px;
-  top: 257px;
-  width: 230px;
-}
-
-#suggestions_co_owner {
-  position: absolute;
-  left: 550px;
-  top: 257px;
-  width: 230px;
-}
-
-#suggestions_supplier {
-  position: absolute;
-  left: 950px;
-  top: 257px;
-  width: 230px;
-}
-
 #update {
   position: absolute;
-  left: 495px;
-  top: 392px;
+  left: 355px;
+  top: 30px;
   width: 100px;
 }
 
 #new {
   position: absolute;
-  left: 495px;
-  top: 434px;
-  width: 100px;
-}
-
-#reset {
-  position: absolute;
-  left: 605px;
-  top: 434px;
+  left: 485px;
+  top: 30px;
   width: 100px;
 }
 
 #delete {
   position: absolute;
-  left: 605px;
-  top: 392px;
+  left: 615px;
+  top: 30px;
+  width: 100px;
+}
+
+#reset {
+  position: absolute;
+  left: 745px;
+  top: 30px;
   width: 100px;
 }
 
 #toast_pop_up {
-  left: 495px;
-  width: 210px;
+  left: 355px;
+  width: 490px;
   position: absolute;
   background-color: gray;
-  top: 332px;
+  top: 30px;
 }
 
-.table-sortable th {
-  cursor: pointer;
+#eq_inventory_number_label {
+  position: absolute;
+  left: 30px;
+  top: 91.528px;
+  width: 555px;
 }
 
-.table-sortable .th-sort-asc::after {
-  content: "\25b4";
-  margin-left: 4px;
+#eq_label_label {
+  position: absolute;
+  left: 615px;
+  top: 91.528px;
+  width: 555px;
 }
 
-.table-sortable .th-sort-desc::after {
-  content: "\25be";
-  margin-left: 4px;
+#eq_name_label {
+  position: absolute;
+  left: 30px;
+  top: 156.181px;
+  width: 555px;
+}
+
+#eq_amount_label {
+  position: absolute;
+  left: 615px;
+  top: 156.181px;
+  width: 555px;
+}
+
+#eq_desc_label {
+  position: absolute;
+  left: 30px;
+  top: 205.834px;
+  width: 555px;
+}
+
+#eq_outcome_label {
+  position: absolute;
+  left: 615px;
+  top: 205.834px;
+  width: 555px;
+}
+
+#eq_purchase_date_label {
+  position: absolute;
+  left: 30px;
+  top: 270.487px;
+  width: 555px;
+}
+
+#eq_purchase_price_label {
+  position: absolute;
+  left: 615px;
+  top: 270.487px;
+  width: 555px;
+}
+
+#eq_annual_cost_label {
+  position: absolute;
+  left: 30px;
+  top: 320.14px;
+  width: 555px;
+}
+
+#eq_annual_cost_budget_label {
+  position: absolute;
+  left: 615px;
+  top: 320.14px;
+  width: 555px;
+}
+
+#eq_base_location_label {
+  position: absolute;
+  left: 30px;
+  top: 384.793px;
+  width: 555px;
+}
+
+#eq_is_mobile_label {
+  position: absolute;
+  left: 615px;
+  top: 384.793px;
+  width: 555px;
+}
+
+#eq_owner_id_label {
+  position: absolute;
+  left: 30px;
+  top: 449.446px;
+  width: 360px;
+}
+
+#eq_co_owner_id_label {
+  position: absolute;
+  left: 420px;
+  top: 449.446px;
+  width: 360px;
+}
+
+#eq_supplier_id_label {
+  position: absolute;
+  left: 810px;
+  top: 449.446px;
+  width: 360px;
+}
+
+#suggestions_owner {
+  position: absolute;
+  left: 30px;
+  top: 484.099px;
+  width: 360px;
+}
+
+#suggestions_co_owner {
+  position: absolute;
+  left: 420px;
+  top: 484.099px;
+  width: 360px;
+}
+
+#suggestions_supplier {
+  position: absolute;
+  left: 810px;
+  top: 484.099px;
+  width: 360px;
 }
 /*# sourceMappingURL=equipment_form.css.map */

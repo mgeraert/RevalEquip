@@ -1,0 +1,101 @@
+.table_design {
+  font-size: 13px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table_design thead tr {
+  background-color: #01A38C;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+  position: sticky;
+  top: 0; 
+}
+
+.table_design th,
+.table_design td {
+  padding: 12px 15px;
+}
+
+.table_design tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.table_design tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.table_design tbody tr:last-of-type {
+  border-bottom: 2px solid #01A38C;
+}
+
+.table_design tbody tr.active-row {
+  font-weight: 900;
+  color: #01A38C;
+}
+
+.js-pscroll {
+  position: relative;
+  overflow: hidden;
+}
+
+.table_design .ps__rail-y {
+  width: 9px;
+  background-color: transparent;
+  opacity: 1 !important;
+  right: 5px;
+}
+
+.table_design .ps__rail-y .ps__thumb-y {
+  width: 100%;
+  right: 0;
+  background-color: transparent;
+  opacity: 1 !important;
+}
+
+.table_design .ps__rail-y .ps__thumb-y::before {
+  content: "";
+  display: block;
+  position: absolute;
+  background-color: #cccccc;
+  border-radius: 5px;
+  width: 100%;
+  height: calc(100% - 30px);
+  left: 0;
+  top: 15px;
+}
+
+.table-sortable th {
+  cursor: pointer;
+}
+  
+.table-sortable .th-sort-asc::after {
+  content: "\25b4";
+  margin-left: 4px;
+}
+  
+.table-sortable .th-sort-desc::after {
+  content: "\25be";
+  margin-left: 4px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}

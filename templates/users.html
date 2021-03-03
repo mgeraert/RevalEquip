@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <title>Reval - Users</title>
 
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/revalStyle.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/blue_table.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/reval_style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/table_design.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/users_form.css') }}">
 
   <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
@@ -22,6 +22,8 @@
   <!--Kite Menu CSS-->
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/menu2.css') }}">
 
+  <!--Favicon-->
+  <link rel="shortcut icon" href="/static/images/favicon.ico">
 </head>
 
 <body>
@@ -39,61 +41,139 @@
     }); //jQuery
   </script>
 
-  <div id="usersTable" style="width: 1200px;height: 540px;overflow: scroll;margin: auto;padding-top: 10px;"></div>
+  <div id="usersTable" style="width: 1200px;height: 540px;overflow: scroll;margin: auto;margin-top: 10px; overflow-x: hidden;"></div>
 
  <div class="widePanel" style="width:1200px;height:500px;">
 
-    <label id="user_last_name_label" for="user_last_name" >Last name</label>
-    <input id="user_last_name" />
+    <!-- <label id="user_last_name_label" for="user_last_name" >Last name</label>
+    <input id="user_last_name" /> -->
+    <div class="form-group"id="user_last_name_label" >
+      <span for="user_last_name">Last name</span>
+      <input id="user_last_name" class="form-field" type="text" placeholder="Last name" />
+    </div>
 
-    <label id="user_name_label" for="user_name">Name</label>
-    <input id="user_name" />
+    <!-- <label id="user_name_label" for="user_name">Name</label>
+    <input id="user_name" /> -->
+    <div class="form-group"id="user_name_label" >
+      <span for="user_name">Name</span>
+      <input id="user_name" class="form-field" type="text" placeholder="Name" />
+    </div>
 
-    <label id="user_sex_label" for="user_sex">Sex</label>
+    <!-- <label id="user_sex_label" for="user_sex">Sex</label>
     <select id="user_sex">
       <option value="m">Male</option>
       <option value="v">Female</option>
       <option value="x">I prefer not to say</option>
-    </select>
+    </select> -->
+    <div class="form-group" id="user_sex_label" >
+      <span for="user_sex">Sex</span>
+      <select id="user_sex" class="form-field">
+        <option value="m">Male</option>
+        <option value="v">Female</option>
+        <option value="x">I prefer not to say</option>
+      </select>
+    </div>
 
-    <label id="user_is_pi_label" for="user_is_pi">Pi</label>
-    <input id="user_is_pi" type="checkbox"/>
+    <!-- <label id="user_is_pi_label" for="user_is_pi">Pi</label>
+    <input id="user_is_pi" type="checkbox"/> -->
+    <div class="form-group" style="width:69.997px;" id="user_is_pi_label">
+      <span for="user_is_pi">Pi</span>
+      <div class="form-field" style="padding:0px;" >
+        <label class="container">
+          <input type="checkbox" id="user_is_pi" >
+          <span class="checkmark"></span>
+        </label>
+      </div>
+    </div>
 
-    <label id="user_is_phd_label" for="user_is_phd">PhD</label>
-    <input id="user_is_phd" type="checkbox"/>
+    <!-- <label id="user_is_phd_label" for="user_is_phd">PhD</label>
+    <input id="user_is_phd" type="checkbox"/> -->
+    <div class="form-group" style="width:85.028px;" id="user_is_phd_label">
+      <span for="user_is_phd">PhD</span>
+      <div class="form-field" style="padding:0px;" >
+        <label class="container">
+          <input type="checkbox" id="user_is_phd" >
+          <span class="checkmark"></span>
+        </label>
+      </div>
+    </div>
 
-    <label id="user_title_label" for="user_title">Title</label>
-    <input id="user_title" />
+    <!-- <label id="user_pw_hash_label" for="user_pw_hash">Password Hash</label>
+    <input id="user_pw_hash" /> -->
+    <div class="form-group"id="user_pw_hash_label" >
+      <span for="user_pw_hash">Password hash</span>
+      <input id="user_pw_hash" class="form-field" type="text" placeholder="Password hash" />
+    </div>
 
-    <label id="user_category_label" for="user_category">Category</label>
-    <input id="user_category" />
+    <!-- <label id="user_alternative_ID_label" for="user_alternative_ID">Alternative ID</label>
+    <input id="user_alternative_ID" /> -->
+    <div class="form-group"id="user_alternative_ID_label" >
+      <span for="user_alternative_ID">Alternative ID</span>
+      <input id="user_alternative_ID" class="form-field" type="text" placeholder="Alternative ID" />
+    </div>
 
-    <label id="user_function_label" for="user_function">Function</label>
-    <input id="user_function"/>
+    <!-- <label id="user_title_label" for="user_title">Title</label>
+    <input id="user_title" /> -->
+    <div class="form-group"id="user_title_label" >
+      <span for="user_title">Title</span>
+      <input id="user_title" class="form-field" type="text" placeholder="Title" />
+    </div>
 
-    <label id="user_email_label" for="user_email">Email</label>
-    <input id="user_email" />
+    <!-- <label id="user_category_label" for="user_category">Category</label>
+    <input id="user_category" /> -->
+    <div class="form-group"id="user_category_label" >
+      <span for="user_category">Category</span>
+      <input id="user_category" class="form-field" type="text" placeholder="Category" />
+    </div>
 
-    <label id="user_home_address_label" for="user_home_address">Home Address</label>
-    <input id="user_home_address" />
+    <!-- <label id="user_function_label" for="user_function">Function</label>
+    <input id="user_function"/> -->
+    <div class="form-group"id="user_function_label" >
+      <span for="user_function">Function</span>
+      <input id="user_function" class="form-field" type="text" placeholder="Function" />
+    </div>
 
-    <label id="user_telephone_label" for="user_telephone">Telephone</label>
-    <input id="user_telephone" />
+    <!-- <label id="user_email_label" for="user_email">Email</label>
+    <input id="user_email" /> -->
+    <div class="form-group"id="user_email_label" >
+      <span for="user_email">Email</span>
+      <input id="user_email" class="form-field" type="text" placeholder="Email" />
+    </div>
 
-    <label id="user_private_phone_label" for="user_private_phone">Private Phone</label>
-    <input id="user_private_phone" />
+    <!-- <label id="user_home_address_label" for="user_home_address">Home Address</label>
+    <input id="user_home_address" /> -->
+    <div class="form-group"id="user_home_address_label" >
+      <span for="user_home_address">Home address</span>
+      <input id="user_home_address" class="form-field" type="text" placeholder="Home adress" />
+    </div>
 
-    <label id="user_in_date_label" for="user_in_date">In Date</label>
-    <input id="user_in_date" type="date"/>
+    <!-- <label id="user_telephone_label" for="user_telephone">Telephone</label>
+    <input id="user_telephone" /> -->
+    <div class="form-group"id="user_telephone_label" >
+      <span for="user_telephone">Telephone</span>
+      <input id="user_telephone" class="form-field" type="text" placeholder="Telephone" />
+    </div>
 
-    <label id="user_out_date_label" for="user_out_date">Out Date</label>
-    <input id="user_out_date"  type="date"/>
+    <!-- <label id="user_private_phone_label" for="user_private_phone">Private Phone</label>
+    <input id="user_private_phone" /> -->
+    <div class="form-group"id="user_private_phone_label" >
+      <span for="user_private_phone">Private phone</span>
+      <input id="user_private_phone" class="form-field" type="text" placeholder="Private phone" />
+    </div>
 
-    <label id="user_pw_hash_label" for="user_pw_hash">Password Hash</label>
-    <input id="user_pw_hash" />
+    <!-- <label id="user_in_date_label" for="user_in_date">In Date</label>
+    <input id="user_in_date" type="date"/> -->
+    <div class="form-group"id="user_in_date_label" >
+      <span for="user_in_date">In date</span>
+      <input id="user_in_date" class="form-field" type="date"/>
+    </div>
 
-    <label id="user_alternative_ID_label" for="user_alternative_ID">Alternative ID</label>
-    <input id="user_alternative_ID" />
+    <!-- <label id="user_out_date_label" for="user_out_date">Out Date</label>
+    <input id="user_out_date"  type="date"/> -->
+    <div class="form-group"id="user_out_date_label" >
+      <span for="user_out_date">Out date</span>
+      <input id="user_out_date" class="form-field" type="date"/>
+    </div>
 
     <button id="update" onclick="updateUser()" class="mlbutton">Update</button>
     <button id="new" onclick="newUser()" class="mlbutton">New</button>

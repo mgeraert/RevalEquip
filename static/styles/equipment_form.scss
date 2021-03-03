@@ -1,15 +1,17 @@
 
-$margin1: 20px;
+$margin1: 30px;
 $margin2: 100px;
+$tabelHeight: 34.653px;
 $labelWidth: 130px;
 $rowSpacing: 28px;
-$textBoxWidthSmall: 230px;
-$textBoxWidthLarge: 430px;
+$textBoxWidthSmall: 360px;
+$textBoxWidthLarge: 555px;
+$buttonHeight: 31.528px;
 $ButtonWidth: 100px;
 $ButtonSpacing: 10px;
 
 $textBoxColumn1Left: $margin1+$labelWidth;
-$labelColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1;
+$labelColumn2Left: $margin1+$textBoxWidthLarge+$margin1;
 $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWidth;
 
 @mixin textBoxStyle {
@@ -21,297 +23,284 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     padding-left: 3px;
 }
 
-#eq_inventory_number_label{
-    position: absolute;
-    left:$margin1;
-    top:$rowSpacing * 1;
-    width: $labelWidth;
-}
-
-#eq_inventory_number{
-    position: absolute;
-    left: $textBoxColumn1Left;
-    top:$rowSpacing * 1;
-    width: $textBoxWidthLarge;
-    @include textBoxStyle();
-}
-
-#eq_label_label{
-    position: absolute;
-    left: $labelColumn2Left;
-    top:$rowSpacing * 1;
-    width: $labelWidth;
-}
-
-#eq_label{
-    position: absolute;
-    left: $textBoxColumn2Left;
-    top:$rowSpacing * 1;
-    width: $textBoxWidthLarge;
-    @include textBoxStyle();
-}
-
-#eq_name_label{
-    position: absolute;
-    left:$margin1;
-    top:$rowSpacing * 2.5;
-    width: $labelWidth;
-}
-
-#eq_name{
-    position: absolute;
-    left: $textBoxColumn1Left;
-    top:$rowSpacing * 2.5;
-    width: $textBoxWidthLarge;
-    @include textBoxStyle();
-}
-
-#eq_amount_label{
-    position: absolute;
-    left: $labelColumn2Left;
-    top:$rowSpacing * 2.5;
-    width: $labelWidth;
-}
-
-#eq_amount{
-    position: absolute;
-    left: $textBoxColumn2Left;
-    top:$rowSpacing * 2.5;
-    width: $textBoxWidthLarge;
-    @include textBoxStyle();
-}
-
-#eq_desc_label{
-    position: absolute;
-    left:$margin1;
-    top:$rowSpacing * 3.5;
-    width: $labelWidth;
-}
-
-#eq_desc{
-    position: absolute;
-    left: $textBoxColumn1Left;
-    top:$rowSpacing * 3.5;
-    width: $textBoxWidthLarge;
-    @include textBoxStyle();
-}
-
-#eq_outcome_label{
-    position: absolute;
-    left: $labelColumn2Left;
-    top:$rowSpacing * 3.5;
-    width: $labelWidth;
-}
-
-#eq_outcome{
-    position: absolute;
-    left: $textBoxColumn2Left;
-    top:$rowSpacing * 3.5;
-    width: $textBoxWidthLarge;
-    @include textBoxStyle();
-}
-
-#eq_purchase_date_label{
-    position: absolute;
-    left:$margin1;
-    top:$rowSpacing * 5;
-    width: $labelWidth;
-}
-
-#eq_purchase_date{
-    position: absolute;
-    left: $textBoxColumn1Left;
-    top:$rowSpacing * 5;
-    width: $textBoxWidthLarge;
-    @include textBoxStyle();
-}
-
-#eq_purchase_price_label {
-    position: absolute;
-    left: $labelColumn2Left;
-    top:$rowSpacing * 5;
-    width: $labelWidth;
-}
-
-#eq_purchase_price{
-    position: absolute;
-    left: $textBoxColumn2Left;
-    top:$rowSpacing * 5;
-    width: $textBoxWidthLarge;
-    @include textBoxStyle();
-}
-
-#eq_annual_cost_label {
-    position: absolute;
-    left:$margin1;
-    top:$rowSpacing * 6;
-    width: $labelWidth;
-}
-
-#eq_annual_cost{
-    position: absolute;
-    left: $textBoxColumn1Left;
-    top:$rowSpacing * 6;
-    width: $textBoxWidthLarge;
-    @include textBoxStyle();
-}
-
-#eq_annual_cost_budget_label {
-    position: absolute;
-    left: $labelColumn2Left;
-    top:$rowSpacing * 6;
-    width: $labelWidth;
-}
-
-#eq_annual_cost_budget{
-    position: absolute;
-    left: $textBoxColumn2Left;
-    top:$rowSpacing * 6;
-    width: $textBoxWidthLarge;
-    @include textBoxStyle();
-}
-
-#eq_base_location_label {
-    position: absolute;
-    left:$margin1;
-    top:$rowSpacing * 7.5;
-    width: $labelWidth;
-}
-
-#eq_base_location {
-    position: absolute;
-    left: $textBoxColumn1Left;
-    top:$rowSpacing * 7.5;
-    width: $textBoxWidthLarge;
-    @include textBoxStyle();
-}
-
-#eq_is_mobile_label {
-    position: absolute;
-    left: $labelColumn2Left;
-    top:$rowSpacing * 7.5;
-    width: $labelWidth;
-}
-
-#eq_is_mobile {
-    position: absolute;
-    left: $textBoxColumn2Left;
-    top:$rowSpacing * 7.5;
-    height: 15px;
-    width: 15px;
-}
-
-#eq_owner_id_label {
-    position: absolute;
-    left:$margin1;
-    top:$rowSpacing * 8.5;
-    width: $labelWidth;
-}
-
-#eq_owner_id {
-    position: absolute;
-    left: $textBoxColumn1Left;
-    top:$rowSpacing * 8.5;
-    width: $textBoxWidthSmall;
-    @include textBoxStyle();
-}
-
-#eq_co_owner_id_label {
-    position: absolute;
-    left:$margin1+$labelWidth+$textBoxWidthSmall+2*$margin1;
-    top:$rowSpacing * 8.5;
-    width: $labelWidth;
-}
-
-#eq_co_owner_id {
-    position: absolute;
-    left: $margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth;
-    top: $rowSpacing * 8.5;
-    width: $textBoxWidthSmall;
-    @include textBoxStyle();
-}
-
-#eq_supplier_id_label{
-    position: absolute;
-    left: $margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth+$textBoxWidthSmall+2*$margin1;
-    top:$rowSpacing * 8.5;
-    width: $labelWidth;
-}
-
-#eq_supplier_id{
-    position: absolute;
-    left: $margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth;
-    top: $rowSpacing * 8.5;
-    width: $textBoxWidthSmall;
-    @include textBoxStyle();
-}
-
-#suggestions_owner {
-    position: absolute;
-    left: $textBoxColumn1Left;
-    top: $rowSpacing * 9.5 - 9px;
-    width: $textBoxWidthSmall;
-}
-
-#suggestions_co_owner {
-    position: absolute;
-    left: $margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth;
-    top: $rowSpacing * 9.5 - 9px;
-    width: $textBoxWidthSmall;
-}
-
-#suggestions_supplier {
-    position: absolute;
-    left: $margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth;
-    top: $rowSpacing * 9.5 - 9px;
-    width: $textBoxWidthSmall;
-}
-
 #update{
     position: absolute;
-    left:495px;
-    top:$rowSpacing * 14;
+    left:355px;
+    top: $margin1;
     width: $ButtonWidth;
 }
 
 #new{
     position: absolute;
-    left:495px;
-    top:$rowSpacing * 14 + 32px + $ButtonSpacing;
-    width: $ButtonWidth;
-}
-#reset{
-    position: absolute;
-    left:495px+ $ButtonWidth + $ButtonSpacing ;
-    top:$rowSpacing * 14 + 32px + $ButtonSpacing;
+    left:355px+$margin1+$ButtonWidth;
+    top: $margin1;
     width: $ButtonWidth;
 }
 
 #delete{
     position: absolute;
-    left:495px+ $ButtonWidth + $ButtonSpacing ;
-    top:$rowSpacing * 14;
+    left:355px+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
+    top: $margin1;
+    width: $ButtonWidth;
+}
+
+#reset{
+    position: absolute;
+    left:355px+$margin1+$ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
+    top: $margin1;
     width: $ButtonWidth;
 }
 
 #toast_pop_up {
-    left:495px;
-    width: $ButtonWidth*2+$ButtonSpacing*1;
+    left: 355px;
+    width: $ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
     position: absolute;
     background-color: gray;
-    top: $rowSpacing*14 - 50px - $ButtonSpacing;
+    top: $margin1;
 }
 
-.table-sortable th {
-    cursor: pointer;
+#eq_inventory_number_label{
+    position: absolute;
+    left:$margin1;
+    top:$margin1+$buttonHeight+$margin1;
+    width: $textBoxWidthLarge;
 }
 
-.table-sortable .th-sort-asc::after {
-    content: "\25b4";
-    margin-left: 4px;
+// #eq_inventory_number{
+//     position: absolute;
+//     left: $textBoxColumn1Left;
+//     top:$rowSpacing * 1;
+//     width: $textBoxWidthLarge;
+//     @include textBoxStyle();
+// }
+
+#eq_label_label{
+    position: absolute;
+    left: $labelColumn2Left;
+    top: $margin1+$buttonHeight+$margin1;
+    width: $textBoxWidthLarge;
 }
 
-.table-sortable .th-sort-desc::after {
-    content: "\25be";
-    margin-left: 4px;
+// #eq_label{
+//     position: absolute;
+//     left: $textBoxColumn2Left;
+//     top:$rowSpacing * 1;
+//     width: $textBoxWidthLarge;
+//     @include textBoxStyle();
+// }
+
+#eq_name_label{
+    position: absolute;
+    left:$margin1;
+    top: $margin1+$buttonHeight+$margin1 * 2 + $tabelHeight;
+    width: $textBoxWidthLarge;
+}
+
+// #eq_name{
+//     position: absolute;
+//     left: $textBoxColumn1Left;
+//     top:$rowSpacing * 2.5;
+//     width: $textBoxWidthLarge;
+//     @include textBoxStyle();
+// }
+
+#eq_amount_label{
+    position: absolute;
+    left: $labelColumn2Left;
+    top: $margin1+$buttonHeight+$margin1 * 2 + $tabelHeight;
+    width: $textBoxWidthLarge;
+}
+
+// #eq_amount{
+//     position: absolute;
+//     left: $textBoxColumn2Left;
+//     top:$rowSpacing * 2.5;
+//     width: $textBoxWidthLarge;
+//     @include textBoxStyle();
+// }
+
+#eq_desc_label{
+    position: absolute;
+    left:$margin1;
+    top:$margin1+$buttonHeight+$margin1 * 2.5 + $tabelHeight * 2;
+    width: $textBoxWidthLarge;
+}
+
+// #eq_desc{
+//     position: absolute;
+//     left: $textBoxColumn1Left;
+//     top:$rowSpacing * 3.5;
+//     width: $textBoxWidthLarge;
+//     @include textBoxStyle();
+// }
+
+#eq_outcome_label{
+    position: absolute;
+    left: $labelColumn2Left;
+    top:$margin1+$buttonHeight+$margin1 * 2.5 + $tabelHeight * 2;
+    width: $textBoxWidthLarge;
+}
+
+// #eq_outcome{
+//     position: absolute;
+//     left: $textBoxColumn2Left;
+//     top:$rowSpacing * 3.5;
+//     width: $textBoxWidthLarge;
+//     @include textBoxStyle();
+// }
+
+#eq_purchase_date_label{
+    position: absolute;
+    left:$margin1;
+    top: $margin1+$buttonHeight+$margin1 * 3.5 + $tabelHeight * 3;
+    width: $textBoxWidthLarge;
+}
+
+// #eq_purchase_date{
+//     position: absolute;
+//     left: $textBoxColumn1Left;
+//     top:$rowSpacing * 5;
+//     width: $textBoxWidthLarge;
+//     @include textBoxStyle();
+// }
+
+#eq_purchase_price_label {
+    position: absolute;
+    left: $labelColumn2Left;
+    top: $margin1+$buttonHeight+$margin1 * 3.5 + $tabelHeight * 3;
+    width: $textBoxWidthLarge;
+}
+
+// #eq_purchase_price{
+//     position: absolute;
+//     left: $textBoxColumn2Left;
+//     top:$rowSpacing * 5;
+//     width: $textBoxWidthLarge;
+//     @include textBoxStyle();
+// }
+
+#eq_annual_cost_label {
+    position: absolute;
+    left:$margin1;
+    top: $margin1+$buttonHeight+$margin1 * 4 + $tabelHeight * 4;
+    width: $textBoxWidthLarge;
+}
+
+// #eq_annual_cost{
+//     position: absolute;
+//     left: $textBoxColumn1Left;
+//     top:$rowSpacing * 6;
+//     width: $textBoxWidthLarge;
+//     @include textBoxStyle();
+// }
+
+#eq_annual_cost_budget_label {
+    position: absolute;
+    left: $labelColumn2Left;
+    top: $margin1+$buttonHeight+$margin1 * 4 + $tabelHeight * 4;
+    width: $textBoxWidthLarge;
+}
+
+// #eq_annual_cost_budget{
+//     position: absolute;
+//     left: $textBoxColumn2Left;
+//     top:$rowSpacing * 6;
+//     width: $textBoxWidthLarge;
+//     @include textBoxStyle();
+// }
+
+#eq_base_location_label {
+    position: absolute;
+    left:$margin1;
+    top: $margin1+$buttonHeight+$margin1 * 5 + $tabelHeight * 5;
+    width: $textBoxWidthLarge;
+}
+
+// #eq_base_location {
+//     position: absolute;
+//     left: $textBoxColumn1Left;
+//     top:$rowSpacing * 7.5;
+//     width: $textBoxWidthLarge;
+//     @include textBoxStyle();
+// }
+
+#eq_is_mobile_label {
+    position: absolute;
+    left: $labelColumn2Left;
+    top: $margin1+$buttonHeight+$margin1 * 5 + $tabelHeight * 5;
+    width: $textBoxWidthLarge;
+}
+
+// #eq_is_mobile {
+//     position: absolute;
+//     left: $textBoxColumn2Left;
+//     top: $margin1+$buttonHeight+$margin1 * 5 + $tabelHeight * 5;
+//     height: 15px;
+//     width: 15px;
+// }
+
+#eq_owner_id_label {
+    position: absolute;
+    left:$margin1;
+    top: $margin1+$buttonHeight+$margin1 * 6 + $tabelHeight * 6;
+    width: $textBoxWidthSmall;
+}
+
+// #eq_owner_id {
+//     position: absolute;
+//     left: $textBoxColumn1Left;
+//     top:$rowSpacing * 8.5;
+//     width: $textBoxWidthSmall;
+//     @include textBoxStyle();
+// }
+
+#eq_co_owner_id_label {
+    position: absolute;
+    left:$margin1+$textBoxWidthSmall+$margin1;
+    top: $margin1+$buttonHeight+$margin1 * 6 + $tabelHeight * 6;
+    width: $textBoxWidthSmall;
+}
+
+// #eq_co_owner_id {
+//     position: absolute;
+//     left: $margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth;
+//     top: $rowSpacing * 8.5;
+//     width: $textBoxWidthSmall;
+//     @include textBoxStyle();
+// }
+
+#eq_supplier_id_label{
+    position: absolute;
+    left: $margin1+$textBoxWidthSmall+$margin1+$textBoxWidthSmall+$margin1;
+    top: $margin1+$buttonHeight+$margin1 * 6 + $tabelHeight * 6;
+    width: $textBoxWidthSmall;
+}
+
+// #eq_supplier_id{
+//     position: absolute;
+//     left: $margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth;
+//     top: $rowSpacing * 8.5;
+//     width: $textBoxWidthSmall;
+//     @include textBoxStyle();
+// }
+
+#suggestions_owner {
+    position: absolute;
+    left: $margin1;
+    top: $margin1+$buttonHeight+$margin1 * 6 + $tabelHeight * 7;
+    width: $textBoxWidthSmall;
+}
+
+#suggestions_co_owner {
+    position: absolute;
+    left:$margin1+$textBoxWidthSmall+$margin1;
+    top: $margin1+$buttonHeight+$margin1 * 6 + $tabelHeight * 7;
+    width: $textBoxWidthSmall;
+}
+
+#suggestions_supplier {
+    position: absolute;
+    left: $margin1+$textBoxWidthSmall+$margin1+$textBoxWidthSmall+$margin1;
+    top: $margin1+$buttonHeight+$margin1 * 6 + $tabelHeight * 7;
+    width: $textBoxWidthSmall;
 }
