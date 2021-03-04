@@ -1,34 +1,43 @@
-#update {
+#update_button {
   position: absolute;
-  left: 355px;
+  left: 420px;
   top: 30px;
   width: 100px;
 }
 
-#new {
+#new_button {
+  position: absolute;
+  left: 550px;
+  top: 30px;
+  width: 100px;
+}
+
+#delete_button {
+  position: absolute;
+  left: 680px;
+  top: 30px;
+  width: 100px;
+}
+
+#add_button {
   position: absolute;
   left: 485px;
   top: 30px;
   width: 100px;
+  visibility: hidden;
 }
 
-#delete {
+#cancel_button {
   position: absolute;
   left: 615px;
   top: 30px;
   width: 100px;
-}
-
-#reset {
-  position: absolute;
-  left: 745px;
-  top: 30px;
-  width: 100px;
+  visibility: hidden;
 }
 
 #toast_pop_up {
-  left: 355px;
-  width: 490px;
+  left: 420px;
+  width: 360px;
   position: absolute;
   background-color: gray;
   top: 30px;

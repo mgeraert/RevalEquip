@@ -23,37 +23,46 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     padding-left: 3px;
 }
 
-#update{
+#update_button{
     position: absolute;
-    left:355px;
+    left:420px;
     top: $margin1;
     width: $ButtonWidth;
 }
 
-#new{
+#new_button{
+    position: absolute;
+    left:420px+$margin1+$ButtonWidth;
+    top: $margin1;
+    width: $ButtonWidth;
+}
+
+#delete_button{
+    position: absolute;
+    left:420px+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
+    top: $margin1;
+    width: $ButtonWidth;
+}
+
+#add_button{
     position: absolute;
     left:355px+$margin1+$ButtonWidth;
     top: $margin1;
     width: $ButtonWidth;
+    visibility: hidden;
 }
 
-#delete{
+#cancel_button{
     position: absolute;
     left:355px+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
     top: $margin1;
     width: $ButtonWidth;
-}
-
-#reset{
-    position: absolute;
-    left:355px+$margin1+$ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
-    top: $margin1;
-    width: $ButtonWidth;
+    visibility: hidden;
 }
 
 #toast_pop_up {
-    left: 355px;
-    width: $ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
+    left: 420px;
+    width: $ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
     position: absolute;
     background-color: gray;
     top: $margin1;
@@ -93,7 +102,7 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     position: absolute;
     left: $margin1;
     top: $margin1+$buttonHeight+$margin1+$tabelHeight+ $margin1 * 0.5;
-    width: 200px;
+    width: 260px;
 }
 
 // #user_sex{
@@ -107,7 +116,7 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
 
 #user_is_pi_label{
     position: absolute;
-    left: $margin1+200px+$margin1;
+    left: $margin1+260px+$margin1;
     top: $margin1+$buttonHeight+$margin1+$tabelHeight+ $margin1 * 0.5;
 }
 
@@ -122,7 +131,7 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
 
 #user_is_phd_label{
     position: absolute;
-    left: $margin1+200px+$margin1+70px+$margin1;
+    left: $margin1+260px+$margin1+117.5px+$margin1;
     top: $margin1+$buttonHeight+$margin1+$tabelHeight+ $margin1 * 0.5;
 }
 
@@ -134,14 +143,6 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
 //     width: 15px;
 // }
 
-
-#user_pw_hash_label{
-    position: absolute;
-    left: $margin1+200px+$margin1+70px+$margin1+85px+$margin1;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+ $margin1 * 0.5;
-    width: $textBoxWidthSmall;
-}
-
 // #user_pw_hash{
 //     position: absolute;
 //     left: $textBoxColumn1Left;
@@ -152,9 +153,9 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
 
 #user_alternative_ID_label{
     position: absolute;
-    left: $margin1+200px+$margin1+70px+$margin1+85px+$margin1+$textBoxWidthSmall+$margin1;
+    left: $labelColumn2Left;
     top: $margin1+$buttonHeight+$margin1+$tabelHeight+ $margin1 * 0.5;
-    width: 305px;
+    width: $textBoxWidthLarge;
 }
 
 // #user_alternative_ID{

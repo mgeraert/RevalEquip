@@ -100,14 +100,14 @@ function getTableDiv(content, width, rownNr) {
 }
 
 function selectRowEquipment(row) {
-    if(typeof row == 'number') {
+    if (typeof row == 'number') {
         rowNr = row
     } else {
         rowNr = row.rowIndex;
     }
 
     var rowNr_data = getJSONFromTable(rowNr);
-    
+
     var table = document.getElementById("equipmentTable");
     var rows = table.getElementsByTagName("tr");
 
@@ -121,6 +121,7 @@ function selectRowEquipment(row) {
     selectedRow.classList.add("active-row");
     g_selectedRow = rowNr;
     g_selectedEquipment = g_equipment[rowNr_data - 1];
+    console.log(g_selectedEquipment.ID)
 
     $("#eq_inventory_number").val(g_selectedEquipment.equipment_inventory_number);
     $("#eq_label").val(g_selectedEquipment.equipment_label);
@@ -208,7 +209,7 @@ function updateEquip() {
 
     var equipment_base_location = $("#eq_base_location").val();
     argString = argString + "&equipment_base_location=" + equipment_base_location;
-    
+
     var is_mobile = $("#eq_is_mobile").is(':checked');
     if (is_mobile == true) {
         equipment_is_mobile = 1;
@@ -227,7 +228,7 @@ function updateEquip() {
         equipment_owner_id = g_selectedOwner.ID;
     }
     argString = argString + "&equipment_owner_id=" + equipment_owner_id;
-    
+
     var equipment_co_owner_id = -1;
     if ($("#eq_co_owner_id").val() != "") {
         equipment_co_owner_id = g_selectedCoOwner.ID;
@@ -266,7 +267,7 @@ function updateEquip() {
                     var columnNr = parseInt(getNumbersFromString(column.getAttribute('onclick'))[0]);
                     if (column.classList[0] == "th-sort-asc") {
                         getEquipment(true, true, true, columnNr)
-                    } else{
+                    } else {
                         getEquipment(true, true, false, columnNr)
                     }
                 } else {
@@ -285,24 +286,24 @@ function updateSuggestionOwner() {
         argString = "?owner_name=" + $("#eq_owner_id").val();
         $.get("/updateSuggestionOwner" + argString, function (data, status) {
             var suggestedUsers = JSON.parse(data);
-            
+
             if (suggestedUsers.length > 0) {
 
                 // remove duplicates https://www.geeksforgeeks.org/how-to-remove-duplicates-from-an-array-of-objects-using-javascript/
-                g_owner = []; 
-                let uniqueUser = {}; 
-                for (let i in suggestedUsers) { 
+                g_owner = [];
+                let uniqueUser = {};
+                for (let i in suggestedUsers) {
                     if (i < 5) {
-                        suggestedUser = suggestedUsers[i]['ID']; 
+                        suggestedUser = suggestedUsers[i]['ID'];
                         uniqueUser[suggestedUser] = suggestedUsers[i];
                     } else {
                         break;
                     }
-                } 
-                for (i in uniqueUser) { 
-                    g_owner.push(uniqueUser[i]); 
-                } 
-                
+                }
+                for (i in uniqueUser) {
+                    g_owner.push(uniqueUser[i]);
+                }
+
                 tableHTML = "<table class='table_design'>"
                 $.each(g_owner, function (i, item) {
                     tableHTML = tableHTML.concat(generateOwnerRow(i + 1, item));
@@ -324,7 +325,7 @@ function generateOwnerRow(rownNr, user) {
     out = "<tr onclick='selectRowOwner(" + rownNr.toString() + ")'>";
 
     out = out.concat('<td>');
-    out = out.concat(getTableDiv(user.user_last_name +' '+ user.user_name, 220, rownNr));
+    out = out.concat(getTableDiv(user.user_last_name + ' ' + user.user_name, 220, rownNr));
     out = out.concat("</td>");
 
     out = out + "</tr>";
@@ -334,7 +335,7 @@ function generateOwnerRow(rownNr, user) {
 
 function selectRowOwner(rownNr) {
     if (rownNr > 0) {
-        g_selectedOwner = g_owner[rownNr-1];
+        g_selectedOwner = g_owner[rownNr - 1];
         $("#eq_owner_id").val(g_selectedOwner.user_last_name + ' ' + g_selectedOwner.user_name);
         $("#suggestions_owner").empty();
     }
@@ -345,24 +346,24 @@ function updateSuggestionCoOwner() {
         argString = "?owner_name=" + $("#eq_co_owner_id").val();
         $.get("/updateSuggestionOwner" + argString, function (data, status) {
             var suggestedUsers = JSON.parse(data);
-            
+
             if (suggestedUsers.length > 0) {
 
                 // remove duplicates https://www.geeksforgeeks.org/how-to-remove-duplicates-from-an-array-of-objects-using-javascript/
-                g_coOwner = []; 
-                let uniqueUser = {}; 
-                for (let i in suggestedUsers) { 
+                g_coOwner = [];
+                let uniqueUser = {};
+                for (let i in suggestedUsers) {
                     if (i < 5) {
-                        suggestedUser = suggestedUsers[i]['ID']; 
+                        suggestedUser = suggestedUsers[i]['ID'];
                         uniqueUser[suggestedUser] = suggestedUsers[i];
                     } else {
                         break;
                     }
-                } 
-                for (i in uniqueUser) { 
-                    g_coOwner.push(uniqueUser[i]); 
-                } 
-                
+                }
+                for (i in uniqueUser) {
+                    g_coOwner.push(uniqueUser[i]);
+                }
+
                 tableHTML = "<table class='table_design'>"
                 $.each(g_coOwner, function (i, item) {
                     tableHTML = tableHTML.concat(generateCoOwnerRow(i + 1, item));
@@ -384,7 +385,7 @@ function generateCoOwnerRow(rownNr, user) {
     out = "<tr onclick='selectRowCoOwner(" + rownNr.toString() + ")'>";
 
     out = out.concat('<td>');
-    out = out.concat(getTableDiv(user.user_last_name +' '+ user.user_name, 220, rownNr));
+    out = out.concat(getTableDiv(user.user_last_name + ' ' + user.user_name, 220, rownNr));
     out = out.concat("</td>");
 
     out = out + "</tr>";
@@ -394,7 +395,7 @@ function generateCoOwnerRow(rownNr, user) {
 
 function selectRowCoOwner(rownNr) {
     if (rownNr > 0) {
-        g_selectedCoOwner = g_coOwner[rownNr-1];
+        g_selectedCoOwner = g_coOwner[rownNr - 1];
         $("#eq_co_owner_id").val(g_selectedCoOwner.user_last_name + ' ' + g_selectedCoOwner.user_name);
         $("#suggestions_co_owner").empty();
     }
@@ -405,24 +406,24 @@ function updateSuggestionSupplier() {
         argString = "?supplier_name=" + $("#eq_supplier_id").val();
         $.get("/updateSuggestionSupplier" + argString, function (data, status) {
             var suggestedSuppliers = JSON.parse(data);
-            
+
             if (suggestedSuppliers.length > 0) {
 
                 // remove duplicates https://www.geeksforgeeks.org/how-to-remove-duplicates-from-an-array-of-objects-using-javascript/
-                g_supplier = []; 
-                let uniqueSupplier = {}; 
-                for (let i in suggestedSuppliers) { 
+                g_supplier = [];
+                let uniqueSupplier = {};
+                for (let i in suggestedSuppliers) {
                     if (i < 5) {
-                        suggestedSupplier = suggestedSuppliers[i]['ID']; 
+                        suggestedSupplier = suggestedSuppliers[i]['ID'];
                         uniqueSupplier[suggestedSupplier] = suggestedSuppliers[i];
                     } else {
                         break;
                     }
-                } 
-                for (i in uniqueSupplier) { 
-                    g_supplier.push(uniqueSupplier[i]); 
-                } 
-                
+                }
+                for (i in uniqueSupplier) {
+                    g_supplier.push(uniqueSupplier[i]);
+                }
+
                 tableHTML = "<table class='table_design'>"
                 $.each(g_supplier, function (i, item) {
                     tableHTML = tableHTML.concat(generateSupplierRow(i + 1, item));
@@ -444,7 +445,7 @@ function generateSupplierRow(rownNr, supplier) {
     out = "<tr onclick='selectRowSupplier(" + rownNr.toString() + ")'>";
 
     out = out.concat('<td>');
-    out = out.concat(getTableDiv(supplier.supplier_last_name +' '+ supplier.supplier_name, 220, rownNr));
+    out = out.concat(getTableDiv(supplier.supplier_last_name + ' ' + supplier.supplier_name, 220, rownNr));
     out = out.concat("</td>");
 
     out = out + "</tr>";
@@ -454,43 +455,34 @@ function generateSupplierRow(rownNr, supplier) {
 
 function selectRowSupplier(rownNr) {
     if (rownNr > 0) {
-        g_selectedSupplier = g_supplier[rownNr-1];
+        g_selectedSupplier = g_supplier[rownNr - 1];
         $("#eq_supplier_id").val(g_selectedSupplier.supplier_last_name + ' ' + g_selectedSupplier.supplier_name);
         $("#suggestions_supplier").empty();
     }
 }
 
-function showToast(text, color){
+function showToast(text, color) {
     const toastHTML = `<div id="toast_pop_up" style="height:32px;background-color:${color};" class="mlbutton">${text}</div>`;
 
     $("#toast_message").html(toastHTML);
 
-    setTimeout(function(){
-        $('#toast_message').fadeOut(500, function() {
+    setTimeout(function () {
+        $('#toast_message').fadeOut(500, function () {
             $(this).empty().show();
         });
-    },1500);
+    }, 1500);
 }
 
-function giveInputWarning(inputID){
-    console.log('#'+inputID)
-    var input = $('#'+inputID);
+function giveInputWarning(inputID) {
+    console.log('#' + inputID)
+    var input = $('#' + inputID);
 
     input.css("border-color", "#BA604D");
-    input.css("transition","0.2s");
+    input.css("transition", "0.2s");
 
-    setTimeout(function(){
+    setTimeout(function () {
         input.css("border-color", "");
-    },1500);
-}
-
-function resetEquip(){
-    clearTextBox();
-    g_selectedEquipment = undefined;
-    g_selectedRow = -1;
-
-    getEquipment();
-    showToast('Velden gereset', '#349BB0');
+    }, 1500);
 }
 
 function clearTextBox() {
@@ -508,10 +500,42 @@ function clearTextBox() {
     $("#eq_purchase_price").val("");
     $("#eq_annual_cost").val("");
     $("#eq_annual_cost_budget").val("");
+    g_selectedEquipment = undefined;
+    g_selectedRow = -1;
 
     $("#suggestions_owner").empty();
     $("#suggestions_co_owner").empty();
     $("#suggestions_supplier").empty();
+}
+
+function prepareNewEquip() {
+    clearTextBox();
+
+    var table_temp = document.querySelector("table");
+    const tBody = table_temp.tBodies[0];
+    const rows_temp = Array.from(tBody.querySelectorAll("tr"));
+    rows_temp.forEach(tr => tr.classList.remove("active-row"));
+
+    $('#update_button').css("visibility", "hidden");
+    $('#new_button').css("visibility", "hidden");
+    $('#delete_button').css("visibility", "hidden");
+    $('#add_button').css("visibility", "visible");
+    $('#cancel_button').css("visibility", "visible");
+}
+
+function cancelNewEquip() {
+    clearTextBox();
+
+    var table_temp = document.querySelector("table");
+    const tBody = table_temp.tBodies[0];
+    const rows_temp = Array.from(tBody.querySelectorAll("tr"));
+    rows_temp.forEach(tr => tr.classList.remove("active-row"));
+
+    $('#update_button').css("visibility", "visible");
+    $('#new_button').css("visibility", "visible");
+    $('#delete_button').css("visibility", "visible");
+    $('#add_button').css("visibility", "hidden");
+    $('#cancel_button').css("visibility", "hidden");
 }
 
 function newEquip() {
@@ -538,7 +562,7 @@ function newEquip() {
 
     var equipment_base_location = $("#eq_base_location").val();
     argString = argString + "&equipment_base_location=" + equipment_base_location;
-    
+
     var is_mobile = $("#eq_is_mobile").is(':checked');
     if (is_mobile == true) {
         equipment_is_mobile = 1;
@@ -553,7 +577,7 @@ function newEquip() {
         equipment_owner_id = g_selectedOwner.ID;
     }
     argString = argString + "&equipment_owner_id=" + equipment_owner_id;
-    
+
     var equipment_co_owner_id = "";
     if ($("#eq_co_owner_id").val() != "" && g_selectedCoOwner != undefined) {
         equipment_co_owner_id = g_selectedCoOwner.ID;
@@ -568,7 +592,7 @@ function newEquip() {
 
     var equipment_annual_cost_budget = $("#eq_annual_cost_budget").val();
     argString = argString + "&equipment_annual_cost_budget=" + equipment_annual_cost_budget;
-    
+
     var equipment_supplier_id = "";
     if ($("#eq_co_owner_id").val() != "" && g_selectedSupplier != undefined) {
         equipment_supplier_id = g_selectedSupplier.ID;
@@ -577,6 +601,11 @@ function newEquip() {
 
     $.get("/newEquipment" + argString, function (data, status) {
         if (data.localeCompare("http200") == 0) {
+            $('#update_button').css("visibility", "visible");
+            $('#new_button').css("visibility", "visible");
+            $('#delete_button').css("visibility", "visible");
+            $('#add_button').css("visibility", "hidden");
+            $('#cancel_button').css("visibility", "hidden");
             getEquipment();
             clearTextBox();
             showToast('Nieuw equipment is aangemaakt', '#8734B0');
@@ -615,7 +644,7 @@ function deleteEquip() {
                 if (column.classList[0] == "th-sort-asc") {
                     clearTextBox();
                     getEquipment(false, true, true, columnNr)
-                } else{
+                } else {
                     clearTextBox();
                     getEquipment(false, true, false, columnNr)
                 }
@@ -632,7 +661,7 @@ function sortTableByColumn(table, column, asc = true) {
     const dirModifier = asc ? 1 : -1;
     const tBody = table.tBodies[0];
     const rows = Array.from(tBody.querySelectorAll("tr"));
-    
+
     var inputType;
     if (column == 0) {
         inputType = "numbers";
@@ -643,27 +672,27 @@ function sortTableByColumn(table, column, asc = true) {
     // sort each row
     const sortedRows = rows.sort((a, b) => {
         if (inputType == "names") {
-            const aColText = a.querySelector(`td:nth-child(${column+1})`).textContent.trim();
-            const bColText = b.querySelector(`td:nth-child(${column+1})`).textContent.trim();
+            const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+            const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
             return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
         } else {
-            const aColText = a.querySelector(`td:nth-child(${column+1})`).textContent.trim();
-            const bColText = b.querySelector(`td:nth-child(${column+1})`).textContent.trim();
+            const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+            const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
             return parseFloat(aColText) > parseFloat(bColText) ? (1 * dirModifier) : (-1 * dirModifier);
         }
     });
-    for (i = 0; i<sortedRows.length; i++) {
+    for (i = 0; i < sortedRows.length; i++) {
         var innerText = sortedRows[i].innerText.split("\n\t\n");
         var name = innerText[1];
         console.log(i, sortedRows[i].innerText.split("\n\t\n")[0], name);
         if (g_selectedEquipment != undefined) {
             if (name == g_selectedEquipment.equipment_name) {
-                g_selectedRow = i+1;
+                g_selectedRow = i + 1;
             }
         }
     }
-    console.log(g_selectedRow-1);
-    
+    console.log(g_selectedRow - 1);
+
     // remove all resisting tr from table
     while (tBody.firstChild) {
         tBody.removeChild(tBody.firstChild);
@@ -674,8 +703,8 @@ function sortTableByColumn(table, column, asc = true) {
 
     // remember current sorting type (asc or decs)
     table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
-    table.querySelector(`th:nth-child(${column+1})`).classList.toggle("th-sort-asc", asc);
-    table.querySelector(`th:nth-child(${column+1})`).classList.toggle("th-sort-desc", !asc);
+    table.querySelector(`th:nth-child(${column + 1})`).classList.toggle("th-sort-asc", asc);
+    table.querySelector(`th:nth-child(${column + 1})`).classList.toggle("th-sort-desc", !asc);
 }
 
 function sortColumnEquipment(column) {
@@ -693,21 +722,51 @@ function sortColumnEquipment(column) {
 function getJSONFromTable(rowNr) {
     var table = document.getElementById('blue_table').tBodies[0];
     var jsonArr = [];
-    for(var i =0,row;row = table.rows[i];i++){
-         var col = row.cells;
-         var jsonObj = {
-             elem : col[0].innerHTML
-           }
-  
+    for (var i = 0, row; row = table.rows[i]; i++) {
+        var col = row.cells;
+        var jsonObj = {
+            elem: col[0].innerHTML
+        }
+
         jsonArr.push(jsonObj);
     }
 
-    var ID = getNumbersFromString(jsonArr[rowNr-1].elem)[1];
+    var ID = getNumbersFromString(jsonArr[rowNr - 1].elem)[1];
     return ID;
 }
 
-function getNumbersFromString(string) {    
+function getNumbersFromString(string) {
     var regex = /\d+/g;
     var matches = string.match(regex);
     return matches;
 }
+
+$(function () {
+    $('#submit').click(function () {
+        if (g_selectedEquipment != undefined) {
+            var form_data = new FormData($('#uploadform')[0]);
+            $.ajax({
+                type: 'POST',
+                url: '/uploadajax_eq?equipment_id=' + g_selectedEquipment.ID,
+                data: form_data,
+                contentType: false,
+                processData: false,
+                dataType: 'json'
+            }).done(function (data, textStatus, jqXHR) {
+                argString = "?picture_name=" + data.name;
+                argString = argString + "&equipment_id=" + g_selectedEquipment.ID;
+                $.get("/newEquipmentPicture" + argString, function (data, status) {
+                    if (data.localeCompare("http200") == 0) {
+                        showToast('Photo is uploaded', '#5DB034');
+                    }
+                });
+                console.log('Photo uploaded!');
+            }).fail(function (data) {
+                console.error('Photo not uploaded. Error!');
+            });
+        } else {
+            showToast('Gelieve een toestel aan te duiden waar u de foto aan wil toevoegen.', '#B08734');
+        }
+
+    });
+}); 

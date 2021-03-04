@@ -9,7 +9,6 @@ def dict_factory(cursor, row):
     return d
 
 class Database(object):
-
     def __init__(self):
         import configparser
         config = configparser.ConfigParser()
@@ -116,7 +115,15 @@ class Database(object):
 
         self.insert_columns(table_name, columns)
 
+    def create_pictures(self):
+        table_name = 'pictures'
+        self.create_table(table_name)
 
+        columns = ["picture_name TEXT DEFAULT ''",
+                   "user_id NUMBER DEFAULT -1",
+                   "equipment_id NUMBER DEFAULT -1"]
+
+        self.insert_columns(table_name, columns)
 
     def create_permissions(self):
         table_name = 'permissions'
@@ -134,3 +141,4 @@ class Database(object):
         self.create_permissions()
         self.create_equipment()
         self.create_suppliers()
+        self.create_pictures()

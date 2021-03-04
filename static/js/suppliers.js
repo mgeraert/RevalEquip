@@ -23,7 +23,7 @@ function getSuppliers(enableSelectedRow = false, enableSort = false, sortAsc = f
             // addRowHandlers();
             if (enableSort) {
                 sortTableByColumn(document.querySelector("table"), sortColumn, sortAsc);
-            } 
+            }
             if (enableSelectedRow) {
                 selectRowSupplier(g_selectedRow);
             }
@@ -94,14 +94,14 @@ function getTableDiv(content, width, rowNr) {
 }
 
 function selectRowSupplier(row) {
-    if(typeof row == 'number') {
+    if (typeof row == 'number') {
         rowNr = row
     } else {
         rowNr = row.rowIndex;
     }
     var rowNr_data = getJSONFromTable(rowNr);
     console.log(rowNr);
-    
+
     var table = document.getElementById("suppliersTable");
     var rows = table.getElementsByTagName("tr");
 
@@ -136,18 +136,21 @@ function updateSupplier() {
     argString = argString + "&supplier_last_name=" + supplier_last_name.toUpperCase();
 
     var supplier_name = "";
-    var name = $("#supplier_name").val().split(' ');
-    for (i = 0; i<name.length; i++) {
-        for (j = 0; j<name[i].length; j++) {
-            if (j == 0) {
-                supplier_name = supplier_name + name[i][j].toUpperCase();
-            } else {
-                supplier_name = supplier_name + name[i][j];
+    if ($("#supplier_name").val() != "") {
+        var name = $("#supplier_name").val().split(' ');
+        for (i = 0; i < name.length; i++) {
+            for (j = 0; j < name[i].length; j++) {
+                if (j == 0) {
+                    supplier_name = supplier_name + name[i][j].toUpperCase();
+                } else {
+                    supplier_name = supplier_name + name[i][j];
+                }
             }
+            supplier_name = supplier_name + " ";
         }
-        supplier_name = supplier_name + " ";
+        supplier_name = supplier_name.slice(0, -1);
     }
-    argString = argString + "&supplier_name=" + supplier_name.slice(0, -1);
+    argString = argString + "&supplier_name=" + supplier_name;
 
     var supplier_email = $("#supplier_email").val();
     argString = argString + "&supplier_email=" + supplier_email;
@@ -178,7 +181,7 @@ function updateSupplier() {
                     var columnNr = parseInt(getNumbersFromString(column.getAttribute('onclick'))[0]);
                     if (column.classList[0] == "th-sort-asc") {
                         getSuppliers(true, true, true, columnNr)
-                    } else{
+                    } else {
                         getSuppliers(true, true, false, columnNr)
                     }
                 } else {
@@ -197,23 +200,56 @@ function updateSupplier() {
     }
 }
 
+function prepareNewSupplier() {
+    clearTextBox();
+
+    var table_temp = document.querySelector("table");
+    const tBody = table_temp.tBodies[0];
+    const rows_temp = Array.from(tBody.querySelectorAll("tr"));
+    rows_temp.forEach(tr => tr.classList.remove("active-row"));
+
+    $('#update_button').css("visibility", "hidden");
+    $('#new_button').css("visibility", "hidden");
+    $('#delete_button').css("visibility", "hidden");
+    $('#add_button').css("visibility", "visible");
+    $('#cancel_button').css("visibility", "visible");
+}
+
+function cancelNewSupplier() {
+    clearTextBox();
+
+    var table_temp = document.querySelector("table");
+    const tBody = table_temp.tBodies[0];
+    const rows_temp = Array.from(tBody.querySelectorAll("tr"));
+    rows_temp.forEach(tr => tr.classList.remove("active-row"));
+
+    $('#update_button').css("visibility", "visible");
+    $('#new_button').css("visibility", "visible");
+    $('#delete_button').css("visibility", "visible");
+    $('#add_button').css("visibility", "hidden");
+    $('#cancel_button').css("visibility", "hidden");
+}
+
 function newSupplier() {
     var supplier_last_name = $("#supplier_last_name").val();
     argString = "?supplier_last_name=" + supplier_last_name.toUpperCase();
 
     var supplier_name = "";
-    var name = $("#supplier_name").val().split(' ');
-    for (i = 0; i<name.length; i++) {
-        for (j = 0; j<name[i].length; j++) {
-            if (j == 0) {
-                supplier_name = supplier_name + name[i][j].toUpperCase();
-            } else {
-                supplier_name = supplier_name + name[i][j];
+    if ($("#supplier_name").val() != "") {
+        var name = $("#supplier_name").val().split(' ');
+        for (i = 0; i < name.length; i++) {
+            for (j = 0; j < name[i].length; j++) {
+                if (j == 0) {
+                    supplier_name = supplier_name + name[i][j].toUpperCase();
+                } else {
+                    supplier_name = supplier_name + name[i][j];
+                }
             }
+            supplier_name = supplier_name + " ";
         }
-        supplier_name = supplier_name + " ";
+        supplier_name = supplier_name.slice(0, -1);
     }
-    argString = argString + "&supplier_name=" + supplier_name.slice(0, -1);
+    argString = argString + "&supplier_name=" + supplier_name;
 
     var supplier_email = $("#supplier_email").val();
     argString = argString + "&supplier_email=" + supplier_email;
@@ -231,6 +267,11 @@ function newSupplier() {
         if (data.localeCompare("http200") == 0) {
             getSuppliers();
             clearTextBox();
+            $('#update_button').css("visibility", "visible");
+            $('#new_button').css("visibility", "visible");
+            $('#delete_button').css("visibility", "visible");
+            $('#add_button').css("visibility", "hidden");
+            $('#cancel_button').css("visibility", "hidden");
             showToast('Nieuwe supplier is aangemaakt', '#8734B0');
         } else if (data.localeCompare("http400") == 0) {
             if (supplier_last_name == "") {
@@ -269,7 +310,7 @@ function deleteSupplier() {
                 if (column.classList[0] == "th-sort-asc") {
                     getSuppliers(false, true, true, columnNr);
                     clearTextBox();
-                } else{
+                } else {
                     getSuppliers(false, true, false, columnNr);
                     clearTextBox();
                 }
@@ -281,7 +322,7 @@ function deleteSupplier() {
     });
 }
 
-function resetSupplier(){
+function resetSupplier() {
     clearTextBox();
     g_selectedSupplier = undefined;
     g_selectedRow = -1;
@@ -297,6 +338,8 @@ function clearTextBox() {
     $("#supplier_phone").val("");
     $("#supplier_company").val("");
     $("#supplier_comment").val("");
+    g_selectedSupplier = undefined;
+    g_selectedRow = -1;
 }
 
 // https://www.youtube.com/watch?v=8SL_hM1a0yo
@@ -304,7 +347,7 @@ function sortTableByColumn(table, column, asc = true) {
     const dirModifier = asc ? 1 : -1;
     const tBody = table.tBodies[0];
     const rows = Array.from(tBody.querySelectorAll("tr"));
-    
+
     var inputType;
     if (column == 0) {
         inputType = "numbers";
@@ -314,32 +357,32 @@ function sortTableByColumn(table, column, asc = true) {
     // sort each row
     const sortedRows = rows.sort((a, b) => {
         if (inputType == "names") {
-            const aColText = a.querySelector(`td:nth-child(${column+1})`).textContent.trim();
-            const bColText = b.querySelector(`td:nth-child(${column+1})`).textContent.trim();
+            const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+            const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
             return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
         } else {
-            const aColText = a.querySelector(`td:nth-child(${column+1})`).textContent.trim();
-            const bColText = b.querySelector(`td:nth-child(${column+1})`).textContent.trim();
+            const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+            const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
             return parseFloat(aColText) > parseFloat(bColText) ? (1 * dirModifier) : (-1 * dirModifier);
         }
     });
-    for (i = 0; i<sortedRows.length; i++) {
+    for (i = 0; i < sortedRows.length; i++) {
         var innerText = sortedRows[i].innerText.split("\n\t\n");
         var nameArray = innerText[1].split(" ");
         var lastName = "";
-        for (j = 0; j<nameArray.length; j++) {
+        for (j = 0; j < nameArray.length; j++) {
             if (nameArray[j] == nameArray[j].toUpperCase()) {
-                lastName = lastName + nameArray[j]+ " ";
+                lastName = lastName + nameArray[j] + " ";
             }
         }
         lastName = lastName.slice(0, -1);
         if (g_selectedSupplier != undefined) {
             if (lastName == g_selectedSupplier.supplier_last_name) {
-                g_selectedRow = i+1;
+                g_selectedRow = i + 1;
             }
         }
     }
-    
+
     // remove all resisting tr from table
     while (tBody.firstChild) {
         tBody.removeChild(tBody.firstChild);
@@ -350,8 +393,8 @@ function sortTableByColumn(table, column, asc = true) {
 
     // remember current sorting type (asc or decs)
     table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
-    table.querySelector(`th:nth-child(${column+1})`).classList.toggle("th-sort-asc", asc);
-    table.querySelector(`th:nth-child(${column+1})`).classList.toggle("th-sort-desc", !asc);
+    table.querySelector(`th:nth-child(${column + 1})`).classList.toggle("th-sort-asc", asc);
+    table.querySelector(`th:nth-child(${column + 1})`).classList.toggle("th-sort-desc", !asc);
 }
 
 function sortColumnSupplier(column) {
@@ -366,50 +409,50 @@ function sortColumnSupplier(column) {
     }
 }
 
-function showToast(text, color){
+function showToast(text, color) {
     const toastHTML = `<div id="toast_pop_up" style="height:32px;background-color:${color};" class="mlbutton">${text}</div>`;
 
     $("#toast_message").html(toastHTML);
 
-    setTimeout(function(){
-        $('#toast_message').fadeOut(500, function() {
+    setTimeout(function () {
+        $('#toast_message').fadeOut(500, function () {
             $(this).empty().show();
         });
-    },1500);
+    }, 1500);
 }
 
 function getJSONFromTable(rowNr) {
     var table = document.getElementById('blue_table').tBodies[0];
     var jsonArr = [];
-    for(var i =0,row;row = table.rows[i];i++){
-         var col = row.cells;
-         var jsonObj = {
-             elem : col[0].innerHTML
-           }
-  
+    for (var i = 0, row; row = table.rows[i]; i++) {
+        var col = row.cells;
+        var jsonObj = {
+            elem: col[0].innerHTML
+        }
+
         jsonArr.push(jsonObj);
     }
 
-    var ID = getNumbersFromString(jsonArr[rowNr-1].elem)[1];// creates array from matches
+    var ID = getNumbersFromString(jsonArr[rowNr - 1].elem)[1];// creates array from matches
     return ID;
 }
 
-function getNumbersFromString(string) {    
+function getNumbersFromString(string) {
     var regex = /\d+/g;
     var matches = string.match(regex);
     return matches;
 }
 
-function giveInputWarning(inputID){
-    console.log('#'+inputID)
-    var input = $('#'+inputID);
+function giveInputWarning(inputID) {
+    console.log('#' + inputID)
+    var input = $('#' + inputID);
 
     input.css("border-color", "#BA604D");
-    input.css("background-color","#E1BBB3");
-    input.css("transition","0.2s");
+    input.css("background-color", "#E1BBB3");
+    input.css("transition", "0.2s");
 
-    setTimeout(function(){
+    setTimeout(function () {
         input.css("border-color", "");
         input.css("background-color", "");
-    },1500);
+    }, 1500);
 }

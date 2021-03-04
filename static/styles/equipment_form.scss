@@ -2,7 +2,9 @@
 $margin1: 30px;
 $margin2: 100px;
 $tabelHeight: 34.653px;
-$labelWidth: 130px;
+$labelWidthSmall: 80px;
+$labelWidthMedium: 120px;
+$labelWidthLarge: 160px;
 $rowSpacing: 28px;
 $textBoxWidthSmall: 360px;
 $textBoxWidthLarge: 555px;
@@ -10,9 +12,7 @@ $buttonHeight: 31.528px;
 $ButtonWidth: 100px;
 $ButtonSpacing: 10px;
 
-$textBoxColumn1Left: $margin1+$labelWidth;
 $labelColumn2Left: $margin1+$textBoxWidthLarge+$margin1;
-$textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWidth;
 
 @mixin textBoxStyle {
     height: 19.2px;
@@ -23,37 +23,62 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     padding-left: 3px;
 }
 
-#update{
+#file_input {
     position: absolute;
-    left:355px;
+    top: $margin1+2px;
+    left: $margin1;
+    width: 360px;
+    padding: 2.2px 3px 2.9px 3px;
+    font-size: 12px;
+}
+
+.upload_button { 
+    position: absolute;
+    top: $margin1;
+    left:$margin1+260px;
+    width: $ButtonWidth;
+}
+
+#update_button{
+    position: absolute;
+    left:420px;
     top: $margin1;
     width: $ButtonWidth;
 }
 
-#new{
+#new_button{
+    position: absolute;
+    left:420px+$margin1+$ButtonWidth;
+    top: $margin1;
+    width: $ButtonWidth;
+}
+
+#delete_button{
+    position: absolute;
+    left:420px+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
+    top: $margin1;
+    width: $ButtonWidth;
+}
+
+#add_button{
     position: absolute;
     left:355px+$margin1+$ButtonWidth;
     top: $margin1;
     width: $ButtonWidth;
+    visibility: hidden;
 }
 
-#delete{
+#cancel_button{
     position: absolute;
     left:355px+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
     top: $margin1;
     width: $ButtonWidth;
-}
-
-#reset{
-    position: absolute;
-    left:355px+$margin1+$ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
-    top: $margin1;
-    width: $ButtonWidth;
+    visibility: hidden;
 }
 
 #toast_pop_up {
-    left: 355px;
-    width: $ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
+    left: 420px;
+    width: $ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
     position: absolute;
     background-color: gray;
     top: $margin1;

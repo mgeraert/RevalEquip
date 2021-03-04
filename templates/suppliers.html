@@ -49,49 +49,50 @@
     <!-- <label id="supplier_last_name_label" for="supplier_last_name" >Last name</label>
     <input id="supplier_last_name" /> -->
     <div class="form-group" id="supplier_last_name_label">
-      <span for="supplier_last_name">Last name</span>
+      <span for="supplier_last_name" style="width:120px;">Last name</span>
       <input id="supplier_last_name" class="form-field" type="text" placeholder="Last name" />
     </div>
 
     <!-- <label id="supplier_name_label" for="supplier_name" >Name</label>
     <input id="supplier_name" /> -->
     <div class="form-group" id="supplier_name_label">
-      <span for="supplier_name">Name</span>
+      <span for="supplier_name" style="width:120px;">Name</span>
       <input id="supplier_name" class="form-field" type="text" placeholder="Name" />
     </div>
     
     <!-- <label id="supplier_email_label" for="supplier_email" >Email</label>
     <input id="supplier_email" /> -->
     <div class="form-group" id="supplier_email_label">
-      <span for="supplier_email">Email</span>
+      <span for="supplier_email" style="width:120px;">Email</span>
       <input id="supplier_email" class="form-field" type="text" placeholder="Email" />
     </div>
     
     <!-- <label id="supplier_phone_label" for="supplier_phone" >Phone Number</label>
     <input id="supplier_phone" /> -->
     <div class="form-group" id="supplier_phone_label">
-      <span for="supplier_phone">Phonenumber</span>
-      <input id="supplier_phone" class="form-field" type="text" placeholder="Phonenumber" />
+      <span for="supplier_phone" style="width:120px;">Phone number</span>
+      <input id="supplier_phone" class="form-field" type="text" placeholder="Phone number" />
     </div>
     
     <!-- <label id="supplier_company_label" for="supplier_company" >Company</label>
     <input id="supplier_company" /> -->
     <div class="form-group" id="supplier_company_label">
-      <span for="supplier_company">Company</span>
+      <span for="supplier_company" style="width:120px;">Company</span>
       <input id="supplier_company" class="form-field" type="text" placeholder="Company" />
     </div>
     
     <!-- <label id="supplier_comment_label" for="supplier_comment" >Comment</label>
     <input id="supplier_comment" /> -->
     <div class="form-group" id="supplier_comment_label">
-      <span for="supplier_comment">Comment</span>
+      <span for="supplier_comment" style="width:120px;">Comment</span>
       <input id="supplier_comment" class="form-field" type="text" placeholder="Comment" />
     </div>
 
-    <button id="update" onclick="updateSupplier()" class="mlbutton">Update</button>
-    <button id="new" onclick="newSupplier()" class="mlbutton">New</button>
-    <button id="reset" onclick="resetSupplier()" class="mlbutton">Reset</button>
-    <button id="delete" onclick="deleteSupplier()" class="mlbutton">Delete</button>
+    <button id="update_button" onclick="updateSupplier()" class="mlbutton">Update</button>
+    <button id="new_button" onclick="prepareNewSupplier()" class="mlbutton">New</button>
+    <button id="cancel_button" onclick="cancelNewSupplier()" class="mlbutton">Cancel</button>
+    <button id="add_button" onclick="newSupplier()" class="mlbutton">Save</button>
+    <button id="delete_button" onclick="deleteSupplier()" class="mlbutton">Delete</button>
 
     <div id="toast_message"></div>
   </div>

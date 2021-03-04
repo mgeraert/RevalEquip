@@ -1,9 +1,9 @@
-from flask import Blueprint, request, render_template
+from flask import Blueprint, request, redirect, render_template
 from classes.Database import Database
 import json
+from werkzeug.utils import secure_filename
 
 equipment = Blueprint('equipment', __name__)
-
 
 @equipment.route('/equipment', methods=['GET'])
 def reval_equipment():
@@ -298,3 +298,36 @@ def get_user_id_by_user_name():
     c = db.conn.cursor()
     c.execute(sql)
     return json.dumps(c.fetchall())
+
+@equipment.route('/newEquipmentPicture', methods=['GET'])
+def new_equipment_picture():
+    sql_string = 'INSERT INTO pictures '
+    sql_parameters = '('
+    sql_values = '('
+
+    picture_name = request.args.get('picture_name')
+    if picture_name != '':
+        sql_parameters = sql_parameters + 'picture_name,'
+        sql_values = sql_values + '"' + picture_name + '",'
+
+    equipment_id = request.args.get('equipment_id')
+    if equipment_id != '':
+        sql_parameters = sql_parameters + 'equipment_id,'
+        sql_values = sql_values + '"' + equipment_id + '",'
+
+    db = Database()
+
+    if sql_parameters[len(sql_parameters)-1] == ',':
+        sql_parameters = sql_parameters[:len(sql_parameters)-1] + sql_parameters[(len(sql_parameters)-1+1):]
+    if sql_values[len(sql_values)-1] == ',':
+        sql_values = sql_values[:len(sql_values)-1] + sql_values[(len(sql_values)-1+1):]
+
+    sql_string = sql_string + sql_parameters + ') VALUES ' + sql_values + ')'
+    print(sql_string)
+
+    c = db.conn.cursor()
+    c.execute(sql_string)
+    db.conn.commit()
+
+    c.close()
+    return 'http200'

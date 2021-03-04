@@ -23,37 +23,46 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     padding-left: 3px;
 }
 
-#update{
+#update_button{
     position: absolute;
-    left:355px;
+    left:420px;
     top: $margin1;
     width: $ButtonWidth;
 }
 
-#new{
+#new_button{
+    position: absolute;
+    left:420px+$margin1+$ButtonWidth;
+    top: $margin1;
+    width: $ButtonWidth;
+}
+
+#delete_button{
+    position: absolute;
+    left:420px+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
+    top: $margin1;
+    width: $ButtonWidth;
+}
+
+#add_button{
     position: absolute;
     left:355px+$margin1+$ButtonWidth;
     top: $margin1;
     width: $ButtonWidth;
+    visibility: hidden;
 }
 
-#delete{
+#cancel_button{
     position: absolute;
     left:355px+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
     top: $margin1;
     width: $ButtonWidth;
-}
-
-#reset{
-    position: absolute;
-    left:355px+$margin1+$ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
-    top: $margin1;
-    width: $ButtonWidth;
+    visibility: hidden;
 }
 
 #toast_pop_up {
-    left: 355px;
-    width: $ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
+    left: 420px;
+    width: $ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
     position: absolute;
     background-color: gray;
     top: $margin1;
