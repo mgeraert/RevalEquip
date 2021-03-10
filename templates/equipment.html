@@ -30,6 +30,7 @@
 
   <!--Favicon-->
   <link rel="shortcut icon" href="/static/images/favicon.ico">
+  
 
 </head>
 
@@ -52,86 +53,67 @@
 
   <div class="widePanel" style="width:1200px;height:700px;">
 
-    <!-- <label id="eq_inventory_number_label" for="eq_inventory_number">Equipment number</label>
-    <input id="eq_inventory_number" /> -->
+    <form id="uploadform" method="post" enctype="multipart/form-data">
+      <label for="file"></label>
+      <input id="file_input" name="file" type="file" class="form-field">
+      <button id="submit" type="button" class="mlbutton upload_button">Upload</button>
+    </form>
+
     <div class="form-group"id="eq_inventory_number_label" >
       <span for="eq_inventory_number" style="width:160px;">Inventory Number</span>
       <input id="eq_inventory_number" class="form-field" type="text" placeholder="Equipment number" />
     </div>
 
-    <!-- <label id="eq_label_label" for="eq_label">Label</label>
-    <input id="eq_label" /> -->
     <div class="form-group"id="eq_label_label" >
       <span for="eq_label" style="width:120px;">Label</span>
       <input id="eq_label" class="form-field" type="text" placeholder="Label" />
     </div>
 
-
-    <!-- <label id="eq_name_label" for="eq_name">Name</label>
-    <input id="eq_name" /> -->
     <div class="form-group" id="eq_name_label">
       <span for="eq_name" style="width:120px;">Name</span>
-      <input id="eq_name" class="form-field" type="text" placeholder="Label" />
+      <input id="eq_name" class="form-field" type="text" placeholder="Name" />
     </div>
 
-    <!-- <label id="eq_amount_label" for="eq_amount">Amount</label>
-    <input id="eq_amount" /> -->
     <div class="form-group"id="eq_amount_label" >
       <span for="eq_amount" style="width:120px;">Amount</span>
       <input id="eq_amount" class="form-field" type="text" placeholder="Amount" />
     </div>
 
-    <!-- <label id="eq_desc_label" for="eq_desc">Description</label>
-    <input id="eq_desc" /> -->
     <div class="form-group" id="eq_desc_label">
       <span for="eq_desc" style="width:120px;">Description</span>
       <input id="eq_desc" class="form-field" type="text" placeholder="Description" />
     </div>
 
-    <!-- <label id="eq_outcome_label" for="eq_outcome">Outcome</label>
-    <input id="eq_outcome"  name="Outcome"  /> -->
     <div class="form-group" id="eq_outcome_label">
       <span for="eq_outcome" style="width:120px;">Outcome</span>
       <input id="eq_outcome" class="form-field" type="text" placeholder="Outcome" />
     </div>
 
-    <!-- <label id="eq_purchase_date_label" for="eq_purchase_date">Purchase Date</label>
-    <input id="eq_purchase_date" /> -->
     <div class="form-group" id="eq_purchase_date_label" >
       <span for="eq_purchase_date" style="width:120px;">Purchase date</span>
       <input id="eq_purchase_date" class="form-field" type="text" placeholder="Purchase date" />
     </div>
 
-    <!-- <label id="eq_purchase_price_label" for="eq_purchase_price">Purchase Price</label>
-    <input id="eq_purchase_price" /> -->
     <div class="form-group" id="eq_purchase_price_label">
       <span for="eq_purchase_price" style="width:120px;">Purchase Price</span>
       <input id="eq_purchase_price" class="form-field" type="text" placeholder="Purchase Price" />
     </div>
 
-    <!-- <label id="eq_annual_cost_label" for="eq_annual_cost">Annual Cost</label>
-    <input id="eq_annual_cost" /> -->
     <div class="form-group" id="eq_annual_cost_label">
       <span for="eq_annual_cost" style="width:120px;">Annual Cost</span>
       <input id="eq_annual_cost" class="form-field" type="text" placeholder="Annual Cost" />
     </div>
 
-    <!-- <label id="eq_annual_cost_budget_label" for="eq_annual_cost_budget">Annual Cost Budget</label>
-    <input id="eq_annual_cost_budget" /> -->
     <div class="form-group" id="eq_annual_cost_budget_label">
       <span for="eq_annual_cost_budget" style="width:160px;">Annual Cost Budget</span>
       <input id="eq_annual_cost_budget" class="form-field" type="text" placeholder="Annual Cost Budget" />
     </div>
 
-    <!-- <label id="eq_base_location_label" for="eq_base_location">Base Location</label>
-    <input id="eq_base_location" /> -->
     <div class="form-group" id="eq_base_location_label">
       <span for="eq_base_location" style="width:120px;">Base location</span>
       <input id="eq_base_location" class="form-field" type="text" placeholder="Base location" />
     </div>
 
-    <!-- <label id="eq_is_mobile_label" for="eq_is_mobile">Mobile</label>
-    <input type="checkbox" id="eq_is_mobile" /> -->
     <div class="form-group" style="width:152.436px;" id="eq_is_mobile_label">
       <span for="eq_is_mobile" style="width:120px">Mobile</span>
       <div class="form-field" style="padding:0px;" >
@@ -142,24 +124,18 @@
       </div>
     </div>
 
-    <!-- <label id="eq_owner_id_label" for="eq_owner_id">Owner</label>
-    <input id="eq_owner_id" oninput="updateSuggestionOwner()"/> -->
     <div class="form-group" id="eq_owner_id_label">
       <span for="eq_owner_id" style="width:120px;">Owner</span>
       <input id="eq_owner_id" class="form-field"  oninput="updateSuggestionOwner()" type="text" placeholder="Owner" />
     </div>
     <div id="suggestions_owner"></div>
 
-    <!-- <label id="eq_co_owner_id_label"for="eq_co_owner_id">Co-owner</label>
-    <input id="eq_co_owner_id" oninput="updateSuggestionCoOwner()" /> -->
     <div class="form-group" id="eq_co_owner_id_label">
       <span for="eq_co_owner_id" style="width:120px;">Co-owner</span>
       <input id="eq_co_owner_id" class="form-field" oninput="updateSuggestionCoOwner()" type="text" placeholder="Co-owner" />
     </div>
     <div id="suggestions_co_owner"></div>
 
-    <!-- <label id="eq_supplier_id_label" for="eq_supplier_id">Supplier</label>
-    <input id="eq_supplier_id" oninput="updateSuggestionSupplier()" /> -->
     <div class="form-group" id="eq_supplier_id_label">
       <span for="eq_supplier_id" style="width:120px;">Supplier</span>
       <input id="eq_supplier_id" class="form-field" oninput="updateSuggestionSupplier()" type="text" placeholder="Supplier" />
@@ -171,20 +147,16 @@
     <button id="cancel_button" onclick="cancelNewEquip()" class="mlbutton">Cancel</button>
     <button id="add_button" onclick="newEquip()" class="mlbutton">Save</button>
     <button id="delete_button" onclick="deleteEquip()" class="mlbutton">Delete</button>
+    <button id="export_button" onclick="exportEquip()" class="mlbutton">Export</button>
+    
 
     <div id="toast_message"></div>
 
-    <form id="uploadform" method="post" enctype="multipart/form-data">
-      <label for="file"></label>
-      <input id="file_input" name="file" type="file" class="form-field">
-      <button id="submit" type="button" class="mlbutton upload_button">Upload</button>
-    </form>
-
-    <div style="visibility: hidden;">
-
+    <div id="eq_gallery">
     </div>
     
   </div>
+  
 
 </body>
 

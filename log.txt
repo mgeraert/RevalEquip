@@ -233,3 +233,335 @@ Traceback (most recent call last):
   File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\blue_equipment.py", line 329, in new_equipment_picture
     c.execute(sql_string)
 sqlite3.OperationalError: database is locked
+[2021-03-06 00:15:14] ERROR    Exception on /uploadajax_eq [POST]
+Traceback (most recent call last):
+  File "D:\Coding\WEB_DEV\Flask-Introduction\task-project\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\WEB_DEV\Flask-Introduction\task-project\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\WEB_DEV\Flask-Introduction\task-project\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\WEB_DEV\Flask-Introduction\task-project\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\WEB_DEV\Flask-Introduction\task-project\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\WEB_DEV\Flask-Introduction\task-project\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:/Coding/RevalEquip/__init__.py", line 64, in upldfile_eq
+    files.save(os.path.join(updir, filename))
+  File "D:\Coding\WEB_DEV\Flask-Introduction\task-project\venv\lib\site-packages\werkzeug\datastructures.py", line 3066, in save
+    dst = open(dst, "wb")
+FileNotFoundError: [Errno 2] No such file or directory: 'D:\\Coding\\RevalEquip\\static\\images\\upload\\1-1Myomed_632_X.jpg'
+[2021-03-06 00:32:24] ERROR    Exception on /get_files [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1953, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1968, in finalize_request
+    response = self.make_response(rv)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2131, in make_response
+    " {rv.__class__.__name__}.".format(rv=rv)
+TypeError: The view function did not return a valid response. The return type must be a string, dict, tuple, Response instance, or WSGI callable, but it was a list.
+[2021-03-06 00:46:36] ERROR    Exception on /get_files [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1953, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1968, in finalize_request
+    response = self.make_response(rv)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2131, in make_response
+    " {rv.__class__.__name__}.".format(rv=rv)
+TypeError: The view function did not return a valid response. The return type must be a string, dict, tuple, Response instance, or WSGI callable, but it was a list.
+[2021-03-06 00:55:58] ERROR    Exception on /get_files [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:/Coding/RevalEquip/__init__.py", line 83, in get_files_from_directory
+    files = os.listdir(updir)
+FileNotFoundError: [WinError 3] Het systeem kan het opgegeven pad niet vinden: 'D:\\Coding\\RevalEquip\\1'
+[2021-03-06 00:56:23] ERROR    Exception on /get_files [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:/Coding/RevalEquip/__init__.py", line 83, in get_files_from_directory
+    files = os.listdir(updir)
+FileNotFoundError: [WinError 3] Het systeem kan het opgegeven pad niet vinden: 'D:\\Coding\\RevalEquip\\1'
+[2021-03-06 00:56:26] ERROR    Exception on /get_files [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:/Coding/RevalEquip/__init__.py", line 83, in get_files_from_directory
+    files = os.listdir(updir)
+FileNotFoundError: [WinError 3] Het systeem kan het opgegeven pad niet vinden: 'D:\\Coding\\RevalEquip\\1'
+[2021-03-06 00:56:47] ERROR    Exception on /get_files [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:/Coding/RevalEquip/__init__.py", line 83, in get_files_from_directory
+    files = os.listdir(updir)
+FileNotFoundError: [WinError 3] Het systeem kan het opgegeven pad niet vinden: 'D:\\Coding\\RevalEquip\\1'
+[2021-03-06 00:57:42] ERROR    Exception on /get_files [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:/Coding/RevalEquip/__init__.py", line 83, in get_files_from_directory
+    files = os.listdir(updir)
+FileNotFoundError: [WinError 3] Het systeem kan het opgegeven pad niet vinden: 'D:\\Coding\\RevalEquip\\1'
+[2021-03-06 01:11:13] ERROR    Exception on /get_files [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:/Coding/RevalEquip/__init__.py", line 83, in get_files_from_directory
+    files = os.listdir(updir)
+FileNotFoundError: [WinError 3] Het systeem kan het opgegeven pad niet vinden: 'D:\\Coding\\RevalEquip\\1'
+[2021-03-06 01:11:15] ERROR    Exception on /get_files [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:/Coding/RevalEquip/__init__.py", line 83, in get_files_from_directory
+    files = os.listdir(updir)
+FileNotFoundError: [WinError 3] Het systeem kan het opgegeven pad niet vinden: 'D:\\Coding\\RevalEquip\\undefined'
+[2021-03-07 23:41:50] ERROR    Exception on /saveEquipmentAsCSV [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\blue_equipment.py", line 356, in save_equipment_as_csv
+    csv_writer.writerow(eq.values())
+  File "C:\Users\Dean Reymen\AppData\Local\Programs\Python\Python37-32\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode character '\ufffd' in position 106: character maps to <undefined>
+[2021-03-07 23:43:39] ERROR    Exception on /saveEquipmentAsCSV [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\blue_equipment.py", line 356, in save_equipment_as_csv
+    csv_writer.writerow(eq.values())
+  File "C:\Users\Dean Reymen\AppData\Local\Programs\Python\Python37-32\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode character '\ufffd' in position 106: character maps to <undefined>
+[2021-03-07 23:43:59] ERROR    Exception on /saveEquipmentAsCSV [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\blue_equipment.py", line 356, in save_equipment_as_csv
+    csv_writer.writerow(eq.values())
+  File "C:\Users\Dean Reymen\AppData\Local\Programs\Python\Python37-32\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode character '\ufffd' in position 106: character maps to <undefined>
+[2021-03-07 23:52:04] ERROR    Exception on /saveEquipmentAsCSV [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\blue_equipment.py", line 345, in save_equipment_as_csv
+    data_file = open('data_equipment.csv', 'w', encoding="utf-8", newline='')
+PermissionError: [Errno 13] Permission denied: 'data_equipment.csv'
+[2021-03-08 00:07:47] ERROR    Exception on /saveEquipmentAsCSV [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1953, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1968, in finalize_request
+    response = self.make_response(rv)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2131, in make_response
+    " {rv.__class__.__name__}.".format(rv=rv)
+TypeError: The view function did not return a valid response. The return type must be a string, dict, tuple, Response instance, or WSGI callable, but it was a TextIOWrapper.
+[2021-03-08 00:08:11] ERROR    Exception on /saveEquipmentAsCSV [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1953, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1968, in finalize_request
+    response = self.make_response(rv)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2131, in make_response
+    " {rv.__class__.__name__}.".format(rv=rv)
+TypeError: The view function did not return a valid response. The return type must be a string, dict, tuple, Response instance, or WSGI callable, but it was a TextIOWrapper.
+[2021-03-08 00:29:07] ERROR    Exception on /download [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\blue_equipment.py", line 364, in download_file
+    return send_file(path, as_attachment=True)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 629, in send_file
+    file = open(filename, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: 'D:\\Coding\\RevalEquip\\simple.docx'
+[2021-03-08 00:29:15] ERROR    Exception on /download [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\blue_equipment.py", line 364, in download_file
+    return send_file(path, as_attachment=True)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 629, in send_file
+    file = open(filename, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: 'D:\\Coding\\RevalEquip\\simple.docx'
+[2021-03-08 00:29:29] ERROR    Exception on /download [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\blue_equipment.py", line 364, in download_file
+    return send_file(path, as_attachment=True)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 629, in send_file
+    file = open(filename, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: 'D:\\Coding\\RevalEquip\\simple.docx'
+[2021-03-10 20:22:59] ERROR    Exception on /downloadFile [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\blue_equipment.py", line 365, in download
+    as_attachment=True)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 629, in send_file
+    file = open(filename, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '/data_equipment.csv'

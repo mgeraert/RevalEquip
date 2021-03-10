@@ -1,9 +1,12 @@
-from flask import Blueprint, request, redirect, render_template
+from flask import Blueprint, request, redirect, render_template, send_file, send_from_directory
 from classes.Database import Database
 import json
+import csv
+import os
 from werkzeug.utils import secure_filename
 
 equipment = Blueprint('equipment', __name__)
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 @equipment.route('/equipment', methods=['GET'])
 def reval_equipment():
@@ -330,4 +333,29 @@ def new_equipment_picture():
     db.conn.commit()
 
     c.close()
+    return 'http200'
+
+@equipment.route('/saveEquipmentAsCSV')
+def save_equipment_as_csv():
+    db = Database()
+    db.conn.row_factory = db.dict_factory
+    c = db.conn.cursor()
+    sql_string = 'SELECT * FROM equipment'
+    c.execute(sql_string)
+    data = c.fetchall()
+    c.close()
+
+    data_file = open('data_equipment.csv', 'w', encoding="utf-8", newline='')
+    csv_writer = csv.writer(data_file, delimiter=';')
+
+    count = 0
+    for eq in data:
+        if count == 0:
+            # Writing headers of CSV file
+            header = eq.keys()
+            csv_writer.writerow(header)
+            count += 1
+        # Writing data of CSV file
+        csv_writer.writerow(eq.values())
+
     return 'http200'

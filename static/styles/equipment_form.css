@@ -35,6 +35,13 @@
   width: 100px;
 }
 
+#export_button {
+  position: absolute;
+  left: 1070px;
+  top: 30px;
+  width: 100px;
+}
+
 #add_button {
   position: absolute;
   left: 485px;
@@ -183,5 +190,38 @@
   left: 810px;
   top: 484.099px;
   width: 360px;
+}
+
+#eq_gallery {
+  position: absolute;
+  width: 1140px;
+  left: 30px;
+  top: 514.099px;
+  overflow: hidden;
+  border-radius: 3px;
+  margin: auto;
+}
+
+.gallery {
+  width: 600px;
+  margin: auto;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.img-w {
+  width: 228px;
+  height: 228px;
+  float: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.img-w img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 228px;
+  height: 228px;
+  position: absolute;
 }
 /*# sourceMappingURL=equipment_form.css.map */

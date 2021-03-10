@@ -9,6 +9,8 @@ var g_selectedCoOwner;
 var g_supplier;
 var g_selectedSupplier;
 
+var g_imageDirectory = "static\\images\\upload\\";
+
 $(document).ready(function () {
     getEquipment();
 });
@@ -39,6 +41,7 @@ function getEquipment(enableSelectedRow = false, enableSort = false, sortAsc = f
 }
 
 function generateTableHeader() {
+    out = "";
     out = "<thead><tr>";
 
     out = out.concat("<th onclick='sortColumnEquipment(0)'>");
@@ -63,6 +66,7 @@ function generateTableHeader() {
 }
 
 function generateTabelRow(rownNr, equipment) {
+    out = "";
 
     out = "<tr onclick='selectRowEquipment(this)'>";
 
@@ -88,6 +92,7 @@ function generateTabelRow(rownNr, equipment) {
 }
 
 function getTableDiv(content, width, rownNr) {
+    out = "";
 
     if (content == null) {
         content = '';
@@ -121,7 +126,7 @@ function selectRowEquipment(row) {
     selectedRow.classList.add("active-row");
     g_selectedRow = rowNr;
     g_selectedEquipment = g_equipment[rowNr_data - 1];
-    console.log(g_selectedEquipment.ID)
+    getFilesFromDirectory(g_imageDirectory);
 
     $("#eq_inventory_number").val(g_selectedEquipment.equipment_inventory_number);
     $("#eq_label").val(g_selectedEquipment.equipment_label);
@@ -760,6 +765,7 @@ $(function () {
                         showToast('Photo is uploaded', '#5DB034');
                     }
                 });
+                getFilesFromDirectory(g_imageDirectory);
                 console.log('Photo uploaded!');
             }).fail(function (data) {
                 console.error('Photo not uploaded. Error!');
@@ -770,3 +776,89 @@ $(function () {
 
     });
 }); 
+
+function getFilesFromDirectory(directory) {
+    argString = "?directory=" + directory + "&equipmentID=" + g_selectedEquipment.ID + "&userID=-1";
+    $.get("/get_files" + argString, function (data, status) {
+        $("#eq_gallery").html("");
+
+        var images = getFromBetween.get(data,'"','"');
+        console.log(images);
+
+        galleryHTML = '<div class="gallery_row">'
+
+        images.forEach(image => {
+            galleryHTML = galleryHTML.concat(generateGalleryColumns(image))
+        });
+        galleryHTML = galleryHTML.concat('</div>');
+
+        //console.log(galleryHTML)
+        $("#eq_gallery").html(galleryHTML);
+    });
+}
+
+function generateGalleryColumns(src) {
+    out = "";
+    out = out.concat('<div class="img-w">');
+    out = out.concat('<img src='+g_imageDirectory+''+src+' onclick="selectImage(this);">');
+    out = out.concat("</div>");
+
+    console.log(out);
+    return out;
+}
+
+function selectImage(imgs) {
+    var expandImg = document.getElementById("expandedImg");
+    expandImg.src = imgs.src;
+    expandImg.parentElement.style.display = "block";
+}
+
+var getFromBetween = {
+    // ALEX C https://stackoverflow.com/questions/14867835/get-substring-between-two-characters-using-javascript
+    results:[],
+    string:"",
+    getFromBetween:function (sub1,sub2) {
+        if(this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return false;
+        var SP = this.string.indexOf(sub1)+sub1.length;
+        var string1 = this.string.substr(0,SP);
+        var string2 = this.string.substr(SP);
+        var TP = string1.length + string2.indexOf(sub2);
+        return this.string.substring(SP,TP);
+    },
+    removeFromBetween:function (sub1,sub2) {
+        if(this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return false;
+        var removal = sub1+this.getFromBetween(sub1,sub2)+sub2;
+        this.string = this.string.replace(removal,"");
+    },
+    getAllResults:function (sub1,sub2) {
+        // first check to see if we do have both substrings
+        if(this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return;
+
+        // find one result
+        var result = this.getFromBetween(sub1,sub2);
+        // push it to the results array
+        this.results.push(result);
+        // remove the most recently found one from the string
+        this.removeFromBetween(sub1,sub2);
+
+        // if there's more substrings
+        if(this.string.indexOf(sub1) > -1 && this.string.indexOf(sub2) > -1) {
+            this.getAllResults(sub1,sub2);
+        }
+        else return;
+    },
+    get:function (string,sub1,sub2) {
+        this.results = [];
+        this.string = string;
+        this.getAllResults(sub1,sub2);
+        return this.results;
+    }
+};
+
+function exportEquip() {
+    $.get("/saveEquipmentAsCSV", function (data, status) {
+        if (data.localeCompare("http200") == 0) {
+            showToast('CSV is gegenereerd', '#8734B0');
+        }
+    });
+}

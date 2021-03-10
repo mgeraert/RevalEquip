@@ -1,4 +1,5 @@
 .mlbutton {
+  cursor: pointer;
   background-color: #01A38C;
   /* blue */
   border: none;
