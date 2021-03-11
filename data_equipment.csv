@@ -61,5 +61,4 @@ ID;equipment_inventory_number;equipment_label;equipment_name;equipment_amount;eq
 63;;sony;Sony Camera FDR-AX33;1;;;;;;-1;-1;;;;-1
 64;;Yeti;USB microphone Yeti nano;1;;;;;;-1;-1;;;;-1
 67;;Biodex;Biodex a;;;;;;;-1;-1;;;;-1
-68;;DS8R;Digitimer DS8R stimulator TEST;1;;;;;0;-1;-1;;;;-1
-69;;;test;;;;;;0;-1;-1;;;;-1
+68;;DS8R;Digitimer DS8R stimulator 123;1;;;;;0;-1;-1;;;;-1

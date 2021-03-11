@@ -1,0 +1,68 @@
+* {
+    font-family: -apple-system, BlinkMacSystemFont, "San Francisco", Helvetica, Arial, sans-serif;
+  font-weight:  400; 
+  margin:  0;
+}
+
+$primary: rgb(182,157,230); 	
+html, body {
+  height:  100vh; 
+  width:  100vw;
+  margin:  0 0; 
+  display:  flex; 
+  align-items:  flex-start; 
+  justify-content:  flex-start; 
+  background:  #f3f2f2; 
+}
+
+.session {
+  border-radius: 3px;
+  margin: auto auto;
+  width: 600px;
+  height: 400px;
+  text-align: center;box-shadow:  0px 2px 6px -1px rgba(0,0,0,.13); 
+}
+
+.left {
+  float: left;
+  width: 33%;
+  height: 400px;
+  
+  img {
+    height: 400px;
+    display: block;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+}
+
+.right {
+  float: right;
+  width: 67%;
+}
+
+.login_screen {
+  text-align: left;
+  padding: 40px 30px;
+  h4 {
+    margin-bottom:  20px;
+    color:  rgba(#000, .5);
+    span {
+        color: #01A38C;
+        font-weight:  700; 
+    }
+  }
+  p {
+    margin-bottom:  40px;
+  }
+
+  #login_email_label {
+    margin-bottom:  20px;
+    left:0px;
+  }
+
+  #login_password_label {
+    margin-bottom:  20px;
+    left:0px;
+  }
+}

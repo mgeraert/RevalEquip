@@ -49,15 +49,9 @@
     }); //jQuery
   </script>
 
-  <div id="equipmentTable" style="width: 1200px;height: 540px;overflow: scroll;margin: auto;margin-top: 10px; overflow-x: hidden;"></div>
+  <div id="equipmentTable" style="width: 1200px;height: 540px;margin: auto;margin-top: 10px; overflow-x: hidden;"></div>
 
   <div class="widePanel" style="width:1200px;height:700px;">
-
-    <form id="uploadform" method="post" enctype="multipart/form-data">
-      <label for="file"></label>
-      <input id="file_input" name="file" type="file" class="form-field">
-      <button id="submit" type="button" class="mlbutton upload_button">Upload</button>
-    </form>
 
     <div class="form-group"id="eq_inventory_number_label" >
       <span for="eq_inventory_number" style="width:160px;">Inventory Number</span>
@@ -142,20 +136,29 @@
     </div>
     <div id="suggestions_supplier"></div>
 
+
+    <form id="uploadform" method="post" enctype="multipart/form-data">
+      <label for="file"></label>
+      <input id="file_input" name="file" type="file" class="form-field">
+      <button id="submit" type="button" class="mlbutton upload_button">Upload</button>
+    </form>
     <button id="update_button" onclick="updateEquip()" class="mlbutton">Update</button>
     <button id="new_button" onclick="prepareNewEquip()" class="mlbutton">New</button>
     <button id="cancel_button" onclick="cancelNewEquip()" class="mlbutton">Cancel</button>
     <button id="add_button" onclick="newEquip()" class="mlbutton">Save</button>
     <button id="delete_button" onclick="deleteEquip()" class="mlbutton">Delete</button>
-    <button id="export_button" onclick="exportEquip()" class="mlbutton">Export</button>
+    <a href="/downloadEquipmentCSV"><button id="export_button" class="mlbutton">Export</button></a>
     
-
     <div id="toast_message"></div>
 
     <div id="eq_gallery">
     </div>
     
   </div>
+  
+  <div id="myModal" class="modal">
+  </div>
+</div>
   
 
 </body>

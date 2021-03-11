@@ -1,4 +1,4 @@
-from flask import Blueprint, request, redirect, render_template, send_file, send_from_directory
+from flask import Blueprint, request, redirect, render_template, send_file, send_from_directory, Response
 from classes.Database import Database
 import json
 import csv
@@ -213,12 +213,22 @@ def delete_equipment():
     db = Database()
     ID = request.args.get('ID')
 
-    sql = 'DELETE FROM equipment WHERE ID = "'+ID+'"'
-    print(sql)
+    sql1 = 'DELETE FROM equipment WHERE ID = "'+ID+'"'
+    print(sql1)
+    sql2 = 'DELETE FROM pictures WHERE equipment_id = "'+ID+'"'
+    print(sql1)
+
     db.conn.row_factory = db.dict_factory
     c = db.conn.cursor()
-    c.execute(sql)
+    c.execute(sql1)
+    c.execute(sql2)
     db.conn.commit()
+
+    directory = 'static/images/upload'
+    my_dir = os.path.join(basedir, directory)
+    for fname in os.listdir(my_dir):
+        if fname.startswith(ID+"-1"):
+            os.remove(os.path.join(my_dir, fname))
 
     c.close()
     return 'http200'
@@ -359,3 +369,12 @@ def save_equipment_as_csv():
         csv_writer.writerow(eq.values())
 
     return 'http200'
+
+@equipment.route('/downloadEquipmentCSV')
+def download_equipment_csv():
+    save_equipment_as_csv()
+
+    with open("data_equipment.csv") as fp:
+        csv = fp.read()
+    return Response(csv,mimetype="text/csv",headers={"Content-disposition":"attachment; filename=data_equipment.csv"})
+

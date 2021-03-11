@@ -1,3 +1,5 @@
+
+
 .table_design {
   font-size: 13px;
   border-collapse: collapse;
@@ -8,18 +10,15 @@
 .table_design thead {
   background-color: #01A38C;
   color: #ffffff;
-}
-
-.table_design thead tr {
-  text-align: left;
-  font-weight: bold;
-}
-
-.table_design thead th {
-  background-color: #01A38C;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
+  tr {
+    text-align: left;
+    font-weight: bold;
+  }
+  th {
+    background-color: #01A38C;
+    position: sticky;
+    top: 0;
+  }
 }
 
 .table_design th,
@@ -82,12 +81,12 @@
 .table-sortable th {
   cursor: pointer;
 }
-
+  
 .table-sortable .th-sort-asc::after {
   content: "\25b4";
   margin-left: 4px;
 }
-
+  
 .table-sortable .th-sort-desc::after {
   content: "\25be";
   margin-left: 4px;
@@ -100,17 +99,17 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f1f1f1; 
 }
-
+ 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #888; 
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #555; 
 }
 
 .closebtn {
@@ -121,4 +120,3 @@
   font-size: 35px;
   cursor: pointer;
 }
-/*# sourceMappingURL=table_design.css.map */

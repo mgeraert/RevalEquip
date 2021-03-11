@@ -1,8 +1,12 @@
-from flask import Blueprint, request, render_template
+import csv
+import os
+
+from flask import Blueprint, request, render_template, Response
 from classes.Database import Database
 import json
 
 users = Blueprint('users', __name__)
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 @users.route('/users', methods=['GET'])
@@ -223,12 +227,54 @@ def delete_user():
     db = Database()
     ID = request.args.get('ID')
 
-    sql = 'DELETE FROM users WHERE ID = "'+ID+'"'
-    print(sql)
+    sql1 = 'DELETE FROM users WHERE ID = "'+ID+'"'
+    print(sql1)
+    sql2 = 'DELETE FROM pictures WHERE user_id = "'+ID+'"'
+
     db.conn.row_factory = db.dict_factory
     c = db.conn.cursor()
-    c.execute(sql)
+    c.execute(sql1)
+    c.execute(sql2)
     db.conn.commit()
+
+    directory = 'static/images/upload'
+    my_dir = os.path.join(basedir, directory)
+    for fname in os.listdir(my_dir):
+        if fname.startswith("-1"+ID):
+            os.remove(os.path.join(my_dir, fname))
 
     c.close()
     return 'http200'
+
+@users.route('/saveUsersAsCSV')
+def save_equipment_as_csv():
+    db = Database()
+    db.conn.row_factory = db.dict_factory
+    c = db.conn.cursor()
+    sql_string = 'SELECT * FROM users'
+    c.execute(sql_string)
+    data = c.fetchall()
+    c.close()
+
+    data_file = open('data_users.csv', 'w', encoding="utf-8", newline='')
+    csv_writer = csv.writer(data_file, delimiter=';')
+
+    count = 0
+    for eq in data:
+        if count == 0:
+            # Writing headers of CSV file
+            header = eq.keys()
+            csv_writer.writerow(header)
+            count += 1
+        # Writing data of CSV file
+        csv_writer.writerow(eq.values())
+
+    return 'http200'
+
+@users.route('/downloadUsersCSV')
+def download_users_csv():
+    save_equipment_as_csv()
+
+    with open("data_users.csv") as fp:
+        csv = fp.read()
+    return Response(csv,mimetype="text/csv",headers={"Content-disposition":"attachment; filename=data_users.csv"})

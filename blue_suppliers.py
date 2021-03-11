@@ -1,4 +1,6 @@
-from flask import Blueprint, request, render_template
+import csv
+
+from flask import Blueprint, request, render_template, Response
 from classes.Database import Database
 import json
 
@@ -141,3 +143,36 @@ def delete_user():
 
     c.close()
     return 'http200'
+
+@suppliers.route('/saveSuppliersAsCSV')
+def save_equipment_as_csv():
+    db = Database()
+    db.conn.row_factory = db.dict_factory
+    c = db.conn.cursor()
+    sql_string = 'SELECT * FROM suppliers'
+    c.execute(sql_string)
+    data = c.fetchall()
+    c.close()
+
+    data_file = open('data_suppliers.csv', 'w', encoding="utf-8", newline='')
+    csv_writer = csv.writer(data_file, delimiter=';')
+
+    count = 0
+    for eq in data:
+        if count == 0:
+            # Writing headers of CSV file
+            header = eq.keys()
+            csv_writer.writerow(header)
+            count += 1
+        # Writing data of CSV file
+        csv_writer.writerow(eq.values())
+
+    return 'http200'
+
+@suppliers.route('/downloadSuppliersCSV')
+def download_suppliers_csv():
+    save_equipment_as_csv()
+
+    with open("data_suppliers.csv") as fp:
+        csv = fp.read()
+    return Response(csv,mimetype="text/csv",headers={"Content-disposition":"attachment; filename=data_suppliers.csv"})

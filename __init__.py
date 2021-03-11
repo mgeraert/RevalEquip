@@ -73,6 +73,19 @@ def upldfile_eq():
             file_size = os.path.getsize(os.path.join(updir, filename))
             return jsonify(name=filename, size=file_size)
 
+@app.route('/uploadajax_user', methods=['GET', 'POST'])
+def upldfile_user():
+    user_id = request.args.get('user_id')
+    if request.method == 'POST':
+        files = request.files['file']
+        if files and allowed_file(files.filename):
+            filename = '-1' + user_id + secure_filename(files.filename)
+            app.logger.info('FileName: ' + filename)
+            updir = os.path.join(basedir, 'static\\images\\upload\\')
+            files.save(os.path.join(updir, filename))
+            file_size = os.path.getsize(os.path.join(updir, filename))
+            return jsonify(name=filename, size=file_size)
+
 
 @app.route('/get_files', methods=['GET'])
 def get_files_from_directory():

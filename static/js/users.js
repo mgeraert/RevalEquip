@@ -2,7 +2,8 @@
 var g_user;
 var g_selectedUser;
 var g_selectedRow = -1;
-var g_makingUser = -1;
+
+var g_imageDirectory = "static\\images\\upload\\";
 
 $(document).ready(function () {
     getUsers();
@@ -124,6 +125,8 @@ function selectRowUser(row) {
     selectedRow.classList.add("active-row");
     g_selectedRow = rowNr;
     g_selectedUser = g_user[rowNr_data - 1];
+
+    loadImagesFromDirectory(g_imageDirectory)
 
     $("#user_last_name").val(g_selectedUser.user_last_name);
     $("#user_name").val(g_selectedUser.user_name);
@@ -359,6 +362,8 @@ function clearTextBox() {
     $("#user_alternative_ID").val("");
     g_selectedUser = undefined;
     g_selectedRow = -1;
+    $("#myModal").html("");
+    $("#users_gallery").html("");
 }
 
 function prepareNewUser() {
@@ -637,3 +642,166 @@ function giveInputWarning(inputID) {
         input.css("background-color", "");
     }, 1500);
 }
+
+$(function () {
+    $('#submit').click(function () {
+        if (g_selectedUser != undefined) {
+            var form_data = new FormData($('#uploadform')[0]);
+            $.ajax({
+                type: 'POST',
+                url: '/uploadajax_user?user_id=' + g_selectedUser.ID,
+                data: form_data,
+                contentType: false,
+                processData: false,
+                dataType: 'json'
+            }).done(function (data, textStatus, jqXHR) {
+                argString = "?picture_name=" + data.name;
+                argString = argString + "&equipment_id=" + g_selectedUser.ID;
+                $.get("/newEquipmentPicture" + argString, function (data, status) {
+                    if (data.localeCompare("http200") == 0) {
+                        showToast('Photo is uploaded', '#5DB034');
+                    }
+                });
+                loadImagesFromDirectory(g_imageDirectory);
+                console.log('Photo uploaded!');
+            }).fail(function (data) {
+                console.error('Photo not uploaded. Error!');
+            });
+        } else {
+            showToast('Gelieve een user aan te duiden aan wie u de foto aan wil toevoegen.', '#B08734');
+        }
+
+    });
+});
+
+function loadImagesFromDirectory(directory) {
+    argString = "?directory=" + directory + "&equipmentID=-1&userID=" + + g_selectedUser.ID;
+    $.get("/get_files" + argString, function (data, status) {
+        console.log(data);
+        var images = getFromBetween.get(data, '"', '"');
+        console.log(images);
+
+        $("#users_gallery").html("");
+        var galleryHTML = '<div class="gallery_row">'
+        var i = 0;
+        images.forEach(image => {
+            i++;
+            galleryHTML = galleryHTML.concat('<div class="img-w">');
+            galleryHTML = galleryHTML.concat('<img src=' + g_imageDirectory + '' + image + ' onclick="openModal();currentSlide(' + i + ')">');
+            galleryHTML = galleryHTML.concat("</div>");
+        });
+        galleryHTML = galleryHTML.concat('</div>');
+        //console.log(galleryHTML)
+        $("#users_gallery").html(galleryHTML);
+
+
+        $("#myModal").html("");
+        var modalHTML = '<span class="close cursor" onclick="closeModal()">&times;</span>';
+        modalHTML = modalHTML.concat('<div class="modal-content">');
+        j = 0;
+        images.forEach(image => {
+            j++;
+            modalHTML = modalHTML.concat('<div class="mySlides">');
+            modalHTML = modalHTML.concat('<div class="numbertext">' + j + '/' + i + '</div>');
+            modalHTML = modalHTML.concat('<img src=' + g_imageDirectory + '' + image + ' >');
+            modalHTML = modalHTML.concat('</div>');
+        });
+        modalHTML = modalHTML.concat('<a class="prev" onclick="plusSlides(-1)">&#10094;</a>');
+        modalHTML = modalHTML.concat('<a class="next" onclick="plusSlides(1)">&#10095;</a>');
+        modalHTML = modalHTML.concat('<div class="caption-container"><p id="caption"></p></div>');
+        i = 0;
+        modalHTML = modalHTML.concat('<div class="gallery_row">');
+        images.forEach(image => {
+            i++;
+            modalHTML = modalHTML.concat('<div class="img-w">');
+            modalHTML = modalHTML.concat('<img class="demo cursor" src=' + g_imageDirectory + '' + image + ' onclick="currentSlide(' + i + ')">');
+            modalHTML = modalHTML.concat('</div>');
+        });
+        galleryHTML = galleryHTML.concat('</div>');
+        modalHTML = modalHTML.concat('</div>');
+        $("#myModal").html(modalHTML);
+
+    });
+}
+
+function openModal() {
+    document.getElementById("myModal").style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById("myModal").style.display = "none";
+}
+
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("demo");
+    var captionText = document.getElementById("caption");
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    console.log(slides.length);
+    if (slides.length != 0) {
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
+}
+
+var getFromBetween = {
+    // ALEX C https://stackoverflow.com/questions/14867835/get-substring-between-two-characters-using-javascript
+    results: [],
+    string: "",
+    getFromBetween: function (sub1, sub2) {
+        if (this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return false;
+        var SP = this.string.indexOf(sub1) + sub1.length;
+        var string1 = this.string.substr(0, SP);
+        var string2 = this.string.substr(SP);
+        var TP = string1.length + string2.indexOf(sub2);
+        return this.string.substring(SP, TP);
+    },
+    removeFromBetween: function (sub1, sub2) {
+        if (this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return false;
+        var removal = sub1 + this.getFromBetween(sub1, sub2) + sub2;
+        this.string = this.string.replace(removal, "");
+    },
+    getAllResults: function (sub1, sub2) {
+        // first check to see if we do have both substrings
+        if (this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return;
+
+        // find one result
+        var result = this.getFromBetween(sub1, sub2);
+        // push it to the results array
+        this.results.push(result);
+        // remove the most recently found one from the string
+        this.removeFromBetween(sub1, sub2);
+
+        // if there's more substrings
+        if (this.string.indexOf(sub1) > -1 && this.string.indexOf(sub2) > -1) {
+            this.getAllResults(sub1, sub2);
+        }
+        else return;
+    },
+    get: function (string, sub1, sub2) {
+        this.results = [];
+        this.string = string;
+        this.getAllResults(sub1, sub2);
+        return this.results;
+    }
+};

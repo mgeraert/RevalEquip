@@ -126,7 +126,7 @@ function selectRowEquipment(row) {
     selectedRow.classList.add("active-row");
     g_selectedRow = rowNr;
     g_selectedEquipment = g_equipment[rowNr_data - 1];
-    getFilesFromDirectory(g_imageDirectory);
+    loadImagesFromDirectory(g_imageDirectory);
 
     $("#eq_inventory_number").val(g_selectedEquipment.equipment_inventory_number);
     $("#eq_label").val(g_selectedEquipment.equipment_label);
@@ -505,6 +505,9 @@ function clearTextBox() {
     $("#eq_purchase_price").val("");
     $("#eq_annual_cost").val("");
     $("#eq_annual_cost_budget").val("");
+
+    $("#eq_gallery").html("");
+    $("#myModal").html("");
     g_selectedEquipment = undefined;
     g_selectedRow = -1;
 
@@ -765,7 +768,7 @@ $(function () {
                         showToast('Photo is uploaded', '#5DB034');
                     }
                 });
-                getFilesFromDirectory(g_imageDirectory);
+                loadImagesFromDirectory(g_imageDirectory);
                 console.log('Photo uploaded!');
             }).fail(function (data) {
                 console.error('Photo not uploaded. Error!');
@@ -775,90 +778,135 @@ $(function () {
         }
 
     });
-}); 
+});
 
-function getFilesFromDirectory(directory) {
+function loadImagesFromDirectory(directory) {
     argString = "?directory=" + directory + "&equipmentID=" + g_selectedEquipment.ID + "&userID=-1";
     $.get("/get_files" + argString, function (data, status) {
-        $("#eq_gallery").html("");
-
-        var images = getFromBetween.get(data,'"','"');
+        var images = getFromBetween.get(data, '"', '"');
         console.log(images);
 
-        galleryHTML = '<div class="gallery_row">'
-
+        $("#eq_gallery").html("");
+        var galleryHTML = '<div class="gallery_row">'
+        var i = 0;
         images.forEach(image => {
-            galleryHTML = galleryHTML.concat(generateGalleryColumns(image))
+            i++;
+            galleryHTML = galleryHTML.concat('<div class="img-w">');
+            galleryHTML = galleryHTML.concat('<img src=' + g_imageDirectory + '' + image + ' onclick="openModal();currentSlide(' + i + ')">');
+            galleryHTML = galleryHTML.concat("</div>");
         });
         galleryHTML = galleryHTML.concat('</div>');
-
         //console.log(galleryHTML)
         $("#eq_gallery").html(galleryHTML);
+
+
+        $("#myModal").html("");
+        var modalHTML = '<span class="close cursor" onclick="closeModal()">&times;</span>';
+        modalHTML = modalHTML.concat('<div class="modal-content">');
+        j = 0;
+        images.forEach(image => {
+            j++;
+            modalHTML = modalHTML.concat('<div class="mySlides">');
+            modalHTML = modalHTML.concat('<div class="numbertext">' + j + '/' + i + '</div>');
+            modalHTML = modalHTML.concat('<img src=' + g_imageDirectory + '' + image + ' >');
+            modalHTML = modalHTML.concat('</div>');
+        });
+        modalHTML = modalHTML.concat('<a class="prev" onclick="plusSlides(-1)">&#10094;</a>');
+        modalHTML = modalHTML.concat('<a class="next" onclick="plusSlides(1)">&#10095;</a>');
+        modalHTML = modalHTML.concat('<div class="caption-container"><p id="caption"></p></div>');
+        i = 0;
+        modalHTML = modalHTML.concat('<div class="gallery_row">');
+        images.forEach(image => {
+            i++;
+            modalHTML = modalHTML.concat('<div class="img-w">');
+            modalHTML = modalHTML.concat('<img class="demo cursor" src=' + g_imageDirectory + '' + image + ' onclick="currentSlide(' + i + ')">');
+            modalHTML = modalHTML.concat('</div>');
+        });
+        galleryHTML = galleryHTML.concat('</div>');
+        modalHTML = modalHTML.concat('</div>');
+        $("#myModal").html(modalHTML);
+
     });
 }
 
-function generateGalleryColumns(src) {
-    out = "";
-    out = out.concat('<div class="img-w">');
-    out = out.concat('<img src='+g_imageDirectory+''+src+' onclick="selectImage(this);">');
-    out = out.concat("</div>");
-
-    console.log(out);
-    return out;
+function openModal() {
+    document.getElementById("myModal").style.display = "block";
 }
 
-function selectImage(imgs) {
-    var expandImg = document.getElementById("expandedImg");
-    expandImg.src = imgs.src;
-    expandImg.parentElement.style.display = "block";
+function closeModal() {
+    document.getElementById("myModal").style.display = "none";
+}
+
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("demo");
+    var captionText = document.getElementById("caption");
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    console.log(slides.length);
+    if (slides.length != 0) {
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
 }
 
 var getFromBetween = {
     // ALEX C https://stackoverflow.com/questions/14867835/get-substring-between-two-characters-using-javascript
-    results:[],
-    string:"",
-    getFromBetween:function (sub1,sub2) {
-        if(this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return false;
-        var SP = this.string.indexOf(sub1)+sub1.length;
-        var string1 = this.string.substr(0,SP);
+    results: [],
+    string: "",
+    getFromBetween: function (sub1, sub2) {
+        if (this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return false;
+        var SP = this.string.indexOf(sub1) + sub1.length;
+        var string1 = this.string.substr(0, SP);
         var string2 = this.string.substr(SP);
         var TP = string1.length + string2.indexOf(sub2);
-        return this.string.substring(SP,TP);
+        return this.string.substring(SP, TP);
     },
-    removeFromBetween:function (sub1,sub2) {
-        if(this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return false;
-        var removal = sub1+this.getFromBetween(sub1,sub2)+sub2;
-        this.string = this.string.replace(removal,"");
+    removeFromBetween: function (sub1, sub2) {
+        if (this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return false;
+        var removal = sub1 + this.getFromBetween(sub1, sub2) + sub2;
+        this.string = this.string.replace(removal, "");
     },
-    getAllResults:function (sub1,sub2) {
+    getAllResults: function (sub1, sub2) {
         // first check to see if we do have both substrings
-        if(this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return;
+        if (this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return;
 
         // find one result
-        var result = this.getFromBetween(sub1,sub2);
+        var result = this.getFromBetween(sub1, sub2);
         // push it to the results array
         this.results.push(result);
         // remove the most recently found one from the string
-        this.removeFromBetween(sub1,sub2);
+        this.removeFromBetween(sub1, sub2);
 
         // if there's more substrings
-        if(this.string.indexOf(sub1) > -1 && this.string.indexOf(sub2) > -1) {
-            this.getAllResults(sub1,sub2);
+        if (this.string.indexOf(sub1) > -1 && this.string.indexOf(sub2) > -1) {
+            this.getAllResults(sub1, sub2);
         }
         else return;
     },
-    get:function (string,sub1,sub2) {
+    get: function (string, sub1, sub2) {
         this.results = [];
         this.string = string;
-        this.getAllResults(sub1,sub2);
+        this.getAllResults(sub1, sub2);
         return this.results;
     }
 };
-
-function exportEquip() {
-    $.get("/saveEquipmentAsCSV", function (data, status) {
-        if (data.localeCompare("http200") == 0) {
-            showToast('CSV is gegenereerd', '#8734B0');
-        }
-    });
-}

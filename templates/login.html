@@ -1,61 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
-
-<style>
-    .loginlabel {
-        width: 120px;
-        font-family: sans-serif;
-        font-weight: bold;
-        display:inline-block;
-    }
-
-    .logintext {
-        width: 200px;
-        font-family: sans-serif;
-    }
-
-    .loginPanel {
-        position: absolute;
-    top: 50%;
-    left: 40%;
-    margin-top: -50px;
-    margin-left: -40px;
-    width: 400px;
-    height: 100px;
-
-    }
-</style>
-
-
-<script>
-    $(document).ready(function () {
-
-    });
-</script>
-
 <head>
-    <meta charset="UTF-8">
-    <title>RevalEquip Login</title>
+  <meta charset="UTF-8">
+  <title>Reval - Login</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/reval_style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/login_form.css') }}">
+
+  <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+  <script src="{{url_for('static', filename='js/suppliers.js')}}"></script>
+
+
+  <!--Font Awesome-->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+  <!--Google Fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+  <!--Kite Menu CSS-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/menu2.css') }}">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="/static/images/favicon.ico">
 </head>
 
 <body>
-
-
-
-
-    <div class="loginPanel">
-        <div style="margin-top: 10px;">
-            <label for="email" class="loginlabel">Email</label>
-            <input type="text" class="logintext" id="email">
+    <div class="session">
+        <div class="left">
+            <img src="static\images\login_bg.jpg">
         </div>
-        <div style="margin-top: 10px;">
-            <label for="email" class="loginlabel">Password</label>
-            <input type="text" class="logintext" id="password">
+        <div class="right">
+            <div class="login_screen">
+                <h4><span>REVAL</span> Database</h4>
+                <p>Welcome back! Log in to your account to view the database.</p>
+                
+                <div class="form-group" id="login_email_label">
+                    <span for="login_email" style="width:120px;">Email</span>
+                    <input id="login_email" class="form-field" type="text" placeholder="Email" />
+                </div>
+                <div class="form-group" id="login_password_label">
+                    <span for="login_password" style="width:120px;">Password</span>
+                    <input id="login_password" class="form-field" type="password" placeholder="Password" />
+                </div>
+                <button id="login_button" onclick="login()" class="mlbutton">Login</button>
+            </div>
         </div>
-
     </div>
 
 </body>

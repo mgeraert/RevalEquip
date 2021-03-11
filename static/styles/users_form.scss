@@ -14,13 +14,20 @@ $textBoxColumn1Left: $margin1+$labelWidth;
 $labelColumn2Left: $margin1+$textBoxWidthLarge+$margin1;
 $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWidth;
 
-@mixin textBoxStyle {
-    height: 19.2px;
-    border-width: 0.3px;
-    border-style: solid;
-    border-radius: 0.5px;
-    border-color: grey;
-    padding-left: 3px;
+#file_input {
+    position: absolute;
+    top: $margin1+2px;
+    left: $margin1;
+    width: 360px;
+    padding: 2.2px 3px 2.9px 3px;
+    font-size: 12px;
+}
+
+.upload_button { 
+    position: absolute;
+    top: $margin1;
+    left:$margin1+260px;
+    width: $ButtonWidth;
 }
 
 #update_button{
@@ -60,6 +67,13 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     visibility: hidden;
 }
 
+#export_button{
+    position: absolute;
+    left:1200px - $ButtonWidth - $margin1;
+    top: $margin1;
+    width: $ButtonWidth;
+}
+
 #toast_pop_up {
     left: 420px;
     width: $ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
@@ -75,28 +89,12 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     width: $textBoxWidthLarge;
 }
 
-// #user_last_name{
-//     position: absolute;
-//     left: $textBoxColumn1Left;
-//     top:$rowSpacing * 1;
-//     width: $textBoxWidthLarge;
-//     @include textBoxStyle();
-// }
-
 #user_name_label{
     position: absolute;
     left: $labelColumn2Left;
     top: $margin1+$buttonHeight+$margin1;
     width: $textBoxWidthLarge;
 }
-
-// #user_name{
-//     position: absolute;
-//     left: $textBoxColumn2Left;
-//     top:$rowSpacing * 1;
-//     width: $textBoxWidthLarge;
-//     @include textBoxStyle();
-// }
 
 #user_sex_label{
     position: absolute;
@@ -105,51 +103,17 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     width: 260px;
 }
 
-// #user_sex{
-//     position: absolute;
-//     left: $textBoxColumn1Left;
-//     top:$rowSpacing * 2;
-//     width: $textBoxWidthSmall/ 1.75;
-//     @include textBoxStyle();
-//     padding-left: 0px;
-// }
-
 #user_is_pi_label{
     position: absolute;
     left: $margin1+260px+$margin1;
     top: $margin1+$buttonHeight+$margin1+$tabelHeight+ $margin1 * 0.5;
 }
 
-// #user_is_pi{
-//     position: absolute;
-//     left: $margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth;
-//     top:$rowSpacing * 2;
-//     height: 15px;
-//     width: 15px;
-//     background-color: #01A38C;
-// }
-
 #user_is_phd_label{
     position: absolute;
     left: $margin1+260px+$margin1+117.5px+$margin1;
     top: $margin1+$buttonHeight+$margin1+$tabelHeight+ $margin1 * 0.5;
 }
-
-// #user_is_phd{
-//     position: absolute;
-//     left: $margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth;
-//     top:$rowSpacing * 2;
-//     height: 15px;
-//     width: 15px;
-// }
-
-// #user_pw_hash{
-//     position: absolute;
-//     left: $textBoxColumn1Left;
-//     top:$rowSpacing * 7.5;
-//     width: $textBoxWidthLarge;
-//     @include textBoxStyle();
-// }
 
 #user_alternative_ID_label{
     position: absolute;
@@ -158,28 +122,12 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     width: $textBoxWidthLarge;
 }
 
-// #user_alternative_ID{
-//     position: absolute;
-//     left: $textBoxColumn2Left;
-//     top:$rowSpacing * 7.5;
-//     width: $textBoxWidthLarge;
-//     @include textBoxStyle();
-// }
-
 #user_title_label{
     position: absolute;
     left:$margin1;
     top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
     width: $textBoxWidthSmall;
 }
-
-// #user_title{
-//     position: absolute;
-//     left: $textBoxColumn1Left;
-//     top:$rowSpacing * 3;
-//     width: $textBoxWidthSmall;
-//     @include textBoxStyle();
-// }
 
 #user_category_label{
     position: absolute;
@@ -188,28 +136,12 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     width: $textBoxWidthSmall;
 }
 
-// #user_category{
-//     position: absolute;
-//     left: $margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth;
-//     top:$rowSpacing * 3;
-//     width: $textBoxWidthSmall;
-//     @include textBoxStyle();
-// }
-
 #user_function_label{
     position: absolute;
     left: $margin1+$textBoxWidthSmall+$margin1+$textBoxWidthSmall+$margin1;
     top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
     width: $textBoxWidthSmall;
 }
-
-// #user_function{
-//     position: absolute;
-//     left: $margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth+$textBoxWidthSmall+2*$margin1+$labelWidth;
-//     top:$rowSpacing * 3;
-//     width: $textBoxWidthSmall;
-//     @include textBoxStyle();
-// }
 
 #user_email_label{
     position: absolute;
@@ -218,28 +150,12 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     width: $textBoxWidthLarge;
 }
 
-// #user_email{
-//     position: absolute;
-//     left: $textBoxColumn1Left;
-//     top:$rowSpacing * 4;
-//     width: $textBoxWidthLarge;
-//     @include textBoxStyle();
-// }
-
 #user_home_address_label{
     position: absolute;
     left: $labelColumn2Left;
     top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
     width: $textBoxWidthLarge;
 }
-
-// #user_home_address{
-//     position: absolute;
-//     left: $textBoxColumn2Left;
-//     top:$rowSpacing * 4;
-//     width: $textBoxWidthLarge;
-//     @include textBoxStyle();
-// }
 
 #user_telephone_label{
     position: absolute;
@@ -248,28 +164,12 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     width: $textBoxWidthLarge;
 }
 
-// #user_telephone{
-//     position: absolute;
-//     left: $textBoxColumn1Left;
-//     top:$rowSpacing * 5;
-//     width: $textBoxWidthLarge;
-//     @include textBoxStyle();
-// }
-
 #user_private_phone_label{
     position: absolute;
     left: $labelColumn2Left;
     top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
     width: $textBoxWidthLarge;
 }
-
-// #user_private_phone{
-//     position: absolute;
-//     left: $textBoxColumn2Left;
-//     top:$rowSpacing * 5;
-//     width: $textBoxWidthLarge;
-//     @include textBoxStyle();
-// }
 
 #user_in_date_label{
     position: absolute;
@@ -278,14 +178,6 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     width: $textBoxWidthLarge;
 }
 
-// #user_in_date{
-//     position: absolute;
-//     left: $textBoxColumn1Left;
-//     top:$rowSpacing * 6;
-//     width: $textBoxWidthSmall/ 1.75;
-//     @include textBoxStyle();
-// }
-
 #user_out_date_label{
     position: absolute;
     left: $labelColumn2Left;
@@ -293,10 +185,186 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     width: $textBoxWidthLarge;
 }
 
-// #user_out_date{
-//     position: absolute;
-//     left: $textBoxColumn2Left;
-//     top:$rowSpacing * 6;
-//     width: $textBoxWidthSmall/ 1.75;
-//     @include textBoxStyle();
-// }
+#users_gallery {
+    position: absolute;
+    width: 1200px - $margin1*2;
+    left: $margin1;
+    top: $buttonHeight+$tabelHeight*6+$margin1*5.5;
+    padding-bottom: $margin1;
+    overflow: hidden;
+    border-radius: 3px;
+    margin: auto;
+}
+
+// GALLERY AT BOTTEM OF PAGE -----------------------------------------------------------------------
+
+.gallery_row {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.img-w {
+    width: 180px;
+    height: 180px;
+    float: left;
+    position: relative;
+    overflow: hidden;
+    img {
+        object-fit: cover;
+        width: 180px;
+        height: 180px;
+        position: absolute;
+
+        opacity: 0.8; 
+        cursor: pointer; 
+    }
+    img:hover {
+        opacity: 1; 
+    }
+}
+
+// -----------------------------------------------------------------------------
+
+// MODAL -----------------------------------------------------------------------
+
+.row > .column {
+    padding: 0 8px;
+}
+  
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+  
+.column {
+    float: left;
+    width: 25%;
+}
+  
+  /* The Modal (background) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #0f0f0f;
+}
+  
+  /* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    
+    background-color: black;
+    margin: auto;
+    padding: 0;
+    width: 90%;
+    max-width: 1200px;
+}
+  
+  /* The Close Button */
+.close {
+    color: white;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 35px;
+    font-weight: bold;
+}
+  
+.close:hover,
+.close:focus {
+    color: #999;
+    text-decoration: none;
+    cursor: pointer;
+}
+  
+.mySlides {
+    display: none;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  
+    img {
+        margin-bottom: -4px;
+        max-height: 700px;
+        width: auto;
+    }
+}
+  
+.cursor {
+    cursor: pointer;
+}
+  
+  /* Next & previous buttons */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+  
+  /* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+  
+  /* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+  
+  /* Number text (1/3 etc) */
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+  
+.caption-container {
+    text-align: center;
+    background-color: black;
+    padding: 2px 16px;
+    color: white;
+}
+  
+.demo {
+    opacity: 0.6;
+}
+  
+.active,
+.demo:hover {
+    opacity: 1;
+}
+  
+img.hover-shadow {
+    transition: 0.3s;
+}
+  
+.hover-shadow:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+// -----------------------------------------------------------------------------

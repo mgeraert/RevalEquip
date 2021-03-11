@@ -60,6 +60,14 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     visibility: hidden;
 }
 
+#export_button{
+    position: absolute;
+    left:1200px - $ButtonWidth - $margin1;
+    top: $margin1;
+    width: $ButtonWidth;
+}
+
+
 #toast_pop_up {
     left: 420px;
     width: $ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth;

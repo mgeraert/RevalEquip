@@ -35,6 +35,13 @@
   visibility: hidden;
 }
 
+#export_button {
+  position: absolute;
+  left: 1070px;
+  top: 30px;
+  width: 100px;
+}
+
 #toast_pop_up {
   left: 420px;
   width: 360px;

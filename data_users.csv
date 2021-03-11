@@ -1,0 +1,164 @@
+ID;user_last_name;user_name;user_in_date;user_out_date;user_category;user_function;user_sex;user_email;user_telephone;user_title;user_pw_hash;user_home_address;user_private_phone;user_is_pi;user_is_phd;user_alternative_ID
+1;VANDERHEYDEN;Ann;1/03/2019;31/07/2041;ATP;Administratief Directeur;v;ann.vanderheyden@uhasselt.be;;;;;;;;-1
+2;BOGAERTS;Katleen;1/09/2018;30/09/2047;ZAP;Docent;v;katleen.bogaerts@uhasselt.be;;;;;;;;-1
+3;BURTIN;Chris;1/09/2018;30/09/2047;ZAP;Docent;m;chris.burtin@uhasselt.be;;;;;;;;-1
+4;CUYPERS;Koen;1/09/2018;30/09/2048;ZAP;Docent;m;koen.cuypers@uhasselt.be;;;;;;;;-1
+5;JANSSENS;Lotte;1/09/2018;30/09/2053;ZAP;Docent;v;lotte.janssens@uhasselt.be;;;;;;;;-1
+6;KLINGELS;Katrijn ;01/09/2018;30/09/2045;ZAP;Docent;v;katrijn.klingels@uhasselt.be;;;;;;1;;-1
+7;MEYNS;Pieter;1/09/2018;30/09/2052;ZAP;Docent;m;pieter.meyns@uhasselt.be;;;;;;;;-1
+8;MICHIELS;Sarah;16/09/2020;30/09/2050;ZAP;Docent;v;sarah.michiels@uhasselt.be;;;;;;;;-1
+9;OPDENACKER;Joke;1/10/2019;30/09/2021;ZAP;Docent;v;joke.opdenacker@uhasselt.be;;;;;;;;-1
+10;SPILDOOREN;Joke;1/09/2018;30/09/2051;ZAP;Docent;v;joke.spildooren@uhasselt.be;;;;;;;;-1
+11;SPOOREN;Annemie;1/09/2018;30/09/2038;ZAP;Docent;v;annemie.spooren@uhasselt.be;;;;;;;;-1
+12;TOPS;Wim;1/02/2020;31/03/2023;ZAP;Docent;m;wim.tops@uhasselt.be;;;;;;;;-1
+13;AMERIJCKX;Charlotte;1/09/2018;9/01/2022;Bursaal;Doctoraatsbursaal;v;charlotte.amerijckx@uhasselt.be;;;;;;;;-1
+14;BRAUERS;Lieke;1/09/2018;31/08/2021;Bursaal;Doctoraatsbursaal;v;lieke.brauers@uhasselt.be;;;;;;;;-1
+15;CASTERS;Laura;1/09/2020;31/12/2022;Bursaal;Doctoraatsbursaal;v;laura.casters@uhasselt.be;;;;;;;;-1
+16;DE DECKER;Claire;1/09/2018;31/03/2021;Bursaal;Doctoraatsbursaal;v;claire.dedecker@uhasselt.be;;;;;;;;-1
+17;DECRAENE;Lisa;10/08/2020;9/08/2022;Bursaal;Doctoraatsbursaal;v;lisa.decraene@uhasselt.be;;;;;;;;-1
+18;DEPESTELE;Siel;1/12/2020;15/09/2022;Bursaal;Doctoraatsbursaal;v;siel.depestele@uhasselt.be;;;;;;;;-1
+19;EMMERZAAL;Jill;1/09/2018;31/08/2021;Bursaal;Doctoraatsbursaal;v;jill.emmerzaal@uhasselt.be;;;;;;;;-1
+20;FRANSSEN;Wouter;1/09/2018;31/01/2022;Bursaal;Doctoraatsbursaal;m;wouter.franssen@uhasselt.be;;;;;;;;-1
+21;GOETSCHALCKX;Mieke;1/08/2019;31/08/2021;Bursaal;Doctoraatsbursaal;v;mieke.goetschalckx@uhasselt.be;;;;;;;;-1
+22;JACOBS;Nina;1/09/2020;31/08/2022;Bursaal;Doctoraatsbursaal;v;nina.jacobs@uhasselt.be;;;;;;;;-1
+23;MARINUS;Nastasia;1/09/2018;15/12/2021;Bursaal;Doctoraatsbursaal;v;nastasia.marinus@uhasselt.be;;;;;;;;-1
+24;PAUWELS;Sara;1/09/2020;31/08/2022;Bursaal;Doctoraatsbursaal;v;sara.pauwels@uhasselt.be;;;;;;;;-1
+25;QUADFLIEG;Kirsten;1/02/2019;31/01/2022;Bursaal;Doctoraatsbursaal;v;kirsten.quadflieg@uhasselt.be;;;;;;;;-1
+26;RAATS;Joke;1/09/2018;30/09/2021;Bursaal;Doctoraatsbursaal;v;joke.raats@uhasselt.be;;;;;;;;-1
+27;RAMAKERS;Indra;1/10/2020;30/09/2022;Bursaal;Doctoraatsbursaal;v;indra.ramakers@uhasselt.be;;;;;;;;-1
+28;SERGOORIS;Abner;16/02/2020;15/02/2022;Bursaal;Doctoraatsbursaal;m;abner.sergooris@uhasselt.be;;;;;;;;-1
+29;STEVENS;Sjoerd;1/09/2018;31/10/2021;Bursaal;Doctoraatsbursaal;m;sjoerd.stevens@uhasselt.be;;;;;;;;-1
+30;VAN DEN BOGAART;Maud;1/09/2018;15/02/2022;Bursaal;Doctoraatsbursaal;v;maud.vandenbogaart@uhasselt.be;;;;;;;;-1
+31;VAN DER VEER;Ingrid;1/12/2018;15/04/2021;Bursaal;Doctoraatsbursaal;v;ingrid.vanderveer@uhasselt.be;;;;;;;;-1
+32;VAN HERCK;Maarten;1/09/2018;31/08/2022;Bursaal;Doctoraatsbursaal;m;maarten.vanherck@uhasselt.be;;;;;;;;-1
+33;VAN HOORNWEDER;Sybren;1/10/2020;30/09/2022;Bursaal;Doctoraatsbursaal;m;sybren.vanhoornweder@uhasselt.be;;;;;;;;-1
+34;VELDKAMP;Renee;1/09/2018;31/08/2021;Bursaal;Doctoraatsbursaal;v;renee.veldkamp@uhasselt.be;;;;;;;;-1
+35;VERSTRAELEN;Stefanie;1/09/2018;19/05/2021;Bursaal;Doctoraatsbursaal;v;stefanie.verstraelen@uhasselt.be;;;;;;;;-1
+36;BERARDI;Emanuele;16/11/2020;15/12/2023;AAP;Doctor-assistent;m;emanuele.berardi@uhasselt.be;;;;;;;;-1
+37;TABONE;Lisa;16/10/2019;15/10/2022;AAP;Doctor-assistent;v;lisa.tabone@uhasselt.be;;;;;;;;-1
+38;VAN DUN;Kim;1/10/2018;30/09/2021;AAP;Doctor-assistent;v;kim.vandun@uhasselt.be;;;;;;;;-1
+39;VERBECQUE;Evi;16/10/2018;31/12/2022;AAP;Doctor-assistent;v;evi.verbecque@uhasselt.be;;;;;;;;-1
+40;VERBOVEN;Kenneth;1/09/2018;31/08/2023;AAP;Doctor-assistent;m;kenneth.verboven@uhasselt.be;;;;;;;;-1
+41;VERBRUGGHE;Jonas;1/09/2018;30/09/2023;AAP;Doctor-assistent;m;jonas.verbrugghe@uhasselt.be;;;;;;;;-1
+42;GOOSSENS;Nina;1/09/2019;31/08/2021;BAP;Doctor-navorser;v;nina.goossens@uhasselt.be;;;;;;;;-1
+43;KERKUM;Yvette;1/01/2021;30/09/2053;BAP;Doctor-navorser;v;yvette.kerkum@uhasselt.be;;;;;;;;-1
+44;KEYTSMAN;Charly;1/10/2018;30/09/2021;BAP;Doctor-navorser;m;charly.keytsman@uhasselt.be;;;;;;;;-1
+45;HEREMANS;Elke;16/09/2018;28/02/2049;ATP;Expert Onderzoek;v;elke.heremans@uhasselt.be;;;;;;;;-1
+46;DE BRANDT;Jana;1/09/2018;30/09/2021;Gast;FWO-medewerker;v;jana.debrandt@uhasselt.be;;;;;;;;-1
+47;ABASIYANIK;Zuhal;1/11/2020;30/09/2022;Gast;gastmedewerker;v;zuhal.abasiyanik@uhasselt.be;;;;;;;;-1
+48;ABESSA;Teklu Gemechu;1/09/2018;30/09/2022;Gast;gastmedewerker;m;teklu gemechu.abessa@uhasselt.be;;;;;;;;-1
+49;AMANZONWE;Renaud;16/07/2020;15/09/2022;Gast;gastmedewerker;m;renaud.amanzonwe@uhasselt.be;;;;;;;;-1
+50;BAERT;Ilse;1/09/2018;30/09/2022;Gast;gastmedewerker;v;ilse.baert@uhasselt.be;;;;;;;;-1
+51;BAGGEN;Remco;1/12/2018;30/09/2022;Gast;gastmedewerker;m;remco.baggen@uhasselt.be;;;;;;;;-1
+52;BELKHOURIBCHIA;Jamal;1/09/2018;30/09/2021;Gast;gastmedewerker;m;jamal.belkhouribchia@uhasselt.be;;;;;;;;-1
+53;BERGER;Jan;1/09/2018;30/09/2021;Gast;gastmedewerker;m;jan.berger@uhasselt.be;;;;;;;;-1
+54;BOGAERT;Liedewij;1/12/2020;30/09/2022;Gast;gastmedewerker;v;liedewij.bogaert@uhasselt.be;;;;;;;;-1
+55;BRUIJNES;Amber;1/09/2018;30/09/2021;Gast;gastmedewerker;m;amber.bruijnes@uhasselt.be;;;;;;;;-1
+56;CHALIMOURDAS;Antonios;1/12/2020;30/09/2022;Gast;gastmedewerker;m;antonios.chalimourdas@uhasselt.be;;;;;;;;-1
+57;DE BAETS;Liesbet;1/09/2018;30/09/2022;Gast;gastmedewerker;v;liesbet.debaets@uhasselt.be;;;;;;;;-1
+58;DE WEERDT;Natasja;1/03/2019;30/09/2021;Gast;gastmedewerker;v;natasja.deweerdt@uhasselt.be;;;;;;;;-1
+59;DUERINCKX;Joris;1/11/2018;30/09/2021;Gast;gastmedewerker;m;joris.duerinckx@uhasselt.be;;;;;;;;-1
+60;FRANCISCO DE LIMA;Fabiano;1/10/2020;30/09/2022;Gast;gastmedewerker;m;fabiano.franciscodelima@uhasselt.be;;;;;;;;-1
+61;GHASEMIAN SHIRVAN;Ensiyeh;16/01/2019;30/09/2022;Gast;gastmedewerker;v;ensiyeh.ghasemianshirvan@uhasselt.be;;;;;;;;-1
+62;HEHL;Melina;1/11/2020;30/09/2022;Gast;gastmedewerker;v;melina.hehl@uhasselt.be;;;;;;;;-1
+63;JAMIL;Asif;1/09/2018;30/09/2021;Gast;gastmedewerker;m;asif.jamil@uhasselt.be;;;;;;;;-1
+64;JOHNSON;Charlotte;1/12/2020;30/09/2022;Gast;gastmedewerker;v;charlotte.johnson@uhasselt.be;;;;;;;;-1
+65;KNEVELS;Leen;1/03/2019;30/09/2021;Gast;gastmedewerker;v;leen.knevels@uhasselt.be;;;;;;;;-1
+66;KNIPPENBERG;Els;1/09/2018;30/09/2021;Gast;gastmedewerker;v;els.knippenberg@uhasselt.be;;;;;;;;-1
+67;KOSSI;Oyene;16/07/2020;15/09/2022;Gast;gastmedewerker;m;oyene.kossi@uhasselt.be;;;;;;;;-1
+68;KUPPERS;Herman;1/09/2018;30/09/2021;Gast;gastmedewerker;m;herman.kuppers@uhasselt.be;;;;;;;;-1
+69;LAHOUSSE;Astrid;1/02/2021;30/09/2022;Gast;gastmedewerker;v;astrid.lahousse@uhasselt.be;;;;;;;;-1
+70;LEENUS;Daphnie;1/09/2018;30/09/2021;Gast;gastmedewerker;v;daphnie.leenus@uhasselt.be;;;;;;;;-1
+71;LENAERTS;Joke;1/03/2019;30/09/2021;Gast;gastmedewerker;v;joke.lenaerts@uhasselt.be;;;;;;;;-1
+72;LEONE;Carmela;1/09/2018;30/09/2022;Gast;gastmedewerker;v;carmela.leone@uhasselt.be;;;;;;;;-1
+73;MARQUES REGO MACHADO;Filipa;1/10/2020;30/09/2022;Gast;gastmedewerker;v;filipa.marquesregomachado@uhasselt.be;;;;;;;;-1
+74;NOUKPO;Ines;16/07/2020;15/09/2022;Gast;gastmedewerker;v;ines.noukpo@uhasselt.be;;;;;;;;-1
+75;RAMARI FERREIRA;Cintia;1/01/2021;30/09/2022;Gast;gastmedewerker;v;cintia.ramariferreira@uhasselt.be;;;;;;;;-1
+76;ROOSE;Eva;1/02/2021;30/09/2022;Gast;gastmedewerker;v;eva.roose@uhasselt.be;;;;;;;;-1
+77;ROOSE;Stijn;1/02/2020;30/09/2021;Gast;gastmedewerker;m;stijn.roose@uhasselt.be;;;;;;;;-1
+78;SEVERIJNS;Deborah;1/09/2018;30/09/2022;Gast;gastmedewerker;v;deborah.severijns@uhasselt.be;;;;;;;;-1
+79;SOLER;Bernardita;1/07/2019;30/09/2022;Gast;gastmedewerker;v;bernardita.soler@uhasselt.be;;;;;;;;-1
+80;TESHOME Melese;Sinaga;1/11/2020;30/09/2022;Gast;gastmedewerker;m;sinaga.teshomemelese@uhasselt.be;;;;;;;;-1
+81;THEUNISSEN;Kyra;1/09/2018;30/09/2021;Gast;gastmedewerker;v;kyra.theunissen@uhasselt.be;;;;;;;;-1
+82;TUFA;Birtukan;1/11/2020;30/09/2022;Gast;gastmedewerker;v;birtukan.tufa@uhasselt.be;;;;;;;;-1
+83;TURRI DA SILVA;Natalia;16/07/2019;30/09/2022;Gast;gastmedewerker;m;natalia.turridasilva@uhasselt.be;;;;;;;;-1
+84;VAN DER STRAATEN;Rob;1/09/2018;30/09/2021;Gast;gastmedewerker;m;rob.vanderstraaten@uhasselt.be;;;;;;;;-1
+85;VAN MALDEREN;Shanti;1/01/2021;30/09/2021;Gast;gastmedewerker;v;shanti.vanmalderen@uhasselt.be;;;;;;;;-1
+86;VAN NOTEN;Pieter;1/09/2018;30/09/2021;Gast;gastmedewerker;m;pieter.vannoten@uhasselt.be;;;;;;;;-1
+87;VANDECASTEELE;Seline;1/03/2019;30/09/2021;Gast;gastmedewerker;v;seline.vandecasteele@uhasselt.be;;;;;;;;-1
+88;VANZEIR;Ellen;1/03/2019;30/09/2021;Gast;gastmedewerker;v;ellen.vanzeir@uhasselt.be;;;;;;;;-1
+89;WORKU;Berhanu Nigussie;1/09/2018;30/09/2022;Gast;gastmedewerker;m;berhanu nigussie.worku@uhasselt.be;;;;;;;;-1
+90;BELLEMANS;Tina;1/10/2020;30/09/2021;ZAP;Gastprofessor;v;tina.bellemans@uhasselt.be;;;;;;;;-1
+91;KENENS;Mieke;1/09/2018;30/04/2025;ATP;Gespecialiseerd Secretariaatsmedewerker;v;mieke.kenens@uhasselt.be;;;;;;;;-1
+92;FEYS;Peter;1/09/2018;31/08/2022;ZAP;Gewoon Hoogleraar;m;peter.feys@uhasselt.be;;;;;;;;-1
+93;FEYS;Peter;1/09/2018;30/09/2039;ZAP;Gewoon Hoogleraar;m;peter.feys@uhasselt.be;;;;;;;;-1
+94;HANSEN;Dominique;1/09/2018;30/09/2047;ZAP;Gewoon Hoogleraar;m;dominique.hansen@uhasselt.be;;;;;;;;-1
+95;HANSEN;Dominique;1/09/2018;31/08/2022;ZAP;Gewoon Hoogleraar;m;dominique.hansen@uhasselt.be;;;;;;;;-1
+96;GRANITZER;Marita;1/09/2018;30/09/2021;ZAP;Hoofddocent;v;marita.granitzer@uhasselt.be;;;;;;;;-1
+97;RAMECKERS;Eugene;1/09/2018;30/09/2023;ZAP;Hoofddocent;m;eugene.rameckers@uhasselt.be;;;;;;;;-1
+98;VAN ERUM;Monique;1/09/2018;30/09/2029;ZAP;Hoofddocent;v;monique.vanerum@uhasselt.be;;;;;;;;-1
+99;VAN WIJMEERSCH;Bart;1/09/2018;30/09/2044;ZAP;Hoofddocent;m;bart.vanwijmeersch@uhasselt.be;;;;;;;;-1
+100;MEULEMANS;Iris;1/09/2018;30/09/2028;OP;Hoofdlector;v;iris.meulemans@uhasselt.be;;;;;;;;-1
+101;SCHROYEN;Valentin;1/09/2018;30/09/2022;OP;Hoofdlector;m;valentin.schroyen@uhasselt.be;;;;;;;;-1
+102;MEESEN;Raf;1/09/2018;30/09/2032;ZAP;Hoogleraar;m;raf.meesen@uhasselt.be;;;;;;;;-1
+103;TIMMERMANS;Annick;1/09/2018;30/09/2034;ZAP;Hoogleraar;v;annick.timmermans@uhasselt.be;;;;;;;;-1
+104;VANDENABEELE;Frank;1/09/2018;30/09/2033;ZAP;Hoogleraar;m;frank.vandenabeele@uhasselt.be;;;;;;;;-1
+105;SWERTS;Marga;1/09/2018;30/09/2034;OP;Lector;v;marga.swerts@uhasselt.be;;;;;;;;-1
+106;VANDEBRIEL;Piet;1/09/2018;30/09/2034;OP;Lector;m;piet.vandebriel@uhasselt.be;;;;;;;;-1
+107;VANSTRAELEN;Jo;1/09/2018;30/09/2021;OP;Lector;m;jo.vanstraelen@uhasselt.be;;;;;;;;-1
+108;BUYSSCHAERT;Maya;1/09/2018;30/11/2036;ATP;Medewerker Onthaal;v;maya.buysschaert@uhasselt.be;;;;;;;;-1
+109;D'HOOGE;Mieke;16/02/2019;31/05/2022;BAP;Navorser;v;mieke.d'hooge@uhasselt.be;;;;;;;;-1
+110;VAN GEEL;Fanny;1/09/2018;31/03/2021;BAP;Navorser;v;fanny.vangeel@uhasselt.be;;;;;;;;-1
+111;CORTEN;Kristoff;1/09/2018;30/09/2021;Gast;onbezoldigd gastprofessor;m;kristoff.corten@uhasselt.be;;;;;;;;-1
+112;POPESCU;Veronica;1/09/2018;30/09/2022;Gast;onbezoldigd gastprofessor;v;veronica.popescu@uhasselt.be;;;;;;;;-1
+113;SMEETS;Kristof;16/01/2020;30/09/2022;Gast;onbezoldigd gastprofessor;m;kristof.smeets@uhasselt.be;;;;;;;;-1
+114;CALSIUS;Joeri;1/09/2018;30/09/2042;OP;OP Docent;m;joeri.calsius@uhasselt.be;;;;;;;;-1
+115;BASTIAENS;Hanne;1/09/2018;30/09/2049;AAP;Praktijkassistent;v;hanne.bastiaens@uhasselt.be;;;;;;;;-1
+116;BILLIET;Bart;1/09/2018;31/08/2022;AAP;Praktijkassistent;m;bart.billiet@uhasselt.be;;;;;;;;-1
+117;BRAEKEN;Marijke;1/09/2018;30/09/2021;AAP;Praktijkassistent;v;marijke.braeken@uhasselt.be;;;;;;;;-1
+118;BRAEKEN;Marijke;16/09/2018;30/09/2021;AAP;Praktijkassistent;v;marijke.braeken@uhasselt.be;;;;;;;;-1
+119;CAPONI;Lidia;16/03/2020;15/09/2021;AAP;Praktijkassistent;v;lidia.caponi@uhasselt.be;;;;;;;;-1
+120;DE WIT;Katleen;1/09/2018;15/09/2022;AAP;Praktijkassistent;v;katleen.dewit@uhasselt.be;;;;;;;;-1
+121;DUCHATEAU;Anneleen;1/09/2018;15/09/2023;AAP;Praktijkassistent;v;anneleen.duchateau@uhasselt.be;;;;;;;;-1
+122;FAVOREEL;Sofie;1/09/2018;15/09/2021;AAP;Praktijkassistent;v;sofie.favoreel@uhasselt.be;;;;;;;;-1
+123;GOOVAERTS;Ellen;16/01/2020;15/09/2021;AAP;Praktijkassistent;v;ellen.goovaerts@uhasselt.be;;;;;;;;-1
+124;HAEPERS;An;1/02/2019;30/09/2022;AAP;Praktijkassistent;v;an.haepers@uhasselt.be;;;;;;;;-1
+125;HANSSEN;Ine;1/09/2018;28/02/2052;AAP;Praktijkassistent;v;ine.hanssen@uhasselt.be;;;;;;;;-1
+126;HOSKENS;Jasmine;1/09/2018;15/09/2022;AAP;Praktijkassistent;v;jasmine.hoskens@uhasselt.be;;;;;;;;-1
+127;HUTS;Kristof;1/09/2018;15/09/2022;AAP;Praktijkassistent;m;kristof.huts@uhasselt.be;;;;;;;;-1
+128;HUYGEN;Katrien;1/09/2018;15/09/2023;AAP;Praktijkassistent;v;katrien.huygen@uhasselt.be;;;;;;;;-1
+129;JUTTEN;Caroline;1/09/2018;15/09/2021;AAP;Praktijkassistent;v;caroline.jutten@uhasselt.be;;;;;;;;-1
+130;LAUWEREINS;Liesbet;1/01/2020;15/09/2021;AAP;Praktijkassistent;v;liesbet.lauwereins@uhasselt.be;;;;;;;;-1
+131;LYSKAWA;Hanne;1/09/2018;15/09/2023;AAP;Praktijkassistent;v;hanne.lyskawa@uhasselt.be;;;;;;;;-1
+132;MATHEVE;Thomas;1/09/2018;15/09/2023;AAP;Praktijkassistent;m;thomas.matheve@uhasselt.be;;;;;;;;-1
+133;MENTENS;Steven;16/09/2018;15/09/2021;AAP;Praktijkassistent;m;steven.mentens@uhasselt.be;;;;;;;;-1
+134;MINGELS;Sarah;1/09/2018;30/09/2021;AAP;Praktijkassistent;v;sarah.mingels@uhasselt.be;;;;;;;;-1
+135;MOONS;Lynn;1/09/2018;15/09/2022;AAP;Praktijkassistent;v;lynn.moons@uhasselt.be;;;;;;;;-1
+136;NEMETH;Tim;16/05/2020;30/09/2021;AAP;Praktijkassistent;m;tim.nemeth@uhasselt.be;;;;;;;;-1
+137;NULENS;An-Sofie;16/09/2018;15/09/2021;AAP;Praktijkassistent;v;an-sofie.nulens@uhasselt.be;;;;;;;;-1
+138;REYNAERTS;David;1/09/2018;31/08/2022;AAP;Praktijkassistent;m;david.reynaerts@uhasselt.be;;;;;;;;-1
+139;SCHROYEN;Anne;16/11/2019;15/09/2021;AAP;Praktijkassistent;v;anne.schroyen@uhasselt.be;;;;;;;;-1
+140;SMEETS;Stefanie;1/02/2019;15/09/2021;AAP;Praktijkassistent;v;stefanie.smeets@uhasselt.be;;;;;;;;-1
+141;STROUWEN;Carolien;1/09/2018;15/09/2023;AAP;Praktijkassistent;v;carolien.strouwen@uhasselt.be;;;;;;;;-1
+142;VAN REUSEL;Merel;1/09/2018;15/09/2023;AAP;Praktijkassistent;v;merel.vanreusel@uhasselt.be;;;;;;;;-1
+143;VANBRABANT;Stefanie;1/09/2018;15/09/2021;AAP;Praktijkassistent;v;stefanie.vanbrabant@uhasselt.be;;;;;;;;-1
+144;VANHEES;Bram;1/02/2019;15/09/2021;AAP;Praktijkassistent;m;bram.vanhees@uhasselt.be;;;;;;;;-1
+145;VANHOLST;Veraline;1/09/2018;15/09/2022;AAP;Praktijkassistent;v;veraline.vanholst@uhasselt.be;;;;;;;;-1
+146;BOELEN;Emma;16/02/2020;30/09/2051;ATP;Stafmedewerker;v;emma.boelen@uhasselt.be;;;;;;;;-1
+147;GERAERTS;Marc;1/09/2019;31/05/2035;ATP;Technisch Ontwikkelaar;m;marc.geraerts@uhasselt.be;;;;;;;;-1
+148;AGTEN;Anouk;1/09/2018;30/06/2021;BAP;Tijdelijk Academisch Medewerker;v;anouk.agten@uhasselt.be;;;;;;;;-1
+149;CEYSSENS;Linde;1/01/2021;30/09/2021;BAP;Tijdelijk Academisch Medewerker;v;linde.ceyssens@uhasselt.be;;;;;;;;-1
+150;DECABOOTER;Iris;1/10/2018;28/02/2061;BAP;Tijdelijk Academisch Medewerker;v;iris.decabooter@uhasselt.be;;;;;;;;-1
+151;DINGENEN;Bart;1/09/2018;30/09/2021;BAP;Tijdelijk Academisch Medewerker;m;bart.dingenen@uhasselt.be;;;;;;;;-1
+152;GOOSSENS;Stephanie;16/01/2021;31/03/2021;BAP;Tijdelijk Academisch Medewerker;v;stephanie.goossens@uhasselt.be;;;;;;;;-1
+153;LAMERS;Ilse;1/09/2018;30/09/2021;BAP;Tijdelijk Academisch Medewerker;v;ilse.lamers@uhasselt.be;;;;;;;;-1
+154;MOUMDJIAN;Lousin;1/09/2018;31/12/2021;BAP;Tijdelijk Academisch Medewerker;v;lousin.moumdjian@uhasselt.be;;;;;;;;-1
+155;POELMANS;Bram;16/01/2021;31/03/2021;BAP;Tijdelijk Academisch Medewerker;m;bram.poelmans@uhasselt.be;;;;;;;;-1
+156;QUETIN;Philippe;16/09/2020;30/09/2021;BAP;Tijdelijk Academisch Medewerker;m;philippe.quetin@uhasselt.be;;;;;;;;-1
+157;VALY;Jan;1/12/2019;30/09/2021;BAP;Tijdelijk Academisch Medewerker;m;jan.valy@uhasselt.be;;;;;;;;-1
+158;VAN DEN BROEKE;Emanuel;1/10/2020;30/09/2021;BAP;Tijdelijk Academisch Medewerker;m;emanuel.vandenbroeke@uhasselt.be;;;;;;;;-1
+159;VAN DEN HOUTE;Maaike;1/09/2018;30/09/2021;BAP;Tijdelijk Academisch Medewerker;v;maaike.vandenhoute@uhasselt.be;;;;;;;;-1
+160;VANMOL;Lien;1/09/2020;30/09/2021;BAP;Tijdelijk Academisch Medewerker;v;lien.vanmol@uhasselt.be;;;;;;;;-1
+161;YILMAZER;Cigdem;1/11/2018;31/03/2022;BAP;Tijdelijk Academisch Medewerker;v;cigdem.yilmazer@uhasselt.be;;;;;;;;-1
+162;BOGAERS;Anne;1/09/2018;30/04/2029;ATP;Verpleegster;v;anne.bogaers@uhasselt.be;;;;;;;;-1
+167;TEST;Test;-1;-1;;;null;;;;undefined;;;0;0;-1
