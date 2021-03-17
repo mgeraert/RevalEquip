@@ -18,7 +18,7 @@ html, body {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  background-image: url("/static/images/wave1.svg");
+  background-image: url("/static/images/wave2.svg");
   background-size: cover;
 }
 
@@ -32,70 +32,75 @@ html, body {
 }
 
 .left {
+  border-radius: 3px;
+  background-color: white;
   float: left;
-  width: 33%;
+  width: 67%;
   height: 400px;
-}
-
-.left img {
-  height: 400px;
-  display: block;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
 }
 
 .right {
-  border-radius: 3px;
-  background-color: white;
   float: right;
   height: 400px;
-  width: 67%;
+  width: 33%;
 }
 
-.login_screen {
+.right img {
+  height: 400px;
+  display: block;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.register_screen {
   text-align: left;
   padding: 50px 30px;
 }
 
-.login_screen h4 {
-  margin-bottom: 30px;
-  color: rgba(0, 0, 0, 0.6);
-}
-
-.login_screen h4 span {
-  color: #01A38C;
-  font-weight: 700;
-}
-
-.login_screen p {
+.register_screen h4 {
   color: rgba(0, 0, 0, 0.6);
   margin-bottom: 40px;
 }
 
-.login_screen #login_email_label {
+.register_screen h4 span {
+  color: #01A38C;
+  font-weight: 700;
+}
+
+.register_screen #register_name_label {
   margin-bottom: 15px;
   left: 0px;
 }
 
-.login_screen #login_password_label {
+.register_screen #register_last_name_label {
   margin-bottom: 15px;
   left: 0px;
 }
 
-.login_screen #no_account {
+.register_screen #register_email_label {
+  margin-bottom: 15px;
+  left: 0px;
+}
+
+.register_screen #register_password_label {
+  margin-bottom: 15px;
+  left: 0px;
+}
+
+.register_screen #have_account {
   margin-top: 7.985px;
   float: left;
   width: 66%;
 }
 
-.login_screen #no_account a {
+.register_screen #have_account a {
   text-decoration: none;
   color: #01A38C;
   font-weight: 700;
 }
 
-.login_screen #login_button {
+.register_screen #register_button {
   float: right;
   width: 100px;
 }
-/*# sourceMappingURL=login_form.css.map */
+/*# sourceMappingURL=register_form.css.map */
