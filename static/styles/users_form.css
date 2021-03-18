@@ -169,11 +169,32 @@
   width: 555px;
 }
 
+#user_can_see_private_data_label {
+  position: absolute;
+  left: 30px;
+  top: 389.446px;
+  width: 231.3px;
+}
+
+#user_can_add_user_label {
+  position: absolute;
+  left: 291.3px;
+  top: 389.446px;
+  width: 231.3px;
+}
+
+#user_can_see_financial_data_label {
+  position: absolute;
+  left: 552.6px;
+  top: 389.446px;
+  width: 231.3px;
+}
+
 #users_gallery {
   position: absolute;
   width: 1140px;
   left: 30px;
-  top: 404.446px;
+  top: 454.099px;
   padding-bottom: 30px;
   overflow: hidden;
   border-radius: 3px;

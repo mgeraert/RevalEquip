@@ -150,6 +150,13 @@
   width: 555px;
 }
 
+#eq_bookable_label {
+  position: absolute;
+  left: 797.436px;
+  top: 384.793px;
+  width: 555px;
+}
+
 #eq_owner_id_label {
   position: absolute;
   left: 30px;

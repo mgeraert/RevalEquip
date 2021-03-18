@@ -9,6 +9,7 @@ $textBoxWidthLarge: 555px;
 $buttonHeight: 31.528px;
 $ButtonWidth: 100px;
 $ButtonSpacing: 10px;
+$permissionsWidth: 200px+31.3px;
 
 $textBoxColumn1Left: $margin1+$labelWidth;
 $labelColumn2Left: $margin1+$textBoxWidthLarge+$margin1;
@@ -185,11 +186,32 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     width: $textBoxWidthLarge;
 }
 
+#user_can_see_private_data_label{
+    position: absolute;
+    left: $margin1;
+    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
+    width: $permissionsWidth;
+}
+
+#user_can_add_user_label{
+    position: absolute;
+    left: $margin1 + $permissionsWidth + $margin1;
+    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
+    width: $permissionsWidth;
+}
+
+#user_can_see_financial_data_label{
+    position: absolute;
+    left: $margin1 + $permissionsWidth + $margin1 + $permissionsWidth + $margin1;
+    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
+    width: $permissionsWidth;
+}
+
 #users_gallery {
     position: absolute;
     width: 1200px - $margin1*2;
     left: $margin1;
-    top: $buttonHeight+$tabelHeight*6+$margin1*5.5;
+    top: $buttonHeight+$tabelHeight*7+$margin1*6;
     padding-bottom: $margin1;
     overflow: hidden;
     border-radius: 3px;

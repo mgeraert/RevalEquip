@@ -166,6 +166,13 @@ $labelColumn2Left: $margin1+$textBoxWidthLarge+$margin1;
     width: $textBoxWidthLarge;
 }
 
+#eq_bookable_label {
+    position: absolute;
+    left: $labelColumn2Left +$margin1+ 152.436px;
+    top: $margin1+$buttonHeight+$margin1 * 5 + $tabelHeight * 5;
+    width: $textBoxWidthLarge;
+}
+
 #eq_owner_id_label {
     position: absolute;
     left:$margin1;

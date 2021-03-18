@@ -35,17 +35,18 @@
                 <h4><span>LOGIN</span></h4>
 
                 <p>Welcome back! Log in to your account to view the database.</p>
-                
-                <div class="form-group" id="login_email_label">
-                    <span for="login_email" style="width:120px;">Email</span>
-                    <input id="login_email" class="form-field" type="text" placeholder="Email" />
-                </div>
-                <div class="form-group" id="login_password_label">
-                    <span for="login_password" style="width:120px;">Password</span>
-                    <input id="login_password" class="form-field" type="password" placeholder="Password" />
-                </div>
+                <form action="/login" method="post">
+                    <div class="form-group" id="login_email_label">
+                        <span for="login_email" style="width:120px;">Email</span>
+                        <input id="login_email" class="form-field" type="text" name="login_email" placeholder="Email"/>
+                    </div>
+                    <div class="form-group" id="login_password_label">
+                        <span for="login_password" style="width:120px;">Password</span>
+                        <input id="login_password" class="form-field" type="password" name="login_password" placeholder="Password"/>
+                    </div>
+                    <button id="login_button" onclick="login()" class="mlbutton">Login</button>
+                </form>
                 <h4 id="no_account">No account? <span><a href="register">Register</a></span></h4>
-                <button id="login_button" onclick="login()" class="mlbutton">Login</button>
             </div>
         </div>
     </div>

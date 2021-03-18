@@ -600,3 +600,1227 @@ Traceback (most recent call last):
   File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\templates\equipment.html", line 160, in template
     {% comment %} <div id="myModal" class="modal">
 jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'comment'.
+[2021-03-18 12:09:18] ERROR    Exception on /register [GET]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 72, in register
+    return redirect(url_for('auth.login'))
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2216, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\helpers.py", line 357, in url_for
+    rv = url_adapter.build(
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\werkzeug\routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'auth.login'. Did you mean 'login' instead?
+[2021-03-18 12:09:38] ERROR    Exception on /register [GET]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 72, in register
+    return redirect(url_for('app.login'))
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2216, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\helpers.py", line 357, in url_for
+    rv = url_adapter.build(
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\werkzeug\routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'app.login'. Did you mean 'login' instead?
+[2021-03-18 12:09:39] ERROR    Exception on /register [GET]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 72, in register
+    return redirect(url_for('app.login'))
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2216, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\helpers.py", line 357, in url_for
+    rv = url_adapter.build(
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\werkzeug\routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'app.login'. Did you mean 'login' instead?
+[2021-03-18 12:19:57] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 112, in register_post
+    flash('Email address already exists')
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\helpers.py", line 423, in flash
+    session["_flashes"] = flashes
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\werkzeug\local.py", line 350, in __setitem__
+    self._get_current_object()[key] = value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\sessions.py", line 102, in _fail
+    raise RuntimeError(
+RuntimeError: The session is unavailable because no secret key was set.  Set the secret_key on the application to something unique and secret.
+[2021-03-18 12:20:10] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 112, in register_post
+    flash('Email address already exists')
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\helpers.py", line 423, in flash
+    session["_flashes"] = flashes
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\werkzeug\local.py", line 350, in __setitem__
+    self._get_current_object()[key] = value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\sessions.py", line 102, in _fail
+    raise RuntimeError(
+RuntimeError: The session is unavailable because no secret key was set.  Set the secret_key on the application to something unique and secret.
+[2021-03-18 12:32:02] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 90, in register_post
+    c.execute(sql_search_for_name)
+sqlite3.OperationalError: near "TEST": syntax error
+[2021-03-18 12:32:14] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 90, in register_post
+    c.execute(sql_search_for_name)
+sqlite3.OperationalError: near "TEST": syntax error
+[2021-03-18 12:33:36] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 90, in register_post
+    c.execute(sql_search_for_name)
+sqlite3.OperationalError: near "TEST": syntax error
+[2021-03-18 12:33:36] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 90, in register_post
+    c.execute(sql_search_for_name)
+sqlite3.OperationalError: near "TEST": syntax error
+[2021-03-18 12:34:34] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 90, in register_post
+    c.execute(sql_search_for_name)
+sqlite3.OperationalError: near "TEST": syntax error
+[2021-03-18 12:35:11] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 90, in register_post
+    c.execute(sql_search_for_name)
+sqlite3.OperationalError: near "TEST": syntax error
+[2021-03-18 12:35:12] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 90, in register_post
+    c.execute(sql_search_for_name)
+sqlite3.OperationalError: near "TEST": syntax error
+[2021-03-18 12:35:12] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 90, in register_post
+    c.execute(sql_search_for_name)
+sqlite3.OperationalError: near "TEST": syntax error
+[2021-03-18 12:36:10] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:/Users/reyme/OneDrive/Documents/Coding/RevalEquip/__init__.py", line 90, in register_post
+    c.execute(sql_search_for_name)
+sqlite3.OperationalError: no such column: TEST
+[2021-03-18 12:36:23] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:/Users/reyme/OneDrive/Documents/Coding/RevalEquip/__init__.py", line 90, in register_post
+    c.execute(sql_search_for_name)
+sqlite3.OperationalError: no such column: TEST
+[2021-03-18 12:37:14] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 91, in register_post
+    c.execute(sql_search_for_name)
+sqlite3.OperationalError: no such column: TEST
+[2021-03-18 12:37:24] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 91, in register_post
+    c.execute(sql_search_for_name)
+sqlite3.OperationalError: no such column: TEST
+[2021-03-18 13:17:30] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 96, in register_post
+    new_user = Users(user_last_name=last_name, user_name=name, user_email=email, user_pw_hash=pw_hash)
+TypeError: __init__() missing 15 required positional arguments: 'user_in_date', 'user_out_date', 'user_category', 'user_function', 'user_sex', 'user_telephone', 'user_title', 'user_home_address', 'user_private_phone', 'user_is_pi', 'user_is_phd', 'user_alternative_ID', 'user_can_see_private_data', 'user_can_add_user', and 'user_can_see_financial_data'
+[2021-03-18 13:19:46] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 96, in register_post
+    new_user = Users(user_last_name=last_name, user_name=name, user_email=email, user_pw_hash=pw_hash)
+TypeError: __init__() missing 15 required positional arguments: 'user_in_date', 'user_out_date', 'user_category', 'user_function', 'user_sex', 'user_telephone', 'user_title', 'user_home_address', 'user_private_phone', 'user_is_pi', 'user_is_phd', 'user_alternative_ID', 'user_can_see_private_data', 'user_can_add_user', and 'user_can_see_financial_data'
+[2021-03-18 13:31:13] ERROR    Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 75, in login_post
+    sql_search_for_email = 'SELECT * FROM users WHERE user_email="' + email + '"'
+TypeError: can only concatenate str (not "NoneType") to str
+[2021-03-18 13:33:48] ERROR    Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 85, in login_post
+    return redirect(url_for('hello'))
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2216, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\helpers.py", line 357, in url_for
+    rv = url_adapter.build(
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\werkzeug\routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'hello'. Did you mean 'login' instead?
+[2021-03-18 14:20:30] ERROR    Exception on /register [GET]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 89, in register
+    return render_template("register.html")
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\templating.py", line 137, in render_template
+    return _render(
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\templating.py", line 120, in _render
+    rv = template.render(context)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1090, in render
+    self.environment.handle_exception()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\templates\register.html", line 37, in top-level template code
+    {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2216, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\helpers.py", line 357, in url_for
+    rv = url_adapter.build(
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\werkzeug\routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'auth.login'. Did you mean 'login' instead?
+[2021-03-18 14:21:07] ERROR    Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 85, in login_post
+    return redirect(url_for('equipment'))
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2216, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\helpers.py", line 357, in url_for
+    rv = url_adapter.build(
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\werkzeug\routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'equipment'. Did you mean 'equipment.get_equipment' instead?
+[2021-03-18 14:21:09] ERROR    Exception on /register [GET]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 89, in register
+    return render_template("register.html")
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\templating.py", line 137, in render_template
+    return _render(
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\templating.py", line 120, in _render
+    rv = template.render(context)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1090, in render
+    self.environment.handle_exception()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\templates\register.html", line 37, in top-level template code
+    {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2216, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\helpers.py", line 357, in url_for
+    rv = url_adapter.build(
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\werkzeug\routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'auth.login'. Did you mean 'login' instead?
+[2021-03-18 14:21:57] ERROR    Exception on /register [GET]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 89, in register
+    return render_template("register.html")
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\templating.py", line 137, in render_template
+    return _render(
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\templating.py", line 120, in _render
+    rv = template.render(context)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1090, in render
+    self.environment.handle_exception()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\templates\register.html", line 37, in top-level template code
+    {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2216, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\helpers.py", line 357, in url_for
+    rv = url_adapter.build(
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\werkzeug\routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'auth.login'. Did you mean 'login' instead?
+[2021-03-18 14:48:35] ERROR    Exception on /register [GET]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 89, in register
+    return render_template("register.html")
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\templating.py", line 138, in render_template
+    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 930, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 883, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 857, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\loaders.py", line 127, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 638, in compile
+    self.handle_exception(source=source_hint)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\templates\register.html", line 35, in template
+    {% comment %} Go to <a href="{{ url_for('register') }}">login page</a>.      {% endcomment %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'comment'. Jinja was looking for the following tags: 'elif' or 'else' or 'endif'. The innermost block that needs to be closed is 'if'.
+[2021-03-18 14:48:40] ERROR    Exception on /register [GET]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 89, in register
+    return render_template("register.html")
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\templating.py", line 138, in render_template
+    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 930, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 883, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 857, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\loaders.py", line 127, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 638, in compile
+    self.handle_exception(source=source_hint)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\templates\register.html", line 35, in template
+    {% comment %} Go to <a href="{{ url_for('register') }}">login page</a>.      {% endcomment %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'comment'. Jinja was looking for the following tags: 'elif' or 'else' or 'endif'. The innermost block that needs to be closed is 'if'.
+[2021-03-18 15:04:57] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 146, in register_post
+    c.execute(sql_string)
+sqlite3.OperationalError: near ")": syntax error
+[2021-03-18 15:05:33] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 146, in register_post
+    c.execute(sql_string)
+sqlite3.OperationalError: near ")": syntax error
+[2021-03-18 15:15:38] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1953, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1968, in finalize_request
+    response = self.make_response(rv)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2097, in make_response
+    raise TypeError(
+TypeError: The view function did not return a valid response. The function either returned None or ended without a return statement.
+[2021-03-18 15:15:41] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1953, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1968, in finalize_request
+    response = self.make_response(rv)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2097, in make_response
+    raise TypeError(
+TypeError: The view function did not return a valid response. The function either returned None or ended without a return statement.
+[2021-03-18 15:48:19] ERROR    Exception on /register [GET]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:/Users/reyme/OneDrive/Documents/Coding/RevalEquip/__init__.py", line 93, in register
+    return render_template("register.html")
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\templating.py", line 136, in render_template
+    ctx.app.update_template_context(context)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 838, in update_template_context
+    context.update(func())
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 379, in _user_context_processor
+    return dict(current_user=_get_user())
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 346, in _get_user
+    current_app.login_manager._load_user()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\login_manager.py", line 302, in _load_user
+    raise Exception(
+Exception: Missing user_loader or request_loader. Refer to http://flask-login.readthedocs.io/#how-it-works for more info.
+[2021-03-18 15:52:40] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1008, in __call__
+    return self.registry[key]
+KeyError: <greenlet.greenlet object at 0x000001C13CB68E00 (otid=0x000001C13CB5A5C0) current active started main>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 181, in register_post
+    alch_db.session.add(new_user)
+  File "<string>", line 2, in add
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\scoping.py", line 104, in _proxied
+    return self.registry()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1010, in __call__
+    return self.registry.setdefault(key, self.createfunc())
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 4027, in __call__
+    return self.class_(**local_kw)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 137, in __init__
+    track_modifications = app.config['SQLALCHEMY_TRACK_MODIFICATIONS']
+KeyError: 'SQLALCHEMY_TRACK_MODIFICATIONS'
+[2021-03-18 15:54:03] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1008, in __call__
+    return self.registry[key]
+KeyError: <greenlet.greenlet object at 0x00000245D90DAE00 (otid=0x00000245D90D1900) current active started main>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 182, in register_post
+    alch_db.session.add(new_user)
+  File "<string>", line 2, in add
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\scoping.py", line 104, in _proxied
+    return self.registry()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1010, in __call__
+    return self.registry.setdefault(key, self.createfunc())
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 4027, in __call__
+    return self.class_(**local_kw)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 137, in __init__
+    track_modifications = app.config['SQLALCHEMY_TRACK_MODIFICATIONS']
+KeyError: 'SQLALCHEMY_TRACK_MODIFICATIONS'
+[2021-03-18 15:56:06] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1008, in __call__
+    return self.registry[key]
+KeyError: <greenlet.greenlet object at 0x0000025CC1E27460 (otid=0x0000025CC1E445C0) current active started main>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 182, in register_post
+    alch_db.session.add(new_user)
+  File "<string>", line 2, in add
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\scoping.py", line 104, in _proxied
+    return self.registry()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1010, in __call__
+    return self.registry.setdefault(key, self.createfunc())
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 4027, in __call__
+    return self.class_(**local_kw)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 137, in __init__
+    track_modifications = app.config['SQLALCHEMY_TRACK_MODIFICATIONS']
+KeyError: 'SQLALCHEMY_TRACK_MODIFICATIONS'
+[2021-03-18 15:56:39] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1008, in __call__
+    return self.registry[key]
+KeyError: <greenlet.greenlet object at 0x00000199F00B1A90 (otid=0x00000199F0062CC0) current active started main>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 184, in register_post
+    alch_db.session.add(new_user)
+  File "<string>", line 2, in add
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\scoping.py", line 104, in _proxied
+    return self.registry()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1010, in __call__
+    return self.registry.setdefault(key, self.createfunc())
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 4027, in __call__
+    return self.class_(**local_kw)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 137, in __init__
+    track_modifications = app.config['SQLALCHEMY_TRACK_MODIFICATIONS']
+KeyError: 'SQLALCHEMY_TRACK_MODIFICATIONS'
+[2021-03-18 15:56:58] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1008, in __call__
+    return self.registry[key]
+KeyError: <greenlet.greenlet object at 0x00000199F00B1250 (otid=0x00000199F0032F80) current active started main>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 184, in register_post
+    alch_db.session.add(new_user)
+  File "<string>", line 2, in add
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\scoping.py", line 104, in _proxied
+    return self.registry()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1010, in __call__
+    return self.registry.setdefault(key, self.createfunc())
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 4027, in __call__
+    return self.class_(**local_kw)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 137, in __init__
+    track_modifications = app.config['SQLALCHEMY_TRACK_MODIFICATIONS']
+KeyError: 'SQLALCHEMY_TRACK_MODIFICATIONS'
+[2021-03-18 15:57:11] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1008, in __call__
+    return self.registry[key]
+KeyError: <greenlet.greenlet object at 0x00000199F0181EB0 (otid=0x00000199F007D040) current active started main>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 184, in register_post
+    alch_db.session.add(new_user)
+  File "<string>", line 2, in add
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\scoping.py", line 104, in _proxied
+    return self.registry()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1010, in __call__
+    return self.registry.setdefault(key, self.createfunc())
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 4027, in __call__
+    return self.class_(**local_kw)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 137, in __init__
+    track_modifications = app.config['SQLALCHEMY_TRACK_MODIFICATIONS']
+KeyError: 'SQLALCHEMY_TRACK_MODIFICATIONS'
+[2021-03-18 15:58:59] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1008, in __call__
+    return self.registry[key]
+KeyError: <greenlet.greenlet object at 0x000001928E671E00 (otid=0x000001928E699500) current active started main>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 183, in register_post
+    arch_db.session.add(new_user)
+  File "<string>", line 2, in add
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\scoping.py", line 104, in _proxied
+    return self.registry()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1010, in __call__
+    return self.registry.setdefault(key, self.createfunc())
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 4027, in __call__
+    return self.class_(**local_kw)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 137, in __init__
+    track_modifications = app.config['SQLALCHEMY_TRACK_MODIFICATIONS']
+KeyError: 'SQLALCHEMY_TRACK_MODIFICATIONS'
+[2021-03-18 15:59:05] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1008, in __call__
+    return self.registry[key]
+KeyError: <greenlet.greenlet object at 0x000002B2D7371E00 (otid=0x000002B2D7399480) current active started main>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 183, in register_post
+    arch_db.session.add(new_user)
+  File "<string>", line 2, in add
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\scoping.py", line 104, in _proxied
+    return self.registry()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1010, in __call__
+    return self.registry.setdefault(key, self.createfunc())
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 4027, in __call__
+    return self.class_(**local_kw)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 137, in __init__
+    track_modifications = app.config['SQLALCHEMY_TRACK_MODIFICATIONS']
+KeyError: 'SQLALCHEMY_TRACK_MODIFICATIONS'
+[2021-03-18 16:00:06] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1008, in __call__
+    return self.registry[key]
+KeyError: <greenlet.greenlet object at 0x00000191ED11CB40 (otid=0x00000191ED0C1580) current active started main>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 184, in register_post
+    arch_db.session.add(new_user)
+  File "<string>", line 2, in add
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\scoping.py", line 104, in _proxied
+    return self.registry()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1010, in __call__
+    return self.registry.setdefault(key, self.createfunc())
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 4027, in __call__
+    return self.class_(**local_kw)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 138, in __init__
+    bind = options.pop('bind', None) or db.engine
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 943, in engine
+    return self.get_engine()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 953, in get_engine
+    state = get_state(app)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 586, in get_state
+    assert 'sqlalchemy' in app.extensions, \
+AssertionError: The sqlalchemy extension was not registered to the current application.  Please make sure to call init_app() first.
+[2021-03-18 16:01:07] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1008, in __call__
+    return self.registry[key]
+KeyError: <greenlet.greenlet object at 0x000002833B404BF0 (otid=0x0000028337810B00) current active started main>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 185, in register_post
+    arch_db.session.add(new_user)
+  File "<string>", line 2, in add
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\scoping.py", line 104, in _proxied
+    return self.registry()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1010, in __call__
+    return self.registry.setdefault(key, self.createfunc())
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 4027, in __call__
+    return self.class_(**local_kw)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 138, in __init__
+    bind = options.pop('bind', None) or db.engine
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 943, in engine
+    return self.get_engine()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 962, in get_engine
+    return connector.get_engine()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 555, in get_engine
+    options = self.get_options(sa_url, echo)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 570, in get_options
+    self._sa.apply_driver_hacks(self._app, sa_url, options)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 914, in apply_driver_hacks
+    sa_url.database = os.path.join(app.root_path, sa_url.database)
+AttributeError: can't set attribute
+[2021-03-18 16:01:09] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1008, in __call__
+    return self.registry[key]
+KeyError: <greenlet.greenlet object at 0x000002833A654A90 (otid=0x000002833B5BF980) current active started main>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 185, in register_post
+    arch_db.session.add(new_user)
+  File "<string>", line 2, in add
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\scoping.py", line 104, in _proxied
+    return self.registry()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1010, in __call__
+    return self.registry.setdefault(key, self.createfunc())
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 4027, in __call__
+    return self.class_(**local_kw)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 138, in __init__
+    bind = options.pop('bind', None) or db.engine
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 943, in engine
+    return self.get_engine()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 962, in get_engine
+    return connector.get_engine()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 555, in get_engine
+    options = self.get_options(sa_url, echo)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 570, in get_options
+    self._sa.apply_driver_hacks(self._app, sa_url, options)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 914, in apply_driver_hacks
+    sa_url.database = os.path.join(app.root_path, sa_url.database)
+AttributeError: can't set attribute
+[2021-03-18 16:01:27] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1008, in __call__
+    return self.registry[key]
+KeyError: <greenlet.greenlet object at 0x0000023939AD4BF0 (otid=0x0000023935EC0EC0) current active started main>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 185, in register_post
+    arch_db.session.add(new_user)
+  File "<string>", line 2, in add
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\scoping.py", line 104, in _proxied
+    return self.registry()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1010, in __call__
+    return self.registry.setdefault(key, self.createfunc())
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 4027, in __call__
+    return self.class_(**local_kw)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 138, in __init__
+    bind = options.pop('bind', None) or db.engine
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 943, in engine
+    return self.get_engine()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 962, in get_engine
+    return connector.get_engine()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 555, in get_engine
+    options = self.get_options(sa_url, echo)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 570, in get_options
+    self._sa.apply_driver_hacks(self._app, sa_url, options)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 914, in apply_driver_hacks
+    sa_url.database = os.path.join(app.root_path, sa_url.database)
+AttributeError: can't set attribute
+[2021-03-18 16:02:26] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1008, in __call__
+    return self.registry[key]
+KeyError: <greenlet.greenlet object at 0x0000013A74C71670 (otid=0x0000013A74C41940) current active started main>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 185, in register_post
+    arch_db.session.add(new_user)
+  File "<string>", line 2, in add
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\scoping.py", line 104, in _proxied
+    return self.registry()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1010, in __call__
+    return self.registry.setdefault(key, self.createfunc())
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 4027, in __call__
+    return self.class_(**local_kw)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 138, in __init__
+    bind = options.pop('bind', None) or db.engine
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 943, in engine
+    return self.get_engine()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 962, in get_engine
+    return connector.get_engine()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 555, in get_engine
+    options = self.get_options(sa_url, echo)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 570, in get_options
+    self._sa.apply_driver_hacks(self._app, sa_url, options)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 914, in apply_driver_hacks
+    sa_url.database = os.path.join(app.root_path, sa_url.database)
+AttributeError: can't set attribute
+[2021-03-18 16:03:28] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1008, in __call__
+    return self.registry[key]
+KeyError: <greenlet.greenlet object at 0x0000023FC7DA7930 (otid=0x0000023FC7D67C00) current active started main>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\reyme\OneDrive\Documents\Coding\RevalEquip\__init__.py", line 185, in register_post
+    arch_db.session.add(new_user)
+  File "<string>", line 2, in add
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\scoping.py", line 104, in _proxied
+    return self.registry()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\_collections.py", line 1010, in __call__
+    return self.registry.setdefault(key, self.createfunc())
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 4027, in __call__
+    return self.class_(**local_kw)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 138, in __init__
+    bind = options.pop('bind', None) or db.engine
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 943, in engine
+    return self.get_engine()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 962, in get_engine
+    return connector.get_engine()
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 555, in get_engine
+    options = self.get_options(sa_url, echo)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 570, in get_options
+    self._sa.apply_driver_hacks(self._app, sa_url, options)
+  File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 914, in apply_driver_hacks
+    sa_url.database = os.path.join(app.root_path, sa_url.database)
+AttributeError: can't set attribute

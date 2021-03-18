@@ -16,7 +16,40 @@
     background-size: cover;
   }
   
+  .flash {
+    z-index: 99;
+    top: 50%;
+    position: fixed;
+    width: 100%;
+    text-align: center;
+  }
+
+  .notification_text {
+    color: white;
+    border: 10px;
+    border-style: solid;
+    border-color: #41BAA9;
+    margin: auto;
+    width: max-content;
+    background-color: #41BAA9;
+    text-align: center;box-shadow:  0px 2px 6px -1px rgba(0,0,0,.13); 
+
+    a {
+      color: white;
+      font-weight: 700; 
+      text-decoration: none;
+    }
+
+    text {
+      color: black;
+      font-size: large;
+      font-weight: bolder;
+      cursor: pointer;
+    }
+  }
+
   .session {
+    z-index: 0;
     margin: auto auto;
     width: 600px;
     height: 400px;
@@ -72,21 +105,28 @@
       left:0px;
     }
   
+    #register_pw_hash {
+      margin-bottom: 15px;
+      left:0px;
+    }
+  
     #register_password_label {
       margin-bottom: 15px;
       left:0px;
     }
 
     #have_account {
-        margin-top: 7.985px;
-        float: left;
-        width: 66%;
-    
-        a {
-          text-decoration: none;
-          color: #01A38C;
-          font-weight: 700; 
-        }
+      margin-top: 2px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      float: left;
+      width: 66%;
+  
+      a {
+        text-decoration: none;
+        color: #01A38C;
+        font-weight: 700; 
+      }
     }
 
     #register_button {

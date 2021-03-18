@@ -184,6 +184,30 @@ function selectRowUser(row) {
     $("#user_pw_hash").val(g_selectedUser.user_pw_hash);
     $("#user_alternative_ID").val(g_selectedUser.user_alternative_ID);
 
+    if (g_selectedUser.user_can_see_private_data == 1) {
+        $("#user_can_see_private_data").prop("checked", true);
+    } else if (g_selectedUser.user_can_see_private_data == -1) {
+        $("#user_can_see_private_data").prop("checked", false);
+    } else {
+        $("#user_can_see_private_data").prop("checked", false);
+    }
+
+    if (g_selectedUser.user_can_add_user == 1) {
+        $("#user_can_add_user").prop("checked", true);
+    } else if (g_selectedUser.user_can_add_user == -1) {
+        $("#user_can_add_user").prop("checked", false);
+    } else {
+        $("#user_can_add_user").prop("checked", false);
+    }
+
+    if (g_selectedUser.user_can_see_financial_data == 1) {
+        $("#user_can_see_financial_data").prop("checked", true);
+    } else if (g_selectedUser.user_can_see_financial_data == -1) {
+        $("#user_can_see_financial_data").prop("checked", false);
+    } else {
+        $("#user_can_see_financial_data").prop("checked", false);
+    }
+
 }
 
 function showToast(text, color) {
@@ -296,6 +320,45 @@ function updateUser() {
     var user_alternative_ID = $("#user_alternative_ID").val();
     argString = argString + "&user_alternative_ID=" + user_alternative_ID;
 
+    var can_see_private_data = $("#user_can_see_private_data").is(':checked');
+    if (can_see_private_data == true) {
+        user_can_see_private_data = 1;
+        argString = argString + "&user_can_see_private_data=" + user_can_see_private_data;
+    } else {
+        if (g_selectedUser.user_can_see_private_data == 1 || g_selectedUser.user_can_see_private_data == 0) {
+            user_can_see_private_data = 0;
+        } else {
+            user_can_see_private_data = "";
+        }
+        argString = argString + "&user_can_see_private_data=" + user_can_see_private_data;
+    }
+
+    var can_add_user = $("#user_can_add_user").is(':checked');
+    if (can_add_user == true) {
+        user_can_add_user = 1;
+        argString = argString + "&user_can_add_user=" + user_can_add_user;
+    } else {
+        if (g_selectedUser.user_can_add_user == 1 || g_selectedUser.user_can_add_user == 0) {
+            user_can_add_user = 0;
+        } else {
+            user_can_add_user = "";
+        }
+        argString = argString + "&user_can_add_user=" + user_can_add_user;
+    }
+
+    var can_see_financial_data = $("#user_can_see_financial_data").is(':checked');
+    if (can_see_financial_data == true) {
+        user_can_see_financial_data = 1;
+        argString = argString + "&user_can_see_financial_data=" + user_can_see_financial_data;
+    } else {
+        if (g_selectedUser.user_can_see_financial_data == 1 || g_selectedUser.user_can_see_financial_data == 0) {
+            user_can_see_financial_data = 0;
+        } else {
+            user_can_see_financial_data = "";
+        }
+        argString = argString + "&user_can_see_financial_data=" + user_can_see_financial_data;
+    }
+
     if (g_selectedRow > -1) {
         $.get("/updateUser" + argString, function (data, status) {
             if (data.localeCompare("http200") == 0) {
@@ -360,6 +423,9 @@ function clearTextBox() {
     $("#user_out_date").val("");
     $("#user_pw_hash").val("");
     $("#user_alternative_ID").val("");
+    $("#user_can_see_private_data_label").prop("checked", false);
+    $("#user_can_add_user_label").prop("checked", false);
+    $("#user_can_see_financial_data_label").prop("checked", false);
     g_selectedUser = undefined;
     g_selectedRow = -1;
     $("#myModal").html("");
@@ -480,6 +546,33 @@ function newUser() {
 
     var user_alternative_ID = $("#user_alternative_ID").val();
     argString = argString + "&user_alternative_ID=" + user_alternative_ID;
+
+    var can_see_private_data = $("#user_can_see_private_data").is(':checked');
+    if (can_see_private_data == true) {
+        user_can_see_private_data = 1;
+        argString = argString + "&user_can_see_private_data=" + user_can_see_private_data;
+    } else {
+        user_can_see_private_data = 0;
+        argString = argString + "&user_can_see_private_data=" + user_can_see_private_data;
+    }
+
+    var can_add_user = $("#user_can_add_user").is(':checked');
+    if (can_add_user == true) {
+        user_can_add_user = 1;
+        argString = argString + "&user_can_add_user=" + user_can_add_user;
+    } else {
+        user_can_add_user = 0;
+        argString = argString + "&user_can_add_user=" + user_can_add_user;
+    }
+
+    var can_see_financial_data = $("#user_can_see_financial_data").is(':checked');
+    if (can_see_financial_data == true) {
+        user_can_see_financial_data = 1;
+        argString = argString + "&user_can_see_financial_data=" + user_can_see_financial_data;
+    } else {
+        user_can_see_financial_data = 0;
+        argString = argString + "&user_can_see_financial_data=" + user_can_see_financial_data;
+    }
 
     $.get("/newUser" + argString, function (data, status) {
         if (data.localeCompare("http200") == 0) {

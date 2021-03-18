@@ -75,7 +75,10 @@ class Database(object):
                    "user_sex TEXT",
                    "user_in_date DATE",
                    "user_out_date DATE",
-                   "user_alternative_ID INTEGER DEFAULT -1"]
+                   "user_alternative_ID INTEGER DEFAULT -1",
+                   "user_can_see_private_data NUMBER DEFAULT 0",
+                   "user_can_add_user NUMBER DEFAULT 0",
+                   "user_can_see_financial_data NUMBER DEFAULT 0"]
 
         self.insert_columns(table_name, columns)
 
@@ -98,7 +101,8 @@ class Database(object):
                    "equipment_annual_cost NUMBER",
                    "equipment_annual_cost_budget TEXT DEFAULT ''",
                    "equipment_purchase_date DATE",
-                   "equipment_supplier_id NUMBER DEFAULT -1"]
+                   "equipment_supplier_id NUMBER DEFAULT -1",
+                   "equipment_bookable NUMBER DEFAULT 1"]
 
         self.insert_columns(table_name, columns)
 

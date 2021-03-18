@@ -143,6 +143,13 @@ function selectRowEquipment(row) {
     } else {
         $("#eq_is_mobile").prop("checked", false);
     }
+    if (g_selectedEquipment.equipment_bookable == 1) {
+        $("#eq_bookable").prop("checked", true);
+    } else if (g_selectedEquipment.equipment_bookable == -1) {
+        $("#eq_bookable").prop("checked", false);
+    } else {
+        $("#eq_bookable").prop("checked", false);
+    }
     $("#suggestions_owner").empty();
     if (g_selectedEquipment.equipment_owner_id == -1 || g_selectedEquipment.equipment_owner_id == "") {
         $("#eq_owner_id").val("");
@@ -226,6 +233,19 @@ function updateEquip() {
             equipment_is_mobile = "";
         }
         argString = argString + "&equipment_is_mobile=" + equipment_is_mobile;
+    }
+
+    var bookable = $("#eq_bookable").is(':checked');
+    if (bookable == true) {
+        equipment_bookable = 1;
+        argString = argString + "&equipment_bookable=" + equipment_bookable;
+    } else {
+        if (g_selectedEquipment.equipment_bookable == 1 || g_selectedEquipment.equipment_bookable == 0) {
+            equipment_bookable = 0;
+        } else {
+            equipment_bookable = "";
+        }
+        argString = argString + "&equipment_bookable=" + equipment_bookable;
     }
 
     var equipment_owner_id = -1;
@@ -500,6 +520,7 @@ function clearTextBox() {
     $("#eq_purchase_date").val("");
     $("#eq_base_location").val("");
     $("#eq_is_mobile").prop("checked", false);
+    $("#eq_bookable").prop("checked", false);
     $("#eq_owner_id").val("")
     $("#eq_co_owner_id").val("")
     $("#eq_purchase_price").val("");
@@ -578,6 +599,15 @@ function newEquip() {
     } else {
         equipment_is_mobile = 0;
         argString = argString + "&equipment_is_mobile=" + equipment_is_mobile;
+    }
+
+    var bookable = $("#eq_bookable").is(':checked');
+    if (bookable == true) {
+        equipment_bookable = 1;
+        argString = argString + "&equipment_bookable=" + equipment_bookable;
+    } else {
+        equipment_bookable = 0;
+        argString = argString + "&equipment_bookable=" + equipment_bookable;
     }
 
     var equipment_owner_id = "";

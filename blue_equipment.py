@@ -78,6 +78,11 @@ def new_equipment():
         sql_parameters = sql_parameters + 'equipment_is_mobile,'
         sql_values = sql_values + '"' + equipment_is_mobile + '",'
 
+    equipment_bookable = request.args.get('equipment_bookable')
+    if equipment_bookable != '':
+        sql_parameters = sql_parameters + 'equipment_bookable,'
+        sql_values = sql_values + '"' + equipment_bookable + '",'
+
     equipment_owner_id = request.args.get('equipment_owner_id')
     if equipment_owner_id != '':
         sql_parameters = sql_parameters + 'equipment_owner_id,'
@@ -168,6 +173,10 @@ def update_equipment():
     equipment_is_mobile = request.args.get('equipment_is_mobile')
     if equipment_is_mobile != '':
         sql_parameters = sql_parameters + ',equipment_is_mobile="' + equipment_is_mobile + '"'
+
+    equipment_bookable = request.args.get('equipment_bookable')
+    if equipment_bookable != '':
+        sql_parameters = sql_parameters + ',equipment_bookable="' + equipment_bookable + '"'
 
     equipment_owner_id = request.args.get('equipment_owner_id')
     if equipment_owner_id != '':
