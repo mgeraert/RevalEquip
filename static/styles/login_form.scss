@@ -16,6 +16,38 @@ html, body {
   background-image: url("/static/images/wave1.svg");
   background-size: cover;
 }
+  
+.flash {
+  z-index: 99;
+  top: 50%;
+  position: fixed;
+  width: 100%;
+  text-align: center;
+}
+
+.notification_text {
+  color: white;
+  border: 10px;
+  border-style: solid;
+  border-color: #41BAA9;
+  margin: auto;
+  width: max-content;
+  background-color: #41BAA9;
+  text-align: center;box-shadow:  0px 2px 6px -1px rgba(0,0,0,.13); 
+
+  a {
+    color: white;
+    font-weight: 700; 
+    text-decoration: none;
+  }
+
+  text {
+    color: black;
+    font-size: large;
+    font-weight: bolder;
+    cursor: pointer;
+  }
+}
 
 .session {
   margin: auto auto;

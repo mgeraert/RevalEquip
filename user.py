@@ -5,13 +5,13 @@ db = SQLAlchemy()
 #...
 
 class User(db.Model):
-    __tablename__ = 'test'
+    __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
     user_last_name = db.Column(db.String)
     user_name = db.Column(db.String)
-    user_in_date = db.Column(db.Date)
-    user_out_date = db.Column(db.Date)
+    user_in_date = db.Column(db.Text)
+    user_out_date = db.Column(db.Text)
     user_category = db.Column(db.String)
     user_function = db.Column(db.String)
     user_sex = db.Column(db.String)

@@ -93,6 +93,7 @@
       <input id="eq_purchase_price" class="form-field" type="text" placeholder="Purchase Price" />
     </div>
 
+    {% if current_user.user_can_see_financial_data %}
     <div class="form-group" id="eq_annual_cost_label">
       <span for="eq_annual_cost" style="width:120px;">Annual Cost</span>
       <input id="eq_annual_cost" class="form-field" type="text" placeholder="Annual Cost" />
@@ -102,6 +103,7 @@
       <span for="eq_annual_cost_budget" style="width:160px;">Annual Cost Budget</span>
       <input id="eq_annual_cost_budget" class="form-field" type="text" placeholder="Annual Cost Budget" />
     </div>
+    {% endif %}
 
     <div class="form-group" id="eq_base_location_label">
       <span for="eq_base_location" style="width:120px;">Base location</span>

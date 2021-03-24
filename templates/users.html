@@ -171,10 +171,12 @@
       <button id="submit" type="button" class="mlbutton upload_button">Upload</button>
     </form>
     <button id="update_button" onclick="updateUser()" class="mlbutton">Update</button>
+    {% if current_user.user_can_add_user %}
     <button id="new_button" onclick="prepareNewUser()" class="mlbutton">New</button>
     <button id="cancel_button" onclick="cancelNewUser()" class="mlbutton">Cancel</button>
     <button id="add_button" onclick="newUser()" class="mlbutton">Save</button>
     <button id="delete_button" onclick="deleteUser()" class="mlbutton">Delete</button>
+    {% endif %}
     <a href="/downloadUsersCSV"><button id="export_button" class="mlbutton">Export</button></a>
 
     <div id="toast_message"></div>

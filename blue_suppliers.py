@@ -1,6 +1,8 @@
 import csv
 
 from flask import Blueprint, request, render_template, Response
+from flask_login import login_required
+
 from classes.Database import Database
 import json
 
@@ -8,6 +10,7 @@ suppliers = Blueprint('suppliers', __name__)
 
 
 @suppliers.route('/suppliers', methods=['GET'])
+@login_required
 def reval_suppliers():
     return render_template('suppliers.html')
 

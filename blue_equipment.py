@@ -1,14 +1,16 @@
-from flask import Blueprint, request, redirect, render_template, send_file, send_from_directory, Response
+from flask import Blueprint, request, render_template, Response
+from flask_login import login_required
+
 from classes.Database import Database
 import json
 import csv
 import os
-from werkzeug.utils import secure_filename
 
 equipment = Blueprint('equipment', __name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 @equipment.route('/equipment', methods=['GET'])
+@login_required
 def reval_equipment():
     return render_template('equipment.html')
 

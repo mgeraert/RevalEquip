@@ -9,7 +9,8 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/login_form.css') }}">
 
   <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
-  <script src="{{url_for('static', filename='js/suppliers.js')}}"></script>
+  <script src="{{url_for('static', filename='js/login.js')}}"></script>
+  <script src="{{url_for('static', filename='js/md5.js')}}"></script>
 
 
   <!--Font Awesome-->
@@ -26,6 +27,15 @@
 </head>
 
 <body>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="notification is-danger flash">
+            <div class="notification_text">
+                {{ messages[0] }}<text style="padding-left:10px;" onclick="removeFlashNotification()">x</text>
+            </div>
+        </div>
+    {% endif %}
+    {% endwith %}
     <div class="session">
         <div class="left">
             <img src="static\images\login_bg.jpg">
@@ -40,6 +50,7 @@
                         <span for="login_email" style="width:120px;">Email</span>
                         <input id="login_email" class="form-field" type="text" name="login_email" placeholder="Email"/>
                     </div>
+                    <input type="hidden" id="login_pw_hash" class="form-field" type="text" name="login_pw_hash"/>
                     <div class="form-group" id="login_password_label">
                         <span for="login_password" style="width:120px;">Password</span>
                         <input id="login_password" class="form-field" type="password" name="login_password" placeholder="Password"/>

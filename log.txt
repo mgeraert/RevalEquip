@@ -1824,3 +1824,494 @@ Traceback (most recent call last):
   File "C:\Users\reyme\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py", line 914, in apply_driver_hacks
     sa_url.database = os.path.join(app.root_path, sa_url.database)
 AttributeError: can't set attribute
+[2021-03-18 22:09:29] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1706, in _execute_context
+    cursor, statement, parameters, context
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\engine\default.py", line 681, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: test
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\blue_auth.py", line 128, in register_post
+    arch_db.session.commit()
+  File "<string>", line 2, in commit
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\orm\session.py", line 1406, in commit
+    self._transaction.commit(_to_root=self.future)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\orm\session.py", line 820, in commit
+    self._prepare_impl()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\orm\session.py", line 799, in _prepare_impl
+    self.session.flush()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\orm\session.py", line 3224, in flush
+    self._flush(objects)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\orm\session.py", line 3364, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 72, in __exit__
+    with_traceback=exc_tb,
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\util\compat.py", line 198, in raise_
+    raise exception
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\orm\session.py", line 3324, in _flush
+    flush_context.execute()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 453, in execute
+    rec.execute(self)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 630, in execute
+    uow,
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\orm\persistence.py", line 247, in save_obj
+    insert,
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\orm\persistence.py", line 1222, in _emit_insert_statements
+    execution_options=execution_options,
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1520, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\sql\elements.py", line 314, in _execute_on_connection
+    self, multiparams, params, execution_options
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1399, in _execute_clauseelement
+    cache_hit=cache_hit,
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1749, in _execute_context
+    e, statement, parameters, cursor, context
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1930, in _handle_dbapi_exception
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\util\compat.py", line 198, in raise_
+    raise exception
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1706, in _execute_context
+    cursor, statement, parameters, context
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\engine\default.py", line 681, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: test
+[SQL: INSERT INTO test (user_last_name, user_name, user_in_date, user_out_date, user_category, user_function, user_sex, user_email, user_telephone, user_title, user_pw_hash, user_home_address, user_private_phone, user_is_pi, user_is_phd, user_alternative_id, user_can_see_private_data, user_can_add_user, user_can_see_financial_data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('TESTQWQWE', 'Testwqwqe', None, None, None, None, None, 'teeeest@test.nl', '', '', '912b7bc95fb9e6885a4685746433f39a', '', '', None, None, -1, 0, 0, 0)]
+(Background on this error at: http://sqlalche.me/e/14/e3q8)
+[2021-03-18 22:10:06] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\blue_auth.py", line 130, in register_post
+    return redirect(url_for('login'))
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2216, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 358, in url_for
+    endpoint, values, method=method, force_external=external
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\werkzeug\routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'login'. Did you mean 'auth.login' instead?
+[2021-03-18 22:15:07] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\sql\base.py", line 1580, in _entity_namespace_key
+    return getattr(ns, key)
+AttributeError: type object 'User' has no attribute 'email'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\blue_auth.py", line 123, in register_post
+    user = User.query.filter_by(email=email).first()  # if this returns a user, then the email already exists in database
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\orm\query.py", line 1723, in filter_by
+    for key, value in kwargs.items()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\orm\query.py", line 1723, in <listcomp>
+    for key, value in kwargs.items()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\sql\base.py", line 1587, in _entity_namespace_key
+    replace_context=err,
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\util\compat.py", line 198, in raise_
+    raise exception
+sqlalchemy.exc.InvalidRequestError: Entity namespace for "users" has no property "email"
+[2021-03-18 22:15:24] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\blue_auth.py", line 126, in register_post
+    return redirect(url_for('auth.signup'))
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2216, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 358, in url_for
+    endpoint, values, method=method, force_external=external
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\werkzeug\routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'auth.signup'. Did you mean 'auth.login' instead?
+[2021-03-18 22:15:26] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\blue_auth.py", line 126, in register_post
+    return redirect(url_for('auth.signup'))
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2216, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 358, in url_for
+    endpoint, values, method=method, force_external=external
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\werkzeug\routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'auth.signup'. Did you mean 'auth.login' instead?
+[2021-03-18 22:15:27] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\blue_auth.py", line 126, in register_post
+    return redirect(url_for('auth.signup'))
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2216, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 358, in url_for
+    endpoint, values, method=method, force_external=external
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\werkzeug\routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'auth.signup'. Did you mean 'auth.login' instead?
+[2021-03-18 22:15:33] ERROR    Exception on /register [POST]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\blue_auth.py", line 126, in register_post
+    return redirect(url_for('auth.signup'))
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2216, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 358, in url_for
+    endpoint, values, method=method, force_external=external
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\werkzeug\routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'auth.signup'. Did you mean 'auth.login' instead?
+[2021-03-18 22:22:32] ERROR    Exception on /login [POST]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\sql\base.py", line 1580, in _entity_namespace_key
+    return getattr(ns, key)
+AttributeError: type object 'User' has no attribute 'email'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\blue_auth.py", line 22, in login_post
+    user = User.query.filter_by(email=email).first()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\orm\query.py", line 1723, in filter_by
+    for key, value in kwargs.items()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\orm\query.py", line 1723, in <listcomp>
+    for key, value in kwargs.items()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\sql\base.py", line 1587, in _entity_namespace_key
+    replace_context=err,
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\sqlalchemy\util\compat.py", line 198, in raise_
+    raise exception
+sqlalchemy.exc.InvalidRequestError: Entity namespace for "users" has no property "email"
+[2021-03-18 22:22:48] ERROR    Exception on /login [POST]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\blue_auth.py", line 28, in login_post
+    return redirect(url_for('equipment.equipment'))
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2216, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 358, in url_for
+    endpoint, values, method=method, force_external=external
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\werkzeug\routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'equipment.equipment'. Did you mean 'equipment.get_equipment' instead?
+[2021-03-18 22:42:58] ERROR    Exception on /suppliers [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "D:\Coding\RevalEquip\blue_suppliers.py", line 15, in reval_suppliers
+    return render_template('suppliers.html')
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\templating.py", line 140, in render_template
+    ctx.app,
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\templating.py", line 120, in _render
+    rv = template.render(context)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\jinja2\environment.py", line 1090, in render
+    self.environment.handle_exception()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\jinja2\environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\jinja2\_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "D:\Coding\RevalEquip\templates\suppliers.html", line 34, in top-level template code
+    {% include 'menu.html' %}
+  File "D:\Coding\RevalEquip\templates\menu.html", line 32, in top-level template code
+    <a href="{{ url_for('hello') }}">Suppliers</a>
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2216, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 358, in url_for
+    endpoint, values, method=method, force_external=external
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\werkzeug\routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'hello'. Did you mean 'auth.login' instead?
+[2021-03-18 22:43:03] ERROR    Exception on /suppliers [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "D:\Coding\RevalEquip\blue_suppliers.py", line 15, in reval_suppliers
+    return render_template('suppliers.html')
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\templating.py", line 140, in render_template
+    ctx.app,
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\templating.py", line 120, in _render
+    rv = template.render(context)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\jinja2\environment.py", line 1090, in render
+    self.environment.handle_exception()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\jinja2\environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\jinja2\_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "D:\Coding\RevalEquip\templates\suppliers.html", line 34, in top-level template code
+    {% include 'menu.html' %}
+  File "D:\Coding\RevalEquip\templates\menu.html", line 32, in top-level template code
+    <a href="{{ url_for('hello') }}">Suppliers</a>
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2216, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 358, in url_for
+    endpoint, values, method=method, force_external=external
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\werkzeug\routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'hello'. Did you mean 'auth.login' instead?
+[2021-03-18 22:43:17] ERROR    Exception on /suppliers [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "D:\Coding\RevalEquip\blue_suppliers.py", line 15, in reval_suppliers
+    return render_template('suppliers.html')
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\templating.py", line 140, in render_template
+    ctx.app,
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\templating.py", line 120, in _render
+    rv = template.render(context)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\jinja2\environment.py", line 1090, in render
+    self.environment.handle_exception()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\jinja2\environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\jinja2\_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "D:\Coding\RevalEquip\templates\suppliers.html", line 34, in top-level template code
+    {% include 'menu.html' %}
+  File "D:\Coding\RevalEquip\templates\menu.html", line 32, in top-level template code
+    <a href="/hello">Suppliers</a>
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2216, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\helpers.py", line 358, in url_for
+    endpoint, values, method=method, force_external=external
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\werkzeug\routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'hello'. Did you mean 'auth.login' instead?
+[2021-03-18 22:44:58] ERROR    Exception on /logout [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "D:\Coding\RevalEquip\blue_auth.py", line 65, in logout
+    return render_template('hello.html')
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\templating.py", line 138, in render_template
+    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\jinja2\environment.py", line 930, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\jinja2\environment.py", line 883, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\jinja2\environment.py", line 857, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\jinja2\loaders.py", line 115, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\templating.py", line 60, in get_source
+    return self._get_source_fast(environment, template)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\templating.py", line 89, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: hello.html
+[2021-03-18 22:45:44] ERROR    Exception on /logout [GET]
+Traceback (most recent call last):
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "D:\Coding\RevalEquip\blue_auth.py", line 65, in logout
+    return render_template('hello.html')
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\templating.py", line 138, in render_template
+    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\jinja2\environment.py", line 930, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\jinja2\environment.py", line 883, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\jinja2\environment.py", line 857, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\jinja2\loaders.py", line 115, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\templating.py", line 60, in get_source
+    return self._get_source_fast(environment, template)
+  File "D:\Coding\RevalEquip\venv\lib\site-packages\flask\templating.py", line 89, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: hello.html

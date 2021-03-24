@@ -1,64 +1,64 @@
-ID;equipment_inventory_number;equipment_label;equipment_name;equipment_amount;equipment_description;equipment_outcome;equipment_purchase_date;equipment_base_location;equipment_is_mobile;equipment_owner_id;equipment_co_owner_id;equipment_purchase_price;equipment_annual_cost;equipment_annual_cost_budget;equipment_supplier_id
-1;I/201923060;45821;Myomed 632 X - 4st;4;;;;B113a;;1;78;;;;1
-2;I201612306;33802;Ergospirometer: loopband + Cortex Metamax 3 B II;;;;;BMO-A010;;-1;-1;;;;-1
-3;I/201736464;38610;Life Fitness - G4;;;;;BMO-A010;;-1;-1;;;;-1
-4;I/201736464;38611;Life Fitness - Leg Press voor G4;;;;;BMO-A010;;-1;-1;;;;-1
-5;I/201828265;42001;New Bike Excite - Technogym 500;;;;;BMO-A010;;-1;-1;;;;-1
-6;I/201635052;35702;Overname fitnesstoestel - Technogym Kinesis One;;;;;BMO-A010;;-1;-1;;;;-1
-8;I/201736464;38608;Technogym Back Extension;;;;;BMO-A010;;-1;-1;;;;-1
-9;I/201736464;38609;Technogym Group Cycle;;;;;BMO-A010;;-1;-1;;;;-1
-10;I/201736464;38606;Technogym Jog Now;;;;;BMO-A010;;-1;-1;;;;-1
-12;I/201709461;36681;NeXus-10 MKII toebehoren: sensoren - SCP   Oxymetrie;;;;;BMO-A026;;-1;-1;;;;-1
-13;I201530206;32189;Algometer II by Somedic s/n 560633;;;;;BMO-A026;;-1;-1;;;;-1
-15;I/201834316;42541;HL9.0/60/128Z ultrasound probe e;;;;;BMO-A028;;-1;-1;;;;-1
-16;I/201825114;41743;Solution de Tracking V120: Trio   Optitrack Marker Set;;;;;BMO-A028;;-1;-1;;;;-1
-17;I/201738923;38782;Digital Oscilloscope, Keysight Technologies InfiniiVision 2000 X Series DSOX2002A;;Oscilloscope;Electrical waveform characteristics;;BMO-A05;;-1;-1;;;;-1
-18;I201616117;34381;APDM System-MobilityLab-6: Gait and posture analysis system;;;Posture and gait;;BMO-A08;;-1;-1;;;;-1
-19;I201719355;37321;System-MobilityLab-6x (XI-00170 1707 17089 1814 1816 1841);;;;;BMO-A08;;-1;-1;;;;-1
-20;I/201842423;43322;NuStep T5 XR zitcross trainer (Revalidatie & MS Centrum Overpelt);;;;;BMO-A08;;-1;-1;;;;-1
-21;I201522736;31376;Extensie - flexie rug adaptor voor Biode System 3 Pro -SN: 15040478 (Bert Op 't Eynde);;;;;BMO-A09;;-1;-1;;;;-1
-22;I/201311128;20563;Loopband Jog 500 (Inez Wens);;;;;BMO-A09;;-1;-1;;;;-1
-23;I/201900482;44184;Biometrics Elink wirleless interface kit 1/Biometrics hand kit;;;;;BMO-A103;;-1;-1;;;;-1
-24;I201613156;33801;4 x POLAR H7 HR SENSOR 10-KIT M-XXL GEN - Keytsman Charly;;;;;BMO-A106;;-1;-1;;;;-1
-25;I201709600;36744;Alaris CC Plus spuitpomp (300001913) en Alaris GP Plus infuuspomp (400005823) - Kenneth Verboven;;Volumetrische pomp en spuitpomp;;;BMO-A106;;-1;-1;;;;-1
-26;I201634564;35667;Polar Balance - 6st - Keytsman Charly;;;;;BMO-A106;;-1;-1;;;;-1
-27;I201634564;35666;Polar M200 - 60st - Keytsman Charly;;;;;BMO-A106;;-1;-1;;;;-1
-28;IBIO/20081440/2;IBIO/20081440/2;Bi-stim: electrodes + trigger;;;;;BMO-A122;;-1;-1;;;;-1
-29;IBIO/20081435/2;IBIO/20081435/2;Bi-stim: opstelling 3234-00;;;;;BMO-A122;;-1;-1;;;;-1
-30;IBIO/20081439/2;IBIO/20081439/2;Bi-stim: tDCS (trancr. dir. st);;;;;BMO-A122;;-1;-1;;;;-1
-31;I/201519315;30901;Computer Controlled Biphasic Isolated Stimulator;;;;;BMO-A122;;-1;-1;;;;-1
-32;I201116382;13881;HDCstimulatoren + HDCel;;;;;BMO-A122;;-1;-1;;;;-1
-33;I/201206327;16464;Model 2100 Isolated Pulse Stimulator 220V, 50 Hz;;;;;BMO-A122;;-1;-1;;;;-1
-34;IMBW/20040918/2;IMBW/20040918/2;Autoclaaf - Q-lab;;;;;BMO-A123;;-1;-1;;;;-1
-35;I/201843244;43281;Wacom cintiq pro 16 (tekentablet);;;;;BMO-A124;;-1;-1;;;;-1
-36;IBIO/20103287/2;IBIO/20103287/2;GAITRite;;;;;BMO-Ak01;;-1;-1;;;;-1
-37;I/201907913;44943;Nu Step T5 XR ZitCross trainer met toebehoren;;;;;BMO-Ak01;;-1;-1;;;;-1
-38;I201712909;36843;Action research arm test - Ilse Lamers;;;;;BMO-Ak08;;-1;-1;;;;-1
-39;I201729569;37961;Brede walkway excl. marmoleum afwerking;;;;;BMO-Ak08;;-1;-1;;;;-1
-40;I201743558;38840;FitLight Trainer systeem voor revalidatie - 8st;;;;;BMO-Ak08;;-1;-1;;;;-1
-41;I/201735225;38401;High speed video analyse systeemSerienr: Scherm: SN:S26361-K1594-V160PC: SN:YM9L001940(overige serienrs, zie bijlage);;;;;BMO-Ak08;;-1;-1;;;;-1
-42;I201601600;32863;Mobile bewegingsregistratie -MVN Awinda Biomech + MVN Studio BIOMECH Lifetime + Xsens License Dongle;;;;;BMO-Ak08;;-1;-1;;;;-1
-43;I/201634105;35604;Systeem biomechanisch krachtenplatform - s/n 10260M - 008656;;;;;BMO-Ak08;;-1;-1;;;;-1
-44;I201609127;33421;CryoCube FC660 vriezer + CO2 back-up + 40 aluminiumhouders;;-80 graden (Grote) (kleine staat er niet in);;;BMO-Akgang;;-1;-1;;;;-1
-45;I/201905948;44564;KH2 POWERbreathe - 2st;;;;;INCABIS;;-1;-1;;;;-1
-46;;;Masimo capnograaf;;;;;BMO-Ak08;;-1;-1;;;;-1
-47;;Bimanual pods;Bimanual Tracking pods pairs;3;In house designed set of turning wheels and software used to measure bimanual coordination;Bimanual coordination characteristics;;;;-1;-1;;;;-1
-48;;Tektronix;Tektronix;1;Oscilloscope;Electrical waveform characteristics;;;;-1;-1;;;;-1
-49;;Motion Chair;Free motion chair;1;In house developped rig to measure unloaded arm and leg deflection;Elbow and knee angles;;;;-1;-1;;;;-1
-50;;Multimeter;Fluke 175 True RMS Multimeter;1;Multimeter;Electrical values (voltage, current, Resistance�);;;;-1;-1;;;;-1
-51;;Tens;Tens units (41 given, 11 bought);52;;;;;;-1;-1;;;;-1
-52;;thermo;Thermo couple meter;1;Hand held thermocouple reader;Temperature;;;;-1;-1;;;;-1
-53;;hptower;HP tower desktop;1;Desktop PC (Windows XP�);;;;;-1;-1;;;;-1
-54;;compaqTower;Compaq tower Lab pc;1;Desktop PC (Windows XP�);;;;;-1;-1;;;;-1
-55;;hpsmall;HP small Lab pc;1;;;;;;-1;-1;;;;-1
-56;;IRTemp;IR temp meter;1;Handheld Infra red thermometer;Temperature;;;;-1;-1;;;;-1
-57;;biosemi;Biosemi EEG;1;;;;;;-1;-1;;;;-1
-58;;DS8R;Digitimer DS8R stimulator;1;;;;;;-1;-1;;;;-1
-59;;superComp;High end dat processing workstation;1;;;;;;-1;-1;;;;-1
-60;;42mon;42'' 4K monitor;1;High end 10Core PC with RTX2080 Graphics card used for Neurological data processing;;2019;;;-1;-1;;;;-1
-61;;Leap;Leap motion controller;1;;;;;;-1;-1;;;;-1
-62;;;Shakers (set of 2 -small-large);2;;;;;;-1;-1;;;;-1
-63;;sony;Sony Camera FDR-AX33;1;;;;;;-1;-1;;;;-1
-64;;Yeti;USB microphone Yeti nano;1;;;;;;-1;-1;;;;-1
-67;;Biodex;Biodex a;;;;;;;-1;-1;;;;-1
-68;;DS8R;Digitimer DS8R stimulator 123;1;;;;;0;-1;-1;;;;-1
+ID;equipment_inventory_number;equipment_label;equipment_name;equipment_amount;equipment_description;equipment_outcome;equipment_purchase_date;equipment_base_location;equipment_is_mobile;equipment_owner_id;equipment_co_owner_id;equipment_purchase_price;equipment_annual_cost;equipment_annual_cost_budget;equipment_supplier_id;equipment_bookable
+1;I/201923060;45821;Myomed 632 X - 4st;4;;;;B113a;;1;78;;;;1;1
+2;I201612306;33802;Ergospirometer: loopband + Cortex Metamax 3 B II;;;;;BMO-A010;;-1;-1;;;;-1;1
+3;I/201736464;38610;Life Fitness - G4;;;;;BMO-A010;;-1;-1;;;;-1;1
+4;I/201736464;38611;Life Fitness - Leg Press voor G4;;;;;BMO-A010;;-1;-1;;;;-1;1
+5;I/201828265;42001;New Bike Excite - Technogym 500;;;;;BMO-A010;;-1;-1;;;;-1;1
+6;I/201635052;35702;Overname fitnesstoestel - Technogym Kinesis One;;;;;BMO-A010;;-1;-1;;;;-1;1
+8;I/201736464;38608;Technogym Back Extension;;;;;BMO-A010;;-1;-1;;;;-1;1
+9;I/201736464;38609;Technogym Group Cycle;;;;;BMO-A010;;-1;-1;;;;-1;1
+10;I/201736464;38606;Technogym Jog Now;;;;;BMO-A010;;-1;-1;;;;-1;1
+12;I/201709461;36681;NeXus-10 MKII toebehoren: sensoren - SCP   Oxymetrie;;;;;BMO-A026;;-1;-1;;;;-1;1
+13;I201530206;32189;Algometer II by Somedic s/n 560633;;;;;BMO-A026;;-1;-1;;;;-1;1
+15;I/201834316;42541;HL9.0/60/128Z ultrasound probe e;;;;;BMO-A028;;-1;-1;;;;-1;1
+16;I/201825114;41743;Solution de Tracking V120: Trio   Optitrack Marker Set;;;;;BMO-A028;;-1;-1;;;;-1;1
+17;I/201738923;38782;Digital Oscilloscope, Keysight Technologies InfiniiVision 2000 X Series DSOX2002A;;Oscilloscope;Electrical waveform characteristics;;BMO-A05;;-1;-1;;;;-1;1
+18;I201616117;34381;APDM System-MobilityLab-6: Gait and posture analysis system;;;Posture and gait;;BMO-A08;;-1;-1;;;;-1;1
+19;I201719355;37321;System-MobilityLab-6x (XI-00170 1707 17089 1814 1816 1841);;;;;BMO-A08;;-1;-1;;;;-1;1
+20;I/201842423;43322;NuStep T5 XR zitcross trainer (Revalidatie & MS Centrum Overpelt);;;;;BMO-A08;;-1;-1;;;;-1;1
+21;I201522736;31376;Extensie - flexie rug adaptor voor Biode System 3 Pro -SN: 15040478 (Bert Op 't Eynde);;;;;BMO-A09;;-1;-1;;;;-1;1
+22;I/201311128;20563;Loopband Jog 500 (Inez Wens);;;;;BMO-A09;;-1;-1;;;;-1;1
+23;I/201900482;44184;Biometrics Elink wirleless interface kit 1/Biometrics hand kit;;;;;BMO-A103;;-1;-1;;;;-1;1
+24;I201613156;33801;4 x POLAR H7 HR SENSOR 10-KIT M-XXL GEN - Keytsman Charly;;;;;BMO-A106;;-1;-1;;;;-1;1
+25;I201709600;36744;Alaris CC Plus spuitpomp (300001913) en Alaris GP Plus infuuspomp (400005823) - Kenneth Verboven;;Volumetrische pomp en spuitpomp;;;BMO-A106;;-1;-1;;;;-1;1
+26;I201634564;35667;Polar Balance - 6st - Keytsman Charly;;;;;BMO-A106;;-1;-1;;;;-1;1
+27;I201634564;35666;Polar M200 - 60st - Keytsman Charly;;;;;BMO-A106;;-1;-1;;;;-1;1
+28;IBIO/20081440/2;IBIO/20081440/2;Bi-stim: electrodes + trigger;;;;;BMO-A122;;-1;-1;;;;-1;1
+29;IBIO/20081435/2;IBIO/20081435/2;Bi-stim: opstelling 3234-00;;;;;BMO-A122;;-1;-1;;;;-1;1
+30;IBIO/20081439/2;IBIO/20081439/2;Bi-stim: tDCS (trancr. dir. st);;;;;BMO-A122;;-1;-1;;;;-1;1
+31;I/201519315;30901;Computer Controlled Biphasic Isolated Stimulator;;;;;BMO-A122;;-1;-1;;;;-1;1
+32;I201116382;13881;HDCstimulatoren + HDCel;;;;;BMO-A122;;-1;-1;;;;-1;1
+33;I/201206327;16464;Model 2100 Isolated Pulse Stimulator 220V, 50 Hz;;;;;BMO-A122;;-1;-1;;;;-1;1
+34;IMBW/20040918/2;IMBW/20040918/2;Autoclaaf - Q-lab;;;;;BMO-A123;;-1;-1;;;;-1;1
+35;I/201843244;43281;Wacom cintiq pro 16 (tekentablet);;;;;BMO-A124;;-1;-1;;;;-1;1
+36;IBIO/20103287/2;IBIO/20103287/2;GAITRite;;;;;BMO-Ak01;;-1;-1;;;;-1;1
+37;I/201907913;44943;Nu Step T5 XR ZitCross trainer met toebehoren;;;;;BMO-Ak01;;-1;-1;;;;-1;1
+38;I201712909;36843;Action research arm test - Ilse Lamers;;;;;BMO-Ak08;;-1;-1;;;;-1;1
+39;I201729569;37961;Brede walkway excl. marmoleum afwerking;;;;;BMO-Ak08;;-1;-1;;;;-1;1
+40;I201743558;38840;FitLight Trainer systeem voor revalidatie - 8st;;;;;BMO-Ak08;;-1;-1;;;;-1;1
+41;I/201735225;38401;High speed video analyse systeemSerienr: Scherm: SN:S26361-K1594-V160PC: SN:YM9L001940(overige serienrs, zie bijlage);;;;;BMO-Ak08;;-1;-1;;;;-1;1
+42;I201601600;32863;Mobile bewegingsregistratie -MVN Awinda Biomech + MVN Studio BIOMECH Lifetime + Xsens License Dongle;;;;;BMO-Ak08;;-1;-1;;;;-1;1
+43;I/201634105;35604;Systeem biomechanisch krachtenplatform - s/n 10260M - 008656;;;;;BMO-Ak08;;-1;-1;;;;-1;1
+44;I201609127;33421;CryoCube FC660 vriezer + CO2 back-up + 40 aluminiumhouders;;-80 graden (Grote) (kleine staat er niet in);;;BMO-Akgang;;-1;-1;;;;-1;1
+45;I/201905948;44564;KH2 POWERbreathe - 2st;;;;;INCABIS;;-1;-1;;;;-1;1
+46;;;Masimo capnograaf;;;;;BMO-Ak08;;-1;-1;;;;-1;1
+47;;Bimanual pods;Bimanual Tracking pods pairs;3;In house designed set of turning wheels and software used to measure bimanual coordination;Bimanual coordination characteristics;;;;-1;-1;;;;-1;1
+48;;Tektronix;Tektronix;1;Oscilloscope;Electrical waveform characteristics;;;;-1;-1;;;;-1;1
+49;;Motion Chair;Free motion chair;1;In house developped rig to measure unloaded arm and leg deflection;Elbow and knee angles;;;;-1;-1;;;;-1;1
+50;;Multimeter;Fluke 175 True RMS Multimeter;1;Multimeter;Electrical values (voltage, current, Resistance�);;;;-1;-1;;;;-1;1
+51;;Tens;Tens units (41 given, 11 bought);52;;;;;;-1;-1;;;;-1;1
+52;;thermo;Thermo couple meter;1;Hand held thermocouple reader;Temperature;;;;-1;-1;;;;-1;1
+53;;hptower;HP tower desktop;1;Desktop PC (Windows XP�);;;;;-1;-1;;;;-1;1
+54;;compaqTower;Compaq tower Lab pc;1;Desktop PC (Windows XP�);;;;;-1;-1;;;;-1;1
+55;;hpsmall;HP small Lab pc;1;;;;;;-1;-1;;;;-1;1
+56;;IRTemp;IR temp meter;1;Handheld Infra red thermometer;Temperature;;;;-1;-1;;;;-1;1
+57;;biosemi;Biosemi EEG;1;;;;;;-1;-1;;;;-1;1
+58;;DS8R;Digitimer DS8R stimulator;1;;;;;;-1;-1;;;;-1;1
+59;;superComp;High end dat processing workstation;1;;;;;;-1;-1;;;;-1;1
+60;;42mon;42'' 4K monitor;1;High end 10Core PC with RTX2080 Graphics card used for Neurological data processing;;2019;;;-1;-1;;;;-1;1
+61;;Leap;Leap motion controller;1;;;;;;-1;-1;;;;-1;1
+62;;;Shakers (set of 2 -small-large);2;;;;;;-1;-1;;;;-1;1
+63;;sony;Sony Camera FDR-AX33;1;;;;;;-1;-1;;;;-1;1
+64;;Yeti;USB microphone Yeti nano;1;;;;;;-1;-1;;;;-1;1
+67;;Biodex;Biodex a;;;;;;;-1;-1;;;;-1;1
+68;;DS8R;Digitimer DS8R stimulator 123;1;;;;;0;-1;-1;;;;-1;1
