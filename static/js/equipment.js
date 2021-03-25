@@ -163,7 +163,13 @@ function selectRowEquipment(row) {
     $("#suggestions_owner").empty();
     if (g_selectedEquipment.equipment_owner_id == -1 || g_selectedEquipment.equipment_owner_id == "") {
         $("#eq_owner_id").val("");
-        $('#eq_owner_id').removeAttr('onclick');
+        $('#eq_owner_detail').removeAttr('onclick');
+        $('#eq_owner_detail').hide();
+
+        var ownerLabelWidth = $('#eq_owner_id_label').width();
+        if (ownerLabelWidth == 342) {
+            $('#eq_owner_id_label').width(ownerLabelWidth+18+"px");
+        }
     } else {
         argString = "?ID=" + g_selectedEquipment.equipment_owner_id;
         $.get("/getUserByID" + argString, function (data, status) {
@@ -171,12 +177,24 @@ function selectRowEquipment(row) {
             $("#eq_owner_id").val(owner.user_last_name + ' ' + owner.user_name);
             g_selectedOwner = owner;
         });
-        $('#eq_owner_id').attr('onclick', 'generatePopUp("owner")');
+        $('#eq_owner_detail').attr('onclick', 'generatePopUp("owner")');
+        $('#eq_owner_detail').show();
+
+        var ownerLabelWidth = $('#eq_owner_id_label').width();
+        if (ownerLabelWidth == 360) {
+            $('#eq_owner_id_label').width(ownerLabelWidth-18+"px");
+        }
     }
     $("#suggestions_co_owner").empty();
     if (g_selectedEquipment.equipment_co_owner_id == -1 || g_selectedEquipment.equipment_co_owner_id == "") {
         $("#eq_co_owner_id").val("");
-        $('#eq_co_owner_id').removeAttr('onclick');
+        $('#eq_co_owner_detail').removeAttr('onclick');
+        $('#eq_co_owner_detail').hide();
+
+        var ownerLabelWidth = $('#eq_co_owner_id_label').width();
+        if (ownerLabelWidth == 342) {
+            $('#eq_co_owner_id_label').width(ownerLabelWidth+18+"px");
+        }
     } else {
         argString = "?ID=" + g_selectedEquipment.equipment_co_owner_id;
         $.get("/getUserByID" + argString, function (data, status) {
@@ -184,7 +202,13 @@ function selectRowEquipment(row) {
             $("#eq_co_owner_id").val(coOwner.user_last_name + ' ' + coOwner.user_name);
             g_selectedCoOwner = coOwner;
         });
-        $('#eq_co_owner_id').attr('onclick', 'generatePopUp("co_owner")');
+        $('#eq_co_owner_detail').attr('onclick', 'generatePopUp("co_owner")');
+        $('#eq_co_owner_detail').show();
+
+        var ownerLabelWidth = $('#eq_co_owner_id_label').width();
+        if (ownerLabelWidth == 360) {
+            $('#eq_co_owner_id_label').width(ownerLabelWidth-18+"px");
+        }
     }
 
     $("#eq_purchase_price").val(g_selectedEquipment.equipment_purchase_price);
@@ -225,7 +249,13 @@ function selectRowEquipment(row) {
     $("#suggestions_owner").empty();
     if (g_selectedEquipment.equipment_supplier_id == -1 || g_selectedEquipment.equipment_supplier_id == "") {
         $("#eq_supplier_id").val("");
-        $('#eq_supplier_id').removeAttr('onclick');
+        $('#eq_supplier_detail').removeAttr('onclick');
+        $('#eq_supplier_detail').hide();
+
+        var ownerLabelWidth = $('#eq_supplier_id_label').width();
+        if (ownerLabelWidth == 342) {
+            $('#eq_supplier_id_label').width(ownerLabelWidth+18+"px");
+        }
     } else {
         argString = "?ID=" + g_selectedEquipment.equipment_supplier_id;
         $.get("/getSupplierByID" + argString, function (data, status) {
@@ -233,7 +263,13 @@ function selectRowEquipment(row) {
             $("#eq_supplier_id").val(supplier.supplier_last_name + ' ' + supplier.supplier_name);
             g_selectedSupplier = supplier;
         });
-        $('#eq_supplier_id').attr('onclick', 'generatePopUp("supplier")');
+        $('#eq_supplier_detail').attr('onclick', 'generatePopUp("supplier")');
+        $('#eq_supplier_detail').show();
+
+        var ownerLabelWidth = $('#eq_supplier_id_label').width();
+        if (ownerLabelWidth == 360) {
+            $('#eq_supplier_id_label').width(ownerLabelWidth-18+"px");
+        }
     }
 }
 
@@ -1013,7 +1049,7 @@ function generatePopUp(type) {
         var popUpHTML = popUpHTML.concat('<div class="pop_up-content">');
         var popUpHTML = popUpHTML.concat('<div class="pop_up-header">');
         var popUpHTML = popUpHTML.concat('<span class="close" onclick="closePopUp()">&times;</span>');
-        var popUpHTML = popUpHTML.concat('<h2>Modal Header</h2>');
+        var popUpHTML = popUpHTML.concat('<h2>Owner contact details</h2>');
         var popUpHTML = popUpHTML.concat('</div>');
         var popUpHTML = popUpHTML.concat('<div class="pop_up-body">');
         var popUpHTML = popUpHTML.concat('<table class="table_design">');
@@ -1052,7 +1088,7 @@ function generatePopUp(type) {
         var popUpHTML = popUpHTML.concat('<div class="pop_up-content">');
         var popUpHTML = popUpHTML.concat('<div class="pop_up-header">');
         var popUpHTML = popUpHTML.concat('<span class="close" onclick="closePopUp()">&times;</span>');
-        var popUpHTML = popUpHTML.concat('<h2>Modal Header</h2>');
+        var popUpHTML = popUpHTML.concat('<h2>Co-owner contact details</h2>');
         var popUpHTML = popUpHTML.concat('</div>');
         var popUpHTML = popUpHTML.concat('<div class="pop_up-body">');
         var popUpHTML = popUpHTML.concat('<table class="table_design">');
@@ -1092,7 +1128,7 @@ function generatePopUp(type) {
         var popUpHTML = popUpHTML.concat('<div class="pop_up-content">');
         var popUpHTML = popUpHTML.concat('<div class="pop_up-header">');
         var popUpHTML = popUpHTML.concat('<span class="close" onclick="closePopUp()">&times;</span>');
-        var popUpHTML = popUpHTML.concat('<h2>Modal Header</h2>');
+        var popUpHTML = popUpHTML.concat('<h2>Supplier contact details</h2>');
         var popUpHTML = popUpHTML.concat('</div>');
         var popUpHTML = popUpHTML.concat('<div class="pop_up-body">');
         var popUpHTML = popUpHTML.concat('<table class="table_design">');
