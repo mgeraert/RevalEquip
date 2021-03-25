@@ -190,6 +190,27 @@
   width: 231.3px;
 }
 
+#user_is_users_admin_label {
+  position: absolute;
+  left: 30px;
+  top: 439.099px;
+  width: 231.3px;
+}
+
+#user_is_equipment_admin_label {
+  position: absolute;
+  left: 291.3px;
+  top: 439.099px;
+  width: 231.3px;
+}
+
+#user_is_suppliers_admin_label {
+  position: absolute;
+  left: 552.6px;
+  top: 439.099px;
+  width: 231.3px;
+}
+
 #users_gallery {
   position: absolute;
   width: 1140px;

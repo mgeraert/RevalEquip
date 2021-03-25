@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, Response
+from flask import Blueprint, request, render_template, Response, session
 from flask_login import login_required
 
 from classes.Database import Database
@@ -6,8 +6,11 @@ import json
 import csv
 import os
 
+from user import User
+
 equipment = Blueprint('equipment', __name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
+
 
 @equipment.route('/equipment', methods=['GET'])
 @login_required
@@ -16,16 +19,42 @@ def reval_equipment():
 
 
 @equipment.route('/getEquipment', methods=['GET'])
-def get_equipment():
+def get_limited_equipment():
     db = Database()
     db.conn.row_factory = db.dict_factory
     c = db.conn.cursor()
-    sql_string = 'SELECT * FROM equipment'
+    user_id = request.args.get('user_id')
+    user = User.query.filter_by(id=user_id).first()
+    if user.user_can_see_financial_data:
+        sql_string = 'SELECT * FROM equipment '
+        c.execute(sql_string)
+        data = c.fetchall()
+    else:
+        sql_string = 'SELECT ID, equipment_inventory_number, equipment_label, equipment_name, equipment_amount, ' \
+                     'equipment_description, equipment_outcome, equipment_purchase_date, equipment_base_location, ' \
+                     'equipment_is_mobile, equipment_owner_id, equipment_co_owner_id, equipment_supplier_id, ' \
+                     'equipment_bookable FROM equipment '
+        c.execute(sql_string)
+        data = c.fetchall()
+
+    c.close()
+    return json.dumps(data)
+
+
+@equipment.route('/getFinancialDataByID', methods=['GET'])
+def get_financial_equipment_data():
+    equipment_id = request.args.get('equipment_id')
+    db = Database()
+    db.conn.row_factory = db.dict_factory
+    c = db.conn.cursor()
+    sql_string = 'SELECT ID, equipment_purchase_price, equipment_annual_cost, equipment_annual_cost_budget FROM ' \
+                 'equipment WHERE ID = ' + equipment_id
     c.execute(sql_string)
     data = c.fetchall()
 
     c.close()
     return json.dumps(data)
+
 
 @equipment.route('/newEquipment', methods=['GET'])
 def new_equipment():
@@ -117,10 +146,10 @@ def new_equipment():
 
     db = Database()
 
-    if sql_parameters[len(sql_parameters)-1] == ',':
-        sql_parameters = sql_parameters[:len(sql_parameters)-1] + sql_parameters[(len(sql_parameters)-1+1):]
-    if sql_values[len(sql_values)-1] == ',':
-        sql_values = sql_values[:len(sql_values)-1] + sql_values[(len(sql_values)-1+1):]
+    if sql_parameters[len(sql_parameters) - 1] == ',':
+        sql_parameters = sql_parameters[:len(sql_parameters) - 1] + sql_parameters[(len(sql_parameters) - 1 + 1):]
+    if sql_values[len(sql_values) - 1] == ',':
+        sql_values = sql_values[:len(sql_values) - 1] + sql_values[(len(sql_values) - 1 + 1):]
 
     sql_string = sql_string + sql_parameters + ') VALUES ' + sql_values + ')'
     print(sql_string)
@@ -131,6 +160,7 @@ def new_equipment():
 
     c.close()
     return 'http200'
+
 
 @equipment.route('/updateEquipment', methods=['GET'])
 def update_equipment():
@@ -219,14 +249,15 @@ def update_equipment():
     c.close()
     return 'http200'
 
+
 @equipment.route('/deleteEquipment', methods=['GET'])
 def delete_equipment():
     db = Database()
     ID = request.args.get('ID')
 
-    sql1 = 'DELETE FROM equipment WHERE ID = "'+ID+'"'
+    sql1 = 'DELETE FROM equipment WHERE ID = "' + ID + '"'
     print(sql1)
-    sql2 = 'DELETE FROM pictures WHERE equipment_id = "'+ID+'"'
+    sql2 = 'DELETE FROM pictures WHERE equipment_id = "' + ID + '"'
     print(sql1)
 
     db.conn.row_factory = db.dict_factory
@@ -238,7 +269,7 @@ def delete_equipment():
     directory = 'static/images/upload'
     my_dir = os.path.join(basedir, directory)
     for fname in os.listdir(my_dir):
-        if fname.startswith(ID+"-1"):
+        if fname.startswith(ID + "-1"):
             os.remove(os.path.join(my_dir, fname))
 
     c.close()
@@ -250,66 +281,70 @@ def update_suggestion_owner():
     owner_name = request.args.get('owner_name')
     db = Database()
 
-    sql_string_last_name = 'SELECT ID, user_last_name, user_name FROM users WHERE user_last_name LIKE "%'+owner_name+'%"'
+    sql_string_last_name = 'SELECT ID, user_last_name, user_name FROM users WHERE user_last_name LIKE "%' + owner_name + '%"'
     db.conn.row_factory = db.dict_factory
     c = db.conn.cursor()
     c.execute(sql_string_last_name)
     data_last_name = c.fetchall()
 
-    sql_string_first_name = 'SELECT ID, user_last_name, user_name FROM users WHERE user_name LIKE "%'+owner_name+'%"'
+    sql_string_first_name = 'SELECT ID, user_last_name, user_name FROM users WHERE user_name LIKE "%' + owner_name + '%"'
     c.execute(sql_string_first_name)
     data_first_name = c.fetchall()
     print(data_first_name)
 
-    list_of_all_names = data_first_name+data_last_name
+    list_of_all_names = data_first_name + data_last_name
     print(list_of_all_names)
 
     c.close()
     return json.dumps(list_of_all_names)
+
 
 @equipment.route('/updateSuggestionSupplier', methods=['GET'])
 def update_suggestion_supplier():
     supplier_name = request.args.get('supplier_name')
     db = Database()
 
-    sql_string_last_name = 'SELECT ID, supplier_last_name, supplier_name FROM suppliers WHERE supplier_last_name LIKE "%'+supplier_name+'%"'
+    sql_string_last_name = 'SELECT ID, supplier_last_name, supplier_name FROM suppliers WHERE supplier_last_name LIKE "%' + supplier_name + '%"'
     db.conn.row_factory = db.dict_factory
     c = db.conn.cursor()
     c.execute(sql_string_last_name)
     data_last_name = c.fetchall()
 
-    sql_string_first_name = 'SELECT ID, supplier_last_name, supplier_name FROM suppliers WHERE supplier_name LIKE "%'+supplier_name+'%"'
+    sql_string_first_name = 'SELECT ID, supplier_last_name, supplier_name FROM suppliers WHERE supplier_name LIKE "%' + supplier_name + '%"'
     c.execute(sql_string_first_name)
     data_first_name = c.fetchall()
     print(data_first_name)
 
-    list_of_all_names = data_first_name+data_last_name
+    list_of_all_names = data_first_name + data_last_name
     print(list_of_all_names)
 
     c.close()
     return json.dumps(list_of_all_names)
+
 
 @equipment.route('/getUserByID', methods=['GET'])
 def get_user_by_id():
     db = Database()
     user_id = request.args.get('ID')
 
-    sql = 'SELECT * FROM users WHERE ID = "'+user_id+'"'
+    sql = 'SELECT * FROM users WHERE ID = "' + user_id + '"'
     db.conn.row_factory = db.dict_factory
     c = db.conn.cursor()
     c.execute(sql)
     return json.dumps(c.fetchall())
+
 
 @equipment.route('/getSupplierByID', methods=['GET'])
 def get_supplier_by_id():
     db = Database()
     user_id = request.args.get('ID')
 
-    sql = 'SELECT * FROM suppliers WHERE ID = "'+user_id+'"'
+    sql = 'SELECT * FROM suppliers WHERE ID = "' + user_id + '"'
     db.conn.row_factory = db.dict_factory
     c = db.conn.cursor()
     c.execute(sql)
     return json.dumps(c.fetchall())
+
 
 @equipment.route('/getUserIDByUserName', methods=['GET'])
 def get_user_id_by_user_name():
@@ -322,6 +357,7 @@ def get_user_id_by_user_name():
     c = db.conn.cursor()
     c.execute(sql)
     return json.dumps(c.fetchall())
+
 
 @equipment.route('/newEquipmentPicture', methods=['GET'])
 def new_equipment_picture():
@@ -341,10 +377,10 @@ def new_equipment_picture():
 
     db = Database()
 
-    if sql_parameters[len(sql_parameters)-1] == ',':
-        sql_parameters = sql_parameters[:len(sql_parameters)-1] + sql_parameters[(len(sql_parameters)-1+1):]
-    if sql_values[len(sql_values)-1] == ',':
-        sql_values = sql_values[:len(sql_values)-1] + sql_values[(len(sql_values)-1+1):]
+    if sql_parameters[len(sql_parameters) - 1] == ',':
+        sql_parameters = sql_parameters[:len(sql_parameters) - 1] + sql_parameters[(len(sql_parameters) - 1 + 1):]
+    if sql_values[len(sql_values) - 1] == ',':
+        sql_values = sql_values[:len(sql_values) - 1] + sql_values[(len(sql_values) - 1 + 1):]
 
     sql_string = sql_string + sql_parameters + ') VALUES ' + sql_values + ')'
     print(sql_string)
@@ -355,6 +391,7 @@ def new_equipment_picture():
 
     c.close()
     return 'http200'
+
 
 @equipment.route('/saveEquipmentAsCSV')
 def save_equipment_as_csv():
@@ -381,11 +418,12 @@ def save_equipment_as_csv():
 
     return 'http200'
 
+
 @equipment.route('/downloadEquipmentCSV')
 def download_equipment_csv():
     save_equipment_as_csv()
 
     with open("data_equipment.csv") as fp:
         csv = fp.read()
-    return Response(csv,mimetype="text/csv",headers={"Content-disposition":"attachment; filename=data_equipment.csv"})
-
+    return Response(csv, mimetype="text/csv",
+                    headers={"Content-disposition": "attachment; filename=data_equipment.csv"})

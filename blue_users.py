@@ -104,13 +104,21 @@ def update_user():
     if user_can_see_private_data != '':
         sql_parameters = sql_parameters + ',user_can_see_private_data="' + user_can_see_private_data + '"'
 
-    user_can_add_user = request.args.get('user_can_add_user')
-    if user_can_add_user != '':
-        sql_parameters = sql_parameters + ',user_can_add_user="' + user_can_add_user + '"'
-
     user_can_see_financial_data = request.args.get('user_can_see_financial_data')
     if user_can_see_financial_data != '':
         sql_parameters = sql_parameters + ',user_can_see_financial_data="' + user_can_see_financial_data + '"'
+
+    user_is_users_admin = request.args.get('user_is_users_admin')
+    if user_is_users_admin != '':
+        sql_parameters = sql_parameters + ',user_is_users_admin="' + user_is_users_admin + '"'
+
+    user_is_equipment_admin = request.args.get('user_is_equipment_admin')
+    if user_is_equipment_admin != '':
+        sql_parameters = sql_parameters + ',user_is_equipment_admin="' + user_is_equipment_admin + '"'
+
+    user_is_suppliers_admin = request.args.get('user_is_suppliers_admin')
+    if user_is_suppliers_admin != '':
+        sql_parameters = sql_parameters + ',user_is_suppliers_admin="' + user_is_suppliers_admin + '"'
 
     db = Database()
     print(sql_parameters)
@@ -222,15 +230,25 @@ def new_user():
         sql_parameters = sql_parameters + 'user_can_see_private_data,'
         sql_values = sql_values + '"' + user_can_see_private_data + '",'
 
-    user_can_add_user = request.args.get('user_can_add_user')
-    if user_can_add_user != '':
-        sql_parameters = sql_parameters + 'user_can_add_user,'
-        sql_values = sql_values + '"' + user_can_add_user + '",'
+    user_can_see_financial_data = request.args.get('user_can_see_financial_data')
+    if user_can_see_financial_data != '':
+        sql_parameters = sql_parameters + 'user_can_see_financial_data,'
+        sql_values = sql_values + '"' + user_can_see_financial_data + '",'
 
-    user_can_see_fincancial_data = request.args.get('user_can_see_fincancial_data')
-    if user_can_see_fincancial_data != '':
-        sql_parameters = sql_parameters + 'user_can_see_fincancial_data,'
-        sql_values = sql_values + '"' + user_can_see_fincancial_data + '",'
+    user_is_users_admin = request.args.get('user_is_users_admin')
+    if user_is_users_admin != '':
+        sql_parameters = sql_parameters + 'user_is_users_admin,'
+        sql_values = sql_values + '"' + user_is_users_admin + '",'
+
+    user_is_equipment_admin = request.args.get('user_is_equipment_admin')
+    if user_is_equipment_admin != '':
+        sql_parameters = sql_parameters + 'user_is_equipment_admin,'
+        sql_values = sql_values + '"' + user_is_equipment_admin + '",'
+
+    user_is_suppliers_admin = request.args.get('user_is_suppliers_admin')
+    if user_is_suppliers_admin != '':
+        sql_parameters = sql_parameters + 'user_is_suppliers_admin,'
+        sql_values = sql_values + '"' + user_is_suppliers_admin + '",'
 
     db = Database()
 

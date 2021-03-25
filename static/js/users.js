@@ -3,11 +3,122 @@ var g_user;
 var g_selectedUser;
 var g_selectedRow = -1;
 
+var g_currentUser;
+
 var g_imageDirectory = "static\\images\\upload\\";
 
 $(document).ready(function () {
-    getUsers();
+    $.get("/getUserByID?" + $("#current_user_id").text(), function (data, status) {
+        g_currentUser = JSON.parse(data.slice(1, -1));
+
+        if (g_currentUser.user_is_users_admin) {
+            getUsers();
+        } else {
+            $("#usersTable").remove();
+            setCurrentUserInputs();
+        }
+    });
 });
+
+function setCurrentUserInputs() {
+    loadImagesFromDirectory(g_imageDirectory)
+
+    $("#user_last_name").val(g_currentUser.user_last_name);
+    $("#user_name").val(g_currentUser.user_name);
+    if (g_currentUser.user_sex == "m") {
+        $("#user_sex").val("m").change();
+    } else if (g_currentUser.user_sex == "v") {
+        $("#user_sex").val("v").change();
+    } else {
+        $("#user_sex").val("x").change();
+    }
+    if (g_currentUser.user_is_pi == 1) {
+        $("#user_is_pi").prop("checked", true);
+    } else if (g_currentUser.equipment_is_mobile == -1) {
+        $("#user_is_pi").prop("checked", false);
+    } else {
+        $("#user_is_pi").prop("checked", false);
+    }
+    if (g_currentUser.user_is_phd == 1) {
+        $("#user_is_phd").prop("checked", true);
+    } else if (g_currentUser.user_is_phd == -1) {
+        $("#user_is_phd").prop("checked", false);
+    } else {
+        $("#user_is_phd").prop("checked", false);
+    }
+    $("#user_title").val(g_currentUser.user_title);
+    $("#user_category").val(g_currentUser.user_category);
+    $("#user_function").val(g_currentUser.user_function);
+    $("#user_email").val(g_currentUser.user_email);
+    $("#user_home_address").val(g_currentUser.user_home_address);
+    $("#user_telephone").val(g_currentUser.user_telephone);
+    $("#user_private_phone").val(g_currentUser.user_private_phone);
+
+    if (g_currentUser.user_in_date != "-1") {
+        var inDate = g_currentUser.user_in_date.split("/");
+        if (inDate[0].length == 1) {
+            $("#user_in_date").val(inDate[2] + '-' + inDate[1] + '-0' + inDate[0]);
+        } else {
+            $("#user_in_date").val(inDate[2] + '-' + inDate[1] + '-' + inDate[0]);
+        }
+    } else {
+        $("#user_in_date").val("");
+    }
+
+    if (g_currentUser.user_out_date != "-1") {
+        var outDate = g_currentUser.user_out_date.split("/");
+        if (outDate[0].length == 1) {
+            $("#user_out_date").val(outDate[2] + '-' + outDate[1] + '-0' + outDate[0]);
+        } else {
+            $("#user_out_date").val(outDate[2] + '-' + outDate[1] + '-' + outDate[0]);
+        }
+    } else {
+        $("#user_out_date").val("");
+    }
+
+    $("#user_pw_hash").val(g_currentUser.user_pw_hash);
+    $("#user_alternative_ID").val(g_currentUser.user_alternative_ID);
+
+    if (g_currentUser.user_can_see_private_data == 1) {
+        $("#user_can_see_private_data").prop("checked", true);
+    } else if (g_currentUser.user_can_see_private_data == -1) {
+        $("#user_can_see_private_data").prop("checked", false);
+    } else {
+        $("#user_can_see_private_data").prop("checked", false);
+    }
+
+    if (g_currentUser.user_can_see_financial_data == 1) {
+        $("#user_can_see_financial_data").prop("checked", true);
+    } else if (g_currentUser.user_can_see_financial_data == -1) {
+        $("#user_can_see_financial_data").prop("checked", false);
+    } else {
+        $("#user_can_see_financial_data").prop("checked", false);
+    }
+
+    if (g_currentUser.user_is_users_admin == 1) {
+        $("#user_is_users_admin").prop("checked", true);
+    } else if (g_currentUser.user_is_users_admin == -1) {
+        $("#user_is_users_admin").prop("checked", false);
+    } else {
+        $("#user_is_users_admin").prop("checked", false);
+    }
+
+    if (g_currentUser.user_is_equipment_admin == 1) {
+        $("#user_is_equipment_admin").prop("checked", true);
+    } else if (g_currentUser.user_is_equipment_admin == -1) {
+        $("#user_is_equipment_admin").prop("checked", false);
+    } else {
+        $("#user_is_equipment_admin").prop("checked", false);
+    }
+
+    if (g_currentUser.user_is_suppliers_admin == 1) {
+        $("#user_is_suppliers_admin").prop("checked", true);
+    } else if (g_currentUser.user_is_suppliers_admin == -1) {
+        $("#user_is_suppliers_admin").prop("checked", false);
+    } else {
+        $("#user_is_suppliers_admin").prop("checked", false);
+    }
+}
 
 function getUsers(enableSelectedRow = false, enableSort = false, sortAsc = false, sortColumn = 0) {
     $.get("/getUsers", function (data, status) {
@@ -192,20 +303,36 @@ function selectRowUser(row) {
         $("#user_can_see_private_data").prop("checked", false);
     }
 
-    if (g_selectedUser.user_can_add_user == 1) {
-        $("#user_can_add_user").prop("checked", true);
-    } else if (g_selectedUser.user_can_add_user == -1) {
-        $("#user_can_add_user").prop("checked", false);
-    } else {
-        $("#user_can_add_user").prop("checked", false);
-    }
-
     if (g_selectedUser.user_can_see_financial_data == 1) {
         $("#user_can_see_financial_data").prop("checked", true);
     } else if (g_selectedUser.user_can_see_financial_data == -1) {
         $("#user_can_see_financial_data").prop("checked", false);
     } else {
         $("#user_can_see_financial_data").prop("checked", false);
+    }
+
+    if (g_selectedUser.user_is_users_admin == 1) {
+        $("#user_is_users_admin").prop("checked", true);
+    } else if (g_selectedUser.user_is_users_admin == -1) {
+        $("#user_is_users_admin").prop("checked", false);
+    } else {
+        $("#user_is_users_admin").prop("checked", false);
+    }
+
+    if (g_selectedUser.user_is_equipment_admin == 1) {
+        $("#user_is_equipment_admin").prop("checked", true);
+    } else if (g_selectedUser.user_is_equipment_admin == -1) {
+        $("#user_is_equipment_admin").prop("checked", false);
+    } else {
+        $("#user_is_equipment_admin").prop("checked", false);
+    }
+
+    if (g_selectedUser.user_is_suppliers_admin == 1) {
+        $("#user_is_suppliers_admin").prop("checked", true);
+    } else if (g_selectedUser.user_is_suppliers_admin == -1) {
+        $("#user_is_suppliers_admin").prop("checked", false);
+    } else {
+        $("#user_is_suppliers_admin").prop("checked", false);
     }
 
 }
@@ -223,9 +350,13 @@ function showToast(text, color) {
 }
 
 function updateUser() {
-    if (g_selectedUser == undefined) {
+    if (g_selectedUser == undefined && g_currentUser.user_is_users_admin != 0) {
         showToast('Gelieve een gebruiker aan te duiden.', '#B08734');
         return;
+    }
+
+    if (g_currentUser.user_is_users_admin == 0) {
+        g_selectedUser = g_currentUser;
     }
     var ID = g_selectedUser.ID;
     argString = "?ID=" + ID;
@@ -333,19 +464,6 @@ function updateUser() {
         argString = argString + "&user_can_see_private_data=" + user_can_see_private_data;
     }
 
-    var can_add_user = $("#user_can_add_user").is(':checked');
-    if (can_add_user == true) {
-        user_can_add_user = 1;
-        argString = argString + "&user_can_add_user=" + user_can_add_user;
-    } else {
-        if (g_selectedUser.user_can_add_user == 1 || g_selectedUser.user_can_add_user == 0) {
-            user_can_add_user = 0;
-        } else {
-            user_can_add_user = "";
-        }
-        argString = argString + "&user_can_add_user=" + user_can_add_user;
-    }
-
     var can_see_financial_data = $("#user_can_see_financial_data").is(':checked');
     if (can_see_financial_data == true) {
         user_can_see_financial_data = 1;
@@ -359,7 +477,46 @@ function updateUser() {
         argString = argString + "&user_can_see_financial_data=" + user_can_see_financial_data;
     }
 
-    if (g_selectedRow > -1) {
+    var is_users_admin = $("#user_is_users_admin").is(':checked');
+    if (is_users_admin == true) {
+        user_is_users_admin = 1;
+        argString = argString + "&user_is_users_admin=" + user_is_users_admin;
+    } else {
+        if (g_selectedUser.user_is_users_admin == 1 || g_selectedUser.user_is_users_admin == 0) {
+            user_is_users_admin = 0;
+        } else {
+            user_is_users_admin = "";
+        }
+        argString = argString + "&user_is_users_admin=" + user_is_users_admin;
+    }
+
+    var is_equipment_admin = $("#user_is_equipment_admin").is(':checked');
+    if (is_equipment_admin == true) {
+        user_is_equipment_admin = 1;
+        argString = argString + "&user_is_equipment_admin=" + user_is_equipment_admin;
+    } else {
+        if (g_selectedUser.user_is_equipment_admin == 1 || g_selectedUser.user_is_equipment_admin == 0) {
+            user_is_equipment_admin = 0;
+        } else {
+            user_is_equipment_admin = "";
+        }
+        argString = argString + "&user_is_equipment_admin=" + user_is_equipment_admin;
+    }
+
+    var is_suppliers_admin = $("#user_is_suppliers_admin").is(':checked');
+    if (is_suppliers_admin == true) {
+        user_is_suppliers_admin = 1;
+        argString = argString + "&user_is_suppliers_admin=" + user_is_suppliers_admin;
+    } else {
+        if (g_selectedUser.user_is_suppliers_admin == 1 || g_selectedUser.user_is_suppliers_admin == 0) {
+            user_is_suppliers_admin = 0;
+        } else {
+            user_is_suppliers_admin = "";
+        }
+        argString = argString + "&user_is_suppliers_admin=" + user_is_suppliers_admin;
+    }
+
+    if (g_selectedRow > -1 || g_currentUser.user_is_users_admin == 0) {
         $.get("/updateUser" + argString, function (data, status) {
             if (data.localeCompare("http200") == 0) {
                 showToast('User is geupdate', '#5DB034');
@@ -424,8 +581,10 @@ function clearTextBox() {
     $("#user_pw_hash").val("");
     $("#user_alternative_ID").val("");
     $("#user_can_see_private_data_label").prop("checked", false);
-    $("#user_can_add_user_label").prop("checked", false);
     $("#user_can_see_financial_data_label").prop("checked", false);
+    $("#user_is_users_admin").prop("checked", false);
+    $("#user_is_equipment_admin").prop("checked", false);
+    $("#user_is_suppliers_admin").prop("checked", false);
     g_selectedUser = undefined;
     g_selectedRow = -1;
     $("#myModal").html("");
@@ -556,15 +715,6 @@ function newUser() {
         argString = argString + "&user_can_see_private_data=" + user_can_see_private_data;
     }
 
-    var can_add_user = $("#user_can_add_user").is(':checked');
-    if (can_add_user == true) {
-        user_can_add_user = 1;
-        argString = argString + "&user_can_add_user=" + user_can_add_user;
-    } else {
-        user_can_add_user = 0;
-        argString = argString + "&user_can_add_user=" + user_can_add_user;
-    }
-
     var can_see_financial_data = $("#user_can_see_financial_data").is(':checked');
     if (can_see_financial_data == true) {
         user_can_see_financial_data = 1;
@@ -572,6 +722,33 @@ function newUser() {
     } else {
         user_can_see_financial_data = 0;
         argString = argString + "&user_can_see_financial_data=" + user_can_see_financial_data;
+    }
+
+    var is_users_admin = $("#user_is_users_admin").is(':checked');
+    if (is_users_admin == true) {
+        user_is_users_admin = 1;
+        argString = argString + "&user_is_users_admin=" + user_is_users_admin;
+    } else {
+        user_is_users_admin = 0;
+        argString = argString + "&user_is_users_admin=" + user_is_users_admin;
+    }
+
+    var is_equipment_admin = $("#user_is_equipment_admin").is(':checked');
+    if (is_equipment_admin == true) {
+        user_is_equipment_admin = 1;
+        argString = argString + "&user_is_equipment_admin=" + user_is_equipment_admin;
+    } else {
+        user_is_equipment_admin = 0;
+        argString = argString + "&user_is_equipment_admin=" + user_is_equipment_admin;
+    }
+
+    var is_suppliers_admin = $("#user_is_suppliers_admin").is(':checked');
+    if (is_suppliers_admin == true) {
+        user_is_suppliers_admin = 1;
+        argString = argString + "&user_is_suppliers_admin=" + user_is_suppliers_admin;
+    } else {
+        user_is_suppliers_admin = 0;
+        argString = argString + "&user_is_suppliers_admin=" + user_is_suppliers_admin;
     }
 
     $.get("/newUser" + argString, function (data, status) {
@@ -723,7 +900,7 @@ function getNumbersFromString(string) {
 }
 
 function giveInputWarning(inputID) {
-    console.log('#' + inputID)
+    // console.log('#' + inputID)
     var input = $('#' + inputID);
 
     input.css("border-color", "#BA604D");
@@ -756,9 +933,9 @@ $(function () {
                     }
                 });
                 loadImagesFromDirectory(g_imageDirectory);
-                console.log('Photo uploaded!');
+                // console.log('Photo uploaded!');
             }).fail(function (data) {
-                console.error('Photo not uploaded. Error!');
+                // console.error('Photo not uploaded. Error!');
             });
         } else {
             showToast('Gelieve een user aan te duiden aan wie u de foto aan wil toevoegen.', '#B08734');
@@ -768,11 +945,16 @@ $(function () {
 });
 
 function loadImagesFromDirectory(directory) {
-    argString = "?directory=" + directory + "&equipmentID=-1&userID=" + + g_selectedUser.ID;
+    if (g_selectedUser == undefined && g_currentUser != undefined) {
+        argString = "?directory=" + directory + "&equipmentID=-1&userID=" + + g_currentUser.ID;
+    } else {
+        argString = "?directory=" + directory + "&equipmentID=-1&userID=" + + g_selectedUser.ID;
+    }
+
     $.get("/get_files" + argString, function (data, status) {
-        console.log(data);
+        // console.log(data);
         var images = getFromBetween.get(data, '"', '"');
-        console.log(images);
+        // console.log(images);
 
         $("#users_gallery").html("");
         var galleryHTML = '<div class="gallery_row">'
@@ -849,7 +1031,7 @@ function showSlides(n) {
     for (i = 0; i < dots.length; i++) {
         dots[i].className = dots[i].className.replace(" active", "");
     }
-    console.log(slides.length);
+    // console.log(slides.length);
     if (slides.length != 0) {
         slides[slideIndex - 1].style.display = "block";
         dots[slideIndex - 1].className += " active";

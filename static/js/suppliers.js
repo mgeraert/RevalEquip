@@ -2,8 +2,15 @@ var g_supplier;
 var g_selectedSupplier;
 var g_selectedRow = -1;
 
+var g_currentUser;
+
 $(document).ready(function () {
-    getSuppliers();
+    $.get("/getUserByID?" + $("#current_user_id").text(), function (data, status) {
+        g_currentUser = JSON.parse(data.slice(1, -1));
+        if (g_currentUser.user_is_suppliers_admin) {
+            getSuppliers();
+        }
+    });
 });
 
 function getSuppliers(enableSelectedRow = false, enableSort = false, sortAsc = false, sortColumn = 0) {

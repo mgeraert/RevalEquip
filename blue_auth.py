@@ -45,8 +45,8 @@ def register_post():
         flash("Email is al in gebruik")
         return redirect(url_for('auth.register'))
 
-    user_email = User.query.filter_by(user_last_name=last_name, user_name=name).first()
-    if user_email:
+    user_name = User.query.filter_by(user_last_name=last_name, user_name=name).first()
+    if user_name:
         flash("Er is al een user gecontacteerd met deze naam, contacteer de admin")
         return redirect(url_for('auth.register'))
 

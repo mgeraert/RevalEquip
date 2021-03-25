@@ -3,6 +3,7 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from logging import Formatter, FileHandler
 
+from classes.Database import Database
 from user import User
 
 import os
@@ -36,6 +37,8 @@ app.register_blueprint(files)
 # )
 # app.logger.addHandler(handler)
 
+db1 = Database()
+db1.create_db()
 db = SQLAlchemy(app)
 
 # -------------------------------------------------------------------------------

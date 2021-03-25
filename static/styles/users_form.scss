@@ -207,6 +207,27 @@ $textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWi
     width: $permissionsWidth;
 }
 
+#user_is_users_admin_label{
+    position: absolute;
+    left: $margin1;
+    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
+    width: $permissionsWidth;
+}
+
+#user_is_equipment_admin_label{
+    position: absolute;
+    left: $margin1 + $permissionsWidth + $margin1;
+    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
+    width: $permissionsWidth;
+}
+
+#user_is_suppliers_admin_label{
+    position: absolute;
+    left: $margin1 + $permissionsWidth + $margin1 + $permissionsWidth + $margin1;
+    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
+    width: $permissionsWidth;
+}
+
 #users_gallery {
     position: absolute;
     width: 1200px - $margin1*2;

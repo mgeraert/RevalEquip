@@ -42,6 +42,8 @@
     }); //jQuery
   </script>
 
+  <text id="current_user_id" style="display: none;">ID={{current_user.id}}</text>
+  {% if current_user.user_is_suppliers_admin %}
   <div id="suppliersTable" style="width: 1200px;height: 540px;overflow: scroll;margin: auto;margin-top: 10px; overflow-x: hidden;"></div>
 
  <div class="widePanel" style="width:1200px;height:500px;">
@@ -97,6 +99,9 @@
 
     <div id="toast_message"></div>
   </div>
+  {% else %}
+    <div>You can't access this page.</div>
+  {% endif %}
 
 </body>
 

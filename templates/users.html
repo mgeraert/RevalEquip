@@ -41,6 +41,8 @@
     }); //jQuery
   </script>
 
+  <text id="current_user_id" style="display: none;">ID={{current_user.id}}</text>
+
   <div id="usersTable" style="width: 1200px;height: 540px;overflow: scroll;margin: auto;margin-top: 10px; overflow-x: hidden;"></div>
 
  <div class="widePanel" style="width:1200px;height:500px;">
@@ -134,21 +136,12 @@
       <input id="user_out_date" class="form-field" type="date"/>
     </div>
     
+    {% if current_user.user_is_users_admin%}
     <div class="form-group" id="user_can_see_private_data_label">
       <span for="user_can_see_private_data" style="width:200px">Can see private data</span>
       <div class="form-field" style="padding:0px;" >
         <label class="container">
           <input type="checkbox" id="user_can_see_private_data" >
-          <span class="checkmark"></span>
-        </label>
-      </div>
-    </div>
-    
-    <div class="form-group" id="user_can_add_user_label">
-      <span for="user_can_add_user" style="width:200px">Can add user</span>
-      <div class="form-field" style="padding:0px;" >
-        <label class="container">
-          <input type="checkbox" id="user_can_add_user" >
           <span class="checkmark"></span>
         </label>
       </div>
@@ -164,20 +157,55 @@
       </div>
     </div>
 
+    <div class="form-group" id="user_is_users_admin_label">
+      <span for="user_is_users_admin" style="width:200px">Users admin</span>
+      <div class="form-field" style="padding:0px;" >
+        <label class="container">
+          <input type="checkbox" id="user_is_users_admin" >
+          <span class="checkmark"></span>
+        </label>
+      </div>
+    </div>
+    
+    <div class="form-group" id="user_is_equipment_admin_label">
+      <span for="user_is_equipment_admin" style="width:200px">Equipment admin</span>
+      <div class="form-field" style="padding:0px;" >
+        <label class="container">
+          <input type="checkbox" id="user_is_equipment_admin" >
+          <span class="checkmark"></span>
+        </label>
+      </div>
+    </div>
+    
+    <div class="form-group" id="user_is_suppliers_admin_label">
+      <span for="user_is_suppliers_admin" style="width:200px">Suppliers admin</span>
+      <div class="form-field" style="padding:0px;" >
+        <label class="container">
+          <input type="checkbox" id="user_is_suppliers_admin" >
+          <span class="checkmark"></span>
+        </label>
+      </div>
+    </div>
+    {% endif %}
+
 
     <form id="uploadform" method="post" enctype="multipart/form-data">
       <label for="file"></label>
       <input id="file_input" name="file" type="file" class="form-field">
       <button id="submit" type="button" class="mlbutton upload_button">Upload</button>
     </form>
+
     <button id="update_button" onclick="updateUser()" class="mlbutton">Update</button>
-    {% if current_user.user_can_add_user %}
+    {% if current_user.user_is_users_admin%}
+    <a href="/downloadUsersCSV"><button id="export_button" class="mlbutton">Export</button></a>
+    {% endif %}
+
+    {% if current_user.user_is_users_admin%}
     <button id="new_button" onclick="prepareNewUser()" class="mlbutton">New</button>
     <button id="cancel_button" onclick="cancelNewUser()" class="mlbutton">Cancel</button>
     <button id="add_button" onclick="newUser()" class="mlbutton">Save</button>
     <button id="delete_button" onclick="deleteUser()" class="mlbutton">Delete</button>
     {% endif %}
-    <a href="/downloadUsersCSV"><button id="export_button" class="mlbutton">Export</button></a>
 
     <div id="toast_message"></div>
 

@@ -25,8 +25,10 @@ class User(db.Model):
     user_is_phd = db.Column(db.Integer)
     user_alternative_id = db.Column(db.Integer, default=-1)
     user_can_see_private_data = db.Column(db.Integer, default=0)
-    user_can_add_user = db.Column(db.Integer, default=0)
     user_can_see_financial_data = db.Column(db.Integer, default=0)
+    user_is_users_admin = db.Column(db.Integer, default=0)
+    user_is_equipment_admin = db.Column(db.Integer, default=0)
+    user_is_suppliers_admin = db.Column(db.Integer, default=0)
 
     def is_active(self):
         """True, as all users are active."""
@@ -43,3 +45,6 @@ class User(db.Model):
     def is_anonymous(self):
         """False, as anonymous users aren't supported."""
         return False
+
+    def is_equipment_admin(self):
+        return self.user_is_equipment_admin

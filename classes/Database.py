@@ -77,8 +77,10 @@ class Database(object):
                    "user_out_date DATE",
                    "user_alternative_ID INTEGER DEFAULT -1",
                    "user_can_see_private_data NUMBER DEFAULT 0",
-                   "user_can_add_user NUMBER DEFAULT 0",
-                   "user_can_see_financial_data NUMBER DEFAULT 0"]
+                   "user_can_see_financial_data NUMBER DEFAULT 0",
+                   "user_is_users_admin NUMBER DEFAULT 0",
+                   "user_is_equipment_admin NUMBER DEFAULT 0",
+                   "user_is_suppliers_admin NUMBER DEFAULT 0"]
 
         self.insert_columns(table_name, columns)
 

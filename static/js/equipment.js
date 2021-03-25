@@ -2,6 +2,8 @@ var g_equipment;
 var g_selectedEquipment;
 var g_selectedRow = -1;
 
+var g_currentUser;
+
 var g_owner;
 var g_selectedOwner;
 var g_coOwner;
@@ -12,11 +14,18 @@ var g_selectedSupplier;
 var g_imageDirectory = "static\\images\\upload\\";
 
 $(document).ready(function () {
-    getEquipment();
+    $.get("/getUserByID?" + $("#current_user_id").text(), function (data, status) {
+        g_currentUser = JSON.parse(data)[0];
+        if (g_currentUser.user_is_equipment_admin == 0) {
+            $('#inputPanel input').attr('readonly', true);
+            $('#inputPanel input:checkbox').attr('disabled', true);
+        }
+        getEquipment();
+    });
 });
 
 function getEquipment(enableSelectedRow = false, enableSort = false, sortAsc = false, sortColumn = 0) {
-    $.get("/getEquipment", function (data, status) {
+    $.get("/getEquipment?user_id=" + g_currentUser.ID, function (data, status) {
         g_equipment = JSON.parse(data);
         if (g_equipment.length > 0) {
             tableHTML = "<table id='blue_table' class='table_design table-sortable'>"
@@ -53,11 +62,11 @@ function generateTableHeader() {
     out = out.concat("</th>");
 
     out = out.concat("<th onclick='sortColumnEquipment(2)'>");
-    out = out.concat('Outcome');
+    out = out.concat('Description');
     out = out.concat("</th>");
 
     out = out.concat("<th onclick='sortColumnEquipment(3)'>");
-    out = out.concat('Purchase Price');
+    out = out.concat('Outcome');
     out = out.concat("</th>");
 
     out = out.concat("</tr></thead>");
@@ -75,15 +84,15 @@ function generateTabelRow(rownNr, equipment) {
     out = out.concat("</td>");
 
     out = out.concat('<td>');
-    out = out.concat(getTableDiv(equipment.equipment_name, 600, rownNr));
+    out = out.concat(getTableDiv(equipment.equipment_name, 400, rownNr));
     out = out.concat("</td>");
 
     out = out.concat('<td>');
-    out = out.concat(getTableDiv(equipment.equipment_outcome, 250, rownNr));
+    out = out.concat(getTableDiv(equipment.equipment_description, 300, rownNr));
     out = out.concat("</td>");
 
     out = out.concat('<td>');
-    out = out.concat(getTableDiv(equipment.equipment_purchase_price, 150, rownNr));
+    out = out.concat(getTableDiv(equipment.equipment_outcome, 300, rownNr));
     out = out.concat("</td>");
 
     out = out + "</tr>";
@@ -126,6 +135,7 @@ function selectRowEquipment(row) {
     selectedRow.classList.add("active-row");
     g_selectedRow = rowNr;
     g_selectedEquipment = g_equipment[rowNr_data - 1];
+
     loadImagesFromDirectory(g_imageDirectory);
 
     $("#eq_inventory_number").val(g_selectedEquipment.equipment_inventory_number);
@@ -153,6 +163,7 @@ function selectRowEquipment(row) {
     $("#suggestions_owner").empty();
     if (g_selectedEquipment.equipment_owner_id == -1 || g_selectedEquipment.equipment_owner_id == "") {
         $("#eq_owner_id").val("");
+        $('#eq_owner_id').removeAttr('onclick');
     } else {
         argString = "?ID=" + g_selectedEquipment.equipment_owner_id;
         $.get("/getUserByID" + argString, function (data, status) {
@@ -160,10 +171,12 @@ function selectRowEquipment(row) {
             $("#eq_owner_id").val(owner.user_last_name + ' ' + owner.user_name);
             g_selectedOwner = owner;
         });
+        $('#eq_owner_id').attr('onclick', 'generatePopUp("owner")');
     }
     $("#suggestions_co_owner").empty();
     if (g_selectedEquipment.equipment_co_owner_id == -1 || g_selectedEquipment.equipment_co_owner_id == "") {
         $("#eq_co_owner_id").val("");
+        $('#eq_co_owner_id').removeAttr('onclick');
     } else {
         argString = "?ID=" + g_selectedEquipment.equipment_co_owner_id;
         $.get("/getUserByID" + argString, function (data, status) {
@@ -171,14 +184,48 @@ function selectRowEquipment(row) {
             $("#eq_co_owner_id").val(coOwner.user_last_name + ' ' + coOwner.user_name);
             g_selectedCoOwner = coOwner;
         });
+        $('#eq_co_owner_id').attr('onclick', 'generatePopUp("co_owner")');
     }
+
     $("#eq_purchase_price").val(g_selectedEquipment.equipment_purchase_price);
     $("#eq_annual_cost").val(g_selectedEquipment.equipment_annual_cost);
     $("#eq_annual_cost_budget").val(g_selectedEquipment.equipment_annual_cost_budget);
-    $("#suggestions_owner").empty();
 
+    if (g_currentUser.ID == g_selectedEquipment.equipment_owner_id || g_currentUser.ID == g_selectedEquipment.equipment_co_owner_id) {
+        if ($("#update_button").length == 0) {
+            var innerHTML = '<button id="update_button" onclick="updateEquip()" class="mlbutton">Update</button>';
+            $(".widePanel").append(innerHTML);
+        }
+        if ($("#eq_purchase_price").length == 0 && $("#eq_annual_cost").length == 0 && $("#eq_annual_cost_budget").length == 0) {
+            var innerHTML = '<div class="form-group" id="eq_purchase_price_label"><span for="eq_purchase_price" style="width:120px;">Purchase Price</span><input id="eq_purchase_price" class="form-field" type="text" placeholder="Purchase Price" /></div><div class="form-group" id="eq_annual_cost_label"><span for="eq_annual_cost" style="width:120px;">Annual Cost</span><input id="eq_annual_cost" class="form-field" type="text" placeholder="Annual Cost" /></div><div class="form-group" id="eq_annual_cost_budget_label"><span for="eq_annual_cost_budget" style="width:160px;">Annual Cost Budget</span><input id="eq_annual_cost_budget" class="form-field" type="text" placeholder="Annual Cost Budget" /></div>';
+            $(".widePanel").append(innerHTML);
+        }
+        $('#inputPanel input').attr('readonly', false);
+        $('#inputPanel input:checkbox').attr('disabled', false);
+        if (g_currentUser.user_can_see_financial_data == 0) {
+            $.get("/getFinancialDataByID?equipment_id=" + g_selectedEquipment.ID, function (data, status) {
+                var financialData = JSON.parse(data)[0];
+                $("#eq_purchase_price").val(financialData.equipment_purchase_price);
+                $("#eq_annual_cost").val(financialData.equipment_annual_cost);
+                $("#eq_annual_cost_budget").val(financialData.equipment_annual_cost_budget);
+            });
+        }
+    } else {
+        if (g_currentUser.user_can_see_financial_data == 0 && g_currentUser.user_is_equipment_admin == 0) {
+            $('#inputPanel input').attr('readonly', true);
+            $('#inputPanel input:checkbox').attr('disabled', true);
+
+            $("#update_button").remove();
+            $("#eq_purchase_price_label").remove();
+            $("#eq_annual_cost_label").remove();
+            $("#eq_annual_cost_budget_label").remove();
+        }
+    }
+
+    $("#suggestions_owner").empty();
     if (g_selectedEquipment.equipment_supplier_id == -1 || g_selectedEquipment.equipment_supplier_id == "") {
         $("#eq_supplier_id").val("");
+        $('#eq_supplier_id').removeAttr('onclick');
     } else {
         argString = "?ID=" + g_selectedEquipment.equipment_supplier_id;
         $.get("/getSupplierByID" + argString, function (data, status) {
@@ -186,6 +233,7 @@ function selectRowEquipment(row) {
             $("#eq_supplier_id").val(supplier.supplier_last_name + ' ' + supplier.supplier_name);
             g_selectedSupplier = supplier;
         });
+        $('#eq_supplier_id').attr('onclick', 'generatePopUp("supplier")');
     }
 }
 
@@ -260,14 +308,26 @@ function updateEquip() {
     }
     argString = argString + "&equipment_co_owner_id=" + equipment_co_owner_id;
 
-    var equipment_purchase_price = $("#eq_purchase_price").val();
-    argString = argString + "&equipment_purchase_price=" + equipment_purchase_price;
+    if ($('#eq_purchase_price').length) {
+        var equipment_purchase_price = $("#eq_purchase_price").val();
+        argString = argString + "&equipment_purchase_price=" + equipment_purchase_price;
+    } else {
+        argString = argString + "&equipment_purchase_price=";
+    }
 
-    var equipment_annual_cost = $("#eq_annual_cost").val();
-    argString = argString + "&equipment_annual_cost=" + equipment_annual_cost;
+    if ($('#eq_annual_cost').length) {
+        var equipment_annual_cost = $("#eq_annual_cost").val();
+        argString = argString + "&equipment_annual_cost=" + equipment_annual_cost;
+    } else {
+        argString = argString + "&equipment_annual_cost=";
+    }
 
-    var equipment_annual_cost_budget = $("#eq_annual_cost_budget").val();
-    argString = argString + "&equipment_annual_cost_budget=" + equipment_annual_cost_budget;
+    if ($('#eq_annual_cost_budget').length) {
+        var equipment_annual_cost_budget = $("#eq_annual_cost_budget").val();
+        argString = argString + "&equipment_annual_cost_budget=" + equipment_annual_cost_budget;
+    } else {
+        argString = argString + "&equipment_annual_cost_budget=";
+    }
 
     var equipment_supplier_id = -1;
     if ($("#eq_supplier_id").val() != "") {
@@ -499,7 +559,7 @@ function showToast(text, color) {
 }
 
 function giveInputWarning(inputID) {
-    console.log('#' + inputID)
+    // console.log('#' + inputID)
     var input = $('#' + inputID);
 
     input.css("border-color", "#BA604D");
@@ -722,14 +782,14 @@ function sortTableByColumn(table, column, asc = true) {
     for (i = 0; i < sortedRows.length; i++) {
         var innerText = sortedRows[i].innerText.split("\n\t\n");
         var name = innerText[1];
-        console.log(i, sortedRows[i].innerText.split("\n\t\n")[0], name);
+        // console.log(i, sortedRows[i].innerText.split("\n\t\n")[0], name);
         if (g_selectedEquipment != undefined) {
             if (name == g_selectedEquipment.equipment_name) {
                 g_selectedRow = i + 1;
             }
         }
     }
-    console.log(g_selectedRow - 1);
+    // console.log(g_selectedRow - 1);
 
     // remove all resisting tr from table
     while (tBody.firstChild) {
@@ -799,9 +859,9 @@ $(function () {
                     }
                 });
                 loadImagesFromDirectory(g_imageDirectory);
-                console.log('Photo uploaded!');
+                // console.log('Photo uploaded!');
             }).fail(function (data) {
-                console.error('Photo not uploaded. Error!');
+                // console.error('Photo not uploaded. Error!');
             });
         } else {
             showToast('Gelieve een toestel aan te duiden waar u de foto aan wil toevoegen.', '#B08734');
@@ -814,7 +874,7 @@ function loadImagesFromDirectory(directory) {
     argString = "?directory=" + directory + "&equipmentID=" + g_selectedEquipment.ID + "&userID=-1";
     $.get("/get_files" + argString, function (data, status) {
         var images = getFromBetween.get(data, '"', '"');
-        console.log(images);
+        // console.log(images);
 
         $("#eq_gallery").html("");
         var galleryHTML = '<div class="gallery_row">'
@@ -891,7 +951,7 @@ function showSlides(n) {
     for (i = 0; i < dots.length; i++) {
         dots[i].className = dots[i].className.replace(" active", "");
     }
-    console.log(slides.length);
+    // console.log(slides.length);
     if (slides.length != 0) {
         slides[slideIndex - 1].style.display = "block";
         dots[slideIndex - 1].className += " active";
@@ -940,3 +1000,138 @@ var getFromBetween = {
         return this.results;
     }
 };
+
+function generatePopUp(type) {
+    $("#pop_up_window").css("display", "block");
+    if (type == 'owner') {
+        var owner = g_selectedOwner;
+        var name = owner.user_last_name + ' ' + owner.user_name;
+        var email = owner.user_email;
+        var phone = owner.user_telephone;
+
+        var popUpHTML = "";
+        var popUpHTML = popUpHTML.concat('<div class="pop_up-content">');
+        var popUpHTML = popUpHTML.concat('<div class="pop_up-header">');
+        var popUpHTML = popUpHTML.concat('<span class="close" onclick="closePopUp()">&times;</span>');
+        var popUpHTML = popUpHTML.concat('<h2>Modal Header</h2>');
+        var popUpHTML = popUpHTML.concat('</div>');
+        var popUpHTML = popUpHTML.concat('<div class="pop_up-body">');
+        var popUpHTML = popUpHTML.concat('<table class="table_design">');
+        var popUpHTML = popUpHTML.concat('<thead>');
+        var popUpHTML = popUpHTML.concat('<tr>');
+        var popUpHTML = popUpHTML.concat('<th>Name</th>');
+        var popUpHTML = popUpHTML.concat('<th>Email</th>');
+        var popUpHTML = popUpHTML.concat('<th>Phonenumber</th>');
+        var popUpHTML = popUpHTML.concat('</tr>');
+        var popUpHTML = popUpHTML.concat('</thead>');
+        var popUpHTML = popUpHTML.concat('<tbody>');
+        var popUpHTML = popUpHTML.concat('<tr>');
+        var popUpHTML = popUpHTML.concat('<td>');
+        var popUpHTML = popUpHTML.concat('<p>' + name + '</p>');
+        var popUpHTML = popUpHTML.concat('</td>');
+        var popUpHTML = popUpHTML.concat('<td>');
+        var popUpHTML = popUpHTML.concat('<p>' + email + '</p>');
+        var popUpHTML = popUpHTML.concat('</td>');
+        var popUpHTML = popUpHTML.concat('<td>');
+        var popUpHTML = popUpHTML.concat('<p>' + phone + '</p>');
+        var popUpHTML = popUpHTML.concat('</td>');
+        var popUpHTML = popUpHTML.concat('</tr>');
+        var popUpHTML = popUpHTML.concat('</tbody>');
+        var popUpHTML = popUpHTML.concat('</table>');
+        var popUpHTML = popUpHTML.concat('</div>');
+        var popUpHTML = popUpHTML.concat('</div>');
+        var popUpHTML = popUpHTML.concat('');
+        $("#pop_up_window").html(popUpHTML);
+    } else if (type == 'co_owner') {
+        var co_owner = g_selectedCoOwner;
+        var name = co_owner.user_last_name + ' ' + co_owner.user_name;
+        var email = co_owner.user_email;
+        var phone = co_owner.user_telephone;
+
+        var popUpHTML = "";
+        var popUpHTML = popUpHTML.concat('<div class="pop_up-content">');
+        var popUpHTML = popUpHTML.concat('<div class="pop_up-header">');
+        var popUpHTML = popUpHTML.concat('<span class="close" onclick="closePopUp()">&times;</span>');
+        var popUpHTML = popUpHTML.concat('<h2>Modal Header</h2>');
+        var popUpHTML = popUpHTML.concat('</div>');
+        var popUpHTML = popUpHTML.concat('<div class="pop_up-body">');
+        var popUpHTML = popUpHTML.concat('<table class="table_design">');
+        var popUpHTML = popUpHTML.concat('<thead>');
+        var popUpHTML = popUpHTML.concat('<tr>');
+        var popUpHTML = popUpHTML.concat('<th>Name</th>');
+        var popUpHTML = popUpHTML.concat('<th>Email</th>');
+        var popUpHTML = popUpHTML.concat('<th>Phonenumber</th>');
+        var popUpHTML = popUpHTML.concat('</tr>');
+        var popUpHTML = popUpHTML.concat('</thead>');
+        var popUpHTML = popUpHTML.concat('<tbody>');
+        var popUpHTML = popUpHTML.concat('<tr>');
+        var popUpHTML = popUpHTML.concat('<td>');
+        var popUpHTML = popUpHTML.concat('<p>' + name + '</p>');
+        var popUpHTML = popUpHTML.concat('</td>');
+        var popUpHTML = popUpHTML.concat('<td>');
+        var popUpHTML = popUpHTML.concat('<p>' + email + '</p>');
+        var popUpHTML = popUpHTML.concat('</td>');
+        var popUpHTML = popUpHTML.concat('<td>');
+        var popUpHTML = popUpHTML.concat('<p>' + phone + '</p>');
+        var popUpHTML = popUpHTML.concat('</td>');
+        var popUpHTML = popUpHTML.concat('</tr>');
+        var popUpHTML = popUpHTML.concat('</tbody>');
+        var popUpHTML = popUpHTML.concat('</table>');
+        var popUpHTML = popUpHTML.concat('</div>');
+        var popUpHTML = popUpHTML.concat('</div>');
+        var popUpHTML = popUpHTML.concat('');
+        $("#pop_up_window").html(popUpHTML);
+    } else if (type == 'supplier') {
+        var supplier = g_selectedSupplier;
+        var name = supplier.supplier_last_name + ' ' + supplier.supplier_name;
+        var email = supplier.supplier_email;
+        var phone = supplier.supplier_phone;
+        var comment = supplier.supplier_comment;
+
+        var popUpHTML = "";
+        var popUpHTML = popUpHTML.concat('<div class="pop_up-content">');
+        var popUpHTML = popUpHTML.concat('<div class="pop_up-header">');
+        var popUpHTML = popUpHTML.concat('<span class="close" onclick="closePopUp()">&times;</span>');
+        var popUpHTML = popUpHTML.concat('<h2>Modal Header</h2>');
+        var popUpHTML = popUpHTML.concat('</div>');
+        var popUpHTML = popUpHTML.concat('<div class="pop_up-body">');
+        var popUpHTML = popUpHTML.concat('<table class="table_design">');
+        var popUpHTML = popUpHTML.concat('<thead>');
+        var popUpHTML = popUpHTML.concat('<tr>');
+        var popUpHTML = popUpHTML.concat('<th>Name</th>');
+        var popUpHTML = popUpHTML.concat('<th>Email</th>');
+        var popUpHTML = popUpHTML.concat('<th>Phonenumber</th>');
+        var popUpHTML = popUpHTML.concat('<th>Comment</th>');
+        var popUpHTML = popUpHTML.concat('</tr>');
+        var popUpHTML = popUpHTML.concat('</thead>');
+        var popUpHTML = popUpHTML.concat('<tbody>');
+        var popUpHTML = popUpHTML.concat('<tr>');
+        var popUpHTML = popUpHTML.concat('<td>');
+        var popUpHTML = popUpHTML.concat('<p>' + name + '</p>');
+        var popUpHTML = popUpHTML.concat('</td>');
+        var popUpHTML = popUpHTML.concat('<td>');
+        var popUpHTML = popUpHTML.concat('<p>' + email + '</p>');
+        var popUpHTML = popUpHTML.concat('</td>');
+        var popUpHTML = popUpHTML.concat('<td>');
+        var popUpHTML = popUpHTML.concat('<p>' + phone + '</p>');
+        var popUpHTML = popUpHTML.concat('</td>');
+        var popUpHTML = popUpHTML.concat('<td>');
+        var popUpHTML = popUpHTML.concat('<p>' + comment + '</p>');
+        var popUpHTML = popUpHTML.concat('</td>');
+        var popUpHTML = popUpHTML.concat('</tr>');
+        var popUpHTML = popUpHTML.concat('</tbody>');
+        var popUpHTML = popUpHTML.concat('</table>');
+        var popUpHTML = popUpHTML.concat('</div>');
+        var popUpHTML = popUpHTML.concat('</div>');
+        var popUpHTML = popUpHTML.concat('');
+        $("#pop_up_window").html(popUpHTML);
+    } else {
+        $("#pop_up_window").css("display", "none");
+        $("#pop_up_window").empty();
+    }
+}
+
+function closePopUp() {
+    $("#pop_up_window").css("display", "none");
+    $("#pop_up_window").empty();
+}
