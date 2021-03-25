@@ -1057,7 +1057,7 @@ function generatePopUp(type) {
         var popUpHTML = popUpHTML.concat('<tr>');
         var popUpHTML = popUpHTML.concat('<th>Name</th>');
         var popUpHTML = popUpHTML.concat('<th>Email</th>');
-        var popUpHTML = popUpHTML.concat('<th>Phonenumber</th>');
+        var popUpHTML = popUpHTML.concat('<th>Phone number</th>');
         var popUpHTML = popUpHTML.concat('</tr>');
         var popUpHTML = popUpHTML.concat('</thead>');
         var popUpHTML = popUpHTML.concat('<tbody>');
@@ -1096,7 +1096,7 @@ function generatePopUp(type) {
         var popUpHTML = popUpHTML.concat('<tr>');
         var popUpHTML = popUpHTML.concat('<th>Name</th>');
         var popUpHTML = popUpHTML.concat('<th>Email</th>');
-        var popUpHTML = popUpHTML.concat('<th>Phonenumber</th>');
+        var popUpHTML = popUpHTML.concat('<th>Phone number</th>');
         var popUpHTML = popUpHTML.concat('</tr>');
         var popUpHTML = popUpHTML.concat('</thead>');
         var popUpHTML = popUpHTML.concat('<tbody>');
@@ -1136,7 +1136,7 @@ function generatePopUp(type) {
         var popUpHTML = popUpHTML.concat('<tr>');
         var popUpHTML = popUpHTML.concat('<th>Name</th>');
         var popUpHTML = popUpHTML.concat('<th>Email</th>');
-        var popUpHTML = popUpHTML.concat('<th>Phonenumber</th>');
+        var popUpHTML = popUpHTML.concat('<th>Phone number</th>');
         var popUpHTML = popUpHTML.concat('<th>Comment</th>');
         var popUpHTML = popUpHTML.concat('</tr>');
         var popUpHTML = popUpHTML.concat('</thead>');
