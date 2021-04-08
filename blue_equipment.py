@@ -19,7 +19,8 @@ def reval_equipment():
 
 
 @equipment.route('/getEquipment', methods=['GET'])
-def get_limited_equipment():
+@login_required
+def get_equipment():
     db = Database()
     db.conn.row_factory = db.dict_factory
     c = db.conn.cursor()
@@ -42,6 +43,7 @@ def get_limited_equipment():
 
 
 @equipment.route('/getFinancialDataByID', methods=['GET'])
+@login_required
 def get_financial_equipment_data():
     equipment_id = request.args.get('equipment_id')
     db = Database()
@@ -57,6 +59,7 @@ def get_financial_equipment_data():
 
 
 @equipment.route('/newEquipment', methods=['GET'])
+@login_required
 def new_equipment():
     sql_string = 'INSERT INTO equipment '
     sql_parameters = '('
@@ -163,6 +166,7 @@ def new_equipment():
 
 
 @equipment.route('/updateEquipment', methods=['GET'])
+@login_required
 def update_equipment():
     sql_string = 'UPDATE equipment SET '
     sql_parameters = ''
@@ -251,6 +255,7 @@ def update_equipment():
 
 
 @equipment.route('/deleteEquipment', methods=['GET'])
+@login_required
 def delete_equipment():
     db = Database()
     ID = request.args.get('ID')
@@ -277,6 +282,7 @@ def delete_equipment():
 
 
 @equipment.route('/updateSuggestionOwner', methods=['GET'])
+@login_required
 def update_suggestion_owner():
     owner_name = request.args.get('owner_name')
     db = Database()
@@ -300,6 +306,7 @@ def update_suggestion_owner():
 
 
 @equipment.route('/updateSuggestionSupplier', methods=['GET'])
+@login_required
 def update_suggestion_supplier():
     supplier_name = request.args.get('supplier_name')
     db = Database()
@@ -323,6 +330,7 @@ def update_suggestion_supplier():
 
 
 @equipment.route('/getUserByID', methods=['GET'])
+@login_required
 def get_user_by_id():
     db = Database()
     user_id = request.args.get('ID')
@@ -335,6 +343,7 @@ def get_user_by_id():
 
 
 @equipment.route('/getSupplierByID', methods=['GET'])
+@login_required
 def get_supplier_by_id():
     db = Database()
     user_id = request.args.get('ID')
@@ -347,6 +356,7 @@ def get_supplier_by_id():
 
 
 @equipment.route('/getUserIDByUserName', methods=['GET'])
+@login_required
 def get_user_id_by_user_name():
     db = Database()
     user_last_name = request.args.get('user_last_name')
@@ -360,6 +370,7 @@ def get_user_id_by_user_name():
 
 
 @equipment.route('/newEquipmentPicture', methods=['GET'])
+@login_required
 def new_equipment_picture():
     sql_string = 'INSERT INTO pictures '
     sql_parameters = '('
@@ -394,6 +405,7 @@ def new_equipment_picture():
 
 
 @equipment.route('/saveEquipmentAsCSV')
+@login_required
 def save_equipment_as_csv():
     db = Database()
     db.conn.row_factory = db.dict_factory
@@ -420,6 +432,7 @@ def save_equipment_as_csv():
 
 
 @equipment.route('/downloadEquipmentCSV')
+@login_required
 def download_equipment_csv():
     save_equipment_as_csv()
 

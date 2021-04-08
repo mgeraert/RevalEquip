@@ -44,7 +44,9 @@
             <div class="login_screen">
                 <h4><span>LOGIN</span></h4>
 
-                <p>Welcome back! Log in to your account to view the database.</p>
+                <p>Welcome back! Log in to your account to view the database.
+                    <p id="no_account">No account? <span><a href="register">Register</a></span></p>
+                </p>
                 <form action="/login" method="post">
                     <div class="form-group" id="login_email_label">
                         <span for="login_email" style="width:120px;">Email</span>
@@ -57,7 +59,7 @@
                     </div>
                     <button id="login_button" onclick="login()" class="mlbutton">Login</button>
                 </form>
-                <h4 id="no_account">No account? <span><a href="register">Register</a></span></h4>
+                <a id = "reset_password" href="resetpassword">Forgot password?</a>
             </div>
         </div>
     </div>

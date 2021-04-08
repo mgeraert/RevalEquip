@@ -105,7 +105,6 @@ html, body {
 
 .login_screen p {
   color: rgba(0, 0, 0, 0.6);
-  margin-bottom: 40px;
 }
 
 .login_screen #login_email_label {
@@ -120,10 +119,9 @@ html, body {
 
 .login_screen #no_account {
   margin-top: 2px;
+  margin-bottom: 30px;
   padding-top: 8px;
   padding-bottom: 8px;
-  float: left;
-  width: 66%;
 }
 
 .login_screen #no_account a {
@@ -135,5 +133,17 @@ html, body {
 .login_screen #login_button {
   float: right;
   width: 100px;
+}
+
+.login_screen #reset_password {
+  margin-top: 2px;
+  margin-bottom: 30px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  float: left;
+  width: 66%;
+  text-decoration: none;
+  color: #01A38C;
+  font-weight: 700;
 }
 /*# sourceMappingURL=login_form.css.map */

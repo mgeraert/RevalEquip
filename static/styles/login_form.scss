@@ -92,7 +92,6 @@ html, body {
 
   p {
     color: rgba(#000, .6);
-    margin-bottom:  40px;
   }
 
   #login_email_label {
@@ -108,10 +107,9 @@ html, body {
 
   #no_account {
     margin-top: 2px;
+    margin-bottom: 30px;
     padding-top: 8px;
     padding-bottom: 8px;
-    float: left;
-    width: 66%;
     
     a {
       text-decoration: none;
@@ -123,5 +121,17 @@ html, body {
   #login_button {
     float: right;
     width: 100px;
+  }
+
+  #reset_password {
+    margin-top: 2px;
+    margin-bottom: 30px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    float: left;
+    width: 66%;
+    text-decoration: none;
+    color: #01A38C;
+    font-weight: 700; 
   }
 }

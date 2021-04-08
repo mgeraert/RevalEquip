@@ -83,10 +83,22 @@
     
     h4 {
       color:  rgba(#000, .6);
-      margin-bottom: 40px;
       span {
           color: #01A38C;
           font-weight: 700; 
+      }
+    }
+
+    #have_account {
+      margin-top: 2px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+  
+      a {
+        text-decoration: none;
+        color: #01A38C;
+        font-weight: 700; 
       }
     }
   
@@ -113,20 +125,6 @@
     #register_password_label {
       margin-bottom: 15px;
       left:0px;
-    }
-
-    #have_account {
-      margin-top: 2px;
-      padding-top: 8px;
-      padding-bottom: 8px;
-      float: left;
-      width: 66%;
-  
-      a {
-        text-decoration: none;
-        color: #01A38C;
-        font-weight: 700; 
-      }
     }
 
     #register_button {
