@@ -1,183 +1,220 @@
-
 $margin1: 30px;
-$margin2: 100px;
 $tabelHeight: 34.653px;
-$labelWidthSmall: 80px;
 $labelWidthMedium: 120px;
-$labelWidthLarge: 160px;
-$rowSpacing: 28px;
-$textBoxWidthSmall: 360px;
-$textBoxWidthLarge: 555px;
+$textBoxWidthSmall: 380px;
+$textBoxWidthLarge: 585px;
 $buttonHeight: 31.528px;
 $ButtonWidth: 100px;
-$ButtonSpacing: 10px;
 
-$labelColumn2Left: $margin1+$textBoxWidthLarge+$margin1;
-
-#file_input {
-    position: absolute;
-    top: $margin1+2px;
-    left: $margin1;
-    width: 360px;
-    padding: 2.2px 3px 2.9px 3px;
-    font-size: 12px;
+html, body {
+    font-size: 14px;
+    height: 100vh; 
+    width: 100vw;
+    margin: 0 0; 
+    display: flex; 
+    align-items: flex-start; 
+    justify-content: flex-start; 
 }
 
-.upload_button { 
-    position: absolute;
-    top: $margin1;
-    left:$margin1+260px;
-    width: $ButtonWidth;
+#wide_panel {
+    top: 0;
 }
 
-#update_button{
-    position: absolute;
-    left:420px;
-    top: $margin1;
-    width: $ButtonWidth;
+#text_title {
+    float: left;
+    width: 100%;
+    padding: 6.2px 12px;
+
+    background-color: #41BAA9;
+    border: 1px solid #01A38C;
+
+    font-size: 16px;
+    text-align: center;
+    color: #fff;
+    font-weight: 550;
+    cursor: auto;
 }
 
-#new_button{
-    position: absolute;
-    left:420px+$margin1+$ButtonWidth;
-    top: $margin1;
-    width: $ButtonWidth;
+#equipment_table {
+    height: fit-content;
+    max-height: 40vh;
+    width: 100%;
+    overflow-x: hidden;
+    text-align: center;
+    border-radius: 6px 6px 6px 6px;
+    box-shadow:  0px 2px 6px -1px rgba(0,0,0,.13); 
 }
 
-#delete_button{
-    position: absolute;
-    left:420px+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
-    top: $margin1;
-    width: $ButtonWidth;
+.button_panel {
+    margin-top: 20px;
+    height: 32px;
+
+    #file_input {
+        position: absolute;
+        margin-top: 2px;
+        width: 360px;
+        padding: 2.2px 3px 2.9px 3px;
+        font-size: 12px;
+    }
+    
+    .upload_button { 
+        position: absolute;
+        left: 260px;
+        width: $ButtonWidth;
+    }
+    
+    #update_button{
+        position: absolute;
+        left:420px;
+        width: $ButtonWidth;
+        display: none;
+    }
+    
+    #new_button{
+        position: absolute;
+        left:420px+$margin1+$ButtonWidth;
+        width: $ButtonWidth;
+        display: none;
+    }
+    
+    #delete_button{
+        position: absolute;
+        left:420px+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
+        width: $ButtonWidth;
+        display: none;
+    }
+    
+    #export_button{
+        position: absolute;
+        left:1200px - $ButtonWidth;
+        width: $ButtonWidth;
+        display: none;
+    }
+    
+    #add_button{
+        position: absolute;
+        left:355px+$margin1+$ButtonWidth;
+        width: $ButtonWidth;
+        display: none;
+    }
+    
+    #cancel_button{
+        position: absolute;
+        left:355px+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
+        width: $ButtonWidth;
+        display: none;
+    }
+
 }
 
-#export_button{
-    position: absolute;
-    left:1200px - $ButtonWidth - $margin1;
-    top: $margin1;
-    width: $ButtonWidth;
-}
-
-#add_button{
-    position: absolute;
-    left:355px+$margin1+$ButtonWidth;
-    top: $margin1;
-    width: $ButtonWidth;
-    visibility: hidden;
-}
-
-#cancel_button{
-    position: absolute;
-    left:355px+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
-    top: $margin1;
-    width: $ButtonWidth;
-    visibility: hidden;
-}
-
-#toast_pop_up {
-    left: 420px;
-    width: $ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
-    position: absolute;
-    background-color: gray;
-    top: $margin1;
+.input_panel {
+    position: relative;
+    margin-top: 25px;
 }
 
 #eq_inventory_number_label{
     position: absolute;
-    left:$margin1;
-    top:$margin1+$buttonHeight+$margin1;
     width: $textBoxWidthLarge;
 }
 
 #eq_label_label{
     position: absolute;
-    left: $labelColumn2Left;
-    top: $margin1+$buttonHeight+$margin1;
     width: $textBoxWidthLarge;
+    margin-left: $textBoxWidthLarge + $margin1;
 }
 
 #eq_name_label{
     position: absolute;
-    left:$margin1;
-    top: $margin1+$buttonHeight+$margin1 * 2 + $tabelHeight;
     width: $textBoxWidthLarge;
+    margin-top: $tabelHeight + $margin1;
 }
 
 #eq_amount_label{
     position: absolute;
-    left: $labelColumn2Left;
-    top: $margin1+$buttonHeight+$margin1 * 2 + $tabelHeight;
     width: $textBoxWidthLarge;
+    margin-left: $textBoxWidthLarge + $margin1;
+    margin-top: $tabelHeight + $margin1;
 }
 
 #eq_desc_label{
     position: absolute;
-    left:$margin1;
-    top:$margin1+$buttonHeight+$margin1 * 2.5 + $tabelHeight * 2;
     width: $textBoxWidthLarge;
+    margin-top: $tabelHeight*2 + $margin1*1.5;
 }
 
 #eq_outcome_label{
     position: absolute;
-    left: $labelColumn2Left;
-    top:$margin1+$buttonHeight+$margin1 * 2.5 + $tabelHeight * 2;
     width: $textBoxWidthLarge;
+    margin-left: $textBoxWidthLarge + $margin1;
+    margin-top: $tabelHeight*2 + $margin1*1.5;
 }
 
 #eq_purchase_date_label{
     position: absolute;
-    left:$margin1;
-    top: $margin1+$buttonHeight+$margin1 * 3.5 + $tabelHeight * 3;
     width: $textBoxWidthLarge;
+    margin-top: $tabelHeight*3 + $margin1*2.5;
 }
 
 #eq_purchase_price_label {
     position: absolute;
-    left: $labelColumn2Left;
-    top: $margin1+$buttonHeight+$margin1 * 3.5 + $tabelHeight * 3;
     width: $textBoxWidthLarge;
+    margin-left: $textBoxWidthLarge + $margin1;
+    margin-top: $tabelHeight*3 + $margin1*2.5;
 }
 
 #eq_annual_cost_label {
     position: absolute;
-    left:$margin1;
-    top: $margin1+$buttonHeight+$margin1 * 4 + $tabelHeight * 4;
     width: $textBoxWidthLarge;
+    margin-top: $tabelHeight*4 + $margin1*3;
 }
 
 #eq_annual_cost_budget_label {
     position: absolute;
-    left: $labelColumn2Left;
-    top: $margin1+$buttonHeight+$margin1 * 4 + $tabelHeight * 4;
     width: $textBoxWidthLarge;
+    margin-left: $textBoxWidthLarge + $margin1;
+    margin-top: $tabelHeight*4 + $margin1*3;
 }
 
 #eq_base_location_label {
     position: absolute;
-    left:$margin1;
-    top: $margin1+$buttonHeight+$margin1 * 5 + $tabelHeight * 5;
     width: $textBoxWidthLarge;
+    margin-top: $tabelHeight*5 + $margin1*4;
 }
 
 #eq_is_mobile_label {
     position: absolute;
-    left: $labelColumn2Left;
-    top: $margin1+$buttonHeight+$margin1 * 5 + $tabelHeight * 5;
     width: $textBoxWidthLarge;
+    margin-left: $textBoxWidthLarge + $margin1;
+    margin-top: $tabelHeight*5 + $margin1*4;
 }
 
 #eq_bookable_label {
     position: absolute;
-    left: $labelColumn2Left +$margin1+ 152.436px;
-    top: $margin1+$buttonHeight+$margin1 * 5 + $tabelHeight * 5;
     width: $textBoxWidthLarge;
+    margin-left: $textBoxWidthLarge + $margin1 + 152.43px + $margin1 ;
+    margin-top: $tabelHeight*5 + $margin1*4;
+}
+
+#gallery_button{
+    position: absolute;
+    width: $ButtonWidth - 10px;
+    margin-left: $textBoxWidthLarge + $margin1 + 152.43px + $margin1 + 152.43px + $margin1;
+    margin-top: $tabelHeight*5 + $margin1*4;
+    display: none;
+}
+
+#documents_button{
+    position: absolute;
+    width: $ButtonWidth;
+    margin-left: $textBoxWidthLarge + $margin1 + 152.43px + $margin1 + 152.43px + $margin1 + $ButtonWidth - 10px + $margin1;
+    margin-top: $tabelHeight*5 + $margin1*4;
+    display: none;
 }
 
 #eq_owner_id_label {
     position: absolute;
-    left:$margin1;
-    top: $margin1+$buttonHeight+$margin1 * 6 + $tabelHeight * 6;
-    width: $textBoxWidthSmall;
+    width: $textBoxWidthSmall - 20px;
+    margin-top: $tabelHeight*6 + $margin1*5;
 
     p {
         color: #7D9791;
@@ -186,15 +223,15 @@ $labelColumn2Left: $margin1+$textBoxWidthLarge+$margin1;
         margin-bottom: auto;
         margin-left: -25px;
         cursor: pointer;
-        display: none;
+        visibility: hidden;
     }
 }
 
 #eq_co_owner_id_label {
     position: absolute;
-    left:$margin1+$textBoxWidthSmall+$margin1;
-    top: $margin1+$buttonHeight+$margin1 * 6 + $tabelHeight * 6;
-    width: $textBoxWidthSmall;
+    width: $textBoxWidthSmall - 20px;;
+    margin-left: $textBoxWidthSmall + $margin1;
+    margin-top: $tabelHeight*6 + $margin1*5;
 
     p {
         color: #7D9791;
@@ -203,15 +240,15 @@ $labelColumn2Left: $margin1+$textBoxWidthLarge+$margin1;
         margin-bottom: auto;
         margin-left: -25px;
         cursor: pointer;
-        display: none;
+        visibility: hidden;
     }
 }
 
 #eq_supplier_id_label{
     position: absolute;
-    left: $margin1+$textBoxWidthSmall+$margin1+$textBoxWidthSmall+$margin1;
-    top: $margin1+$buttonHeight+$margin1 * 6 + $tabelHeight * 6;
-    width: $textBoxWidthSmall;
+    width: $textBoxWidthSmall - 20px;;
+    margin-left: $textBoxWidthSmall*2 + $margin1*2;
+    margin-top: $tabelHeight*6 + $margin1*5;
 
     p {
         color: #7D9791;
@@ -220,44 +257,51 @@ $labelColumn2Left: $margin1+$textBoxWidthLarge+$margin1;
         margin-bottom: auto;
         margin-left: -25px;
         cursor: pointer;
-        display: none;
+        visibility: hidden;
     }
 }
 
-#suggestions_owner {
-    z-index: 1000;
+#suggestions_panel {
     position: absolute;
-    left: $margin1;
-    top: $margin1+$buttonHeight+$margin1 * 6 + $tabelHeight * 7;
-    width: $textBoxWidthSmall;
+    width: 100%;
+    margin-top: $tabelHeight*7 + $margin1*5;
+    padding-bottom: 20%;
+
+    #suggestions_owner {
+        position: absolute;
+        width: $textBoxWidthSmall;
+    }
+    
+    #suggestions_co_owner {
+        position: absolute;
+        width: $textBoxWidthSmall;
+        margin-left: $textBoxWidthSmall + $margin1;
+    }
+    
+    #suggestions_supplier {
+        position: absolute;
+        width: $textBoxWidthSmall;
+        margin-left: $textBoxWidthSmall*2 + $margin1*2;
+    }
 }
 
-#suggestions_co_owner {
-    z-index: 1000;
-    position: absolute;
-    left:$margin1+$textBoxWidthSmall+$margin1;
-    top: $margin1+$buttonHeight+$margin1 * 6 + $tabelHeight * 7;
-    width: $textBoxWidthSmall;
-}
 
-#suggestions_supplier {
-    z-index: 1000;
-    position: absolute;
-    left: $margin1+$textBoxWidthSmall+$margin1+$textBoxWidthSmall+$margin1;
-    top: $margin1+$buttonHeight+$margin1 * 6 + $tabelHeight * 7;
-    width: $textBoxWidthSmall;
-}
 
-#eq_gallery {
-    position: absolute;
-    width: 1200px - $margin1*2;
-    left: $margin1;
-    top: $margin1+$buttonHeight+$margin1 * 7 + $tabelHeight * 7;
-    padding-bottom: $margin1;
-    overflow: hidden;
-    border-radius: 3px;
+#toast_pop_up {
     margin: auto;
+    text-align: center;
 }
+
+// #eq_gallery {
+//     position: absolute;
+//     width: 1200px - $margin1*2;
+//     left: $margin1;
+//     top: $margin1+$buttonHeight+$margin1 * 7 + $tabelHeight * 7;
+//     padding-bottom: $margin1;
+//     overflow: hidden;
+//     border-radius: 3px;
+//     margin: auto;
+// }
 
 // GALLERY AT BOTTEM OF PAGE -----------------------------------------------------------------------
 
@@ -308,7 +352,7 @@ $labelColumn2Left: $margin1+$textBoxWidthLarge+$margin1;
 }
   
   /* The Modal (background) */
-.modal {
+.gallery_modal {
     display: none;
     position: fixed;
     z-index: 1;
@@ -322,7 +366,7 @@ $labelColumn2Left: $margin1+$textBoxWidthLarge+$margin1;
 }
   
   /* Modal Content */
-.modal-content {
+.gallery_modal-content {
     position: relative;
     background-color: #fefefe;
     
@@ -350,7 +394,7 @@ $labelColumn2Left: $margin1+$textBoxWidthLarge+$margin1;
     cursor: pointer;
 }
   
-.mySlides {
+.gallery_slides {
     display: none;
     width: fit-content;
     margin-left: auto;
@@ -404,6 +448,7 @@ $labelColumn2Left: $margin1+$textBoxWidthLarge+$margin1;
     padding: 8px 12px;
     position: absolute;
     top: 0;
+    margin-top: -30px;
 }
   
 .caption-container {
@@ -454,8 +499,7 @@ img.hover-shadow {
     background-color: #fefefe;
     margin: auto;
     padding: 0;
-    border: 1px solid #888;
-    width: 60%;
+    width: fit-content;
     box-shadow:  0px 2px 6px -1px rgba(0,0,0,.13); 
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;

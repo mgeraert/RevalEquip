@@ -1,10 +1,13 @@
+
+$spacing: 20px;
+
 * {
     font-family: -apple-system, BlinkMacSystemFont, "San Francisco", Helvetica, Arial, sans-serif;
     font-weight: 400; 
     margin: 0;
-  }
+}
 
-  html, body {
+html, body {
     font-size: 14px;
     height: 100vh; 
     width: 100vw;
@@ -14,17 +17,17 @@
     justify-content: flex-start; 
     background-image: url("/static/images/wave2.svg");
     background-size: cover;
-  }
-  
-  .flash {
+}
+
+.flash {
     z-index: 99;
     top: 50%;
     position: fixed;
     width: 100%;
     text-align: center;
-  }
+}
 
-  .notification_text {
+.notification_text {
     color: white;
     border: 10px;
     border-style: solid;
@@ -35,101 +38,97 @@
     text-align: center;box-shadow:  0px 2px 6px -1px rgba(0,0,0,.13); 
 
     a {
-      color: white;
-      font-weight: 700; 
-      text-decoration: none;
-    }
+        color: white;
+        font-weight: 700; 
+        text-decoration: none;
+        }
 
     text {
-      color: black;
-      font-size: large;
-      font-weight: bolder;
-      cursor: pointer;
+        color: black;
+        font-size: large;
+        font-weight: bolder;
+        cursor: pointer;
     }
-  }
+}
 
-  .session {
+.session {
     z-index: 0;
     margin: auto auto;
     width: 600px;
     height: 400px;
     text-align: center;box-shadow:  0px 2px 6px -1px rgba(0,0,0,.13); 
-  }
-  
-  .left {
+}
+
+.left {
     border-radius: 3px;
     background-color: white;
     float: left;
     width: 67%;
     height: 400px;
-  }
-  
-  .right {
+}
+
+.right {
     float: right;
     height: 400px;
     width: 33%;
-    
+
     img {
-      height: 400px;
-      display: block;
-      border-top-right-radius: 3px;
-      border-bottom-right-radius: 3px;
+        height: 400px;
+        display: block;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
     }
-  }
-  
-  .register_screen {
+}
+
+.register_screen {
     text-align: left;
     padding: 50px 30px;
-    
+
     h4 {
-      color:  rgba(#000, .6);
-      span {
-          color: #01A38C;
-          font-weight: 700; 
-      }
+        color:  rgba(#000, .6);
+        margin-bottom: $spacing / 2;
+        span {
+            color: #01A38C;
+            font-weight: 700; 
+        }
     }
 
     #have_account {
-      margin-top: 2px;
-      padding-top: 8px;
-      padding-bottom: 8px;
-      margin-bottom: 20px;
-  
-      a {
-        text-decoration: none;
-        color: #01A38C;
-        font-weight: 700; 
-      }
+        margin-top: 2px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        margin-bottom: $spacing;
+
+        a {
+            text-decoration: none;
+            color: #01A38C;
+            font-weight: 700; 
+        }
     }
-  
+
     #register_name_label {
-      margin-bottom: 15px;
-      left:0px;
+        margin-bottom: $spacing;
+        left:0px;
     }
-  
+
     #register_last_name_label {
-      margin-bottom: 15px;
-      left:0px;
+        margin-bottom: $spacing;
+        left:0px;
     }
-  
+
     #register_email_label {
-      margin-bottom: 15px;
-      left:0px;
+        margin-bottom: $spacing;
+        left:0px;
     }
-  
-    #register_pw_hash {
-      margin-bottom: 15px;
-      left:0px;
-    }
-  
-    #register_password_label {
-      margin-bottom: 15px;
-      left:0px;
+
+    #register_file {
+        margin-bottom: $spacing;
+        left:0px;
+        border-radius: 6px 6px 6px 6px;
     }
 
     #register_button {
         float: right;
         width: 100px;
     }
-  }
-  
+}

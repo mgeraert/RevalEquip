@@ -9,15 +9,14 @@
   
   <title>Reval - Equipment</title>
 
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/reval_style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/table_design.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/reval_style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/equipment_form.css') }}">
   
 	<!-- <link rel="stylesheet" type="text/css" href="static/styles/perfect-scrollbar.css"> -->
 
   <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
   <script src="{{url_for('static', filename='js/equipment.js')}}"></script>
-  <script src="https://unpkg.com/floatthead"></script>
 
   <!--Font Awesome-->
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -26,7 +25,7 @@
   <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 
   <!--Kite Menu CSS-->
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/menu2.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/menu.css') }}">
 
   <!--Favicon-->
   <link rel="shortcut icon" href="/static/images/favicon.ico">
@@ -35,151 +34,161 @@
 </head>
 
 <body>
-
-
-  <!--Start Kite Menu-->
-  {% include 'menu.html' %}
-  <!--End Kite Menu-->
-  <script src="{{url_for('static', filename='js/menu2.js')}}"></script>
-
-
-  <script>
-    $(document).ready(function () {
-      $(".kite-menu").kiteMenu();
-    }); //jQuery
-  </script>
-
-  <text id="current_user_id" style="display: none;">ID={{current_user.id}}</text>
-
-  <div id="equipmentTable" style="width: 1200px;height: 540px;margin: auto;margin-top: 10px; overflow-x: hidden;"></div>
-
-  <div class="widePanel" id="inputPanel" style="width:1200px;height:700px;">
-
-    <div class="form-group"id="eq_inventory_number_label" >
-      <span for="eq_inventory_number" style="width:160px;">Inventory Number</span>
-      <input id="eq_inventory_number" class="form-field" type="text" placeholder="Equipment number" />
-    </div>
-
-    <div class="form-group"id="eq_label_label" >
-      <span for="eq_label" style="width:120px;">Label</span>
-      <input id="eq_label" class="form-field" type="text" placeholder="Label" />
-    </div>
-
-    <div class="form-group" id="eq_name_label">
-      <span for="eq_name" style="width:120px;">Name</span>
-      <input id="eq_name" class="form-field" type="text" placeholder="Name" />
-    </div>
-
-    <div class="form-group"id="eq_amount_label" >
-      <span for="eq_amount" style="width:120px;">Amount</span>
-      <input id="eq_amount" class="form-field" type="text" placeholder="Amount" />
-    </div>
-
-    <div class="form-group" id="eq_desc_label">
-      <span for="eq_desc" style="width:120px;">Description</span>
-      <input id="eq_desc" class="form-field" type="text" placeholder="Description" />
-    </div>
-
-    <div class="form-group" id="eq_outcome_label">
-      <span for="eq_outcome" style="width:120px;">Outcome</span>
-      <input id="eq_outcome" class="form-field" type="text" placeholder="Outcome" />
-    </div>
-
-    <div class="form-group" id="eq_purchase_date_label" >
-      <span for="eq_purchase_date" style="width:120px;">Purchase date</span>
-      <input id="eq_purchase_date" class="form-field" type="text" placeholder="Purchase date" />
-    </div>
-
-    {% if current_user.user_can_see_financial_data or current_user.user_is_equipment_admin %}
-    <div class="form-group" id="eq_purchase_price_label">
-      <span for="eq_purchase_price" style="width:120px;">Purchase Price</span>
-      <input id="eq_purchase_price" class="form-field" type="text" placeholder="Purchase Price" />
-    </div>
-
-    <div class="form-group" id="eq_annual_cost_label">
-      <span for="eq_annual_cost" style="width:120px;">Annual Cost</span>
-      <input id="eq_annual_cost" class="form-field" type="text" placeholder="Annual Cost" />
-    </div>
-
-    <div class="form-group" id="eq_annual_cost_budget_label">
-      <span for="eq_annual_cost_budget" style="width:160px;">Annual Cost Budget</span>
-      <input id="eq_annual_cost_budget" class="form-field" type="text" placeholder="Annual Cost Budget" />
-    </div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="notification is-danger flash">
+            <div class="notification_text">
+                {{ messages[0] }}<text style="padding-left:10px;" onclick="removeFlashNotification()">x</text>
+            </div>
+        </div>
     {% endif %}
-
-    <div class="form-group" id="eq_base_location_label">
-      <span for="eq_base_location" style="width:120px;">Base location</span>
-      <input id="eq_base_location" class="form-field" type="text" placeholder="Base location" />
-    </div>
-
-    <div class="form-group" style="width:152.436px;" id="eq_is_mobile_label">
-      <span for="eq_is_mobile" style="width:120px">Mobile</span>
-      <div class="form-field" style="padding:0px;" >
-        <label class="container">
-          <input type="checkbox" id="eq_is_mobile" >
-          <span class="checkmark"></span>
-        </label>
-      </div>
-    </div>
-
-    <div class="form-group" style="width:152.436px;" id="eq_bookable_label">
-      <span for="eq_bookable" style="width:120px">Bookable</span>
-      <div class="form-field" style="padding:0px;" >
-        <label class="container">
-          <input type="checkbox" id="eq_bookable" >
-          <span class="checkmark"></span>
-        </label>
-      </div>
-    </div>
-
-    <div class="form-group" id="eq_owner_id_label">
-      <span for="eq_owner_id" style="width:120px;">Owner</span>
-      <input id="eq_owner_id" class="form-field"  oninput="updateSuggestionOwner()" type="text" placeholder="Owner" />
-      <p id="eq_owner_detail">?</p>
-    </div>
-    <div id="suggestions_owner"></div>
-
-    <div class="form-group" id="eq_co_owner_id_label">
-      <span for="eq_co_owner_id" style="width:120px;">Co-owner</span>
-      <input id="eq_co_owner_id" class="form-field" oninput="updateSuggestionCoOwner()" type="text" placeholder="Co-owner" />
-      <p id="eq_co_owner_detail">?</p>
-    </div>
-    <div id="suggestions_co_owner"></div>
-
-    <div class="form-group" id="eq_supplier_id_label">
-      <span for="eq_supplier_id" style="width:120px;">Supplier</span>
-      <input id="eq_supplier_id" class="form-field" oninput="updateSuggestionSupplier()" type="text" placeholder="Supplier" />
-      <p id="eq_supplier_detail">?</p>
-    </div>
-    <div id="suggestions_supplier"></div>
-
-
-    <form id="uploadform" method="post" enctype="multipart/form-data">
-      <label for="file"></label>
-      <input id="file_input" name="file" type="file" class="form-field">
-      <button id="submit" type="button" class="mlbutton upload_button">Upload</button>
-    </form>
-    {% if current_user.user_is_equipment_admin %}
-    <button id="update_button" onclick="updateEquip()" class="mlbutton">Update</button>
-    <button id="new_button" onclick="prepareNewEquip()" class="mlbutton">New</button>
-    <button id="cancel_button" onclick="cancelNewEquip()" class="mlbutton">Cancel</button>
-    <button id="add_button" onclick="newEquip()" class="mlbutton">Save</button>
-    <button id="delete_button" onclick="deleteEquip()" class="mlbutton">Delete</button>
-    <a href="/downloadEquipmentCSV"><button id="export_button" class="mlbutton">Export</button></a>
-    {% endif %}
+    {% endwith %}
     
-    <div id="toast_message"></div>
+    <!--Start Kite Menu-->
+    {% include 'menu.html' %}
+    <!--End Kite Menu-->
+    <script src="{{url_for('static', filename='js/menu.js')}}"></script>
 
-    <div id="eq_gallery">
+    <text id="current_user_id" style="display: none;">ID={{current_user.id}}</text>
+
+    <script>
+        $(document).ready(function () {
+            $(".kite-menu").kiteMenu();
+        }); //jQuery
+    </script>
+
+    <div class="wide_panel" id="wide_panel">
+
+        <div id="equipment_table"></div>
+
+        <div class="button_panel" id="button_panel">
+            <form id="upload_form" method="post" enctype="multipart/form-data">
+                <label for="file"></label>
+                <input id="file_input" name="file" type="file" class="form-field">
+                <button id="submit" type="button" class="mlbutton upload_button">Upload</button>
+            </form>
+            <button id="update_button" onclick="updateEquip()" class="mlbutton">Update</button>
+            <button id="new_button" onclick="prepareNewEquip()" class="mlbutton">New</button>
+            <button id="cancel_button" onclick="cancelNewEquip()" class="mlbutton">Cancel</button>
+            <button id="add_button" onclick="newEquip()" class="mlbutton">Save</button>
+            <button id="delete_button" onclick="deleteEquip()" class="mlbutton">Delete</button>
+            <a href="/equipment/download-as-csv"><button id="export_button" class="mlbutton">Export</button></a>
+        </div>
+
+        <div class="input_panel" id="input_panel">
+            <div class="form-group"id="eq_inventory_number_label" >
+                <span for="eq_inventory_number" style="width:160px;">Inventory Number</span>
+                <input id="eq_inventory_number" class="form-field" type="text" placeholder="Equipment number" />
+            </div>
+    
+            <div class="form-group"id="eq_label_label" >
+                <span for="eq_label" style="width:120px;">Label</span>
+                <input id="eq_label" class="form-field" type="text" placeholder="Label" />
+            </div>
+    
+            <div class="form-group" id="eq_name_label">
+                <span for="eq_name" style="width:120px;">Name</span>
+                <input id="eq_name" class="form-field" type="text" placeholder="Name" />
+            </div>
+    
+            <div class="form-group"id="eq_amount_label" >
+                <span for="eq_amount" style="width:120px;">Amount</span>
+                <input id="eq_amount" class="form-field" type="text" placeholder="Amount" />
+            </div>
+    
+            <div class="form-group" id="eq_desc_label">
+                <span for="eq_desc" style="width:120px;">Description</span>
+                <input id="eq_desc" class="form-field" type="text" placeholder="Description" />
+            </div>
+    
+            <div class="form-group" id="eq_outcome_label">
+                <span for="eq_outcome" style="width:120px;">Outcome</span>
+                <input id="eq_outcome" class="form-field" type="text" placeholder="Outcome" />
+            </div>
+    
+            <div class="form-group" id="eq_purchase_date_label" >
+                <span for="eq_purchase_date" style="width:120px;">Purchase date</span>
+                <input id="eq_purchase_date" class="form-field" type="text" placeholder="Purchase date" />
+            </div>
+    
+            <div class="form-group" id="eq_purchase_price_label">
+                <span for="eq_purchase_price" style="width:120px;">Purchase Price</span>
+                <input id="eq_purchase_price" class="form-field" type="text" placeholder="Purchase Price" />
+            </div>
+    
+            <div class="form-group" id="eq_annual_cost_label">
+                <span for="eq_annual_cost" style="width:120px;">Annual Cost</span>
+                <input id="eq_annual_cost" class="form-field" type="text" placeholder="Annual Cost" />
+            </div>
+    
+            <div class="form-group" id="eq_annual_cost_budget_label">
+                <span for="eq_annual_cost_budget" style="width:160px;">Annual Cost Budget</span>
+                <input id="eq_annual_cost_budget" class="form-field" type="text" placeholder="Annual Cost Budget" />
+            </div>
+    
+            <div class="form-group" id="eq_base_location_label">
+                <span for="eq_base_location" style="width:120px;">Base location</span>
+                <input id="eq_base_location" class="form-field" type="text" placeholder="Base location" />
+            </div>
+    
+            <div class="form-group" style="width:152.436px;" id="eq_is_mobile_label">
+                <span for="eq_is_mobile" style="width:120px">Mobile</span>
+                <div class="form-field" style="padding:0px;" >
+                <label class="container">
+                    <input type="checkbox" id="eq_is_mobile" >
+                    <span class="checkmark"></span>
+                </label>
+                </div>
+            </div>
+    
+            <div class="form-group" style="width:152.436px;" id="eq_bookable_label">
+                <span for="eq_bookable" style="width:120px">Bookable</span>
+                <div class="form-field" style="padding:0px;" >
+                <label class="container">
+                    <input type="checkbox" id="eq_bookable" >
+                    <span class="checkmark"></span>
+                </label>
+                </div>
+            </div>
+
+            <button id="gallery_button" onclick="openGallery()" class="mlbutton">Gallery</button>
+            <button id="documents_button" onclick="openDocuments()" class="mlbutton">Documents</button>
+    
+            <div class="form-group" id="eq_owner_id_label">
+                <span for="eq_owner_id" style="width:120px;">Owner</span>
+                <input id="eq_owner_id" class="form-field"  oninput="updateOwnerSuggestion()" type="text" placeholder="Owner" />
+                <p id="eq_owner_detail" onclick="showOwnerDetail()">?</p>
+            </div>
+            
+    
+            <div class="form-group" id="eq_co_owner_id_label">
+                <span for="eq_co_owner_id" style="width:120px;">Co-owner</span>
+                <input id="eq_co_owner_id" class="form-field" oninput="updateCoOwnerSuggestion()" type="text" placeholder="Co-owner" />
+                <p id="eq_co_owner_detail" onclick="showCoOwnerDetail()">?</p>
+            </div>
+    
+            <div class="form-group" id="eq_supplier_id_label">
+                <span for="eq_supplier_id" style="width:120px;">Supplier</span>
+                <input id="eq_supplier_id" class="form-field" oninput="updateSupplierSuggestion()" type="text" placeholder="Supplier" />
+                <p id="eq_supplier_detail" onclick="showSupplierDetail()">?</p>
+            </div>
+            <div id="suggestions_panel">
+                <div id="suggestions_owner"></div>
+                <div id="suggestions_co_owner"></div>
+                <div id="suggestions_supplier"></div>
+            </div>
+        </div>
+
     </div>
     
-  </div>
-  
-  <div id="myModal" class="modal"></div>
-  <div id="pop_up_window" class="pop_up"></div>
-</div>
-  
+    <div id="toast_message" class="notification is-danger flash"></div>
 
+    <div id="gallery_modal" class="gallery_modal"></div>
+    <div id="documents_pop_up" class="pop_up"></div>
+
+    <div id="owner_info_pop_up" class="pop_up"></div>
+    <div id="co_owner_info_pop_up" class="pop_up"></div>
+    <div id="supplier_info_pop_up" class="pop_up"></div>
 </body>
 
 </html>

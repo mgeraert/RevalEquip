@@ -3,7 +3,7 @@ $(document).ready(function () {
 });
 
 function generatePasswordHash() {
-    $("#login_pw_hash").val(MD5($("#login_password").val()));
+    $("#login_pw_hash").val(sha256($("#login_password").val()));
 }
 
 function removeFlashNotification() {

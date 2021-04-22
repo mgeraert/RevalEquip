@@ -1,5 +1,4 @@
 ID;supplier_last_name;supplier_name;supplier_email;supplier_phone;supplier_company;supplier_comment
 1;REYMEN REYMEN;Dean Dean;test@test.be;;;
-2;REYMEN REYMEN;Dean Dean;test@test.be;;;
-3;REYMEN REYMEN;Dean Dean;test@test.be;;;
-4;REYMEN REYMEN;Dean Dean;test@test.be;;;
+5;ACHTER NAAM;Voor Naam;tresttest@email.be;  0032412345678;;Zie website voor meer info
+6;TEST TEST;Test Test;;;;

@@ -1,35 +1,43 @@
-from flask import Blueprint, request, render_template, Response, session
-from flask_login import login_required
-
-from classes.Database import Database
-import json
 import csv
+import json
 import os
 
-from user import User
+import flask_login
+from flask import Blueprint, render_template, Response, request
+from flask_login import login_required
+from werkzeug.utils import redirect
+
+from classes.Database import Database
 
 equipment = Blueprint('equipment', __name__)
-basedir = os.path.abspath(os.path.dirname(__file__))
 
 
-@equipment.route('/equipment', methods=['GET'])
+@equipment.route('/equipment')
 @login_required
-def reval_equipment():
+def _equipment():
     return render_template('equipment.html')
 
 
-@equipment.route('/getEquipment', methods=['GET'])
+@equipment.route('/equipment/get')
 @login_required
 def get_equipment():
     db = Database()
     db.conn.row_factory = db.dict_factory
     c = db.conn.cursor()
-    user_id = request.args.get('user_id')
-    user = User.query.filter_by(id=user_id).first()
-    if user.user_can_see_financial_data:
+
+    user = flask_login.current_user
+
+    # admin is allowed to receive all the data
+    if user.is_admin():
         sql_string = 'SELECT * FROM equipment '
         c.execute(sql_string)
         data = c.fetchall()
+    # financial team is allowed to see all the insensitive data and financial data
+    elif user.is_financial_team():
+        sql_string = 'SELECT * FROM equipment '
+        c.execute(sql_string)
+        data = c.fetchall()
+    # the rest is only allowed to see the insensitive data
     else:
         sql_string = 'SELECT ID, equipment_inventory_number, equipment_label, equipment_name, equipment_amount, ' \
                      'equipment_description, equipment_outcome, equipment_purchase_date, equipment_base_location, ' \
@@ -42,25 +50,178 @@ def get_equipment():
     return json.dumps(data)
 
 
-@equipment.route('/getFinancialDataByID', methods=['GET'])
+@equipment.route('/equipment/get-by-id', methods=['GET'])
 @login_required
-def get_financial_equipment_data():
-    equipment_id = request.args.get('equipment_id')
+def get_equipment_by_id():
     db = Database()
     db.conn.row_factory = db.dict_factory
     c = db.conn.cursor()
-    sql_string = 'SELECT ID, equipment_purchase_price, equipment_annual_cost, equipment_annual_cost_budget FROM ' \
-                 'equipment WHERE ID = ' + equipment_id
+
+    user = flask_login.current_user
+
+    equipment_id = request.args.get('equipment_id')
+    sql_string = 'SELECT ID, equipment_owner_id, equipment_co_owner_id FROM equipment WHERE ID = "' + equipment_id + '"'
     c.execute(sql_string)
-    data = c.fetchall()
+
+    equip = c.fetchall()[0]
+    equipment_owner_id = equip['equipment_owner_id']
+    equipment_co_owner_id = equip['equipment_co_owner_id']
+
+    # admin is allowed to receive all the data
+    if user.is_admin():
+        sql_string = 'SELECT * FROM equipment WHERE ID = "' + equipment_id + '"'
+        c.execute(sql_string)
+        data = c.fetchall()
+    # financial team is allowed to see all the insensitive data and financial data
+    elif user.is_financial_team():
+        sql_string = 'SELECT * FROM equipment WHERE ID = "' + equipment_id + '"'
+        c.execute(sql_string)
+        data = c.fetchall()
+    # owner allowed to see all the data about the equipment
+    elif user.is_owner() and user.get_id() == equipment_owner_id:
+        sql_string = 'SELECT * FROM equipment WHERE ID = "' + equipment_id + '"'
+        c.execute(sql_string)
+        data = c.fetchall()
+    # co-owner allowed to see all the data about the equipment
+    elif user.is_owner() and user.get_id() == equipment_co_owner_id:
+        sql_string = 'SELECT * FROM equipment WHERE ID = "' + equipment_id + '"'
+        c.execute(sql_string)
+        data = c.fetchall()
+    # the rest is only allowed to see the insensitive data
+    else:
+        sql_string = 'SELECT ID, equipment_inventory_number, equipment_label, equipment_name, equipment_amount, ' \
+                     'equipment_description, equipment_outcome, equipment_purchase_date, equipment_base_location, ' \
+                     'equipment_is_mobile, equipment_owner_id, equipment_co_owner_id, equipment_supplier_id, ' \
+                     'equipment_bookable FROM equipment WHERE ID = "' + equipment_id + '"'
+        c.execute(sql_string)
+        data = c.fetchall()
 
     c.close()
     return json.dumps(data)
 
 
-@equipment.route('/newEquipment', methods=['GET'])
+@equipment.route('/equipment/update', methods=['GET'])
+@login_required
+def update_equipment():
+    sql_string = 'UPDATE equipment SET '
+    sql_parameters = ''
+    ID = request.args.get('ID')
+
+    db = Database()
+    db.conn.row_factory = db.dict_factory
+    c = db.conn.cursor()
+
+    user = flask_login.current_user
+
+    equipment_id = request.args.get('ID')
+    sql_equipment = 'SELECT ID, equipment_owner_id, equipment_co_owner_id FROM equipment WHERE ID = "' + equipment_id + '"'
+    c.execute(sql_equipment)
+
+    equip = c.fetchall()[0]
+    equipment_owner_id = equip['equipment_owner_id']
+    equipment_co_owner_id = equip['equipment_co_owner_id']
+
+    # check if user is allowed to edit/update the equipment
+    if not user.is_admin():
+        if user.get_id() != equipment_owner_id and user.get_id() != equipment_co_owner_id:
+            return 'http403'
+
+    # sql_string gets prepared
+    equipment_inventory_number = request.args.get('equipment_inventory_number')
+    if equipment_inventory_number != '':
+        sql_parameters = sql_parameters + 'equipment_inventory_number="' + equipment_inventory_number + '"'
+
+    equipment_label = request.args.get('equipment_label')
+    if equipment_label != '':
+        sql_parameters = sql_parameters + ',equipment_label="' + equipment_label + '"'
+
+    equipment_name = request.args.get('equipment_name').capitalize()
+    if equipment_name != '':
+        sql_parameters = sql_parameters + ',equipment_name="' + equipment_name + '"'
+    else:
+        return 'http400'
+
+    equipment_amount = request.args.get('equipment_amount')
+    if equipment_amount != '':
+        sql_parameters = sql_parameters + ',equipment_amount="' + equipment_amount + '"'
+
+    equipment_description = request.args.get('equipment_description')
+    if equipment_description != '':
+        sql_parameters = sql_parameters + ',equipment_description="' + equipment_description + '"'
+
+    equipment_outcome = request.args.get('equipment_outcome')
+    if equipment_outcome != '':
+        sql_parameters = sql_parameters + ',equipment_outcome="' + equipment_outcome + '"'
+
+    equipment_purchase_date = request.args.get('equipment_purchase_date')
+    if equipment_purchase_date != '':
+        sql_parameters = sql_parameters + ',equipment_purchase_date="' + equipment_purchase_date + '"'
+
+    equipment_base_location = request.args.get('equipment_base_location')
+    if equipment_base_location != '':
+        sql_parameters = sql_parameters + ',equipment_base_location="' + equipment_base_location + '"'
+
+    equipment_is_mobile = request.args.get('equipment_is_mobile')
+    if equipment_is_mobile != '':
+        sql_parameters = sql_parameters + ',equipment_is_mobile="' + equipment_is_mobile + '"'
+
+    equipment_bookable = request.args.get('equipment_bookable')
+    if equipment_bookable != '':
+        sql_parameters = sql_parameters + ',equipment_bookable="' + equipment_bookable + '"'
+
+    equipment_owner_id = request.args.get('equipment_owner_id')
+    if equipment_owner_id != '':
+        sql_parameters = sql_parameters + ',equipment_owner_id="' + equipment_owner_id + '"'
+
+        sql_user_set_owner = 'UPDATE users SET user_is_owner= "1" WHERE ID = "' + equipment_owner_id + '"'
+        c.execute(sql_user_set_owner)
+
+    equipment_co_owner_id = request.args.get('equipment_co_owner_id')
+    if equipment_co_owner_id != '':
+        sql_parameters = sql_parameters + ',equipment_co_owner_id="' + equipment_co_owner_id + '"'
+
+        sql_user_set_owner = 'UPDATE users SET user_is_owner= "1" WHERE ID = "' + equipment_co_owner_id + '"'
+        c.execute(sql_user_set_owner)
+
+    equipment_purchase_price = request.args.get('equipment_purchase_price')
+    if equipment_purchase_price != '':
+        sql_parameters = sql_parameters + ',equipment_purchase_price="' + equipment_purchase_price + '"'
+
+    equipment_annual_cost = request.args.get('equipment_annual_cost')
+    if equipment_annual_cost != '':
+        sql_parameters = sql_parameters + ',equipment_annual_cost="' + equipment_annual_cost + '"'
+
+    equipment_annual_cost_budget = request.args.get('equipment_annual_cost_budget')
+    if equipment_annual_cost_budget != '':
+        sql_parameters = sql_parameters + ',equipment_annual_cost_budget="' + equipment_annual_cost_budget + '"'
+
+    equipment_supplier_id = request.args.get('equipment_supplier_id')
+    if equipment_supplier_id != '':
+        sql_parameters = sql_parameters + ',equipment_supplier_id="' + equipment_supplier_id + '"'
+
+    if sql_parameters[0] == ',':
+        sql_parameters = sql_parameters[1:]
+    sql_string = sql_string + sql_parameters + ' WHERE ID = ' + ID
+
+    # sql_string gets executed
+    c.execute(sql_string)
+    db.conn.commit()
+
+    c.close()
+    return 'http200'
+
+
+@equipment.route('/equipment/new', methods=['GET'])
 @login_required
 def new_equipment():
+    user = flask_login.current_user
+    # only admin is allowed to create a new equipment
+    if not user.is_admin():
+        return 'http403'
+
+    db = Database()
+    c = db.conn.cursor()
+
     sql_string = 'INSERT INTO equipment '
     sql_parameters = '('
     sql_values = '('
@@ -112,20 +273,26 @@ def new_equipment():
         sql_parameters = sql_parameters + 'equipment_is_mobile,'
         sql_values = sql_values + '"' + equipment_is_mobile + '",'
 
-    equipment_bookable = request.args.get('equipment_bookable')
-    if equipment_bookable != '':
-        sql_parameters = sql_parameters + 'equipment_bookable,'
-        sql_values = sql_values + '"' + equipment_bookable + '",'
+    # equipment_bookable = request.args.get('equipment_bookable')
+    # if equipment_bookable != '':
+    #     sql_parameters = sql_parameters + 'equipment_bookable,'
+    #     sql_values = sql_values + '"' + equipment_bookable + '",'
 
     equipment_owner_id = request.args.get('equipment_owner_id')
     if equipment_owner_id != '':
         sql_parameters = sql_parameters + 'equipment_owner_id,'
         sql_values = sql_values + '"' + equipment_owner_id + '",'
 
+        sql_user_set_owner = 'UPDATE users SET user_is_owner= "1" WHERE ID = "' + equipment_owner_id + '"'
+        c.execute(sql_user_set_owner)
+
     equipment_co_owner_id = request.args.get('equipment_co_owner_id')
     if equipment_co_owner_id != '':
         sql_parameters = sql_parameters + 'equipment_co_owner_id,'
         sql_values = sql_values + '"' + equipment_co_owner_id + '",'
+
+        sql_user_set_owner = 'UPDATE users SET user_is_owner= "1" WHERE ID = "' + equipment_co_owner_id + '"'
+        c.execute(sql_user_set_owner)
 
     equipment_purchase_price = request.args.get('equipment_purchase_price')
     if equipment_purchase_price != '':
@@ -147,17 +314,13 @@ def new_equipment():
         sql_parameters = sql_parameters + 'equipment_supplier_id,'
         sql_values = sql_values + '"' + equipment_supplier_id + '",'
 
-    db = Database()
-
     if sql_parameters[len(sql_parameters) - 1] == ',':
         sql_parameters = sql_parameters[:len(sql_parameters) - 1] + sql_parameters[(len(sql_parameters) - 1 + 1):]
     if sql_values[len(sql_values) - 1] == ',':
         sql_values = sql_values[:len(sql_values) - 1] + sql_values[(len(sql_values) - 1 + 1):]
 
     sql_string = sql_string + sql_parameters + ') VALUES ' + sql_values + ')'
-    print(sql_string)
 
-    c = db.conn.cursor()
     c.execute(sql_string)
     db.conn.commit()
 
@@ -165,248 +328,45 @@ def new_equipment():
     return 'http200'
 
 
-@equipment.route('/updateEquipment', methods=['GET'])
-@login_required
-def update_equipment():
-    sql_string = 'UPDATE equipment SET '
-    sql_parameters = ''
-    ID = request.args.get('ID')
-
-    equipment_inventory_number = request.args.get('equipment_inventory_number')
-    if equipment_inventory_number != '':
-        sql_parameters = sql_parameters + 'equipment_inventory_number="' + equipment_inventory_number + '"'
-
-    equipment_label = request.args.get('equipment_label')
-    if equipment_label != '':
-        sql_parameters = sql_parameters + ',equipment_label="' + equipment_label + '"'
-
-    equipment_name = request.args.get('equipment_name')
-    if equipment_name != '':
-        sql_parameters = sql_parameters + ',equipment_name="' + equipment_name + '"'
-    else:
-        return 'http400'
-
-    equipment_amount = request.args.get('equipment_amount')
-    if equipment_amount != '':
-        sql_parameters = sql_parameters + ',equipment_amount="' + equipment_amount + '"'
-
-    equipment_description = request.args.get('equipment_description')
-    if equipment_description != '':
-        sql_parameters = sql_parameters + ',equipment_description="' + equipment_description + '"'
-
-    equipment_outcome = request.args.get('equipment_outcome')
-    if equipment_outcome != '':
-        sql_parameters = sql_parameters + ',equipment_outcome="' + equipment_outcome + '"'
-
-    equipment_purchase_date = request.args.get('equipment_purchase_date')
-    if equipment_purchase_date != '':
-        sql_parameters = sql_parameters + ',equipment_purchase_date="' + equipment_purchase_date + '"'
-
-    equipment_base_location = request.args.get('equipment_base_location')
-    if equipment_base_location != '':
-        sql_parameters = sql_parameters + ',equipment_base_location="' + equipment_base_location + '"'
-
-    equipment_is_mobile = request.args.get('equipment_is_mobile')
-    if equipment_is_mobile != '':
-        sql_parameters = sql_parameters + ',equipment_is_mobile="' + equipment_is_mobile + '"'
-
-    equipment_bookable = request.args.get('equipment_bookable')
-    if equipment_bookable != '':
-        sql_parameters = sql_parameters + ',equipment_bookable="' + equipment_bookable + '"'
-
-    equipment_owner_id = request.args.get('equipment_owner_id')
-    if equipment_owner_id != '':
-        sql_parameters = sql_parameters + ',equipment_owner_id="' + equipment_owner_id + '"'
-
-    equipment_co_owner_id = request.args.get('equipment_co_owner_id')
-    if equipment_co_owner_id != '':
-        sql_parameters = sql_parameters + ',equipment_co_owner_id="' + equipment_co_owner_id + '"'
-
-    equipment_purchase_price = request.args.get('equipment_purchase_price')
-    if equipment_purchase_price != '':
-        sql_parameters = sql_parameters + ',equipment_purchase_price="' + equipment_purchase_price + '"'
-
-    equipment_annual_cost = request.args.get('equipment_annual_cost')
-    if equipment_annual_cost != '':
-        sql_parameters = sql_parameters + ',equipment_annual_cost="' + equipment_annual_cost + '"'
-
-    equipment_annual_cost_budget = request.args.get('equipment_annual_cost_budget')
-    if equipment_annual_cost_budget != '':
-        sql_parameters = sql_parameters + ',equipment_annual_cost_budget="' + equipment_annual_cost_budget + '"'
-
-    equipment_supplier_id = request.args.get('equipment_supplier_id')
-    if equipment_supplier_id != '':
-        sql_parameters = sql_parameters + ',equipment_supplier_id="' + equipment_supplier_id + '"'
-
-    db = Database()
-    print(sql_parameters)
-
-    if sql_parameters[0] == ',':
-        sql_parameters = sql_parameters[1:]
-    sql_string = sql_string + sql_parameters + ' WHERE ID = ' + ID
-    print(sql_string)
-
-    c = db.conn.cursor()
-    c.execute(sql_string)
-    db.conn.commit()
-
-    c.close()
-    return 'http200'
-
-
-@equipment.route('/deleteEquipment', methods=['GET'])
+@equipment.route('/equipment/delete', methods=['GET'])
 @login_required
 def delete_equipment():
+    user = flask_login.current_user
+    # only admin is allowed to delete a new equipment
+    if not user.is_admin():
+        return 'http403'
+
     db = Database()
     ID = request.args.get('ID')
 
     sql1 = 'DELETE FROM equipment WHERE ID = "' + ID + '"'
-    print(sql1)
     sql2 = 'DELETE FROM pictures WHERE equipment_id = "' + ID + '"'
-    print(sql1)
+    sql3 = 'DELETE FROM documents WHERE equipment_id = "' + ID + '"'
 
     db.conn.row_factory = db.dict_factory
     c = db.conn.cursor()
     c.execute(sql1)
     c.execute(sql2)
+    c.execute(sql3)
     db.conn.commit()
 
-    directory = 'static/images/upload'
-    my_dir = os.path.join(basedir, directory)
-    for fname in os.listdir(my_dir):
-        if fname.startswith(ID + "-1"):
-            os.remove(os.path.join(my_dir, fname))
+    pictures_dir = os.path.join(os.getcwd(), 'static\\images\\upload\\')
+    for filename in os.listdir(pictures_dir):
+        if filename.startswith("equipment_picture_id_" + ID):
+            os.remove(os.path.join(pictures_dir, filename))
+
+    documents_dir = os.path.join(os.getcwd(), 'static\\docs\\upload\\')
+    for filename in os.listdir(documents_dir):
+        if filename.startswith("equipment_document_id_" + ID):
+            os.remove(os.path.join(documents_dir, filename))
 
     c.close()
     return 'http200'
 
 
-@equipment.route('/updateSuggestionOwner', methods=['GET'])
+@equipment.route('/equipment/download-as-csv')
 @login_required
-def update_suggestion_owner():
-    owner_name = request.args.get('owner_name')
-    db = Database()
-
-    sql_string_last_name = 'SELECT ID, user_last_name, user_name FROM users WHERE user_last_name LIKE "%' + owner_name + '%"'
-    db.conn.row_factory = db.dict_factory
-    c = db.conn.cursor()
-    c.execute(sql_string_last_name)
-    data_last_name = c.fetchall()
-
-    sql_string_first_name = 'SELECT ID, user_last_name, user_name FROM users WHERE user_name LIKE "%' + owner_name + '%"'
-    c.execute(sql_string_first_name)
-    data_first_name = c.fetchall()
-    print(data_first_name)
-
-    list_of_all_names = data_first_name + data_last_name
-    print(list_of_all_names)
-
-    c.close()
-    return json.dumps(list_of_all_names)
-
-
-@equipment.route('/updateSuggestionSupplier', methods=['GET'])
-@login_required
-def update_suggestion_supplier():
-    supplier_name = request.args.get('supplier_name')
-    db = Database()
-
-    sql_string_last_name = 'SELECT ID, supplier_last_name, supplier_name FROM suppliers WHERE supplier_last_name LIKE "%' + supplier_name + '%"'
-    db.conn.row_factory = db.dict_factory
-    c = db.conn.cursor()
-    c.execute(sql_string_last_name)
-    data_last_name = c.fetchall()
-
-    sql_string_first_name = 'SELECT ID, supplier_last_name, supplier_name FROM suppliers WHERE supplier_name LIKE "%' + supplier_name + '%"'
-    c.execute(sql_string_first_name)
-    data_first_name = c.fetchall()
-    print(data_first_name)
-
-    list_of_all_names = data_first_name + data_last_name
-    print(list_of_all_names)
-
-    c.close()
-    return json.dumps(list_of_all_names)
-
-
-@equipment.route('/getUserByID', methods=['GET'])
-@login_required
-def get_user_by_id():
-    db = Database()
-    user_id = request.args.get('ID')
-
-    sql = 'SELECT * FROM users WHERE ID = "' + user_id + '"'
-    db.conn.row_factory = db.dict_factory
-    c = db.conn.cursor()
-    c.execute(sql)
-    return json.dumps(c.fetchall())
-
-
-@equipment.route('/getSupplierByID', methods=['GET'])
-@login_required
-def get_supplier_by_id():
-    db = Database()
-    user_id = request.args.get('ID')
-
-    sql = 'SELECT * FROM suppliers WHERE ID = "' + user_id + '"'
-    db.conn.row_factory = db.dict_factory
-    c = db.conn.cursor()
-    c.execute(sql)
-    return json.dumps(c.fetchall())
-
-
-@equipment.route('/getUserIDByUserName', methods=['GET'])
-@login_required
-def get_user_id_by_user_name():
-    db = Database()
-    user_last_name = request.args.get('user_last_name')
-    user_name = request.args.get('user_name')
-
-    sql = 'SELECT * FROM users WHERE user_name LIKE "%' + user_name + '%" AND user_last_name LIKE "%' + user_last_name + '%"'
-    db.conn.row_factory = db.dict_factory
-    c = db.conn.cursor()
-    c.execute(sql)
-    return json.dumps(c.fetchall())
-
-
-@equipment.route('/newEquipmentPicture', methods=['GET'])
-@login_required
-def new_equipment_picture():
-    sql_string = 'INSERT INTO pictures '
-    sql_parameters = '('
-    sql_values = '('
-
-    picture_name = request.args.get('picture_name')
-    if picture_name != '':
-        sql_parameters = sql_parameters + 'picture_name,'
-        sql_values = sql_values + '"' + picture_name + '",'
-
-    equipment_id = request.args.get('equipment_id')
-    if equipment_id != '':
-        sql_parameters = sql_parameters + 'equipment_id,'
-        sql_values = sql_values + '"' + equipment_id + '",'
-
-    db = Database()
-
-    if sql_parameters[len(sql_parameters) - 1] == ',':
-        sql_parameters = sql_parameters[:len(sql_parameters) - 1] + sql_parameters[(len(sql_parameters) - 1 + 1):]
-    if sql_values[len(sql_values) - 1] == ',':
-        sql_values = sql_values[:len(sql_values) - 1] + sql_values[(len(sql_values) - 1 + 1):]
-
-    sql_string = sql_string + sql_parameters + ') VALUES ' + sql_values + ')'
-    print(sql_string)
-
-    c = db.conn.cursor()
-    c.execute(sql_string)
-    db.conn.commit()
-
-    c.close()
-    return 'http200'
-
-
-@equipment.route('/saveEquipmentAsCSV')
-@login_required
-def save_equipment_as_csv():
+def download_equipment_as_csv():
     db = Database()
     db.conn.row_factory = db.dict_factory
     c = db.conn.cursor()
@@ -428,15 +388,14 @@ def save_equipment_as_csv():
         # Writing data of CSV file
         csv_writer.writerow(eq.values())
 
-    return 'http200'
-
-
-@equipment.route('/downloadEquipmentCSV')
-@login_required
-def download_equipment_csv():
-    save_equipment_as_csv()
-
     with open("data_equipment.csv") as fp:
-        csv = fp.read()
-    return Response(csv, mimetype="text/csv",
-                    headers={"Content-disposition": "attachment; filename=data_equipment.csv"})
+        csv_file = fp.read()
+
+    user = flask_login.current_user
+
+    # admin is allowed to receive all the data
+    if user.is_admin():
+        return Response(csv_file, mimetype="text/csv",
+                        headers={"Content-disposition": "attachment; filename=data_equipment.csv"})
+    else:
+        return redirect(request.referrer)

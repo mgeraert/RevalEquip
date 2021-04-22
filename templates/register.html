@@ -10,7 +10,6 @@
 
   <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
   <script src="{{url_for('static', filename='js/register.js')}}"></script>
-  <script src="{{url_for('static', filename='js/md5.js')}}"></script>
 
 
   <!--Font Awesome-->
@@ -19,14 +18,12 @@
   <!--Google Fonts-->
   <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 
-  <!--Kite Menu CSS-->
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/menu2.css') }}">
-
   <!--Favicon-->
   <link rel="shortcut icon" href="/static/images/favicon.ico">
 </head>
 
 <body>
+    
     {% with messages = get_flashed_messages() %}
     {% if messages %}
         <div class="notification is-danger flash">
@@ -36,12 +33,13 @@
         </div>
     {% endif %}
     {% endwith %}
+
     <div class="session">
         <div class="left">
             <div class="register_screen">
                 <h4><span>REGISTER</span></h4>
                 <p id="have_account">Already have an account? <span><a href="login">Login</a></span></p>
-                <form method="post" action="/register">
+                <form method="post" action="/register" enctype="multipart/form-data">
                     <div class="form-group" id="register_name_label">
                         <span for="register_name" style="width:120px;">Name</span>
                         <input id="register_name" class="form-field" type="text" name="register_name" placeholder="Name" />
@@ -54,11 +52,8 @@
                         <span for="register_email" style="width:120px;">Email</span>
                         <input id="register_email" class="form-field" type="text" name="register_email" placeholder="Email" />
                     </div>
-                    <input type="hidden" id="register_pw_hash" class="form-field" type="text" name="register_pw_hash"/>
-                
-                    <div class="form-group" id="register_password_label">
-                        <span for="register_password" style="width:120px;">Password</span>
-                        <input id="register_password" class="form-field" type="password" name="register_password" placeholder="Password" />
+                    <div class="form-group" id="register_file_label">
+                        <input id="register_file" name="file" type="file" class="form-field">   
                     </div>
                     <button id="register_button" class="mlbutton">Register</button>
                 </form>

@@ -1,167 +1,144 @@
-
 $margin1: 30px;
-$margin2: 100px;
-$tabelHeight: 34.653px;
-$labelWidth: 130px;
-$rowSpacing: 28px;
-$textBoxWidthSmall: 360px;
-$textBoxWidthLarge: 555px;
-$buttonHeight: 31.528px;
 $ButtonWidth: 100px;
-$ButtonSpacing: 10px;
 
-$textBoxColumn1Left: $margin1+$labelWidth;
-$labelColumn2Left: $margin1+$textBoxWidthLarge+$margin1;
-$textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWidth;
-
-@mixin textBoxStyle {
-    height: 19.2px;
-    border-width: 0.3px;
-    border-style: solid;
-    border-radius: 0.5px;
-    border-color: grey;
-    padding-left: 3px;
+html, body {
+    font-size: 14px;
+    height: 100vh; 
+    width: 100vw;
+    margin: 0 0; 
+    display: flex; 
+    align-items: flex-start; 
+    justify-content: flex-start; 
 }
 
-#update_button{
-    position: absolute;
-    left:420px;
-    top: $margin1;
-    width: $ButtonWidth;
+#wide_panel {
+    top: 0;
 }
 
-#new_button{
-    position: absolute;
-    left:420px+$margin1+$ButtonWidth;
-    top: $margin1;
-    width: $ButtonWidth;
+#text_title {
+    float: left;
+    width: 100%;
+    padding: 6.2px 12px;
+
+    background-color: #41BAA9;
+    border: 1px solid #01A38C;
+
+    font-size: 16px;
+    text-align: center;
+    color: #fff;
+    font-weight: 550;
+    cursor: auto;
 }
 
-#delete_button{
-    position: absolute;
-    left:420px+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
-    top: $margin1;
-    width: $ButtonWidth;
+#suppliers_table {
+    height: fit-content;
+    max-height: 40vh;
+    width: 100%;
+    overflow-x: hidden;
+    text-align: center;
+    border-radius: 6px 6px 6px 6px;
+    box-shadow:  0px 2px 6px -1px rgba(0,0,0,.13); 
 }
 
-#add_button{
-    position: absolute;
-    left:355px+$margin1+$ButtonWidth;
-    top: $margin1;
-    width: $ButtonWidth;
-    visibility: hidden;
+.button_panel {
+    margin-top: 20px;
+    height: 32px;
+
+    #file_input {
+        position: absolute;
+        margin-top: 2px;
+        width: 360px;
+        padding: 2.2px 3px 2.9px 3px;
+        font-size: 12px;
+    }
+    
+    .upload_button { 
+        position: absolute;
+        left: 260px;
+        width: $ButtonWidth;
+    }
+    
+    #update_button{
+        position: absolute;
+        left:420px;
+        width: $ButtonWidth;
+        // display: none;
+    }
+    
+    #new_button{
+        position: absolute;
+        left:420px+$margin1+$ButtonWidth;
+        width: $ButtonWidth;
+        // display: none;
+    }
+    
+    #delete_button{
+        position: absolute;
+        left:420px+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
+        width: $ButtonWidth;
+        // display: none;
+    }
+    
+    #export_button{
+        position: absolute;
+        left:1200px - $ButtonWidth;
+        width: $ButtonWidth;
+        // display: none;
+    }
+    
+    #add_button{
+        position: absolute;
+        left:355px+$margin1+$ButtonWidth;
+        width: $ButtonWidth;
+        display: none;
+    }
+    
+    #cancel_button{
+        position: absolute;
+        left:355px+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
+        width: $ButtonWidth;
+        display: none;
+    }
 }
 
-#cancel_button{
-    position: absolute;
-    left:355px+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
-    top: $margin1;
-    width: $ButtonWidth;
-    visibility: hidden;
-}
-
-#export_button{
-    position: absolute;
-    left:1200px - $ButtonWidth - $margin1;
-    top: $margin1;
-    width: $ButtonWidth;
-}
-
-
-#toast_pop_up {
-    left: 420px;
-    width: $ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
-    position: absolute;
-    background-color: gray;
-    top: $margin1;
+.input_panel {
+    position: relative;
+    margin-top: 25px;
 }
 
 #supplier_last_name_label{
-    position: absolute;
-    left: $margin1;
-    top: $margin1+$buttonHeight+$margin1;
-    width: $textBoxWidthLarge;
+    float: left;
+    width: 49%;
 }
-
-// #supplier_last_name{
-//     position: absolute;
-//     left: $textBoxColumn1Left;
-//     top:$rowSpacing * 1;
-//     width: $textBoxWidth;
-//     @include textBoxStyle();
-// }
 
 #supplier_name_label{
-    position: absolute;
-    left: $labelColumn2Left;
-    top: $margin1+$buttonHeight+$margin1;
-    width: $textBoxWidthLarge;
+    float: left;
+    margin-left: 2%;
+    width: 49%;
 }
-
-// #supplier_name{
-//     position: absolute;
-//     left: $textBoxColumn2Left;
-//     top:$rowSpacing * 1;
-//     width: $textBoxWidth;
-//     @include textBoxStyle();
-// }
 
 #supplier_email_label{
-    position: absolute;
-    left: $margin1;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5;
-    width: $textBoxWidthLarge;
+    float: left;
+    margin-top: 2%;
+    width: 32%;
 }
-
-// #supplier_email{
-//     position: absolute;
-//     left: $textBoxColumn1Left;
-//     top:$rowSpacing * 2;
-//     width: $textBoxWidth;
-//     @include textBoxStyle();
-// }
 
 #supplier_phone_label{
-    position: absolute;
-    left: $labelColumn2Left;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5;
-    width: $textBoxWidthLarge;
+    float: left;
+    margin-left: 2%;
+    margin-top: 2%;
+    width: 32%;
 }
-
-// #supplier_phone{
-//     position: absolute;
-//     left: $textBoxColumn2Left;
-//     top:$rowSpacing * 2;
-//     width: $textBoxWidth;
-//     @include textBoxStyle();
-// }
 
 #supplier_company_label{
-    position: absolute;
-    left: $margin1;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
-    width: $textBoxWidthLarge;
+    float: left;
+    margin-left: 2%;
+    margin-top: 2%;
+    width: 32%;
 }
-
-// #supplier_company{
-//     position: absolute;
-//     left: $textBoxColumn1Left;
-//     top:$rowSpacing * 3;
-//     width: $textBoxWidth;
-//     @include textBoxStyle();
-// }
 
 #supplier_comment_label{
-    position: absolute;
-    left: $labelColumn2Left;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
-    width: $textBoxWidthLarge;
+    float: left;
+    margin-top: 2%;
+    width: 100%;
 }
-
-// #supplier_comment{
-//     position: absolute;
-//     left: $textBoxColumn2Left;
-//     top:$rowSpacing * 3;
-//     width: $textBoxWidth;
-//     @include textBoxStyle();
-// }

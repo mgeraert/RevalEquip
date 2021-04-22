@@ -1,0 +1,120 @@
+html, body {
+    font-size: 14px;
+    height: 100vh; 
+    width: 100vw;
+    margin: 0 0; 
+    display: flex; 
+    align-items: flex-start; 
+    justify-content: flex-start; 
+    background-image: url("/static/images/wave3.svg");
+    background-size: cover;
+}
+
+#user_last_name_label{
+    float: left;
+    width: 35%;
+}
+
+#user_name_label{
+    float: left;
+    margin-left: 2%;
+    width: 35%;
+}
+
+#user_sex_label{
+    float: left;
+    margin-left: 2%;
+    width: 26%;
+}
+
+#user_title_label{
+    margin-top: 2%;
+    float: left;
+    width: 32%;
+}
+
+#user_category_label{
+    margin-top: 2%;
+    float: left;
+    margin-left: 2%;
+    width: 32%;
+}
+
+#user_function_label{
+    margin-top: 2%;
+    float: left;
+    margin-left: 2%;
+    width: 32%;
+}
+
+#user_email_label{
+    margin-top: 2%;
+    float: left;
+    width: 49%;
+}
+
+#user_home_address_label{
+    margin-top: 2%;
+    float: left;
+    margin-left: 2%;
+    width: 49%;
+}
+
+#user_telephone_label{
+    margin-top: 2%;
+    float: left;
+    width: 49%;
+}
+
+#user_private_phone_label{
+    margin-top: 2%;
+    float: left;
+    margin-left: 2%;
+    width: 49%;
+}
+
+#user_in_date_label{
+    margin-top: 2%;
+    float: left;
+    width: 30%;
+    height: 35px;
+}
+
+#user_out_date_label{
+    margin-top: 2%;
+    float: left;
+    margin-left: 2%;
+    width: 30%;
+    height: 35px;
+}
+
+#user_is_pi_label{
+    margin-top: 2%;
+    float: left;
+    margin-left: 2%;
+    height: 35px;
+}
+
+#user_is_phd_label{
+    margin-top: 2%;
+    float: left;
+    margin-left: 2%;
+    height: 35px;
+}
+
+#update_button{
+    margin-top: 2%;
+    float: left;
+    margin-left: 2%;
+    width: 100px;
+}
+
+#text_requirements {
+    margin-top: 2%;
+    float: left;
+    width: 100%;
+    padding: 4px 12px;
+    font-size: 12px;
+    text-align: center;
+}
+

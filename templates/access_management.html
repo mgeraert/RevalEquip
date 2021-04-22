@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- https://codepen.io/BuddyLReno/pen/boGRPO -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
+  
+  <title>Reval - Access management</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/reval_style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/table_design.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/access_management_form.css') }}">
+  
+	<!-- <link rel="stylesheet" type="text/css" href="static/styles/perfect-scrollbar.css"> -->
+
+  <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+  <script src="{{url_for('static', filename='js/access_management.js')}}"></script>
+  <script src="https://unpkg.com/floatthead"></script>
+
+  <!--Font Awesome-->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+  <!--Google Fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+  <!--Kite Menu CSS-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/menu.css') }}">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="/static/images/favicon.ico">
+  
+
+</head>
+
+<body>
+  <!--Start Kite Menu-->
+  {% include 'menu.html' %}
+  <!--End Kite Menu-->
+  <script src="{{url_for('static', filename='js/menu.js')}}"></script>
+
+
+  <script>
+    $(document).ready(function () {
+      $(".kite-menu").kiteMenu();
+    }); //jQuery
+  </script>
+
+  <div class="wide_panel" id="wide_panel">
+    <div id="not_allowed_users_table"></div>
+  </div>
+    
+  <div id="toast_message" class="notification is-danger flash"></div>
+  
+  <div id="picture_pop_up" class="picture_pop_up"></div>
+</div>
+  
+
+</body>
+
+</html>

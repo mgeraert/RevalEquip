@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- https://codepen.io/BuddyLReno/pen/boGRPO -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
+  
+  <title>Reval - Access management</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/reval_style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/profile_form.css') }}">
+  
+	<!-- <link rel="stylesheet" type="text/css" href="static/styles/perfect-scrollbar.css"> -->
+
+  <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+  <script src="{{url_for('static', filename='js/profile.js')}}"></script>
+
+  <!--Font Awesome-->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+  <!--Google Fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+  <!--Kite Menu CSS-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/menu.css') }}">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="/static/images/favicon.ico">
+  
+
+</head>
+
+<body>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="notification is-danger flash">
+            <div class="notification_text">
+                {{ messages[0] }}<text style="padding-left:10px;" onclick="removeFlashNotification()">x</text>
+            </div>
+        </div>
+    {% endif %}
+    {% endwith %}
+    
+    {% if current_user.user_completed_profile %}
+    <!--Start Kite Menu-->
+    {% include 'menu.html' %}
+    <!--End Kite Menu-->
+    <script src="{{url_for('static', filename='js/menu.js')}}"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $(".kite-menu").kiteMenu();
+        }); //jQuery
+    </script>
+    {% endif %}
+
+    <div class="wide_panel">
+        <div class="form-group label" id="user_last_name_label">
+            <span for="user_last_name" style="width:120px;">Last name</span>
+            <input id="user_last_name" class="form-field" type="text" placeholder="Last name (!)" />
+        </div>
+
+        <div class="form-group" id="user_name_label" >
+            <span for="user_name" style="width:120px;">Name</span>
+            <input id="user_name" class="form-field" type="text" placeholder="Name (!)" />
+        </div>
+
+        <div class="form-group" id="user_sex_label" >
+            <span for="user_sex" style="width:120px;">Sex</span>
+            <select id="user_sex" class="form-field">
+                <option value="m">Male</option>
+                <option value="v">Female</option>
+                <option value="x">I prefer not to say</option>
+            </select>
+        </div>
+
+        <div class="form-group"id="user_title_label" >
+            <span for="user_title" style="width:120px;">Title</span>
+            <input id="user_title" class="form-field" type="text" placeholder="Title" />
+        </div>
+
+        <div class="form-group"id="user_category_label" >
+            <span for="user_category" style="width:120px;">Category</span>
+            <input id="user_category" class="form-field" type="text" placeholder="Category" />
+        </div>
+
+        <div class="form-group"id="user_function_label" >
+            <span for="user_function" style="width:120px;">Function</span>
+            <input id="user_function" class="form-field" type="text" placeholder="Function" />
+        </div>
+
+        <div class="form-group"id="user_email_label" >
+            <span for="user_email" style="width:120px;">Email</span>
+            <input id="user_email" class="form-field" type="text" placeholder="Email (!)" />
+        </div>
+
+        <div class="form-group"id="user_home_address_label" >
+            <span for="user_home_address" style="width:120px;">Home address</span>
+            <input id="user_home_address" class="form-field" type="text" placeholder="Home adress" />
+        </div>
+
+        <div class="form-group"id="user_telephone_label" >
+            <span for="user_telephone" style="width:120px;">Telephone</span>
+            <input id="user_telephone" class="form-field" type="tel" placeholder="Telephone (!)" />
+        </div>
+
+        <div class="form-group"id="user_private_phone_label" >
+            <span for="user_private_phone" style="width:120px;">Private phone</span>
+            <input id="user_private_phone" class="form-field" type="tel" placeholder="Private phone" />
+        </div>
+
+        <div class="form-group"id="user_in_date_label" >
+            <span for="user_in_date" style="width:120px;">In date</span>
+            <input id="user_in_date" class="form-field" type="date"/>
+        </div>
+
+        <div class="form-group"id="user_out_date_label" >
+            <span for="user_out_date" style="width:120px;">Out date</span>
+            <input id="user_out_date" class="form-field" type="date"/>
+        </div>
+
+        <div class="form-group" style="width:117.5px;" id="user_is_pi_label">
+            <span for="user_is_pi" style="width:85.188px">Pi</span>
+            <div class="form-field" style="padding:0px;" >
+                <label class="container">
+                <input type="checkbox" id="user_is_pi" >
+                <span class="checkmark"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group" style="width:117.5px;;" id="user_is_phd_label">
+            <span for="user_is_phd" style="width:85.188px">PhD</span>
+            <div class="form-field" style="padding:0px;" >
+                <label class="container">
+                <input type="checkbox" id="user_is_phd" >
+                <span class="checkmark"></span>
+                </label>
+            </div>
+        </div>
+        <button id="update_button" onclick="updateProfile()" class="mlbutton">Update</button>
+        <text id="text_requirements">Please fill in all the text boxes with (!).</text>
+    </div>
+</div>
+  
+
+</body>
+
+</html>

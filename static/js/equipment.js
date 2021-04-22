@@ -11,21 +11,71 @@ var g_selectedCoOwner;
 var g_supplier;
 var g_selectedSupplier;
 
-var g_imageDirectory = "static\\images\\upload\\";
+var g_imageDirectory = "static\\images\\";
 
 $(document).ready(function () {
-    $.get("/getUserByID?" + $("#current_user_id").text(), function (data, status) {
+    $("#menu_title").text("Equipment");
+
+    $.get("/users/get-permissions-by-id?" + $("#current_user_id").text(), function (data, status) {
         g_currentUser = JSON.parse(data)[0];
-        if (g_currentUser.user_is_equipment_admin == 0) {
-            $('#inputPanel input').attr('readonly', true);
-            $('#inputPanel input:checkbox').attr('disabled', true);
+        if (g_currentUser.user_is_lender) {
+            showButtons(false);
+            showAllInputs(false);
+            setReadOnly(true);
+        }
+        if (g_currentUser.user_can_see_financial_data) {
+            showButtons(true);
+            showAllInputs(true);
+            setReadOnly(false);
+        }
+        if (g_currentUser.user_is_admin) {
+            showButtons(true);
+            showAllInputs(true);
+            setReadOnly(false);
         }
         getEquipment();
     });
 });
 
+function setReadOnly(boolean) {
+    if (boolean) {
+        $('#wide_panel input').attr('readonly', true);
+        $('#wide_panel input:checkbox').attr('disabled', true);
+    } else {
+        $('#wide_panel input').attr('readonly', false);
+        $('#wide_panel input:checkbox').attr('disabled', false);
+    }
+}
+
+function showAllInputs(boolean) {
+    if (boolean) {
+        $('#eq_purchase_price_label').show();
+        $('#eq_annual_cost_label').show();
+        $('#eq_annual_cost_budget_label').show();
+    } else {
+        $('#eq_purchase_price_label').hide();
+        $('#eq_annual_cost_label').hide();
+        $('#eq_annual_cost_budget_label').hide();
+    }
+}
+
+function showButtons(boolean) {
+    if (boolean) {
+        $('#update_button').show();
+        $('#new_button').show();
+        $('#delete_button').show();
+        $('#export_button').show();
+    } else {
+        $('#update_button').hide();
+        $('#new_button').hide();
+        $('#delete_button').hide();
+        $('#export_button').hide();
+    }
+}
+
+// GENERATE EQUIPMENT TABLE -----------------------------------------------------------------------------------------------
 function getEquipment(enableSelectedRow = false, enableSort = false, sortAsc = false, sortColumn = 0) {
-    $.get("/getEquipment?user_id=" + g_currentUser.ID, function (data, status) {
+    $.get("/equipment/get", function (data, status) {
         g_equipment = JSON.parse(data);
         if (g_equipment.length > 0) {
             tableHTML = "<table id='blue_table' class='table_design table-sortable'>"
@@ -37,7 +87,7 @@ function getEquipment(enableSelectedRow = false, enableSort = false, sortAsc = f
             tableHTML = tableHTML.concat("<tbody>");
             tableHTML = tableHTML.concat("</table>");
 
-            $("#equipmentTable").html(tableHTML);
+            $("#equipment_table").html(tableHTML);
             // addRowHandlers();
             if (enableSort) {
                 sortTableByColumn(document.querySelector("table"), sortColumn, sortAsc);
@@ -112,8 +162,21 @@ function getTableDiv(content, width, rownNr) {
     out = out.concat('</div>');
     return out;
 }
+// --------------------------------------------------------------------------------------------------------------------
 
+
+// DO .... WHEN EQUIPMENT GETS SELECTED -------------------------------------------------------------------------------------
 function selectRowEquipment(row) {
+    clearTextBox();
+    loadSelectedData(row);
+    generateGallery();
+    generateDocuments();
+    checkIfUserIsOwner();
+}
+// --------------------------------------------------------------------------------------------------------------------
+
+// LOAD INPUT VALUES --------------------------------------------------------------------------------------------
+function loadSelectedData(row) {
     if (typeof row == 'number') {
         rowNr = row
     } else {
@@ -122,7 +185,7 @@ function selectRowEquipment(row) {
 
     var rowNr_data = getJSONFromTable(rowNr);
 
-    var table = document.getElementById("equipmentTable");
+    var table = document.getElementById("equipment_table");
     var rows = table.getElementsByTagName("tr");
 
     if (g_selectedRow > -1 && g_selectedRow < rows.length) {
@@ -136,8 +199,6 @@ function selectRowEquipment(row) {
     g_selectedRow = rowNr;
     g_selectedEquipment = g_equipment[rowNr_data - 1];
 
-    loadImagesFromDirectory(g_imageDirectory);
-
     $("#eq_inventory_number").val(g_selectedEquipment.equipment_inventory_number);
     $("#eq_label").val(g_selectedEquipment.equipment_label);
     $("#eq_name").val(g_selectedEquipment.equipment_name);
@@ -148,648 +209,109 @@ function selectRowEquipment(row) {
     $("#eq_base_location").val(g_selectedEquipment.equipment_base_location);
     if (g_selectedEquipment.equipment_is_mobile == 1) {
         $("#eq_is_mobile").prop("checked", true);
-    } else if (g_selectedEquipment.equipment_is_mobile == -1) {
-        $("#eq_is_mobile").prop("checked", false);
     } else {
         $("#eq_is_mobile").prop("checked", false);
     }
     if (g_selectedEquipment.equipment_bookable == 1) {
         $("#eq_bookable").prop("checked", true);
-    } else if (g_selectedEquipment.equipment_bookable == -1) {
-        $("#eq_bookable").prop("checked", false);
     } else {
         $("#eq_bookable").prop("checked", false);
     }
-    $("#suggestions_owner").empty();
-    if (g_selectedEquipment.equipment_owner_id == -1 || g_selectedEquipment.equipment_owner_id == "") {
-        $("#eq_owner_id").val("");
-        $('#eq_owner_detail').removeAttr('onclick');
-        $('#eq_owner_detail').hide();
 
-        var ownerLabelWidth = $('#eq_owner_id_label').width();
-        if (ownerLabelWidth == 342) {
-            $('#eq_owner_id_label').width(ownerLabelWidth+18+"px");
-        }
-    } else {
-        argString = "?ID=" + g_selectedEquipment.equipment_owner_id;
-        $.get("/getUserByID" + argString, function (data, status) {
+    var owner_id = g_selectedEquipment.equipment_owner_id;
+    if (owner_id != -1) {
+        $.get("/users/get-name-by-id?ID=" + owner_id, function (data, status) {
             var owner = JSON.parse(data)[0];
             $("#eq_owner_id").val(owner.user_last_name + ' ' + owner.user_name);
-            g_selectedOwner = owner;
+            $('#eq_owner_detail').css("visibility", "visible");
         });
-        $('#eq_owner_detail').attr('onclick', 'generatePopUp("owner")');
-        $('#eq_owner_detail').show();
-
-        var ownerLabelWidth = $('#eq_owner_id_label').width();
-        if (ownerLabelWidth == 360) {
-            $('#eq_owner_id_label').width(ownerLabelWidth-18+"px");
-        }
-    }
-    $("#suggestions_co_owner").empty();
-    if (g_selectedEquipment.equipment_co_owner_id == -1 || g_selectedEquipment.equipment_co_owner_id == "") {
-        $("#eq_co_owner_id").val("");
-        $('#eq_co_owner_detail').removeAttr('onclick');
-        $('#eq_co_owner_detail').hide();
-
-        var ownerLabelWidth = $('#eq_co_owner_id_label').width();
-        if (ownerLabelWidth == 342) {
-            $('#eq_co_owner_id_label').width(ownerLabelWidth+18+"px");
-        }
+        generateInformationPopUp('owner', owner_id);
     } else {
-        argString = "?ID=" + g_selectedEquipment.equipment_co_owner_id;
-        $.get("/getUserByID" + argString, function (data, status) {
+        $('#eq_owner_detail').css("visibility", "hidden");
+        $("#owner_info_pop_up").html('');
+    }
+
+    var co_owner_id = g_selectedEquipment.equipment_co_owner_id;
+    if (co_owner_id != -1) {
+        $.get("/users/get-name-by-id?ID=" + co_owner_id, function (data, status) {
             var coOwner = JSON.parse(data)[0];
             $("#eq_co_owner_id").val(coOwner.user_last_name + ' ' + coOwner.user_name);
-            g_selectedCoOwner = coOwner;
+            $('#eq_co_owner_detail').css("visibility", "visible");
         });
-        $('#eq_co_owner_detail').attr('onclick', 'generatePopUp("co_owner")');
-        $('#eq_co_owner_detail').show();
+        generateInformationPopUp('co_owner', co_owner_id);
+    } else {
+        $('#eq_co_owner_detail').css("visibility", "hidden");
+        $("#co_owner_info_pop_up").html('');
+    }
 
-        var ownerLabelWidth = $('#eq_co_owner_id_label').width();
-        if (ownerLabelWidth == 360) {
-            $('#eq_co_owner_id_label').width(ownerLabelWidth-18+"px");
-        }
+    var supplier_id = g_selectedEquipment.equipment_supplier_id;
+    if (supplier_id != -1) {
+        $.get("/suppliers/get-name-by-id?ID=" + supplier_id, function (data, status) {
+            var supplier = JSON.parse(data)[0];
+            $("#eq_supplier_id").val(supplier.supplier_last_name + ' ' + supplier.supplier_name);
+            $('#eq_supplier_detail').css("visibility", "visible");
+        });
+        generateInformationPopUp('supplier', supplier_id);
+    } else {
+        $('#eq_supplier_detail').css("visibility", "hidden");
+        $("#supplier_info_pop_up").html('');
     }
 
     $("#eq_purchase_price").val(g_selectedEquipment.equipment_purchase_price);
     $("#eq_annual_cost").val(g_selectedEquipment.equipment_annual_cost);
     $("#eq_annual_cost_budget").val(g_selectedEquipment.equipment_annual_cost_budget);
+}
+// --------------------------------------------------------------------------------------------------------------------
 
-    if (g_currentUser.ID == g_selectedEquipment.equipment_owner_id || g_currentUser.ID == g_selectedEquipment.equipment_co_owner_id) {
-        if ($("#update_button").length == 0) {
-            var innerHTML = '<button id="update_button" onclick="updateEquip()" class="mlbutton">Update</button>';
-            $(".widePanel").append(innerHTML);
-        }
-        if ($("#eq_purchase_price").length == 0 && $("#eq_annual_cost").length == 0 && $("#eq_annual_cost_budget").length == 0) {
-            var innerHTML = '<div class="form-group" id="eq_purchase_price_label"><span for="eq_purchase_price" style="width:120px;">Purchase Price</span><input id="eq_purchase_price" class="form-field" type="text" placeholder="Purchase Price" /></div><div class="form-group" id="eq_annual_cost_label"><span for="eq_annual_cost" style="width:120px;">Annual Cost</span><input id="eq_annual_cost" class="form-field" type="text" placeholder="Annual Cost" /></div><div class="form-group" id="eq_annual_cost_budget_label"><span for="eq_annual_cost_budget" style="width:160px;">Annual Cost Budget</span><input id="eq_annual_cost_budget" class="form-field" type="text" placeholder="Annual Cost Budget" /></div>';
-            $(".widePanel").append(innerHTML);
-        }
-        $('#inputPanel input').attr('readonly', false);
-        $('#inputPanel input:checkbox').attr('disabled', false);
-        if (g_currentUser.user_can_see_financial_data == 0) {
-            $.get("/getFinancialDataByID?equipment_id=" + g_selectedEquipment.ID, function (data, status) {
-                var financialData = JSON.parse(data)[0];
-                $("#eq_purchase_price").val(financialData.equipment_purchase_price);
-                $("#eq_annual_cost").val(financialData.equipment_annual_cost);
-                $("#eq_annual_cost_budget").val(financialData.equipment_annual_cost_budget);
+// --------------------------------------------------------------------------------------------------------------------
+function checkIfUserIsOwner() {
+    if (g_currentUser.user_is_admin == 0) {
+        if (g_selectedEquipment.equipment_owner_id == g_currentUser.ID || g_selectedEquipment.equipment_co_owner_id == g_currentUser.ID) {
+            $.get("/equipment/get-by-id?equipment_id=" + g_selectedEquipment.ID, function (data, status) {
+                var equipment = JSON.parse(data)[0];
+
+                $("#eq_purchase_price").val(equipment.equipment_purchase_price);
+                $("#eq_annual_cost").val(equipment.equipment_annual_cost);
+                $("#eq_annual_cost_budget").val(equipment.equipment_annual_cost_budget);
+
+                showButtons(true);
+                showAllInputs(true);
+                setReadOnly(false);
             });
-        }
-    } else {
-        if (g_currentUser.user_can_see_financial_data == 0 && g_currentUser.user_is_equipment_admin == 0) {
-            $('#inputPanel input').attr('readonly', true);
-            $('#inputPanel input:checkbox').attr('disabled', true);
-
-            $("#update_button").remove();
-            $("#eq_purchase_price_label").remove();
-            $("#eq_annual_cost_label").remove();
-            $("#eq_annual_cost_budget_label").remove();
-        }
-    }
-
-    $("#suggestions_owner").empty();
-    if (g_selectedEquipment.equipment_supplier_id == -1 || g_selectedEquipment.equipment_supplier_id == "") {
-        $("#eq_supplier_id").val("");
-        $('#eq_supplier_detail').removeAttr('onclick');
-        $('#eq_supplier_detail').hide();
-
-        var ownerLabelWidth = $('#eq_supplier_id_label').width();
-        if (ownerLabelWidth == 342) {
-            $('#eq_supplier_id_label').width(ownerLabelWidth+18+"px");
-        }
-    } else {
-        argString = "?ID=" + g_selectedEquipment.equipment_supplier_id;
-        $.get("/getSupplierByID" + argString, function (data, status) {
-            var supplier = JSON.parse(data)[0];
-            $("#eq_supplier_id").val(supplier.supplier_last_name + ' ' + supplier.supplier_name);
-            g_selectedSupplier = supplier;
-        });
-        $('#eq_supplier_detail').attr('onclick', 'generatePopUp("supplier")');
-        $('#eq_supplier_detail').show();
-
-        var ownerLabelWidth = $('#eq_supplier_id_label').width();
-        if (ownerLabelWidth == 360) {
-            $('#eq_supplier_id_label').width(ownerLabelWidth-18+"px");
-        }
-    }
-}
-
-function updateEquip() {
-    // g_selectedEquipment = g_equipment[rownNr - 1];
-    if (g_selectedEquipment == undefined) {
-        showToast('Gelieve een toestel aan te duiden.', '#B08734');
-        return;
-    }
-    var ID = g_selectedEquipment.ID;
-    argString = "?ID=" + ID;
-
-    var equipment_inventory_number = $("#eq_inventory_number").val();
-    argString = argString + "&equipment_inventory_number=" + equipment_inventory_number;
-
-    var equipment_label = $("#eq_label").val();
-    argString = argString + "&equipment_label=" + equipment_label;
-
-    var equipment_name = $("#eq_name").val();
-    argString = argString + "&equipment_name=" + equipment_name;
-
-    var equipment_amount = $("#eq_amount").val();
-    argString = argString + "&equipment_amount=" + equipment_amount;
-
-    var equipment_description = $("#eq_desc").val();
-    argString = argString + "&equipment_description=" + equipment_description;
-
-    var equipment_outcome = $("#eq_outcome").val();
-    argString = argString + "&equipment_outcome=" + equipment_outcome;
-
-    var equipment_purchase_date = $("#eq_purchase_date").val();
-    argString = argString + "&equipment_purchase_date=" + equipment_purchase_date;
-
-    var equipment_base_location = $("#eq_base_location").val();
-    argString = argString + "&equipment_base_location=" + equipment_base_location;
-
-    var is_mobile = $("#eq_is_mobile").is(':checked');
-    if (is_mobile == true) {
-        equipment_is_mobile = 1;
-        argString = argString + "&equipment_is_mobile=" + equipment_is_mobile;
-    } else {
-        if (g_selectedEquipment.equipment_is_mobile == 1 || g_selectedEquipment.equipment_is_mobile == 0) {
-            equipment_is_mobile = 0;
         } else {
-            equipment_is_mobile = "";
+            showButtons(false);
+            showAllInputs(false);
+            setReadOnly(true);
         }
-        argString = argString + "&equipment_is_mobile=" + equipment_is_mobile;
     }
+}
+// --------------------------------------------------------------------------------------------------------------------
 
-    var bookable = $("#eq_bookable").is(':checked');
-    if (bookable == true) {
-        equipment_bookable = 1;
-        argString = argString + "&equipment_bookable=" + equipment_bookable;
-    } else {
-        if (g_selectedEquipment.equipment_bookable == 1 || g_selectedEquipment.equipment_bookable == 0) {
-            equipment_bookable = 0;
-        } else {
-            equipment_bookable = "";
+// --------------------------------------------------------------------------------------------------------------------
+function getJSONFromTable(rowNr) {
+    var table = document.getElementById('blue_table').tBodies[0];
+    var jsonArr = [];
+    for (var i = 0, row; row = table.rows[i]; i++) {
+        var col = row.cells;
+        var jsonObj = {
+            elem: col[0].innerHTML
         }
-        argString = argString + "&equipment_bookable=" + equipment_bookable;
+
+        jsonArr.push(jsonObj);
     }
 
-    var equipment_owner_id = -1;
-    if ($("#eq_owner_id").val() != "") {
-        equipment_owner_id = g_selectedOwner.ID;
-    }
-    argString = argString + "&equipment_owner_id=" + equipment_owner_id;
-
-    var equipment_co_owner_id = -1;
-    if ($("#eq_co_owner_id").val() != "") {
-        equipment_co_owner_id = g_selectedCoOwner.ID;
-    }
-    argString = argString + "&equipment_co_owner_id=" + equipment_co_owner_id;
-
-    if ($('#eq_purchase_price').length) {
-        var equipment_purchase_price = $("#eq_purchase_price").val();
-        argString = argString + "&equipment_purchase_price=" + equipment_purchase_price;
-    } else {
-        argString = argString + "&equipment_purchase_price=";
-    }
-
-    if ($('#eq_annual_cost').length) {
-        var equipment_annual_cost = $("#eq_annual_cost").val();
-        argString = argString + "&equipment_annual_cost=" + equipment_annual_cost;
-    } else {
-        argString = argString + "&equipment_annual_cost=";
-    }
-
-    if ($('#eq_annual_cost_budget').length) {
-        var equipment_annual_cost_budget = $("#eq_annual_cost_budget").val();
-        argString = argString + "&equipment_annual_cost_budget=" + equipment_annual_cost_budget;
-    } else {
-        argString = argString + "&equipment_annual_cost_budget=";
-    }
-
-    var equipment_supplier_id = -1;
-    if ($("#eq_supplier_id").val() != "") {
-        equipment_supplier_id = g_selectedSupplier.ID;
-    }
-    argString = argString + "&equipment_supplier_id=" + equipment_supplier_id;
-
-    if (g_selectedRow > -1) {
-        $.get("/updateEquipment" + argString, function (data, status) {
-            if (data.localeCompare("http200") == 0) {
-                showToast('Equipment is geupdate', '#5DB034');
-
-                var table_temp = document.querySelector("table");
-                const tHead = table_temp.tHead;
-                var column = '';
-                tHead.querySelectorAll("th").forEach(th => {
-                    if (th.classList.contains("th-sort-asc") == true || th.classList.contains("th-sort-desc")) {
-                        column = th;
-                    }
-                });
-                if (column != '') {
-                    var columnNr = parseInt(getNumbersFromString(column.getAttribute('onclick'))[0]);
-                    if (column.classList[0] == "th-sort-asc") {
-                        getEquipment(true, true, true, columnNr)
-                    } else {
-                        getEquipment(true, true, false, columnNr)
-                    }
-                } else {
-                    getEquipment(true);
-                }
-            } else if (data.localeCompare("http400") == 0) {
-                giveInputWarning("eq_name");
-                showToast('Gelieve het toestel een naam te geven', '#B08734');
-            }
-        });
-    }
+    var ID = getNumbersFromString(jsonArr[rowNr - 1].elem)[1];
+    return ID;
 }
 
-function updateSuggestionOwner() {
-    if ($("#eq_owner_id").val().length > 1) {
-        argString = "?owner_name=" + $("#eq_owner_id").val();
-        $.get("/updateSuggestionOwner" + argString, function (data, status) {
-            var suggestedUsers = JSON.parse(data);
-
-            if (suggestedUsers.length > 0) {
-
-                // remove duplicates https://www.geeksforgeeks.org/how-to-remove-duplicates-from-an-array-of-objects-using-javascript/
-                g_owner = [];
-                let uniqueUser = {};
-                for (let i in suggestedUsers) {
-                    if (i < 5) {
-                        suggestedUser = suggestedUsers[i]['ID'];
-                        uniqueUser[suggestedUser] = suggestedUsers[i];
-                    } else {
-                        break;
-                    }
-                }
-                for (i in uniqueUser) {
-                    g_owner.push(uniqueUser[i]);
-                }
-
-                tableHTML = "<table class='table_design'>"
-                $.each(g_owner, function (i, item) {
-                    tableHTML = tableHTML.concat(generateOwnerRow(i + 1, item));
-                });
-                tableHTML = tableHTML.concat("</table>");
-
-                $("#suggestions_owner").html(tableHTML);
-            } else {
-                $("#suggestions_owner").empty();
-            }
-        });
-    } else if ($("#eq_owner_id").val().length == 0 || $("#eq_owner_id").val() == -1) {
-        $("#suggestions_owner").empty();
-    }
+function getNumbersFromString(string) {
+    var regex = /\d+/g;
+    var matches = string.match(regex);
+    return matches;
 }
+// --------------------------------------------------------------------------------------------------------------------
 
-function generateOwnerRow(rownNr, user) {
-
-    out = "<tr onclick='selectRowOwner(" + rownNr.toString() + ")'>";
-
-    out = out.concat('<td>');
-    out = out.concat(getTableDiv(user.user_last_name + ' ' + user.user_name, 220, rownNr));
-    out = out.concat("</td>");
-
-    out = out + "</tr>";
-
-    return out;
-}
-
-function selectRowOwner(rownNr) {
-    if (rownNr > 0) {
-        g_selectedOwner = g_owner[rownNr - 1];
-        $("#eq_owner_id").val(g_selectedOwner.user_last_name + ' ' + g_selectedOwner.user_name);
-        $("#suggestions_owner").empty();
-    }
-}
-
-function updateSuggestionCoOwner() {
-    if ($("#eq_co_owner_id").val().length > 1) {
-        argString = "?owner_name=" + $("#eq_co_owner_id").val();
-        $.get("/updateSuggestionOwner" + argString, function (data, status) {
-            var suggestedUsers = JSON.parse(data);
-
-            if (suggestedUsers.length > 0) {
-
-                // remove duplicates https://www.geeksforgeeks.org/how-to-remove-duplicates-from-an-array-of-objects-using-javascript/
-                g_coOwner = [];
-                let uniqueUser = {};
-                for (let i in suggestedUsers) {
-                    if (i < 5) {
-                        suggestedUser = suggestedUsers[i]['ID'];
-                        uniqueUser[suggestedUser] = suggestedUsers[i];
-                    } else {
-                        break;
-                    }
-                }
-                for (i in uniqueUser) {
-                    g_coOwner.push(uniqueUser[i]);
-                }
-
-                tableHTML = "<table class='table_design'>"
-                $.each(g_coOwner, function (i, item) {
-                    tableHTML = tableHTML.concat(generateCoOwnerRow(i + 1, item));
-                });
-                tableHTML = tableHTML.concat("</table>");
-
-                $("#suggestions_co_owner").html(tableHTML);
-            } else {
-                $("#suggestions_co_owner").empty();
-            }
-        });
-    } else if ($("#eq_co_owner_id").val().length == 0 || $("#eq_co_owner_id").val() == -1) {
-        $("#suggestions_co_owner").empty();
-    }
-}
-
-function generateCoOwnerRow(rownNr, user) {
-
-    out = "<tr onclick='selectRowCoOwner(" + rownNr.toString() + ")'>";
-
-    out = out.concat('<td>');
-    out = out.concat(getTableDiv(user.user_last_name + ' ' + user.user_name, 220, rownNr));
-    out = out.concat("</td>");
-
-    out = out + "</tr>";
-
-    return out;
-}
-
-function selectRowCoOwner(rownNr) {
-    if (rownNr > 0) {
-        g_selectedCoOwner = g_coOwner[rownNr - 1];
-        $("#eq_co_owner_id").val(g_selectedCoOwner.user_last_name + ' ' + g_selectedCoOwner.user_name);
-        $("#suggestions_co_owner").empty();
-    }
-}
-
-function updateSuggestionSupplier() {
-    if ($("#eq_supplier_id").val().length > 1) {
-        argString = "?supplier_name=" + $("#eq_supplier_id").val();
-        $.get("/updateSuggestionSupplier" + argString, function (data, status) {
-            var suggestedSuppliers = JSON.parse(data);
-
-            if (suggestedSuppliers.length > 0) {
-
-                // remove duplicates https://www.geeksforgeeks.org/how-to-remove-duplicates-from-an-array-of-objects-using-javascript/
-                g_supplier = [];
-                let uniqueSupplier = {};
-                for (let i in suggestedSuppliers) {
-                    if (i < 5) {
-                        suggestedSupplier = suggestedSuppliers[i]['ID'];
-                        uniqueSupplier[suggestedSupplier] = suggestedSuppliers[i];
-                    } else {
-                        break;
-                    }
-                }
-                for (i in uniqueSupplier) {
-                    g_supplier.push(uniqueSupplier[i]);
-                }
-
-                tableHTML = "<table class='table_design'>"
-                $.each(g_supplier, function (i, item) {
-                    tableHTML = tableHTML.concat(generateSupplierRow(i + 1, item));
-                });
-                tableHTML = tableHTML.concat("</table>");
-
-                $("#suggestions_supplier").html(tableHTML);
-            } else {
-                $("#suggestions_supplier").empty();
-            }
-        });
-    } else if ($("#eq_supplier_id").val().length == 0 || $("#eq_supplier_id").val() == -1) {
-        $("#suggestions_supplier").empty();
-    }
-}
-
-function generateSupplierRow(rownNr, supplier) {
-
-    out = "<tr onclick='selectRowSupplier(" + rownNr.toString() + ")'>";
-
-    out = out.concat('<td>');
-    out = out.concat(getTableDiv(supplier.supplier_last_name + ' ' + supplier.supplier_name, 220, rownNr));
-    out = out.concat("</td>");
-
-    out = out + "</tr>";
-
-    return out;
-}
-
-function selectRowSupplier(rownNr) {
-    if (rownNr > 0) {
-        g_selectedSupplier = g_supplier[rownNr - 1];
-        $("#eq_supplier_id").val(g_selectedSupplier.supplier_last_name + ' ' + g_selectedSupplier.supplier_name);
-        $("#suggestions_supplier").empty();
-    }
-}
-
-function showToast(text, color) {
-    const toastHTML = `<div id="toast_pop_up" style="height:32px;background-color:${color};" class="mlbutton">${text}</div>`;
-
-    $("#toast_message").html(toastHTML);
-
-    setTimeout(function () {
-        $('#toast_message').fadeOut(500, function () {
-            $(this).empty().show();
-        });
-    }, 1500);
-}
-
-function giveInputWarning(inputID) {
-    // console.log('#' + inputID)
-    var input = $('#' + inputID);
-
-    input.css("border-color", "#BA604D");
-    input.css("transition", "0.2s");
-
-    setTimeout(function () {
-        input.css("border-color", "");
-    }, 1500);
-}
-
-function clearTextBox() {
-    $("#eq_inventory_number").val("");
-    $("#eq_label").val("");
-    $("#eq_name").val("");
-    $("#eq_amount").val("");
-    $("#eq_desc").val("");
-    $("#eq_outcome").val("");
-    $("#eq_purchase_date").val("");
-    $("#eq_base_location").val("");
-    $("#eq_is_mobile").prop("checked", false);
-    $("#eq_bookable").prop("checked", false);
-    $("#eq_owner_id").val("")
-    $("#eq_co_owner_id").val("")
-    $("#eq_purchase_price").val("");
-    $("#eq_annual_cost").val("");
-    $("#eq_annual_cost_budget").val("");
-
-    $("#eq_gallery").html("");
-    $("#myModal").html("");
-    g_selectedEquipment = undefined;
-    g_selectedRow = -1;
-
-    $("#suggestions_owner").empty();
-    $("#suggestions_co_owner").empty();
-    $("#suggestions_supplier").empty();
-}
-
-function prepareNewEquip() {
-    clearTextBox();
-
-    var table_temp = document.querySelector("table");
-    const tBody = table_temp.tBodies[0];
-    const rows_temp = Array.from(tBody.querySelectorAll("tr"));
-    rows_temp.forEach(tr => tr.classList.remove("active-row"));
-
-    $('#update_button').css("visibility", "hidden");
-    $('#new_button').css("visibility", "hidden");
-    $('#delete_button').css("visibility", "hidden");
-    $('#add_button').css("visibility", "visible");
-    $('#cancel_button').css("visibility", "visible");
-}
-
-function cancelNewEquip() {
-    clearTextBox();
-
-    var table_temp = document.querySelector("table");
-    const tBody = table_temp.tBodies[0];
-    const rows_temp = Array.from(tBody.querySelectorAll("tr"));
-    rows_temp.forEach(tr => tr.classList.remove("active-row"));
-
-    $('#update_button').css("visibility", "visible");
-    $('#new_button').css("visibility", "visible");
-    $('#delete_button').css("visibility", "visible");
-    $('#add_button').css("visibility", "hidden");
-    $('#cancel_button').css("visibility", "hidden");
-}
-
-function newEquip() {
-    var equipment_inventory_number = $("#eq_inventory_number").val();
-    argString = "?equipment_inventory_number=" + equipment_inventory_number;
-
-    var equipment_label = $("#eq_label").val();
-    argString = argString + "&equipment_label=" + equipment_label;
-
-    var equipment_name = $("#eq_name").val();
-    argString = argString + "&equipment_name=" + equipment_name;
-
-    var equipment_amount = $("#eq_amount").val();
-    argString = argString + "&equipment_amount=" + equipment_amount;
-
-    var equipment_description = $("#eq_desc").val();
-    argString = argString + "&equipment_description=" + equipment_description;
-
-    var equipment_outcome = $("#eq_outcome").val();
-    argString = argString + "&equipment_outcome=" + equipment_outcome;
-
-    var equipment_purchase_date = $("#eq_purchase_date").val();
-    argString = argString + "&equipment_purchase_date=" + equipment_purchase_date;
-
-    var equipment_base_location = $("#eq_base_location").val();
-    argString = argString + "&equipment_base_location=" + equipment_base_location;
-
-    var is_mobile = $("#eq_is_mobile").is(':checked');
-    if (is_mobile == true) {
-        equipment_is_mobile = 1;
-        argString = argString + "&equipment_is_mobile=" + equipment_is_mobile;
-    } else {
-        equipment_is_mobile = 0;
-        argString = argString + "&equipment_is_mobile=" + equipment_is_mobile;
-    }
-
-    var bookable = $("#eq_bookable").is(':checked');
-    if (bookable == true) {
-        equipment_bookable = 1;
-        argString = argString + "&equipment_bookable=" + equipment_bookable;
-    } else {
-        equipment_bookable = 0;
-        argString = argString + "&equipment_bookable=" + equipment_bookable;
-    }
-
-    var equipment_owner_id = "";
-    if ($("#eq_owner_id").val() != "" && g_selectedOwner != undefined) {
-        equipment_owner_id = g_selectedOwner.ID;
-    }
-    argString = argString + "&equipment_owner_id=" + equipment_owner_id;
-
-    var equipment_co_owner_id = "";
-    if ($("#eq_co_owner_id").val() != "" && g_selectedCoOwner != undefined) {
-        equipment_co_owner_id = g_selectedCoOwner.ID;
-    }
-    argString = argString + "&equipment_co_owner_id=" + equipment_co_owner_id;
-
-    var equipment_purchase_price = $("#eq_purchase_price").val();
-    argString = argString + "&equipment_purchase_price=" + equipment_purchase_price;
-
-    var equipment_annual_cost = $("#eq_annual_cost").val();
-    argString = argString + "&equipment_annual_cost=" + equipment_annual_cost;
-
-    var equipment_annual_cost_budget = $("#eq_annual_cost_budget").val();
-    argString = argString + "&equipment_annual_cost_budget=" + equipment_annual_cost_budget;
-
-    var equipment_supplier_id = "";
-    if ($("#eq_co_owner_id").val() != "" && g_selectedSupplier != undefined) {
-        equipment_supplier_id = g_selectedSupplier.ID;
-    }
-    argString = argString + "&equipment_supplier_id=" + equipment_supplier_id;
-
-    $.get("/newEquipment" + argString, function (data, status) {
-        if (data.localeCompare("http200") == 0) {
-            $('#update_button').css("visibility", "visible");
-            $('#new_button').css("visibility", "visible");
-            $('#delete_button').css("visibility", "visible");
-            $('#add_button').css("visibility", "hidden");
-            $('#cancel_button').css("visibility", "hidden");
-            getEquipment();
-            clearTextBox();
-            showToast('Nieuw equipment is aangemaakt', '#8734B0');
-        } else if (data.localeCompare("http400") == 0) {
-            giveInputWarning("eq_name");
-            $("#suggestions_owner").empty();
-            $("#suggestions_co_owner").empty();
-            $("#suggestions_supplier").empty();
-            showToast('Gelieve het toestel een naam te geven', '#B08734');
-        }
-    });
-}
-
-function deleteEquip() {
-    if (g_selectedEquipment == undefined) {
-        showToast('Gelieve een toestel aan te duiden.', '#B08734');
-        return;
-    }
-    var ID = g_selectedEquipment.ID;
-    argString = "?ID=" + ID;
-
-    $.get("/deleteEquipment" + argString, function (data, status) {
-        if (data.localeCompare("http200") == 0) {
-            showToast('ID:' + ID + ' is verwijderd', '#B04934');
-
-            var table_temp = document.querySelector("table");
-            const tHead = table_temp.tHead;
-            var column = '';
-            tHead.querySelectorAll("th").forEach(th => {
-                if (th.classList.contains("th-sort-asc") == true || th.classList.contains("th-sort-desc")) {
-                    column = th;
-                }
-            });
-            if (column != '') {
-                var columnNr = parseInt(getNumbersFromString(column.getAttribute('onclick'))[0]);
-                if (column.classList[0] == "th-sort-asc") {
-                    clearTextBox();
-                    getEquipment(false, true, true, columnNr)
-                } else {
-                    clearTextBox();
-                    getEquipment(false, true, false, columnNr)
-                }
-            } else {
-                clearTextBox();
-                getEquipment();
-            }
-        }
-    });
-}
-
+// SORTING TABLE ------------------------------------------------------------------------------------------------------
 function sortTableByColumn(table, column, asc = true) {
     // https://www.youtube.com/watch?v=8SL_hM1a0yo
     const dirModifier = asc ? 1 : -1;
@@ -852,119 +374,478 @@ function sortColumnEquipment(column) {
         sortTableByColumn(table, column, false);
     }
 }
+// --------------------------------------------------------------------------------------------------------------------
 
-function getJSONFromTable(rowNr) {
-    var table = document.getElementById('blue_table').tBodies[0];
-    var jsonArr = [];
-    for (var i = 0, row; row = table.rows[i]; i++) {
-        var col = row.cells;
-        var jsonObj = {
-            elem: col[0].innerHTML
+// UPDATE SELECTED EQUIPMENT ------------------------------------------------------------------------------------------
+function updateEquip() {
+    // g_selectedEquipment = g_equipment[rownNr - 1];
+    if (g_selectedEquipment == undefined) {
+        showToast("Please select an equipment.");
+        return;
+    }
+    var ID = g_selectedEquipment.ID;
+    argString = "?ID=" + ID;
+
+    var equipment_inventory_number = $("#eq_inventory_number").val();
+    argString = argString + "&equipment_inventory_number=" + equipment_inventory_number;
+
+    var equipment_label = $("#eq_label").val();
+    argString = argString + "&equipment_label=" + equipment_label;
+
+    var equipment_name = $("#eq_name").val();
+    argString = argString + "&equipment_name=" + equipment_name;
+
+    var equipment_amount = $("#eq_amount").val();
+    argString = argString + "&equipment_amount=" + equipment_amount;
+
+    var equipment_description = $("#eq_desc").val();
+    argString = argString + "&equipment_description=" + equipment_description;
+
+    var equipment_outcome = $("#eq_outcome").val();
+    argString = argString + "&equipment_outcome=" + equipment_outcome;
+
+    var equipment_purchase_date = $("#eq_purchase_date").val();
+    argString = argString + "&equipment_purchase_date=" + equipment_purchase_date;
+
+    var equipment_base_location = $("#eq_base_location").val();
+    argString = argString + "&equipment_base_location=" + equipment_base_location;
+
+    var is_mobile = $("#eq_is_mobile").is(':checked');
+    if (is_mobile == true) {
+        equipment_is_mobile = 1;
+        argString = argString + "&equipment_is_mobile=" + equipment_is_mobile;
+    } else {
+        if (g_selectedEquipment.equipment_is_mobile == 1 || g_selectedEquipment.equipment_is_mobile == 0) {
+            equipment_is_mobile = 0;
+        } else {
+            equipment_is_mobile = "";
         }
-
-        jsonArr.push(jsonObj);
+        argString = argString + "&equipment_is_mobile=" + equipment_is_mobile;
     }
 
-    var ID = getNumbersFromString(jsonArr[rowNr - 1].elem)[1];
-    return ID;
+    var bookable = $("#eq_bookable").is(':checked');
+    if (bookable == true) {
+        equipment_bookable = 1;
+        argString = argString + "&equipment_bookable=" + equipment_bookable;
+    } else {
+        if (g_selectedEquipment.equipment_bookable == 1 || g_selectedEquipment.equipment_bookable == 0) {
+            equipment_bookable = 0;
+        } else {
+            equipment_bookable = "";
+        }
+        argString = argString + "&equipment_bookable=" + equipment_bookable;
+    }
+
+    if ($('#eq_purchase_price').length) {
+        var equipment_purchase_price = $("#eq_purchase_price").val();
+        argString = argString + "&equipment_purchase_price=" + equipment_purchase_price;
+    } else {
+        argString = argString + "&equipment_purchase_price=";
+    }
+
+    if ($('#eq_annual_cost').length) {
+        var equipment_annual_cost = $("#eq_annual_cost").val();
+        argString = argString + "&equipment_annual_cost=" + equipment_annual_cost;
+    } else {
+        argString = argString + "&equipment_annual_cost=";
+    }
+
+    if ($('#eq_annual_cost_budget').length) {
+        var equipment_annual_cost_budget = $("#eq_annual_cost_budget").val();
+        argString = argString + "&equipment_annual_cost_budget=" + equipment_annual_cost_budget;
+    } else {
+        argString = argString + "&equipment_annual_cost_budget=";
+    }
+
+    var equipment_owner_id = -1;
+    if ($("#eq_owner_id").val() != "") {
+        if (g_selectedOwner != undefined) {
+            equipment_owner_id = g_selectedOwner.ID;
+        } else {
+            equipment_owner_id = g_selectedEquipment.equipment_owner_id;
+        }
+    }
+    argString = argString + "&equipment_owner_id=" + equipment_owner_id;
+
+    var equipment_co_owner_id = -1;
+    if ($("#eq_co_owner_id").val() != "") {
+        if (g_selectedCoOwner != undefined) {
+            equipment_co_owner_id = g_selectedCoOwner.ID;
+        } else {
+            equipment_co_owner_id = g_selectedEquipment.equipment_co_owner_id;
+        }
+    }
+    argString = argString + "&equipment_co_owner_id=" + equipment_co_owner_id;
+
+    var equipment_supplier_id = -1;
+    if ($("#eq_supplier_id").val() != "") {
+        if (g_selectedSupplier != undefined) {
+            equipment_supplier_id = g_selectedSupplier.ID;
+        } else {
+            equipment_supplier_id = g_selectedEquipment.equipment_supplier_id;
+        }
+    }
+    argString = argString + "&equipment_supplier_id=" + equipment_supplier_id;
+
+    if (g_selectedRow > -1) {
+        $.get("/equipment/update" + argString, function (data, status) {
+            if (data.localeCompare("http200") == 0) {
+                showToast("Selected equipment has been updated.");
+
+                var table_temp = document.querySelector("table");
+                const tHead = table_temp.tHead;
+                var column = '';
+                tHead.querySelectorAll("th").forEach(th => {
+                    if (th.classList.contains("th-sort-asc") == true || th.classList.contains("th-sort-desc")) {
+                        column = th;
+                    }
+                });
+                if (column != '') {
+                    var columnNr = parseInt(getNumbersFromString(column.getAttribute('onclick'))[0]);
+                    if (column.classList[0] == "th-sort-asc") {
+                        getEquipment(true, true, true, columnNr)
+                    } else {
+                        getEquipment(true, true, false, columnNr)
+                    }
+                } else {
+                    getEquipment(true);
+                }
+            } else if (data.localeCompare("http400") == 0) {
+                showToast("Please fill in all the required values.");
+                giveInputWarning("eq_name");
+            } else if (data.localeCompare("http403") == 0) {
+                showToast("Not allowed.");
+            }
+        });
+    }
+}
+// --------------------------------------------------------------------------------------------------------------------
+
+// NEW EQUIPMENT ------------------------------------------------------------------------------------------------------
+function prepareNewEquip() {
+    clearTextBox();
+    deselectEquipment();
+
+    var table_temp = document.querySelector("table");
+    const tBody = table_temp.tBodies[0];
+    const rows_temp = Array.from(tBody.querySelectorAll("tr"));
+    rows_temp.forEach(tr => tr.classList.remove("active-row"));
+
+    $('#upload_form').hide();
+    $('#update_button').hide();
+    $('#new_button').hide();
+    $('#delete_button').hide();
+    $('#add_button').show();
+    $('#cancel_button').show();
+
+    $('#eq_bookable_label').hide();
 }
 
-function getNumbersFromString(string) {
-    var regex = /\d+/g;
-    var matches = string.match(regex);
-    return matches;
+function cancelNewEquip() {
+    clearTextBox();
+
+    var table_temp = document.querySelector("table");
+    const tBody = table_temp.tBodies[0];
+    const rows_temp = Array.from(tBody.querySelectorAll("tr"));
+    rows_temp.forEach(tr => tr.classList.remove("active-row"));
+
+    $('#upload_form').show();
+    $('#update_button').show();
+    $('#new_button').show();
+    $('#delete_button').show();
+    $('#add_button').hide();
+    $('#cancel_button').hide();
+
+    $('#eq_bookable_label').show();
 }
 
+function newEquip() {
+    var equipment_inventory_number = $("#eq_inventory_number").val();
+    argString = "?equipment_inventory_number=" + equipment_inventory_number;
+
+    var equipment_label = $("#eq_label").val();
+    argString = argString + "&equipment_label=" + equipment_label;
+
+    var equipment_name = $("#eq_name").val();
+    argString = argString + "&equipment_name=" + equipment_name;
+
+    var equipment_amount = $("#eq_amount").val();
+    argString = argString + "&equipment_amount=" + equipment_amount;
+
+    var equipment_description = $("#eq_desc").val();
+    argString = argString + "&equipment_description=" + equipment_description;
+
+    var equipment_outcome = $("#eq_outcome").val();
+    argString = argString + "&equipment_outcome=" + equipment_outcome;
+
+    var equipment_purchase_date = $("#eq_purchase_date").val();
+    argString = argString + "&equipment_purchase_date=" + equipment_purchase_date;
+
+    var equipment_base_location = $("#eq_base_location").val();
+    argString = argString + "&equipment_base_location=" + equipment_base_location;
+
+    var is_mobile = $("#eq_is_mobile").is(':checked');
+    if (is_mobile == true) {
+        equipment_is_mobile = 1;
+        argString = argString + "&equipment_is_mobile=" + equipment_is_mobile;
+    } else {
+        equipment_is_mobile = 0;
+        argString = argString + "&equipment_is_mobile=" + equipment_is_mobile;
+    }
+
+    // var bookable = $("#eq_bookable").is(':checked');
+    // if (bookable == true) {
+    //     equipment_bookable = 1;
+    //     argString = argString + "&equipment_bookable=" + equipment_bookable;
+    // } else {
+    //     equipment_bookable = 0;
+    //     argString = argString + "&equipment_bookable=" + equipment_bookable;
+    // }
+
+    var equipment_owner_id = "";
+    if ($("#eq_owner_id").val() != "" && g_selectedOwner != undefined) {
+        equipment_owner_id = g_selectedOwner.ID;
+    }
+    argString = argString + "&equipment_owner_id=" + equipment_owner_id;
+
+    var equipment_co_owner_id = "";
+    if ($("#eq_co_owner_id").val() != "" && g_selectedCoOwner != undefined) {
+        equipment_co_owner_id = g_selectedCoOwner.ID;
+    }
+    argString = argString + "&equipment_co_owner_id=" + equipment_co_owner_id;
+
+    var equipment_purchase_price = $("#eq_purchase_price").val();
+    argString = argString + "&equipment_purchase_price=" + equipment_purchase_price;
+
+    var equipment_annual_cost = $("#eq_annual_cost").val();
+    argString = argString + "&equipment_annual_cost=" + equipment_annual_cost;
+
+    var equipment_annual_cost_budget = $("#eq_annual_cost_budget").val();
+    argString = argString + "&equipment_annual_cost_budget=" + equipment_annual_cost_budget;
+
+    var equipment_supplier_id = "";
+    if ($("#eq_co_owner_id").val() != "" && g_selectedSupplier != undefined) {
+        equipment_supplier_id = g_selectedSupplier.ID;
+    }
+    argString = argString + "&equipment_supplier_id=" + equipment_supplier_id;
+
+    $.get("/equipment/new" + argString, function (data, status) {
+        if (data.localeCompare("http200") == 0) {
+            $('#upload_form').show();
+            $('#update_button').show();
+            $('#new_button').show();
+            $('#delete_button').show();
+            $('#add_button').hide();
+            $('#cancel_button').hide();
+
+            $('#eq_bookable_label').show();
+
+            getEquipment();
+            clearTextBox();
+            showToast('New equipment has been added.');
+        } else if (data.localeCompare("http400") == 0) {
+            giveInputWarning("eq_name");
+
+            $("#suggestions_owner").empty();
+            $("#suggestions_co_owner").empty();
+            $("#suggestions_supplier").empty();
+        }
+    });
+}
+// --------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------
+function clearTextBox() {
+    $("#eq_inventory_number").val("");
+    $("#eq_label").val("");
+    $("#eq_name").val("");
+    $("#eq_amount").val("");
+    $("#eq_desc").val("");
+    $("#eq_outcome").val("");
+    $("#eq_purchase_date").val("");
+    $("#eq_purchase_price").val("");
+    $("#eq_annual_cost").val("");
+    $("#eq_annual_cost_budget").val("");
+    $("#eq_base_location").val("");
+    $("#eq_is_mobile").prop("checked", false);
+    $("#eq_bookable").prop("checked", false);
+    $("#eq_owner_id").val("")
+    $("#eq_co_owner_id").val("")
+    $("#eq_supplier_id").val("")
+
+    $('#gallery_button').hide();
+    $("#gallery_modal").html("");
+    $('#documents_button').hide();
+    $("#documents_pop_up").html("");
+
+    $("#suggestions_owner").html("");
+    $("#suggestions_co_owner").html("");
+    $("#suggestions_supplier").html("");
+}
+
+function deselectEquipment() {
+    g_selectedEquipment = undefined;
+    g_selectedRow = -1;
+}
+// --------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------
+function giveInputWarning(inputID) {
+    // console.log('#' + inputID)
+    var input = $('#' + inputID);
+
+    input.css("border-color", "#BA604D");
+    input.css("transition", "0.2s");
+
+    setTimeout(function () {
+        input.css("border-color", "");
+    }, 1500);
+}
+// --------------------------------------------------------------------------------------------------------------------
+
+
+// DELETE EQUIPMENT ---------------------------------------------------------------------------------------------------
+function deleteEquip() {
+    if (g_selectedEquipment == undefined) {
+        showToast('Please select an equipment before clicking delete.');
+        return;
+    }
+    var ID = g_selectedEquipment.ID;
+    argString = "?ID=" + ID;
+
+    $.get("/equipment/delete" + argString, function (data, status) {
+        if (data.localeCompare("http200") == 0) {
+            showToast('ID:' + ID + ' is verwijderd');
+
+            var table_temp = document.querySelector("table");
+            const tHead = table_temp.tHead;
+            var column = '';
+            tHead.querySelectorAll("th").forEach(th => {
+                if (th.classList.contains("th-sort-asc") == true || th.classList.contains("th-sort-desc")) {
+                    column = th;
+                }
+            });
+            if (column != '') {
+                var columnNr = parseInt(getNumbersFromString(column.getAttribute('onclick'))[0]);
+                if (column.classList[0] == "th-sort-asc") {
+                    clearTextBox();
+                    getEquipment(false, true, true, columnNr)
+                } else {
+                    clearTextBox();
+                    getEquipment(false, true, false, columnNr)
+                }
+            } else {
+                clearTextBox();
+                getEquipment();
+            }
+        }
+    });
+}
+// --------------------------------------------------------------------------------------------------------------------
+
+// FLASH/TOAST NOTIFICATIONS-------------------------------------------------------------------------------------------
+function showToast(text, color = '#01A38C') {
+    var toastHTML = `<div id="toast_pop_up" style="background-color:${color};" class="mlbutton">${text}</div>`;
+
+    $("#toast_message").html(toastHTML);
+
+    setTimeout(function () {
+        $('#toast_message').fadeOut(500, function () {
+            $(this).empty().show();
+        });
+    }, 2500);
+}
+
+function removeFlashNotification() {
+    $(".notification").remove();
+}
+// --------------------------------------------------------------------------------------------------------------------
+
+// UPLOAD FILE TO SELECTED EQUIPMENT ----------------------------------------------------------------------------------
 $(function () {
     $('#submit').click(function () {
         if (g_selectedEquipment != undefined) {
-            var form_data = new FormData($('#uploadform')[0]);
-            $.ajax({
-                type: 'POST',
-                url: '/uploadajax_eq?equipment_id=' + g_selectedEquipment.ID,
-                data: form_data,
-                contentType: false,
-                processData: false,
-                dataType: 'json'
-            }).done(function (data, textStatus, jqXHR) {
-                argString = "?picture_name=" + data.name;
-                argString = argString + "&equipment_id=" + g_selectedEquipment.ID;
-                $.get("/newEquipmentPicture" + argString, function (data, status) {
-                    if (data.localeCompare("http200") == 0) {
-                        showToast('Photo is uploaded', '#5DB034');
-                    }
+            if ($('#file_input').val() != '') {
+                var form_data = new FormData($('#upload_form')[0]);
+                $.ajax({
+                    type: 'POST',
+                    url: '/equipment-files/upload?equipment_id=' + g_selectedEquipment.ID,
+                    data: form_data,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json'
+                }).done(function (data, textStatus, jqXHR) {
+                    $('#file_input').val('')
+                    showToast('The files has successfully been uploaded to the selected equipment.');
+                }).fail(function (data) {
+                    $('#file_input').val('')
+                    showToast('Error! Please try uploading again.');
                 });
-                loadImagesFromDirectory(g_imageDirectory);
-                // console.log('Photo uploaded!');
-            }).fail(function (data) {
-                // console.error('Photo not uploaded. Error!');
-            });
+            } else {
+                showToast('Please upload a valid file.');
+            }
         } else {
-            showToast('Gelieve een toestel aan te duiden waar u de foto aan wil toevoegen.', '#B08734');
+            showToast('Please select an equipment before uploading a file.');
         }
-
     });
 });
+// --------------------------------------------------------------------------------------------------------------------
 
-function loadImagesFromDirectory(directory) {
-    argString = "?directory=" + directory + "&equipmentID=" + g_selectedEquipment.ID + "&userID=-1";
-    $.get("/get_files" + argString, function (data, status) {
-        var images = getFromBetween.get(data, '"', '"');
-        // console.log(images);
+// GALLERY / PICTURES FOR SELECTED EQUIPMENT --------------------------------------------------------------------------
+function generateGallery() {
+    $.get("/equipment-files/get-pictures-by-equipment-id?equipment_id=" + g_selectedEquipment.ID, function (data) {
+        var pictures = JSON.parse(data);
+        var images = [];
 
-        $("#eq_gallery").html("");
-        var galleryHTML = '<div class="gallery_row">'
         var i = 0;
-        images.forEach(image => {
+        pictures.forEach(picture => {
             i++;
-            galleryHTML = galleryHTML.concat('<div class="img-w">');
-            galleryHTML = galleryHTML.concat('<img src=' + g_imageDirectory + '' + image + ' onclick="openModal();currentSlide(' + i + ')">');
-            galleryHTML = galleryHTML.concat("</div>");
+            picture_name = picture.picture_name;
+            images.push(picture_name);
         });
-        galleryHTML = galleryHTML.concat('</div>');
-        //console.log(galleryHTML)
-        $("#eq_gallery").html(galleryHTML);
 
+        if (images.length == 0) {
+            $('#gallery_button').hide();
+        } else {
+            $('#gallery_button').show();
 
-        $("#myModal").html("");
-        var modalHTML = '<span class="close cursor" onclick="closeModal()">&times;</span>';
-        modalHTML = modalHTML.concat('<div class="modal-content">');
-        j = 0;
-        images.forEach(image => {
-            j++;
-            modalHTML = modalHTML.concat('<div class="mySlides">');
-            modalHTML = modalHTML.concat('<div class="numbertext">' + j + '/' + i + '</div>');
-            modalHTML = modalHTML.concat('<img src=' + g_imageDirectory + '' + image + ' >');
+            $("#gallery_modal").html("");
+            var modalHTML = '<span class="close cursor" onclick="closeGallery()">&times;</span>';
+            modalHTML = modalHTML.concat('<div class="gallery_modal-content">');
+            var j = 0;
+            images.forEach(image => {
+                j++;
+                modalHTML = modalHTML.concat('<div class="gallery_slides">');
+                modalHTML = modalHTML.concat('<div class="numbertext">' + j + '/' + i + '</div>');
+                modalHTML = modalHTML.concat('<img src=' + g_imageDirectory + 'upload\\' + image + ' >');
+                modalHTML = modalHTML.concat('</div>');
+            });
+            modalHTML = modalHTML.concat('<a class="prev" onclick="plusSlides(-1)">&#10094;</a>');
+            modalHTML = modalHTML.concat('<a class="next" onclick="plusSlides(1)">&#10095;</a>');
+            modalHTML = modalHTML.concat('<div class="caption-container"><p id="caption"></p></div>');
+            i = 0;
+            modalHTML = modalHTML.concat('<div class="gallery_row">');
+            images.forEach(image => {
+                i++;
+                modalHTML = modalHTML.concat('<div class="img-w">');
+                modalHTML = modalHTML.concat('<img class="demo cursor" src=' + g_imageDirectory + 'upload\\' + image + ' onclick="currentSlide(' + i + ')">');
+                modalHTML = modalHTML.concat('</div>');
+            });
             modalHTML = modalHTML.concat('</div>');
-        });
-        modalHTML = modalHTML.concat('<a class="prev" onclick="plusSlides(-1)">&#10094;</a>');
-        modalHTML = modalHTML.concat('<a class="next" onclick="plusSlides(1)">&#10095;</a>');
-        modalHTML = modalHTML.concat('<div class="caption-container"><p id="caption"></p></div>');
-        i = 0;
-        modalHTML = modalHTML.concat('<div class="gallery_row">');
-        images.forEach(image => {
-            i++;
-            modalHTML = modalHTML.concat('<div class="img-w">');
-            modalHTML = modalHTML.concat('<img class="demo cursor" src=' + g_imageDirectory + '' + image + ' onclick="currentSlide(' + i + ')">');
             modalHTML = modalHTML.concat('</div>');
-        });
-        galleryHTML = galleryHTML.concat('</div>');
-        modalHTML = modalHTML.concat('</div>');
-        $("#myModal").html(modalHTML);
-
+            $("#gallery_modal").html(modalHTML);
+        }
     });
 }
 
-function openModal() {
-    document.getElementById("myModal").style.display = "block";
+function openGallery() {
+    currentSlide(1);
+    document.getElementById("gallery_modal").style.display = "block";
 }
 
-function closeModal() {
-    document.getElementById("myModal").style.display = "none";
+function closeGallery() {
+    document.getElementById("gallery_modal").style.display = "none";
 }
-
-var slideIndex = 1;
-showSlides(slideIndex);
 
 function plusSlides(n) {
     showSlides(slideIndex += n);
@@ -974,9 +855,12 @@ function currentSlide(n) {
     showSlides(slideIndex = n);
 }
 
+var slideIndex = 1;
+showSlides(slideIndex);
+
 function showSlides(n) {
     var i;
-    var slides = document.getElementsByClassName("mySlides");
+    var slides = document.getElementsByClassName("gallery_slides");
     var dots = document.getElementsByClassName("demo");
     var captionText = document.getElementById("caption");
     if (n > slides.length) { slideIndex = 1 }
@@ -994,180 +878,335 @@ function showSlides(n) {
         captionText.innerHTML = dots[slideIndex - 1].alt;
     }
 }
+// --------------------------------------------------------------------------------------------------------------------
 
-var getFromBetween = {
-    // ALEX C https://stackoverflow.com/questions/14867835/get-substring-between-two-characters-using-javascript
-    results: [],
-    string: "",
-    getFromBetween: function (sub1, sub2) {
-        if (this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return false;
-        var SP = this.string.indexOf(sub1) + sub1.length;
-        var string1 = this.string.substr(0, SP);
-        var string2 = this.string.substr(SP);
-        var TP = string1.length + string2.indexOf(sub2);
-        return this.string.substring(SP, TP);
-    },
-    removeFromBetween: function (sub1, sub2) {
-        if (this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return false;
-        var removal = sub1 + this.getFromBetween(sub1, sub2) + sub2;
-        this.string = this.string.replace(removal, "");
-    },
-    getAllResults: function (sub1, sub2) {
-        // first check to see if we do have both substrings
-        if (this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return;
+// DOCUMENTS FOR SELECTED EQUIPMENT -----------------------------------------------------------------------------------
+function generateDocuments() {
+    $.get("/equipment-files/get-documents-by-equipment-id?equipment_id=" + g_selectedEquipment.ID, function (data) {
+        var documents = JSON.parse(data);
+        var document_name_array = [];
 
-        // find one result
-        var result = this.getFromBetween(sub1, sub2);
-        // push it to the results array
-        this.results.push(result);
-        // remove the most recently found one from the string
-        this.removeFromBetween(sub1, sub2);
+        documents.forEach(document => {
+            document_name = document.document_name;
+            document_name_array.push(document_name);
+        });
 
-        // if there's more substrings
-        if (this.string.indexOf(sub1) > -1 && this.string.indexOf(sub2) > -1) {
-            this.getAllResults(sub1, sub2);
+        if (documents.length == 0) {
+            $('#documents_button').hide();
+        } else {
+            $("#documents_pop_up").html('');
+            documentsHTML = '<div class="pop_up-content">'
+            documentsHTML = documentsHTML.concat('<div class="pop_up-header">');
+            documentsHTML = documentsHTML.concat('<span class="close" onclick="closePopUp()">×</span>');
+            documentsHTML = documentsHTML.concat('<h2>Documents</h2>');
+            documentsHTML = documentsHTML.concat('</div>');
+            documentsHTML = documentsHTML.concat('<div class="pop_up-body">');
+            documentsHTML = documentsHTML.concat('<table class="table_design">');
+            documentsHTML = documentsHTML.concat(generateDocumentsHeader());
+            documentsHTML = documentsHTML.concat('<tbody>');
+            document_name_array.forEach(document_name => {
+                documentsHTML = documentsHTML.concat(generateDocumentsRow(document_name));
+            });
+            documentsHTML = documentsHTML.concat('</tbody>');
+            documentsHTML = documentsHTML.concat('</table>');
+            documentsHTML = documentsHTML.concat('</div>');
+            documentsHTML = documentsHTML.concat('</div>');
+
+            $("#documents_pop_up").html(documentsHTML);
+            $('#documents_button').show();
         }
-        else return;
-    },
-    get: function (string, sub1, sub2) {
-        this.results = [];
-        this.string = string;
-        this.getAllResults(sub1, sub2);
-        return this.results;
-    }
-};
+    });
+}
 
-function generatePopUp(type) {
-    $("#pop_up_window").css("display", "block");
+function generateDocumentsHeader() {
+    var out = '<thead>';
+    out = out.concat('<tr>');
+    out = out.concat('<th>Filename</th>');
+    out = out.concat('<th>File</th>');
+    out = out.concat('</tr>');
+    out = out.concat('</thead>');
+
+    return out;
+}
+
+function generateDocumentsRow(document_name) {
+    var filename = document_name.split('filename_')[1];
+    out = '<tr>';
+    out = out.concat('<td><p>' + filename + '</p></td>');
+    out = out.concat('<td>');
+    out = out.concat('<a href="/equipment-files/equipment-document?document=' + document_name + '">');
+    out = out.concat('<img title="' + document_name + '" src="' + g_imageDirectory + 'icons\\doc.svg">');
+    out = out.concat('</a>');
+    out = out.concat('</td>');
+    out = out.concat('</tr>');
+
+    return out;
+}
+
+function openDocuments() {
+    $("#documents_pop_up").css("display", "block");
+}
+
+function closeDocuments() {
+    $("#documents_pop_up").css("display", "none");
+}
+// --------------------------------------------------------------------------------------------------------------------
+
+// SUGGESTION PANEL ---------------------------------------------------------------------------------------------------
+
+// OWNER SUGGESTION
+function updateOwnerSuggestion() {
+    if ($("#eq_owner_id").val().length > 1) {
+        argString = "?name=" + $("#eq_owner_id").val();
+        $.get("/users/get-owner-suggestion-by-name" + argString, function (data) {
+            var suggestedUsers = JSON.parse(data);
+
+            if (suggestedUsers.length > 0) {
+                $("#suggestions_owner").html('');
+
+                g_owner = [];
+                for (var i = 0; i < suggestedUsers.length; i++) {
+                    if (i < 5) {
+                        g_owner.push(suggestedUsers[i]);
+                    }
+                }
+
+                tableHTML = "<table class='table_design'>"
+                $.each(g_owner, function (i, item) {
+                    tableHTML = tableHTML.concat(generateOwnerRow(i + 1, item));
+                });
+                tableHTML = tableHTML.concat("</table>");
+
+                $("#suggestions_owner").html(tableHTML);
+            } else {
+                $("#suggestions_owner").html('');
+            }
+        });
+    } else if ($("#eq_owner_id").val().length == 0 || $("#eq_owner_id").val() == -1) {
+        $("#suggestions_owner").html('');
+    }
+}
+
+function generateOwnerRow(rownNr, user) {
+    out = "<tr onclick='selectOwnerRow(" + rownNr.toString() + ")'>";
+    out = out.concat('<td>');
+    out = out.concat(getTableDiv(user.user_last_name + ' ' + user.user_name, 220, rownNr));
+    out = out.concat("</td>");
+    out = out.concat("</tr>");
+
+    return out;
+}
+
+function selectOwnerRow(rownNr) {
+    if (rownNr > 0) {
+        g_selectedOwner = g_owner[rownNr - 1];
+        $("#eq_owner_id").val(g_selectedOwner.user_last_name + ' ' + g_selectedOwner.user_name);
+        $("#suggestions_owner").html('');
+    }
+}
+
+// CO-OWNER SUGGESTION
+function updateCoOwnerSuggestion() {
+    if ($("#eq_co_owner_id").val().length > 1) {
+        argString = "?name=" + $("#eq_co_owner_id").val();
+        $.get("/users/get-owner-suggestion-by-name" + argString, function (data) {
+            var suggestedUsers = JSON.parse(data);
+
+            if (suggestedUsers.length > 0) {
+                $("#suggestions_co_owner").html('');
+
+                g_coOwner = [];
+                for (var i = 0; i < suggestedUsers.length; i++) {
+                    if (i < 5) {
+                        g_coOwner.push(suggestedUsers[i]);
+                    }
+                }
+
+                tableHTML = "<table class='table_design'>"
+                $.each(g_coOwner, function (i, item) {
+                    tableHTML = tableHTML.concat(generateCoOwnerRow(i + 1, item));
+                });
+                tableHTML = tableHTML.concat("</table>");
+
+                $("#suggestions_co_owner").html(tableHTML);
+            } else {
+                $("#suggestions_co_owner").html('');
+            }
+        });
+    } else if ($("#eq_co_owner_id").val().length == 0 || $("#eq_co_owner_id").val() == -1) {
+        $("#suggestions_co_owner").html('');
+    }
+}
+
+function generateCoOwnerRow(rownNr, user) {
+    out = "<tr onclick='selectCoOwnerRow(" + rownNr.toString() + ")'>";
+    out = out.concat('<td>');
+    out = out.concat(getTableDiv(user.user_last_name + ' ' + user.user_name, 220, rownNr));
+    out = out.concat("</td>");
+    out = out.concat("</tr>");
+
+    return out;
+}
+
+function selectCoOwnerRow(rownNr) {
+    if (rownNr > 0) {
+        g_selectedCoOwner = g_coOwner[rownNr - 1];
+        $("#eq_co_owner_id").val(g_selectedCoOwner.user_last_name + ' ' + g_selectedCoOwner.user_name);
+        $("#suggestions_co_owner").html('');
+    }
+}
+
+// SUPPLIER SUGGESTION
+function updateSupplierSuggestion() {
+    if ($("#eq_supplier_id").val().length > 1) {
+        argString = "?name=" + $("#eq_supplier_id").val();
+        $.get("/suppliers/get-supplier-suggestion-by-name" + argString, function (data) {
+            var suggestedSuppliers = JSON.parse(data);
+
+            if (suggestedSuppliers.length > 0) {
+                $("#suggestions_supplier").html('');
+
+                g_supplier = [];
+                for (var i = 0; i < suggestedSuppliers.length; i++) {
+                    if (i < 5) {
+                        g_supplier.push(suggestedSuppliers[i]);
+                    }
+                }
+
+                tableHTML = "<table class='table_design'>"
+                $.each(g_supplier, function (i, item) {
+                    tableHTML = tableHTML.concat(generateSupplierRow(i + 1, item));
+                });
+                tableHTML = tableHTML.concat("</table>");
+
+                $("#suggestions_supplier").html(tableHTML);
+            } else {
+                $("#suggestions_supplier").html('');
+            }
+        });
+    } else if ($("#eq_supplier_id").val().length == 0 || $("#eq_supplier_id").val() == -1) {
+        $("#suggestions_supplier").html('');
+    }
+}
+
+function generateSupplierRow(rownNr, supplier) {
+    out = "<tr onclick='selectSupplierRow(" + rownNr.toString() + ")'>";
+    out = out.concat('<td>');
+    out = out.concat(getTableDiv(supplier.supplier_last_name + ' ' + supplier.supplier_name, 220, rownNr));
+    out = out.concat("</td>");
+    out = out.concat("</tr>");
+
+    return out;
+}
+
+function selectSupplierRow(rownNr) {
+    if (rownNr > 0) {
+        g_selectedSupplier = g_supplier[rownNr - 1];
+        $("#eq_supplier_id").val(g_selectedSupplier.supplier_last_name + ' ' + g_selectedSupplier.supplier_name);
+        $("#suggestions_supplier").html('');
+    }
+}
+// --------------------------------------------------------------------------------------------------------------------
+
+// INFORMATION POP UP -------------------------------------------------------------------------------------------------
+function showOwnerDetail() {
+    $("#owner_info_pop_up").css("display", "block");
+}
+
+function showCoOwnerDetail() {
+    $("#co_owner_info_pop_up").css("display", "block");
+}
+
+function showSupplierDetail() {
+    $("#supplier_info_pop_up").css("display", "block");
+}
+
+function generateInformationPopUp(type, id) {
     if (type == 'owner') {
-        var owner = g_selectedOwner;
-        var name = owner.user_last_name + ' ' + owner.user_name;
-        var email = owner.user_email;
-        var phone = owner.user_telephone;
+        $.get("/users/get-pop-up-info-by-id?ID=" + id, function (data) {
+            var owner = JSON.parse(data)[0];
 
-        var popUpHTML = "";
-        var popUpHTML = popUpHTML.concat('<div class="pop_up-content">');
-        var popUpHTML = popUpHTML.concat('<div class="pop_up-header">');
-        var popUpHTML = popUpHTML.concat('<span class="close" onclick="closePopUp()">&times;</span>');
-        var popUpHTML = popUpHTML.concat('<h2>Owner contact details</h2>');
-        var popUpHTML = popUpHTML.concat('</div>');
-        var popUpHTML = popUpHTML.concat('<div class="pop_up-body">');
-        var popUpHTML = popUpHTML.concat('<table class="table_design">');
-        var popUpHTML = popUpHTML.concat('<thead>');
-        var popUpHTML = popUpHTML.concat('<tr>');
-        var popUpHTML = popUpHTML.concat('<th>Name</th>');
-        var popUpHTML = popUpHTML.concat('<th>Email</th>');
-        var popUpHTML = popUpHTML.concat('<th>Phone number</th>');
-        var popUpHTML = popUpHTML.concat('</tr>');
-        var popUpHTML = popUpHTML.concat('</thead>');
-        var popUpHTML = popUpHTML.concat('<tbody>');
-        var popUpHTML = popUpHTML.concat('<tr>');
-        var popUpHTML = popUpHTML.concat('<td>');
-        var popUpHTML = popUpHTML.concat('<p>' + name + '</p>');
-        var popUpHTML = popUpHTML.concat('</td>');
-        var popUpHTML = popUpHTML.concat('<td>');
-        var popUpHTML = popUpHTML.concat('<p>' + email + '</p>');
-        var popUpHTML = popUpHTML.concat('</td>');
-        var popUpHTML = popUpHTML.concat('<td>');
-        var popUpHTML = popUpHTML.concat('<p>' + phone + '</p>');
-        var popUpHTML = popUpHTML.concat('</td>');
-        var popUpHTML = popUpHTML.concat('</tr>');
-        var popUpHTML = popUpHTML.concat('</tbody>');
-        var popUpHTML = popUpHTML.concat('</table>');
-        var popUpHTML = popUpHTML.concat('</div>');
-        var popUpHTML = popUpHTML.concat('</div>');
-        var popUpHTML = popUpHTML.concat('');
-        $("#pop_up_window").html(popUpHTML);
+            var name = owner.user_last_name + ' ' + owner.user_name;
+            var email = owner.user_email;
+            var phone = owner.user_telephone;
+
+            $("#owner_info_pop_up").html('');
+            var popUpHTML = generateInformationPopUpHTML('Owner contact details', name, email, phone);
+            $("#owner_info_pop_up").html(popUpHTML);
+        });
     } else if (type == 'co_owner') {
-        var co_owner = g_selectedCoOwner;
-        var name = co_owner.user_last_name + ' ' + co_owner.user_name;
-        var email = co_owner.user_email;
-        var phone = co_owner.user_telephone;
+        $.get("/users/get-pop-up-info-by-id?ID=" + id, function (data) {
+            var co_owner = JSON.parse(data)[0];
 
-        var popUpHTML = "";
-        var popUpHTML = popUpHTML.concat('<div class="pop_up-content">');
-        var popUpHTML = popUpHTML.concat('<div class="pop_up-header">');
-        var popUpHTML = popUpHTML.concat('<span class="close" onclick="closePopUp()">&times;</span>');
-        var popUpHTML = popUpHTML.concat('<h2>Co-owner contact details</h2>');
-        var popUpHTML = popUpHTML.concat('</div>');
-        var popUpHTML = popUpHTML.concat('<div class="pop_up-body">');
-        var popUpHTML = popUpHTML.concat('<table class="table_design">');
-        var popUpHTML = popUpHTML.concat('<thead>');
-        var popUpHTML = popUpHTML.concat('<tr>');
-        var popUpHTML = popUpHTML.concat('<th>Name</th>');
-        var popUpHTML = popUpHTML.concat('<th>Email</th>');
-        var popUpHTML = popUpHTML.concat('<th>Phone number</th>');
-        var popUpHTML = popUpHTML.concat('</tr>');
-        var popUpHTML = popUpHTML.concat('</thead>');
-        var popUpHTML = popUpHTML.concat('<tbody>');
-        var popUpHTML = popUpHTML.concat('<tr>');
-        var popUpHTML = popUpHTML.concat('<td>');
-        var popUpHTML = popUpHTML.concat('<p>' + name + '</p>');
-        var popUpHTML = popUpHTML.concat('</td>');
-        var popUpHTML = popUpHTML.concat('<td>');
-        var popUpHTML = popUpHTML.concat('<p>' + email + '</p>');
-        var popUpHTML = popUpHTML.concat('</td>');
-        var popUpHTML = popUpHTML.concat('<td>');
-        var popUpHTML = popUpHTML.concat('<p>' + phone + '</p>');
-        var popUpHTML = popUpHTML.concat('</td>');
-        var popUpHTML = popUpHTML.concat('</tr>');
-        var popUpHTML = popUpHTML.concat('</tbody>');
-        var popUpHTML = popUpHTML.concat('</table>');
-        var popUpHTML = popUpHTML.concat('</div>');
-        var popUpHTML = popUpHTML.concat('</div>');
-        var popUpHTML = popUpHTML.concat('');
-        $("#pop_up_window").html(popUpHTML);
+            var name = co_owner.user_last_name + ' ' + co_owner.user_name;
+            var email = co_owner.user_email;
+            var phone = co_owner.user_telephone;
+
+            $("#co_owner_info_pop_up").html('');
+            var popUpHTML = generateInformationPopUpHTML('Co-owner contact details', name, email, phone);
+            $("#co_owner_info_pop_up").html(popUpHTML);
+        });
     } else if (type == 'supplier') {
-        var supplier = g_selectedSupplier;
-        var name = supplier.supplier_last_name + ' ' + supplier.supplier_name;
-        var email = supplier.supplier_email;
-        var phone = supplier.supplier_phone;
-        var comment = supplier.supplier_comment;
+        $.get("/suppliers/get-pop-up-info-by-id?ID=" + id, function (data) {
+            var supplier = JSON.parse(data)[0];
 
-        var popUpHTML = "";
-        var popUpHTML = popUpHTML.concat('<div class="pop_up-content">');
-        var popUpHTML = popUpHTML.concat('<div class="pop_up-header">');
-        var popUpHTML = popUpHTML.concat('<span class="close" onclick="closePopUp()">&times;</span>');
-        var popUpHTML = popUpHTML.concat('<h2>Supplier contact details</h2>');
-        var popUpHTML = popUpHTML.concat('</div>');
-        var popUpHTML = popUpHTML.concat('<div class="pop_up-body">');
-        var popUpHTML = popUpHTML.concat('<table class="table_design">');
-        var popUpHTML = popUpHTML.concat('<thead>');
-        var popUpHTML = popUpHTML.concat('<tr>');
-        var popUpHTML = popUpHTML.concat('<th>Name</th>');
-        var popUpHTML = popUpHTML.concat('<th>Email</th>');
-        var popUpHTML = popUpHTML.concat('<th>Phone number</th>');
-        var popUpHTML = popUpHTML.concat('<th>Comment</th>');
-        var popUpHTML = popUpHTML.concat('</tr>');
-        var popUpHTML = popUpHTML.concat('</thead>');
-        var popUpHTML = popUpHTML.concat('<tbody>');
-        var popUpHTML = popUpHTML.concat('<tr>');
-        var popUpHTML = popUpHTML.concat('<td>');
-        var popUpHTML = popUpHTML.concat('<p>' + name + '</p>');
-        var popUpHTML = popUpHTML.concat('</td>');
-        var popUpHTML = popUpHTML.concat('<td>');
-        var popUpHTML = popUpHTML.concat('<p>' + email + '</p>');
-        var popUpHTML = popUpHTML.concat('</td>');
-        var popUpHTML = popUpHTML.concat('<td>');
-        var popUpHTML = popUpHTML.concat('<p>' + phone + '</p>');
-        var popUpHTML = popUpHTML.concat('</td>');
-        var popUpHTML = popUpHTML.concat('<td>');
-        var popUpHTML = popUpHTML.concat('<p>' + comment + '</p>');
-        var popUpHTML = popUpHTML.concat('</td>');
-        var popUpHTML = popUpHTML.concat('</tr>');
-        var popUpHTML = popUpHTML.concat('</tbody>');
-        var popUpHTML = popUpHTML.concat('</table>');
-        var popUpHTML = popUpHTML.concat('</div>');
-        var popUpHTML = popUpHTML.concat('</div>');
-        var popUpHTML = popUpHTML.concat('');
-        $("#pop_up_window").html(popUpHTML);
-    } else {
-        $("#pop_up_window").css("display", "none");
-        $("#pop_up_window").empty();
+            var name = supplier.supplier_last_name + ' ' + supplier.supplier_name;
+            var email = supplier.supplier_email;
+            var phone = supplier.supplier_phone;
+            var comment = supplier.supplier_comment;
+
+            $("#supplier_info_pop_up").html('');
+            var popUpHTML = generateInformationPopUpHTML('Supplier contact details', name, email, phone, comment);
+            $("#supplier_info_pop_up").html(popUpHTML);
+        });
     }
+}
+
+function generateInformationPopUpHTML(title, name, email, phone, comment = '') {
+    var out = "";
+    var out = out.concat('<div class="pop_up-content">');
+    var out = out.concat('<div class="pop_up-header">');
+    var out = out.concat('<span class="close" onclick="closePopUp()">&times;</span>');
+    var out = out.concat('<h2>' + title + '</h2>');
+    var out = out.concat('</div>');
+    var out = out.concat('<div class="pop_up-body">');
+    var out = out.concat('<table class="table_design">');
+    var out = out.concat('<thead>');
+    var out = out.concat('<tr>');
+    var out = out.concat('<th>Name</th>');
+    var out = out.concat('<th>Email</th>');
+    var out = out.concat('<th>Phone number</th>');
+    if (comment != '') {
+        var out = out.concat('<th>Comment</th>');
+    }
+    var out = out.concat('</tr>');
+    var out = out.concat('</thead>');
+    var out = out.concat('<tbody>');
+    var out = out.concat('<tr>');
+    var out = out.concat('<td>');
+    var out = out.concat('<p>' + name + '</p>');
+    var out = out.concat('</td>');
+    var out = out.concat('<td>');
+    var out = out.concat('<p>' + email + '</p>');
+    var out = out.concat('</td>');
+    var out = out.concat('<td>');
+    var out = out.concat('<p>' + phone + '</p>');
+    var out = out.concat('</td>');
+    if (comment != '') {
+        var out = out.concat('<td>');
+        var out = out.concat('<p>' + comment + '</p>');
+        var out = out.concat('</td>');
+    }
+    var out = out.concat('</tr>');
+    var out = out.concat('</tbody>');
+    var out = out.concat('</table>');
+    var out = out.concat('</div>');
+    var out = out.concat('</div>');
+
+    return out;
 }
 
 function closePopUp() {
-    $("#pop_up_window").css("display", "none");
-    $("#pop_up_window").empty();
+    $(".pop_up").css("display", "none");
 }
+// --------------------------------------------------------------------------------------------------------------------

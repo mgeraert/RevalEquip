@@ -22,42 +22,6 @@ html, body {
   background-size: cover;
 }
 
-.flash {
-  z-index: 99;
-  top: 50%;
-  position: fixed;
-  width: 100%;
-  text-align: center;
-}
-
-.notification_text {
-  color: white;
-  border: 10px;
-  border-style: solid;
-  border-color: #41BAA9;
-  margin: auto;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-  background-color: #41BAA9;
-  text-align: center;
-  -webkit-box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.13);
-          box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.13);
-}
-
-.notification_text a {
-  color: white;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.notification_text text {
-  color: black;
-  font-size: large;
-  font-weight: bolder;
-  cursor: pointer;
-}
-
 .session {
   margin: auto auto;
   width: 600px;

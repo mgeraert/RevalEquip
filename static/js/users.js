@@ -1,139 +1,35 @@
-
-var g_user;
+var g_users;
 var g_selectedUser;
 var g_selectedRow = -1;
 
 var g_currentUser;
 
-var g_imageDirectory = "static\\images\\upload\\";
+var g_imageDirectory = "static\\images\\";
 
 $(document).ready(function () {
-    $.get("/getUserByID?" + $("#current_user_id").text(), function (data, status) {
-        g_currentUser = JSON.parse(data.slice(1, -1));
+    $("#menu_title").text("Users");
 
-        if (g_currentUser.user_is_users_admin) {
-            getUsers();
-        } else {
-            $("#usersTable").remove();
-            setCurrentUserInputs();
-        }
+    $.get("/users/get-permissions-by-id?" + $("#current_user_id").text(), function (data, status) {
+        g_currentUser = JSON.parse(data)[0];
+        getUsers();
     });
 });
 
-function setCurrentUserInputs() {
-    loadImagesFromDirectory(g_imageDirectory)
-
-    $("#user_last_name").val(g_currentUser.user_last_name);
-    $("#user_name").val(g_currentUser.user_name);
-    if (g_currentUser.user_sex == "m") {
-        $("#user_sex").val("m").change();
-    } else if (g_currentUser.user_sex == "v") {
-        $("#user_sex").val("v").change();
-    } else {
-        $("#user_sex").val("x").change();
-    }
-    if (g_currentUser.user_is_pi == 1) {
-        $("#user_is_pi").prop("checked", true);
-    } else if (g_currentUser.equipment_is_mobile == -1) {
-        $("#user_is_pi").prop("checked", false);
-    } else {
-        $("#user_is_pi").prop("checked", false);
-    }
-    if (g_currentUser.user_is_phd == 1) {
-        $("#user_is_phd").prop("checked", true);
-    } else if (g_currentUser.user_is_phd == -1) {
-        $("#user_is_phd").prop("checked", false);
-    } else {
-        $("#user_is_phd").prop("checked", false);
-    }
-    $("#user_title").val(g_currentUser.user_title);
-    $("#user_category").val(g_currentUser.user_category);
-    $("#user_function").val(g_currentUser.user_function);
-    $("#user_email").val(g_currentUser.user_email);
-    $("#user_home_address").val(g_currentUser.user_home_address);
-    $("#user_telephone").val(g_currentUser.user_telephone);
-    $("#user_private_phone").val(g_currentUser.user_private_phone);
-
-    if (g_currentUser.user_in_date != "-1") {
-        var inDate = g_currentUser.user_in_date.split("/");
-        if (inDate[0].length == 1) {
-            $("#user_in_date").val(inDate[2] + '-' + inDate[1] + '-0' + inDate[0]);
-        } else {
-            $("#user_in_date").val(inDate[2] + '-' + inDate[1] + '-' + inDate[0]);
-        }
-    } else {
-        $("#user_in_date").val("");
-    }
-
-    if (g_currentUser.user_out_date != "-1") {
-        var outDate = g_currentUser.user_out_date.split("/");
-        if (outDate[0].length == 1) {
-            $("#user_out_date").val(outDate[2] + '-' + outDate[1] + '-0' + outDate[0]);
-        } else {
-            $("#user_out_date").val(outDate[2] + '-' + outDate[1] + '-' + outDate[0]);
-        }
-    } else {
-        $("#user_out_date").val("");
-    }
-
-    $("#user_pw_hash").val(g_currentUser.user_pw_hash);
-    $("#user_alternative_ID").val(g_currentUser.user_alternative_ID);
-
-    if (g_currentUser.user_can_see_private_data == 1) {
-        $("#user_can_see_private_data").prop("checked", true);
-    } else if (g_currentUser.user_can_see_private_data == -1) {
-        $("#user_can_see_private_data").prop("checked", false);
-    } else {
-        $("#user_can_see_private_data").prop("checked", false);
-    }
-
-    if (g_currentUser.user_can_see_financial_data == 1) {
-        $("#user_can_see_financial_data").prop("checked", true);
-    } else if (g_currentUser.user_can_see_financial_data == -1) {
-        $("#user_can_see_financial_data").prop("checked", false);
-    } else {
-        $("#user_can_see_financial_data").prop("checked", false);
-    }
-
-    if (g_currentUser.user_is_users_admin == 1) {
-        $("#user_is_users_admin").prop("checked", true);
-    } else if (g_currentUser.user_is_users_admin == -1) {
-        $("#user_is_users_admin").prop("checked", false);
-    } else {
-        $("#user_is_users_admin").prop("checked", false);
-    }
-
-    if (g_currentUser.user_is_equipment_admin == 1) {
-        $("#user_is_equipment_admin").prop("checked", true);
-    } else if (g_currentUser.user_is_equipment_admin == -1) {
-        $("#user_is_equipment_admin").prop("checked", false);
-    } else {
-        $("#user_is_equipment_admin").prop("checked", false);
-    }
-
-    if (g_currentUser.user_is_suppliers_admin == 1) {
-        $("#user_is_suppliers_admin").prop("checked", true);
-    } else if (g_currentUser.user_is_suppliers_admin == -1) {
-        $("#user_is_suppliers_admin").prop("checked", false);
-    } else {
-        $("#user_is_suppliers_admin").prop("checked", false);
-    }
-}
-
+// GENERATE USERS TABLE -----------------------------------------------------------------------------------------------
 function getUsers(enableSelectedRow = false, enableSort = false, sortAsc = false, sortColumn = 0) {
-    $.get("/getUsers", function (data, status) {
-        g_user = JSON.parse(data);
-        if (g_user.length > 0) {
+    $.get("/users/get", function (data, status) {
+        g_users = JSON.parse(data);
+        if (g_users.length > 0) {
             tableHTML = "<table id='blue_table' class='table_design table-sortable'>"
             tableHTML = tableHTML.concat(generateTableHeader());
             tableHTML = tableHTML.concat("<tbody>");
-            $.each(g_user, function (i, item) {
+            $.each(g_users, function (i, item) {
                 tableHTML = tableHTML.concat(generateTabelRow(i + 1, item));
             });
             tableHTML = tableHTML.concat("<tbody>");
             tableHTML = tableHTML.concat("</table>");
 
-            $("#usersTable").html(tableHTML);
+            $("#users_table").html(tableHTML);
             // addRowHandlers();
             if (enableSort) {
                 sortTableByColumn(document.querySelector("table"), sortColumn, sortAsc);
@@ -173,7 +69,6 @@ function generateTableHeader() {
     return out;
 }
 
-
 function generateTabelRow(rowNr, user) {
 
     out = "<tr onclick='selectRowUser(this)'>";
@@ -204,6 +99,7 @@ function generateTabelRow(rowNr, user) {
 }
 
 function getTableDiv(content, width, rowNr) {
+    out = "";
 
     if (content == null) {
         content = '';
@@ -214,16 +110,60 @@ function getTableDiv(content, width, rowNr) {
     out = out.concat('</div>');
     return out;
 }
+// --------------------------------------------------------------------------------------------------------------------
 
+// DO .... WHEN USER GETS SELECTED ------------------------------------------------------------------------------------
 function selectRowUser(row) {
+    clearTextBox();
+    loadSelectedData(row);
+    generatePicture();
+}
+// --------------------------------------------------------------------------------------------------------------------
+
+// LOAD PROFILE PICTURE OF SELECTED USER  -----------------------------------------------------------------------------
+function generatePicture() {
+    $.get("/users-files/get-by-user-id?user_id=" + g_selectedUser.ID, function (data, status) {
+        pictures = JSON.parse(data);
+        if (pictures.length == 0) {
+            $('#picture_button').hide();
+        } else {
+            var picture = pictures[0];
+
+            var picture_name = picture.picture_name;
+            var picturePopUpHTML = '';
+            $("#picture_pop_up").html(picturePopUpHTML);
+            picturePopUpHTML = picturePopUpHTML.concat('<span class="close cursor" onclick="closePicturePopUp()">×</span>');
+            picturePopUpHTML = picturePopUpHTML.concat('<div class="picture_pop_up-content">');
+            picturePopUpHTML = picturePopUpHTML.concat('<div class="picture_pop_up-picture" style="display: block;"><img title="' + picture_name + '" src="' + g_imageDirectory + 'upload\\' + picture_name + '"></div>');
+            picturePopUpHTML = picturePopUpHTML.concat('</div>');
+            $("#picture_pop_up").html(picturePopUpHTML);
+
+            $('#picture_button').show();
+        }
+
+    });
+}
+
+function openProfilePicture() {
+    document.getElementById("picture_pop_up").style.display = "block";
+}
+
+function closeProfilePicture() {
+    document.getElementById("picture_pop_up").style.display = "none";
+}
+// --------------------------------------------------------------------------------------------------------------------
+
+// LOAD INPUT VALUES --------------------------------------------------------------------------------------------------
+function loadSelectedData(row) {
     if (typeof row == 'number') {
         rowNr = row
     } else {
         rowNr = row.rowIndex;
     }
+
     var rowNr_data = getJSONFromTable(rowNr);
 
-    var table = document.getElementById("usersTable");
+    var table = document.getElementById("users_table");
     var rows = table.getElementsByTagName("tr");
 
     if (g_selectedRow > -1 && g_selectedRow < rows.length) {
@@ -235,9 +175,7 @@ function selectRowUser(row) {
     selectedRow = rows[rowNr];
     selectedRow.classList.add("active-row");
     g_selectedRow = rowNr;
-    g_selectedUser = g_user[rowNr_data - 1];
-
-    loadImagesFromDirectory(g_imageDirectory)
+    g_selectedUser = g_users[rowNr_data - 1];
 
     $("#user_last_name").val(g_selectedUser.user_last_name);
     $("#user_name").val(g_selectedUser.user_name);
@@ -248,25 +186,14 @@ function selectRowUser(row) {
     } else {
         $("#user_sex").val("x").change();
     }
-    if (g_selectedUser.user_is_pi == 1) {
-        $("#user_is_pi").prop("checked", true);
-    } else if (g_selectedUser.equipment_is_mobile == -1) {
-        $("#user_is_pi").prop("checked", false);
-    } else {
-        $("#user_is_pi").prop("checked", false);
-    }
-    if (g_selectedUser.user_is_phd == 1) {
-        $("#user_is_phd").prop("checked", true);
-    } else if (g_selectedUser.user_is_phd == -1) {
-        $("#user_is_phd").prop("checked", false);
-    } else {
-        $("#user_is_phd").prop("checked", false);
-    }
+
     $("#user_title").val(g_selectedUser.user_title);
     $("#user_category").val(g_selectedUser.user_category);
     $("#user_function").val(g_selectedUser.user_function);
+
     $("#user_email").val(g_selectedUser.user_email);
     $("#user_home_address").val(g_selectedUser.user_home_address);
+
     $("#user_telephone").val(g_selectedUser.user_telephone);
     $("#user_private_phone").val(g_selectedUser.user_private_phone);
 
@@ -280,7 +207,6 @@ function selectRowUser(row) {
     } else {
         $("#user_in_date").val("");
     }
-
     if (g_selectedUser.user_out_date != "-1") {
         var outDate = g_selectedUser.user_out_date.split("/");
         if (outDate[0].length == 1) {
@@ -291,124 +217,213 @@ function selectRowUser(row) {
     } else {
         $("#user_out_date").val("");
     }
-
-    $("#user_pw_hash").val(g_selectedUser.user_pw_hash);
-    $("#user_alternative_ID").val(g_selectedUser.user_alternative_ID);
-
-    if (g_selectedUser.user_can_see_private_data == 1) {
-        $("#user_can_see_private_data").prop("checked", true);
-    } else if (g_selectedUser.user_can_see_private_data == -1) {
-        $("#user_can_see_private_data").prop("checked", false);
+    if (g_selectedUser.user_is_pi == 1) {
+        $("#user_is_pi").prop("checked", true);
     } else {
-        $("#user_can_see_private_data").prop("checked", false);
+        $("#user_is_pi").prop("checked", false);
+    }
+    if (g_selectedUser.user_is_phd == 1) {
+        $("#user_is_phd").prop("checked", true);
+    } else {
+        $("#user_is_phd").prop("checked", false);
     }
 
-    if (g_selectedUser.user_can_see_financial_data == 1) {
-        $("#user_can_see_financial_data").prop("checked", true);
-    } else if (g_selectedUser.user_can_see_financial_data == -1) {
-        $("#user_can_see_financial_data").prop("checked", false);
+    if (g_selectedUser.user_is_financial_team == 1) {
+        $("#user_is_financial_team").prop("checked", true);
     } else {
-        $("#user_can_see_financial_data").prop("checked", false);
+        $("#user_is_financial_team").prop("checked", false);
+    }
+    if (g_selectedUser.user_is_admin == 1) {
+        $("#user_is_admin").prop("checked", true);
+    } else {
+        $("#user_is_admin").prop("checked", false);
+    }
+    if (g_selectedUser.user_is_lender == 1) {
+        $("#user_is_lender").prop("checked", true);
+    } else {
+        $("#user_is_lender").prop("checked", false);
+    }
+    if (g_selectedUser.user_is_lender_admin == 1) {
+        $("#user_is_lender_admin").prop("checked", true);
+    } else {
+        $("#user_is_lender_admin").prop("checked", false);
+    }
+    if (g_selectedUser.user_is_owner == 1) {
+        $("#user_is_owner").prop("checked", true);
+    } else {
+        $("#user_is_owner").prop("checked", false);
     }
 
-    if (g_selectedUser.user_is_users_admin == 1) {
-        $("#user_is_users_admin").prop("checked", true);
-    } else if (g_selectedUser.user_is_users_admin == -1) {
-        $("#user_is_users_admin").prop("checked", false);
+    if (g_selectedUser.user_date_when_allowed != "-1") {
+        var dateWhenAllowed = g_selectedUser.user_date_when_allowed.split("/");
+        if (dateWhenAllowed[0].length == 1) {
+            $("#user_date_when_allowed").val(dateWhenAllowed[2] + '-' + dateWhenAllowed[1] + '-0' + dateWhenAllowed[0]);
+        } else {
+            $("#user_date_when_allowed").val(dateWhenAllowed[2] + '-' + dateWhenAllowed[1] + '-' + dateWhenAllowed[0]);
+        }
     } else {
-        $("#user_is_users_admin").prop("checked", false);
+        $("#user_date_when_allowed").val("");
+    }
+    if (g_selectedUser.user_completed_profile == 1) {
+        $("#user_completed_profile").prop("checked", true);
+    } else {
+        $("#user_completed_profile").prop("checked", false);
+    }
+    if (g_selectedUser.user_is_allowed == 1) {
+        $("#user_is_allowed").prop("checked", true);
+    } else {
+        $("#user_is_allowed").prop("checked", false);
+    }
+    if (g_selectedUser.user_set_pw == 1) {
+        $("#user_set_pw").prop("checked", true);
+    } else {
+        $("#user_set_pw").prop("checked", false);
+    }
+}
+// --------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------
+function getJSONFromTable(rowNr) {
+    var table = document.getElementById('blue_table').tBodies[0];
+    var jsonArr = [];
+    for (var i = 0, row; row = table.rows[i]; i++) {
+        var col = row.cells;
+        var jsonObj = {
+            elem: col[0].innerHTML
+        }
+
+        jsonArr.push(jsonObj);
     }
 
-    if (g_selectedUser.user_is_equipment_admin == 1) {
-        $("#user_is_equipment_admin").prop("checked", true);
-    } else if (g_selectedUser.user_is_equipment_admin == -1) {
-        $("#user_is_equipment_admin").prop("checked", false);
-    } else {
-        $("#user_is_equipment_admin").prop("checked", false);
-    }
-
-    if (g_selectedUser.user_is_suppliers_admin == 1) {
-        $("#user_is_suppliers_admin").prop("checked", true);
-    } else if (g_selectedUser.user_is_suppliers_admin == -1) {
-        $("#user_is_suppliers_admin").prop("checked", false);
-    } else {
-        $("#user_is_suppliers_admin").prop("checked", false);
-    }
-
+    var ID = getNumbersFromString(jsonArr[rowNr - 1].elem)[1];
+    return ID;
 }
 
-function showToast(text, color) {
-    const toastHTML = `<div id="toast_pop_up" style="height:32px;background-color:${color};" class="mlbutton">${text}</div>`;
+function getNumbersFromString(string) {
+    var regex = /\d+/g;
+    var matches = string.match(regex);
+    return matches;
+}
+// --------------------------------------------------------------------------------------------------------------------
 
-    $("#toast_message").html(toastHTML);
+// SORTING TABLE ------------------------------------------------------------------------------------------------------
+function sortTableByColumn(table, column, asc = true) {
+    // https://www.youtube.com/watch?v=8SL_hM1a0yo
+    const dirModifier = asc ? 1 : -1;
+    const tBody = table.tBodies[0];
+    const rows = Array.from(tBody.querySelectorAll("tr"));
 
-    setTimeout(function () {
-        $('#toast_message').fadeOut(500, function () {
-            $(this).empty().show();
-        });
-    }, 1500);
+    var inputType;
+    if (column == 0) {
+        inputType = "numbers";
+    } else {
+        inputType = "names";
+    }
+
+    // sort each row
+    const sortedRows = rows.sort((a, b) => {
+        if (inputType == "names") {
+            const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+            const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+            return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
+        } else {
+            const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+            const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+            return parseFloat(aColText) > parseFloat(bColText) ? (1 * dirModifier) : (-1 * dirModifier);
+        }
+    });
+    for (i = 0; i < sortedRows.length; i++) {
+        var innerText = sortedRows[i].innerText.split("\n\t\n");
+        var name = innerText[1];
+        // console.log(i, sortedRows[i].innerText.split("\n\t\n")[0], name);
+        if (g_selectedUser != undefined) {
+            if (name == g_selectedUser.user_name) {
+                g_selectedRow = i + 1;
+            }
+        }
+    }
+    // console.log(g_selectedRow - 1);
+
+    // remove all resisting tr from table
+    while (tBody.firstChild) {
+        tBody.removeChild(tBody.firstChild);
+    }
+
+    // add sorted rows
+    tBody.append(...sortedRows);
+
+    // remember current sorting type (asc or decs)
+    table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
+    table.querySelector(`th:nth-child(${column + 1})`).classList.toggle("th-sort-asc", asc);
+    table.querySelector(`th:nth-child(${column + 1})`).classList.toggle("th-sort-desc", !asc);
 }
 
+function sortColumnUser(column) {
+    var table = document.querySelector("table");
+    var currentIsAscending = table.querySelectorAll("th")[column].className;
+    if (currentIsAscending == "") {
+        sortTableByColumn(table, column);
+    } else if (currentIsAscending == "th-sort-desc") {
+        sortTableByColumn(table, column, true);
+    } else {
+        sortTableByColumn(table, column, false);
+    }
+}
+// --------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------
+function clearTextBox() {
+    $("#user_last_name").val("");
+    $("#user_name").val("");
+    $("#user_sex").val("x").change();
+
+    $("#user_title").val("");
+    $("#user_category").val("");
+    $("#user_function").val("");
+
+    $("#user_email").val("");
+    $("#user_home_address").val("");
+
+    $("#user_telephone").val("");
+    $("#user_private_phone").val("");
+
+    $("#user_in_date").val("");
+    $("#user_out_date").val("");
+    $("#user_is_pi").prop("checked", false);
+    $("#user_is_phd").prop("checked", false);
+    $("#picture_button").hide();
+
+    $("#user_is_financial_team").prop("checked", false);
+    $("#user_is_admin").prop("checked", false);
+    $("#user_is_lender").prop("checked", false);
+    $("#user_is_lender_admin").prop("checked", false);
+    $("#user_is_owner").prop("checked", false);
+}
+
+function deselectUsers() {
+    g_selectedUser = undefined;
+    g_selectedRow = -1;
+}
+// --------------------------------------------------------------------------------------------------------------------
+
+// UPDATE SELECTED USER -----------------------------------------------------------------------------------------------
 function updateUser() {
-    if (g_selectedUser == undefined && g_currentUser.user_is_users_admin != 0) {
-        showToast('Gelieve een gebruiker aan te duiden.', '#B08734');
+    if (g_selectedUser == undefined) {
+        showToast("Please select a user.");
         return;
     }
 
-    if (g_currentUser.user_is_users_admin == 0) {
-        g_selectedUser = g_currentUser;
-    }
     var ID = g_selectedUser.ID;
     argString = "?ID=" + ID;
 
     var user_last_name = $("#user_last_name").val();
-    argString = argString + "&user_last_name=" + user_last_name.toUpperCase();
+    argString = argString + "&user_last_name=" + user_last_name;
 
-    var user_name = "";
-    if ($("#user_name").val() != "") {
-        var name = $("#user_name").val().split(' ');
-        for (i = 0; i < name.length; i++) {
-            for (j = 0; j < name[i].length; j++) {
-                if (j == 0) {
-                    user_name = user_name + name[i][j].toUpperCase();
-                } else {
-                    user_name = user_name + name[i][j];
-                }
-            }
-            user_name = user_name + " ";
-        }
-        user_name = user_name.slice(0, -1);
-    }
+    var user_name = $("#user_name").val();
     argString = argString + "&user_name=" + user_name;
 
     var user_sex = $("#user_sex").val();
     argString = argString + "&user_sex=" + user_sex;
-
-    var is_pi = $("#user_is_pi").is(':checked');
-    if (is_pi == true) {
-        user_is_pi = 1;
-        argString = argString + "&user_is_pi=" + user_is_pi;
-    } else {
-        if (g_selectedUser.user_is_pi == 1 || g_selectedUser.user_is_pi == 0) {
-            user_is_pi = 0;
-        } else {
-            user_is_pi = "";
-        }
-        argString = argString + "&user_is_pi=" + user_is_pi;
-    }
-
-    var is_phd = $("#user_is_phd").is(':checked');
-    if (is_phd == true) {
-        user_is_phd = 1;
-        argString = argString + "&user_is_phd=" + user_is_phd;
-    } else {
-        if (g_selectedUser.user_is_phd == 1 || g_selectedUser.user_is_phd == 0) {
-            user_is_phd = 0;
-        } else {
-            user_is_phd = "";
-        }
-        argString = argString + "&user_is_phd=" + user_is_phd;
-    }
 
     var user_title = $("#user_title").val();
     argString = argString + "&user_title=" + user_title;
@@ -445,81 +460,71 @@ function updateUser() {
         argString = argString + "&user_out_date=" + user_out_date[2] + '/' + user_out_date[1] + '/' + user_out_date[0];
     }
 
-    var user_pw_hash = $("#user_pw_hash").val();
-    argString = argString + "&user_pw_hash=" + user_pw_hash;
-
-    var user_alternative_ID = $("#user_alternative_ID").val();
-    argString = argString + "&user_alternative_ID=" + user_alternative_ID;
-
-    var can_see_private_data = $("#user_can_see_private_data").is(':checked');
-    if (can_see_private_data == true) {
-        user_can_see_private_data = 1;
-        argString = argString + "&user_can_see_private_data=" + user_can_see_private_data;
+    var is_pi = $("#user_is_pi").is(':checked');
+    if (is_pi == true) {
+        var user_is_pi = 1;
+        argString = argString + "&user_is_pi=" + user_is_pi;
     } else {
-        if (g_selectedUser.user_can_see_private_data == 1 || g_selectedUser.user_can_see_private_data == 0) {
-            user_can_see_private_data = 0;
+        if (g_selectedUser.user_is_pi == 1 || g_selectedUser.user_is_pi == 0) {
+            var user_is_pi = 0;
         } else {
-            user_can_see_private_data = "";
+            var user_is_pi = "";
         }
-        argString = argString + "&user_can_see_private_data=" + user_can_see_private_data;
+        argString = argString + "&user_is_pi=" + user_is_pi;
     }
 
-    var can_see_financial_data = $("#user_can_see_financial_data").is(':checked');
-    if (can_see_financial_data == true) {
-        user_can_see_financial_data = 1;
-        argString = argString + "&user_can_see_financial_data=" + user_can_see_financial_data;
+    var is_phd = $("#user_is_phd").is(':checked');
+    if (is_phd == true) {
+        var user_is_phd = 1;
+        argString = argString + "&user_is_phd=" + user_is_phd;
     } else {
-        if (g_selectedUser.user_can_see_financial_data == 1 || g_selectedUser.user_can_see_financial_data == 0) {
-            user_can_see_financial_data = 0;
+        if (g_selectedUser.user_is_phd == 1 || g_selectedUser.user_is_phd == 0) {
+            var user_is_phd = 0;
         } else {
-            user_can_see_financial_data = "";
+            var user_is_phd = "";
         }
-        argString = argString + "&user_can_see_financial_data=" + user_can_see_financial_data;
+        argString = argString + "&user_is_phd=" + user_is_phd;
     }
 
-    var is_users_admin = $("#user_is_users_admin").is(':checked');
-    if (is_users_admin == true) {
-        user_is_users_admin = 1;
-        argString = argString + "&user_is_users_admin=" + user_is_users_admin;
+    var is_financial_team = $("#user_is_financial_team").is(':checked');
+    if (is_financial_team == true) {
+        argString = argString + "&user_is_financial_team=" + 1;
     } else {
-        if (g_selectedUser.user_is_users_admin == 1 || g_selectedUser.user_is_users_admin == 0) {
-            user_is_users_admin = 0;
-        } else {
-            user_is_users_admin = "";
-        }
-        argString = argString + "&user_is_users_admin=" + user_is_users_admin;
+        argString = argString + "&user_is_financial_team=" + 0;
     }
 
-    var is_equipment_admin = $("#user_is_equipment_admin").is(':checked');
-    if (is_equipment_admin == true) {
-        user_is_equipment_admin = 1;
-        argString = argString + "&user_is_equipment_admin=" + user_is_equipment_admin;
+    var is_admin = $("#user_is_admin").is(':checked');
+    if (is_admin == true) {
+        argString = argString + "&user_is_admin=" + 1;
     } else {
-        if (g_selectedUser.user_is_equipment_admin == 1 || g_selectedUser.user_is_equipment_admin == 0) {
-            user_is_equipment_admin = 0;
-        } else {
-            user_is_equipment_admin = "";
-        }
-        argString = argString + "&user_is_equipment_admin=" + user_is_equipment_admin;
+        argString = argString + "&user_is_admin=" + 0;
     }
 
-    var is_suppliers_admin = $("#user_is_suppliers_admin").is(':checked');
-    if (is_suppliers_admin == true) {
-        user_is_suppliers_admin = 1;
-        argString = argString + "&user_is_suppliers_admin=" + user_is_suppliers_admin;
+    var is_lender = $("#user_is_lender").is(':checked');
+    if (is_lender == true) {
+        argString = argString + "&user_is_lender=" + 1;
     } else {
-        if (g_selectedUser.user_is_suppliers_admin == 1 || g_selectedUser.user_is_suppliers_admin == 0) {
-            user_is_suppliers_admin = 0;
-        } else {
-            user_is_suppliers_admin = "";
-        }
-        argString = argString + "&user_is_suppliers_admin=" + user_is_suppliers_admin;
+        argString = argString + "&user_is_lender=" + 0;
     }
 
-    if (g_selectedRow > -1 || g_currentUser.user_is_users_admin == 0) {
-        $.get("/updateUser" + argString, function (data, status) {
+    var is_lender_admin = $("#user_is_lender_admin").is(':checked');
+    if (is_lender_admin == true) {
+        argString = argString + "&user_is_lender_admin=" + 1;
+    } else {
+        argString = argString + "&user_is_lender_admin=" + 0;
+    }
+
+    var is_owner = $("#user_is_owner").is(':checked');
+    if (is_owner == true) {
+        argString = argString + "&user_is_owner=" + 1;
+    } else {
+        argString = argString + "&user_is_owner=" + 0;
+    }
+
+    if (g_selectedRow > -1) {
+        $.get("/users/update" + argString, function (data, status) {
             if (data.localeCompare("http200") == 0) {
-                showToast('User is geupdate', '#5DB034');
+                showToast("Selected user has been updated.");
 
                 var table_temp = document.querySelector("table");
                 const tHead = table_temp.tHead;
@@ -548,62 +553,34 @@ function updateUser() {
                 if (user_name == "") {
                     giveInputWarning("user_name");
                 }
-                showToast('Gelieve de velden correct in te vullen', '#B08734');
+                if (user_email == "") {
+                    giveInputWarning("user_email");
+                }
+                if (user_telephone == "") {
+                    giveInputWarning("user_telephone");
+                }
             }
         });
     }
 }
+// --------------------------------------------------------------------------------------------------------------------
 
-function resetUser() {
-    clearTextBox();
-    g_selectedUser = undefined;
-    g_selectedRow = -1;
-
-    getUsers();
-    showToast('Velden gereset', '#349BB0');
-}
-
-function clearTextBox() {
-    $("#user_last_name").val("");
-    $("#user_name").val("");
-    $("#user_sex").val("");
-    $("#user_is_pi").prop("checked", false);
-    $("#user_is_phd").prop("checked", false);
-    $("#user_title").val("");
-    $("#user_category").val("");
-    $("#user_function").val("");
-    $("#user_email").val("");
-    $("#user_home_address").val("");
-    $("#user_telephone").val("")
-    $("#user_private_phone").val("")
-    $("#user_in_date").val("");
-    $("#user_out_date").val("");
-    $("#user_pw_hash").val("");
-    $("#user_alternative_ID").val("");
-    $("#user_can_see_private_data_label").prop("checked", false);
-    $("#user_can_see_financial_data_label").prop("checked", false);
-    $("#user_is_users_admin").prop("checked", false);
-    $("#user_is_equipment_admin").prop("checked", false);
-    $("#user_is_suppliers_admin").prop("checked", false);
-    g_selectedUser = undefined;
-    g_selectedRow = -1;
-    $("#myModal").html("");
-    $("#users_gallery").html("");
-}
-
+// NEW USER -----------------------------------------------------------------------------------------------------------
 function prepareNewUser() {
     clearTextBox();
+    deselectUsers();
 
     var table_temp = document.querySelector("table");
     const tBody = table_temp.tBodies[0];
     const rows_temp = Array.from(tBody.querySelectorAll("tr"));
     rows_temp.forEach(tr => tr.classList.remove("active-row"));
 
-    $('#update_button').css("visibility", "hidden");
-    $('#new_button').css("visibility", "hidden");
-    $('#delete_button').css("visibility", "hidden");
-    $('#add_button').css("visibility", "visible");
-    $('#cancel_button').css("visibility", "visible");
+    $('#upload_form').hide();
+    $('#update_button').hide();
+    $('#new_button').hide();
+    $('#delete_button').hide();
+    $('#add_button').show();
+    $('#cancel_button').show();
 }
 
 function cancelNewUser() {
@@ -614,56 +591,23 @@ function cancelNewUser() {
     const rows_temp = Array.from(tBody.querySelectorAll("tr"));
     rows_temp.forEach(tr => tr.classList.remove("active-row"));
 
-    $('#update_button').css("visibility", "visible");
-    $('#new_button').css("visibility", "visible");
-    $('#delete_button').css("visibility", "visible");
-    $('#add_button').css("visibility", "hidden");
-    $('#cancel_button').css("visibility", "hidden");
+    $('#upload_form').show();
+    $('#update_button').show();
+    $('#new_button').show();
+    $('#delete_button').show();
+    $('#add_button').hide();
+    $('#cancel_button').hide();
 }
 
 function newUser() {
     var user_last_name = $("#user_last_name").val();
-    argString = "?user_last_name=" + user_last_name.toUpperCase();
+    argString = "?user_last_name=" + user_last_name;
 
-    var user_name = "";
-    if ($("#user_name").val() != "") {
-        var name = $("#user_name").val().split(' ');
-        for (i = 0; i < name.length; i++) {
-            for (j = 0; j < name[i].length; j++) {
-                if (j == 0) {
-                    user_name = user_name + name[i][j].toUpperCase();
-                } else {
-                    user_name = user_name + name[i][j];
-                }
-            }
-            user_name = user_name + " ";
-        }
-        user_name = user_name.slice(0, -1);
-    }
-    argString = argString + "&user_name=" + user_name;
-
+    var user_name = $("#user_name").val();
     argString = argString + "&user_name=" + user_name;
 
     var user_sex = $("#user_sex").val();
     argString = argString + "&user_sex=" + user_sex;
-
-    var is_pi = $("#user_is_pi").is(':checked');
-    if (is_pi == true) {
-        user_is_pi = 1;
-        argString = argString + "&user_is_pi=" + user_is_pi;
-    } else {
-        user_is_pi = 0;
-        argString = argString + "&user_is_pi=" + user_is_pi;
-    }
-
-    var is_phd = $("#user_is_phd").is(':checked');
-    if (is_phd == true) {
-        user_is_phd = 1;
-        argString = argString + "&user_is_phd=" + user_is_phd;
-    } else {
-        user_is_phd = 0;
-        argString = argString + "&user_is_phd=" + user_is_phd;
-    }
 
     var user_title = $("#user_title").val();
     argString = argString + "&user_title=" + user_title;
@@ -700,67 +644,71 @@ function newUser() {
         argString = argString + "&user_out_date=" + user_out_date[2] + '/' + user_out_date[1] + '/' + user_out_date[0];
     }
 
-    var user_pw_hash = $("#user_pw_hash").val();
-    argString = argString + "&user_pw_hash=" + user_pw_hash;
-
-    var user_alternative_ID = $("#user_alternative_ID").val();
-    argString = argString + "&user_alternative_ID=" + user_alternative_ID;
-
-    var can_see_private_data = $("#user_can_see_private_data").is(':checked');
-    if (can_see_private_data == true) {
-        user_can_see_private_data = 1;
-        argString = argString + "&user_can_see_private_data=" + user_can_see_private_data;
+    var is_pi = $("#user_is_pi").is(':checked');
+    if (is_pi == true) {
+        user_is_pi = 1;
+        argString = argString + "&user_is_pi=" + user_is_pi;
     } else {
-        user_can_see_private_data = 0;
-        argString = argString + "&user_can_see_private_data=" + user_can_see_private_data;
+        user_is_pi = 0;
+        argString = argString + "&user_is_pi=" + user_is_pi;
     }
 
-    var can_see_financial_data = $("#user_can_see_financial_data").is(':checked');
-    if (can_see_financial_data == true) {
-        user_can_see_financial_data = 1;
-        argString = argString + "&user_can_see_financial_data=" + user_can_see_financial_data;
+    var is_phd = $("#user_is_phd").is(':checked');
+    if (is_phd == true) {
+        user_is_phd = 1;
+        argString = argString + "&user_is_phd=" + user_is_phd;
     } else {
-        user_can_see_financial_data = 0;
-        argString = argString + "&user_can_see_financial_data=" + user_can_see_financial_data;
+        user_is_phd = 0;
+        argString = argString + "&user_is_phd=" + user_is_phd;
     }
 
-    var is_users_admin = $("#user_is_users_admin").is(':checked');
-    if (is_users_admin == true) {
-        user_is_users_admin = 1;
-        argString = argString + "&user_is_users_admin=" + user_is_users_admin;
+    var is_financial_team = $("#user_is_financial_team").is(':checked');
+    if (is_financial_team == true) {
+        argString = argString + "&user_is_financial_team=" + 1;
     } else {
-        user_is_users_admin = 0;
-        argString = argString + "&user_is_users_admin=" + user_is_users_admin;
+        argString = argString + "&user_is_financial_team=" + 0;
     }
 
-    var is_equipment_admin = $("#user_is_equipment_admin").is(':checked');
-    if (is_equipment_admin == true) {
-        user_is_equipment_admin = 1;
-        argString = argString + "&user_is_equipment_admin=" + user_is_equipment_admin;
+    var is_admin = $("#user_is_admin").is(':checked');
+    if (is_admin == true) {
+        argString = argString + "&user_is_admin=" + 1;
     } else {
-        user_is_equipment_admin = 0;
-        argString = argString + "&user_is_equipment_admin=" + user_is_equipment_admin;
+        argString = argString + "&user_is_admin=" + 0;
     }
 
-    var is_suppliers_admin = $("#user_is_suppliers_admin").is(':checked');
-    if (is_suppliers_admin == true) {
-        user_is_suppliers_admin = 1;
-        argString = argString + "&user_is_suppliers_admin=" + user_is_suppliers_admin;
+    var is_lender = $("#user_is_lender").is(':checked');
+    if (is_lender == true) {
+        argString = argString + "&user_is_lender=" + 1;
     } else {
-        user_is_suppliers_admin = 0;
-        argString = argString + "&user_is_suppliers_admin=" + user_is_suppliers_admin;
+        argString = argString + "&user_is_lender=" + 0;
     }
 
-    $.get("/newUser" + argString, function (data, status) {
+    var is_lender_admin = $("#user_is_lender_admin").is(':checked');
+    if (is_lender_admin == true) {
+        argString = argString + "&user_is_lender_admin=" + 1;
+    } else {
+        argString = argString + "&user_is_lender_admin=" + 0;
+    }
+
+    var is_owner = $("#user_is_owner").is(':checked');
+    if (is_owner == true) {
+        argString = argString + "&user_is_owner=" + 1;
+    } else {
+        argString = argString + "&user_is_owner=" + 0;
+    }
+
+    $.get("/users/new" + argString, function (data, status) {
         if (data.localeCompare("http200") == 0) {
+            $('#upload_form').show();
+            $('#update_button').show();
+            $('#new_button').show();
+            $('#delete_button').show();
+            $('#add_button').hide();
+            $('#cancel_button').hide();
+
             getUsers();
             clearTextBox();
-            $('#update_button').css("visibility", "visible");
-            $('#new_button').css("visibility", "visible");
-            $('#delete_button').css("visibility", "visible");
-            $('#add_button').css("visibility", "hidden");
-            $('#cancel_button').css("visibility", "hidden");
-            showToast('Nieuwe user is aangemaakt', '#8734B0');
+            showToast('New user has been added.');
         } else if (data.localeCompare("http400") == 0) {
             if (user_last_name == "") {
                 giveInputWarning("user_last_name");
@@ -768,22 +716,29 @@ function newUser() {
             if (user_name == "") {
                 giveInputWarning("user_name");
             }
-            showToast('Gelieve de velden correct in te vullen', '#B08734');
+            if (user_email == "") {
+                giveInputWarning("user_email");
+            }
+            if (user_telephone == "") {
+                giveInputWarning("user_telephone");
+            }
         }
     });
 }
+// --------------------------------------------------------------------------------------------------------------------
 
+// DELETE USER --------------------------------------------------------------------------------------------------------
 function deleteUser() {
     if (g_selectedUser == undefined) {
-        showToast('Gelieve een gebruiker aan te duiden.', '#B08734');
+        showToast('Please select a user before clicking delete.');
         return;
     }
     var ID = g_selectedUser.ID;
     argString = "?ID=" + ID;
 
-    $.get("/deleteUser" + argString, function (data, status) {
+    $.get("/users/delete" + argString, function (data, status) {
         if (data.localeCompare("http200") == 0) {
-            showToast('ID:' + ID + ' is verwijderd', '#B04934');
+            showToast('ID:' + ID + ' is deleted.');
 
             var table_temp = document.querySelector("table");
             const tHead = table_temp.tHead;
@@ -796,287 +751,84 @@ function deleteUser() {
             if (column != '') {
                 var columnNr = parseInt(getNumbersFromString(column.getAttribute('onclick'))[0]);
                 if (column.classList[0] == "th-sort-asc") {
-                    getUsers(false, true, true, columnNr);
                     clearTextBox();
+                    getUsers(false, true, true, columnNr)
                 } else {
-                    getUsers(false, true, false, columnNr);
                     clearTextBox();
+                    getUsers(false, true, false, columnNr)
                 }
             } else {
-                getUsers();
                 clearTextBox();
+                getUsers();
             }
         }
     });
 }
+// --------------------------------------------------------------------------------------------------------------------
 
-// https://www.youtube.com/watch?v=8SL_hM1a0yo
-function sortTableByColumn(table, column, asc = true) {
-    const dirModifier = asc ? 1 : -1;
-    const tBody = table.tBodies[0];
-    const rows = Array.from(tBody.querySelectorAll("tr"));
+// FLASH/TOAST NOTIFICATIONS-------------------------------------------------------------------------------------------
+function showToast(text, color = '#01A38C') {
+    var toastHTML = `<div id="toast_pop_up" style="background-color:${color};" class="mlbutton">${text}</div>`;
 
-    var inputType;
-    if (column == 0) {
-        inputType = "numbers";
-    } else {
-        inputType = "names";
-    }
-    // sort each row
-    const sortedRows = rows.sort((a, b) => {
-        if (inputType == "names") {
-            const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
-            const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
-            return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
-        } else {
-            const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
-            const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
-            return parseFloat(aColText) > parseFloat(bColText) ? (1 * dirModifier) : (-1 * dirModifier);
-        }
-    });
-    for (i = 0; i < sortedRows.length; i++) {
-        var innerText = sortedRows[i].innerText.split("\n\t\n");
-        var nameArray = innerText[1].split(" ");
-        var lastName = "";
-        for (j = 0; j < nameArray.length; j++) {
-            if (nameArray[j] == nameArray[j].toUpperCase()) {
-                lastName = lastName + nameArray[j] + " ";
-            }
-        }
-        lastName = lastName.slice(0, -1);
-        if (g_selectedUser != undefined) {
-            if (lastName == g_selectedUser.user_last_name) {
-                g_selectedRow = i + 1;
-            }
-        }
-    }
+    $("#toast_message").html(toastHTML);
 
-    // remove all resisting tr from table
-    while (tBody.firstChild) {
-        tBody.removeChild(tBody.firstChild);
-    }
-
-    // add sorted rows
-    tBody.append(...sortedRows);
-
-    // remember current sorting type (asc or decs)
-    table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
-    table.querySelector(`th:nth-child(${column + 1})`).classList.toggle("th-sort-asc", asc);
-    table.querySelector(`th:nth-child(${column + 1})`).classList.toggle("th-sort-desc", !asc);
+    setTimeout(function () {
+        $('#toast_message').fadeOut(500, function () {
+            $(this).empty().show();
+        });
+    }, 2500);
 }
 
-function sortColumnUser(column) {
-    var table = document.querySelector("table");
-    var currentIsAscending = table.querySelectorAll("th")[column].className;
-    if (currentIsAscending == "") {
-        sortTableByColumn(table, column);
-    } else if (currentIsAscending == "th-sort-desc") {
-        sortTableByColumn(table, column, true);
-    } else {
-        sortTableByColumn(table, column, false);
-    }
+function removeFlashNotification() {
+    $(".notification").remove();
 }
+// --------------------------------------------------------------------------------------------------------------------
 
-function getJSONFromTable(rowNr) {
-    var table = document.getElementById('blue_table').tBodies[0];
-    var jsonArr = [];
-    for (var i = 0, row; row = table.rows[i]; i++) {
-        var col = row.cells;
-        var jsonObj = {
-            elem: col[0].innerHTML
-        }
-
-        jsonArr.push(jsonObj);
-    }
-
-    var ID = getNumbersFromString(jsonArr[rowNr - 1].elem)[1];// creates array from matches
-    return ID;
-}
-
-function getNumbersFromString(string) {
-    var regex = /\d+/g;
-    var matches = string.match(regex);
-    return matches;
-}
-
+// --------------------------------------------------------------------------------------------------------------------
 function giveInputWarning(inputID) {
     // console.log('#' + inputID)
     var input = $('#' + inputID);
 
     input.css("border-color", "#BA604D");
-    input.css("background-color", "#E1BBB3");
     input.css("transition", "0.2s");
 
     setTimeout(function () {
         input.css("border-color", "");
-        input.css("background-color", "");
     }, 1500);
 }
+// --------------------------------------------------------------------------------------------------------------------
 
+// UPLOAD FILE TO SELECTED USER ---------------------------------------------------------------------------------------
 $(function () {
     $('#submit').click(function () {
         if (g_selectedUser != undefined) {
-            var form_data = new FormData($('#uploadform')[0]);
-            $.ajax({
-                type: 'POST',
-                url: '/uploadajax_user?user_id=' + g_selectedUser.ID,
-                data: form_data,
-                contentType: false,
-                processData: false,
-                dataType: 'json'
-            }).done(function (data, textStatus, jqXHR) {
-                argString = "?picture_name=" + data.name;
-                argString = argString + "&equipment_id=" + g_selectedUser.ID;
-                $.get("/newEquipmentPicture" + argString, function (data, status) {
-                    if (data.localeCompare("http200") == 0) {
-                        showToast('Photo is uploaded', '#5DB034');
+            if ($('#file_input').val() != '') {
+                var form_data = new FormData($('#upload_form')[0]);
+                $.ajax({
+                    type: 'POST',
+                    url: '/users-files/upload?user_id=' + g_selectedUser.ID,
+                    data: form_data,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json'
+                }).done(function (data, textStatus, jqXHR) {
+                    returnData = JSON.parse(data);
+                    if ("error" in returnData && returnData["error"] == "file not allowed") {
+                        showToast('Please upload a valid file. (png/jpg/jpeg)');
+                    } else {
+                        showToast('The profile picture has successfully been uploaded to the selected user.');
                     }
+                    $('#file_input').val('')
+                }).fail(function (data) {
+                    $('#file_input').val('')
+                    showToast('Error! Please try uploading again.');
                 });
-                loadImagesFromDirectory(g_imageDirectory);
-                // console.log('Photo uploaded!');
-            }).fail(function (data) {
-                // console.error('Photo not uploaded. Error!');
-            });
+            } else {
+                showToast('Please upload a valid file. (png/jpg/jpeg)');
+            }
         } else {
-            showToast('Gelieve een user aan te duiden aan wie u de foto aan wil toevoegen.', '#B08734');
+            showToast('Please select a user before uploading a file.');
         }
-
     });
 });
-
-function loadImagesFromDirectory(directory) {
-    if (g_selectedUser == undefined && g_currentUser != undefined) {
-        argString = "?directory=" + directory + "&equipmentID=-1&userID=" + + g_currentUser.ID;
-    } else {
-        argString = "?directory=" + directory + "&equipmentID=-1&userID=" + + g_selectedUser.ID;
-    }
-
-    $.get("/get_files" + argString, function (data, status) {
-        // console.log(data);
-        var images = getFromBetween.get(data, '"', '"');
-        // console.log(images);
-
-        $("#users_gallery").html("");
-        var galleryHTML = '<div class="gallery_row">'
-        var i = 0;
-        images.forEach(image => {
-            i++;
-            galleryHTML = galleryHTML.concat('<div class="img-w">');
-            galleryHTML = galleryHTML.concat('<img src=' + g_imageDirectory + '' + image + ' onclick="openModal();currentSlide(' + i + ')">');
-            galleryHTML = galleryHTML.concat("</div>");
-        });
-        galleryHTML = galleryHTML.concat('</div>');
-        //console.log(galleryHTML)
-        $("#users_gallery").html(galleryHTML);
-
-
-        $("#myModal").html("");
-        var modalHTML = '<span class="close cursor" onclick="closeModal()">&times;</span>';
-        modalHTML = modalHTML.concat('<div class="modal-content">');
-        j = 0;
-        images.forEach(image => {
-            j++;
-            modalHTML = modalHTML.concat('<div class="mySlides">');
-            modalHTML = modalHTML.concat('<div class="numbertext">' + j + '/' + i + '</div>');
-            modalHTML = modalHTML.concat('<img src=' + g_imageDirectory + '' + image + ' >');
-            modalHTML = modalHTML.concat('</div>');
-        });
-        modalHTML = modalHTML.concat('<a class="prev" onclick="plusSlides(-1)">&#10094;</a>');
-        modalHTML = modalHTML.concat('<a class="next" onclick="plusSlides(1)">&#10095;</a>');
-        modalHTML = modalHTML.concat('<div class="caption-container"><p id="caption"></p></div>');
-        i = 0;
-        modalHTML = modalHTML.concat('<div class="gallery_row">');
-        images.forEach(image => {
-            i++;
-            modalHTML = modalHTML.concat('<div class="img-w">');
-            modalHTML = modalHTML.concat('<img class="demo cursor" src=' + g_imageDirectory + '' + image + ' onclick="currentSlide(' + i + ')">');
-            modalHTML = modalHTML.concat('</div>');
-        });
-        galleryHTML = galleryHTML.concat('</div>');
-        modalHTML = modalHTML.concat('</div>');
-        $("#myModal").html(modalHTML);
-
-    });
-}
-
-function openModal() {
-    document.getElementById("myModal").style.display = "block";
-}
-
-function closeModal() {
-    document.getElementById("myModal").style.display = "none";
-}
-
-var slideIndex = 1;
-showSlides(slideIndex);
-
-function plusSlides(n) {
-    showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-    showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-    var i;
-    var slides = document.getElementsByClassName("mySlides");
-    var dots = document.getElementsByClassName("demo");
-    var captionText = document.getElementById("caption");
-    if (n > slides.length) { slideIndex = 1 }
-    if (n < 1) { slideIndex = slides.length }
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
-    // console.log(slides.length);
-    if (slides.length != 0) {
-        slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " active";
-        captionText.innerHTML = dots[slideIndex - 1].alt;
-    }
-}
-
-var getFromBetween = {
-    // ALEX C https://stackoverflow.com/questions/14867835/get-substring-between-two-characters-using-javascript
-    results: [],
-    string: "",
-    getFromBetween: function (sub1, sub2) {
-        if (this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return false;
-        var SP = this.string.indexOf(sub1) + sub1.length;
-        var string1 = this.string.substr(0, SP);
-        var string2 = this.string.substr(SP);
-        var TP = string1.length + string2.indexOf(sub2);
-        return this.string.substring(SP, TP);
-    },
-    removeFromBetween: function (sub1, sub2) {
-        if (this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return false;
-        var removal = sub1 + this.getFromBetween(sub1, sub2) + sub2;
-        this.string = this.string.replace(removal, "");
-    },
-    getAllResults: function (sub1, sub2) {
-        // first check to see if we do have both substrings
-        if (this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return;
-
-        // find one result
-        var result = this.getFromBetween(sub1, sub2);
-        // push it to the results array
-        this.results.push(result);
-        // remove the most recently found one from the string
-        this.removeFromBetween(sub1, sub2);
-
-        // if there's more substrings
-        if (this.string.indexOf(sub1) > -1 && this.string.indexOf(sub2) > -1) {
-            this.getAllResults(sub1, sub2);
-        }
-        else return;
-    },
-    get: function (string, sub1, sub2) {
-        this.results = [];
-        this.string = string;
-        this.getAllResults(sub1, sub2);
-        return this.results;
-    }
-};
+// --------------------------------------------------------------------------------------------------------------------

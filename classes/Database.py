@@ -1,12 +1,14 @@
-import sqlite3
 import os
 import platform
+import sqlite3
+
 
 def dict_factory(cursor, row):
     d = {}
     for idx, col in enumerate(cursor.description):
         d[col[0]] = row[idx]
     return d
+
 
 class Database(object):
     def __init__(self):
@@ -38,9 +40,8 @@ class Database(object):
             try:
                 c.execute(sql_string)
             except sqlite3.Error as e:
-                if not 'duplicate column name:' in e.args[0] :
+                if not 'duplicate column name:' in e.args[0]:
                     print(e.args[0])
-
 
     def get_sql_data(self, sql_string):
         self.conn.row_factory = dict_factory
@@ -48,39 +49,44 @@ class Database(object):
         c.execute(sql_string)
         return c.fetchall()
 
-    def dict_factory(self,cursor, row):
+    def dict_factory(self, cursor, row):
         d = {}
         for idx, col in enumerate(cursor.description):
             d[col[0]] = row[idx]
         return d
-
-
 
     def create_users(self):
         table_name = 'users'
         self.create_table(table_name)
 
         columns = ["user_name TEXT DEFAULT ''",
-                   "user_last_name TEXT DEFAULT ''",
-                   "user_email TEXT DEFAULT ''",
+                   "user_last_name TEXT",
+                   "user_category TEXT",
+                   "user_function TEXT DEFAULT ''",
+                   "user_sex TEXT",
+                   "user_email TEXT",
                    "user_telephone TEXT DEFAULT ''",
                    "user_title TEXT DEFAULT ''",
-                   "user_pw_hash TEXT DEFAULT ''",
                    "user_home_address TEXT DEFAULT ''",
                    "user_private_phone TEXT DEFAULT ''",
-                   "user_is_pi NUMBER",
-                   "user_is_phd NUMBER",
-                   "user_category TEXT",
-                   "user_function TEXT",
-                   "user_sex TEXT",
-                   "user_in_date DATE",
-                   "user_out_date DATE",
+                   "user_is_pi NUMBER DEFAULT -1",
+                   "user_is_phd NUMBER DEFAULT -1",
+                   "user_in_date DATE DEFAULT -1",
+                   "user_out_date DATE DEFAULT -1",
+
                    "user_alternative_ID INTEGER DEFAULT -1",
-                   "user_can_see_private_data NUMBER DEFAULT 0",
-                   "user_can_see_financial_data NUMBER DEFAULT 0",
-                   "user_is_users_admin NUMBER DEFAULT 0",
-                   "user_is_equipment_admin NUMBER DEFAULT 0",
-                   "user_is_suppliers_admin NUMBER DEFAULT 0"]
+                   "user_pw_hash TEXT DEFAULT ''",
+
+                   "user_is_allowed NUMBER DEFAULT 0",
+                   "user_date_when_allowed DATE DEFAULT -1",
+                   "user_completed_profile NUMBER DEFAULT 0",
+                   "user_set_pw NUMBER DEFAULT 0",
+
+                   "user_is_financial_team NUMBER DEFAULT 0",
+                   "user_is_admin NUMBER DEFAULT 0",
+                   "user_is_lender NUMBER DEFAULT 1",
+                   "user_is_lender_admin NUMBER DEFAULT 0",
+                   "user_is_owner NUMBER DEFAULT 0"]
 
         self.insert_columns(table_name, columns)
 
@@ -90,21 +96,26 @@ class Database(object):
 
         columns = ["equipment_inventory_number TEXT DEFAULT ''",
                    "equipment_label TEXT DEFAULT ''",
+
                    "equipment_name TEXT DEFAULT ''",
-                   "equipment_owner_id NUMBER DEFAULT -1",
-                   "equipment_co_owner_id NUMBER DEFAULT -1",
-                   "equipment_supplier_id NUMBER DEFAULT -1",
-                   "equipment_base_location TEXT DEFAULT ''",
-                   "equipment_outcome TEXT DEFAULT ''",
-                   "equipment_purchase_price NUMBER",
-                   "equipment_annual_cost NUMBER",
-                   "equipment_is_mobile NUMBER",
                    "equipment_amount NUMBER DEFAULT 1",
+
+                   "equipment_description TEXT DEFAULT ''",
+                   "equipment_outcome TEXT DEFAULT ''",
+
+                   "equipment_purchase_date DATE",
+                   "equipment_purchase_price NUMBER",
+
                    "equipment_annual_cost NUMBER",
                    "equipment_annual_cost_budget TEXT DEFAULT ''",
-                   "equipment_purchase_date DATE",
-                   "equipment_supplier_id NUMBER DEFAULT -1",
-                   "equipment_bookable NUMBER DEFAULT 1"]
+
+                   "equipment_base_location TEXT DEFAULT ''",
+                   "equipment_is_mobile NUMBER",
+                   "equipment_bookable NUMBER DEFAULT 1",
+
+                   "equipment_owner_id NUMBER DEFAULT -1",
+                   "equipment_co_owner_id NUMBER DEFAULT -1",
+                   "equipment_supplier_id NUMBER DEFAULT -1"]
 
         self.insert_columns(table_name, columns)
 
@@ -131,20 +142,19 @@ class Database(object):
 
         self.insert_columns(table_name, columns)
 
-    def create_permissions(self):
-        table_name = 'permissions'
+    def create_documents(self):
+        table_name = 'documents'
         self.create_table(table_name)
 
-        columns = ["permission_name TEXT DEFAULT ''"]
+        columns = ["document_name TEXT DEFAULT ''",
+                   "user_id NUMBER DEFAULT -1",
+                   "equipment_id NUMBER DEFAULT -1"]
 
         self.insert_columns(table_name, columns)
 
-        sql_string = "SELECT permission_name FROM roles WHERE role_name = ''"
-
-
     def create_db(self):
         self.create_users()
-        self.create_permissions()
         self.create_equipment()
         self.create_suppliers()
         self.create_pictures()
+        self.create_documents()

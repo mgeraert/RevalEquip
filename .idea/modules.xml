@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/RevalEquip.iml" filepath="$PROJECT_DIR$/.idea/RevalEquip.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/reval-new.iml" filepath="$PROJECT_DIR$/.idea/reval-new.iml" />
     </modules>
   </component>
 </project>

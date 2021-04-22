@@ -1,413 +1,272 @@
-
 $margin1: 30px;
-$margin2: 100px;
-$tabelHeight: 34.653px;
-$labelWidth: 130px;
-$rowSpacing: 28px;
-$textBoxWidthSmall: 360px;
-$textBoxWidthLarge: 555px;
-$buttonHeight: 31.528px;
 $ButtonWidth: 100px;
-$ButtonSpacing: 10px;
-$permissionsWidth: 200px+31.3px;
 
-$textBoxColumn1Left: $margin1+$labelWidth;
-$labelColumn2Left: $margin1+$textBoxWidthLarge+$margin1;
-$textBoxColumn2Left: $margin1+$labelWidth+$textBoxWidthLarge+2*$margin1+$labelWidth;
-
-#file_input {
-    position: absolute;
-    top: $margin1+2px;
-    left: $margin1;
-    width: 360px;
-    padding: 2.2px 3px 2.9px 3px;
-    font-size: 12px;
+html, body {
+    font-size: 14px;
+    height: 100vh; 
+    width: 100vw;
+    margin: 0 0; 
+    display: flex; 
+    align-items: flex-start; 
+    justify-content: flex-start; 
 }
 
-.upload_button { 
-    position: absolute;
-    top: $margin1;
-    left:$margin1+260px;
-    width: $ButtonWidth;
+#wide_panel {
+    top: 0;
 }
 
-#update_button{
-    position: absolute;
-    left:420px;
-    top: $margin1;
-    width: $ButtonWidth;
+#text_title {
+    float: left;
+    width: 100%;
+    padding: 6.2px 12px;
+
+    background-color: #41BAA9;
+    border: 1px solid #01A38C;
+
+    font-size: 16px;
+    text-align: center;
+    color: #fff;
+    font-weight: 550;
+    cursor: auto;
 }
 
-#new_button{
-    position: absolute;
-    left:420px+$margin1+$ButtonWidth;
-    top: $margin1;
-    width: $ButtonWidth;
+#users_table {
+    height: fit-content;
+    max-height: 40vh;
+    width: 100%;
+    overflow-x: hidden;
+    text-align: center;
+    border-radius: 6px 6px 6px 6px;
+    box-shadow:  0px 2px 6px -1px rgba(0,0,0,.13); 
 }
 
-#delete_button{
-    position: absolute;
-    left:420px+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
-    top: $margin1;
-    width: $ButtonWidth;
+.button_panel {
+    margin-top: 20px;
+    height: 32px;
+
+    #file_input {
+        position: absolute;
+        margin-top: 2px;
+        width: 360px;
+        padding: 2.2px 3px 2.9px 3px;
+        font-size: 12px;
+    }
+    
+    .upload_button { 
+        position: absolute;
+        left: 260px;
+        width: $ButtonWidth;
+    }
+    
+    #update_button{
+        position: absolute;
+        left:420px;
+        width: $ButtonWidth;
+        // display: none;
+    }
+    
+    #new_button{
+        position: absolute;
+        left:420px+$margin1+$ButtonWidth;
+        width: $ButtonWidth;
+        // display: none;
+    }
+    
+    #delete_button{
+        position: absolute;
+        left:420px+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
+        width: $ButtonWidth;
+        // display: none;
+    }
+    
+    #export_button{
+        position: absolute;
+        left:1200px - $ButtonWidth;
+        width: $ButtonWidth;
+        // display: none;
+    }
+    
+    #add_button{
+        position: absolute;
+        left:355px+$margin1+$ButtonWidth;
+        width: $ButtonWidth;
+        display: none;
+    }
+    
+    #cancel_button{
+        position: absolute;
+        left:355px+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
+        width: $ButtonWidth;
+        display: none;
+    }
 }
 
-#add_button{
-    position: absolute;
-    left:355px+$margin1+$ButtonWidth;
-    top: $margin1;
-    width: $ButtonWidth;
-    visibility: hidden;
-}
-
-#cancel_button{
-    position: absolute;
-    left:355px+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
-    top: $margin1;
-    width: $ButtonWidth;
-    visibility: hidden;
-}
-
-#export_button{
-    position: absolute;
-    left:1200px - $ButtonWidth - $margin1;
-    top: $margin1;
-    width: $ButtonWidth;
-}
-
-#toast_pop_up {
-    left: 420px;
-    width: $ButtonWidth+$margin1+$ButtonWidth+$margin1+$ButtonWidth;
-    position: absolute;
-    background-color: gray;
-    top: $margin1;
+.input_panel {
+    position: relative;
+    margin-top: 25px;
+    text {
+        width: 100%;
+    }
 }
 
 #user_last_name_label{
-    position: absolute;
-    left: $margin1;
-    top: $margin1+$buttonHeight+$margin1;
-    width: $textBoxWidthLarge;
+    float: left;
+    width: 35%;
 }
 
 #user_name_label{
-    position: absolute;
-    left: $labelColumn2Left;
-    top: $margin1+$buttonHeight+$margin1;
-    width: $textBoxWidthLarge;
+    float: left;
+    margin-left: 2%;
+    width: 35%;
 }
 
 #user_sex_label{
-    position: absolute;
-    left: $margin1;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+ $margin1 * 0.5;
-    width: 260px;
-}
-
-#user_is_pi_label{
-    position: absolute;
-    left: $margin1+260px+$margin1;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+ $margin1 * 0.5;
-}
-
-#user_is_phd_label{
-    position: absolute;
-    left: $margin1+260px+$margin1+117.5px+$margin1;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+ $margin1 * 0.5;
-}
-
-#user_alternative_ID_label{
-    position: absolute;
-    left: $labelColumn2Left;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+ $margin1 * 0.5;
-    width: $textBoxWidthLarge;
+    float: left;
+    margin-left: 2%;
+    width: 26%;
 }
 
 #user_title_label{
-    position: absolute;
-    left:$margin1;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
-    width: $textBoxWidthSmall;
+    margin-top: 2%;
+    float: left;
+    width: 32%;
 }
 
 #user_category_label{
-    position: absolute;
-    left:$margin1+$textBoxWidthSmall+$margin1;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
-    width: $textBoxWidthSmall;
+    margin-top: 2%;
+    float: left;
+    margin-left: 2%;
+    width: 32%;
 }
 
 #user_function_label{
-    position: absolute;
-    left: $margin1+$textBoxWidthSmall+$margin1+$textBoxWidthSmall+$margin1;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
-    width: $textBoxWidthSmall;
+    margin-top: 2%;
+    float: left;
+    margin-left: 2%;
+    width: 32%;
 }
 
 #user_email_label{
-    position: absolute;
-    left:$margin1;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
-    width: $textBoxWidthLarge;
+    margin-top: 2%;
+    float: left;
+    width: 49%;
 }
 
 #user_home_address_label{
-    position: absolute;
-    left: $labelColumn2Left;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
-    width: $textBoxWidthLarge;
+    margin-top: 2%;
+    float: left;
+    margin-left: 2%;
+    width: 49%;
 }
 
 #user_telephone_label{
-    position: absolute;
-    left:$margin1;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
-    width: $textBoxWidthLarge;
+    margin-top: 2%;
+    float: left;
+    width: 49%;
 }
 
 #user_private_phone_label{
-    position: absolute;
-    left: $labelColumn2Left;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
-    width: $textBoxWidthLarge;
+    margin-top: 2%;
+    float: left;
+    margin-left: 2%;
+    width: 49%;
 }
 
 #user_in_date_label{
-    position: absolute;
-    left:$margin1;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
-    width: $textBoxWidthLarge;
+    margin-top: 2%;
+    float: left;
+    width: 30%;
+    height: 35px;
 }
 
 #user_out_date_label{
-    position: absolute;
-    left: $labelColumn2Left;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
-    width: $textBoxWidthLarge;
-}
-
-#user_can_see_private_data_label{
-    position: absolute;
-    left: $margin1;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
-    width: $permissionsWidth;
-}
-
-#user_can_add_user_label{
-    position: absolute;
-    left: $margin1 + $permissionsWidth + $margin1;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
-    width: $permissionsWidth;
-}
-
-#user_can_see_financial_data_label{
-    position: absolute;
-    left: $margin1 + $permissionsWidth + $margin1 + $permissionsWidth + $margin1;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
-    width: $permissionsWidth;
-}
-
-#user_is_users_admin_label{
-    position: absolute;
-    left: $margin1;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
-    width: $permissionsWidth;
-}
-
-#user_is_equipment_admin_label{
-    position: absolute;
-    left: $margin1 + $permissionsWidth + $margin1;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
-    width: $permissionsWidth;
-}
-
-#user_is_suppliers_admin_label{
-    position: absolute;
-    left: $margin1 + $permissionsWidth + $margin1 + $permissionsWidth + $margin1;
-    top: $margin1+$buttonHeight+$margin1+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5+$tabelHeight+$margin1 * 0.5;
-    width: $permissionsWidth;
-}
-
-#users_gallery {
-    position: absolute;
-    width: 1200px - $margin1*2;
-    left: $margin1;
-    top: $buttonHeight+$tabelHeight*7+$margin1*6;
-    padding-bottom: $margin1;
-    overflow: hidden;
-    border-radius: 3px;
-    margin: auto;
-}
-
-// GALLERY AT BOTTEM OF PAGE -----------------------------------------------------------------------
-
-.gallery_row {
-    width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-}
-
-.img-w {
-    width: 180px;
-    height: 180px;
+    margin-top: 2%;
     float: left;
-    position: relative;
-    overflow: hidden;
-    img {
-        object-fit: cover;
-        width: 180px;
-        height: 180px;
-        position: absolute;
-
-        opacity: 0.8; 
-        cursor: pointer; 
-    }
-    img:hover {
-        opacity: 1; 
-    }
+    margin-left: 2%;
+    width: 30%;
+    height: 35px;
 }
 
-// -----------------------------------------------------------------------------
-
-// MODAL -----------------------------------------------------------------------
-
-.row > .column {
-    padding: 0 8px;
-}
-  
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-  
-.column {
+#user_is_pi_label{
+    margin-top: 2%;
     float: left;
-    width: 25%;
+    margin-left: 2%;
+    height: 35px;
 }
-  
-  /* The Modal (background) */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    padding-top: 100px;
-    left: 0;
-    top: 0;
+
+#user_is_phd_label{
+    margin-top: 2%;
+    float: left;
+    margin-left: 2%;
+    height: 35px;
+}
+
+#picture_button{
+    margin-top: 2%;
+    float: left;
+    margin-left: 2%;
+    width: 147px;
+    height: 35px;
+}
+
+#user_is_financial_team_label{
+    float: left;
+    height: 35px;
+}
+
+#user_is_admin_label{
+    float: left;
+    margin-left: 2%;
+    height: 35px;
+}
+
+#user_is_lender_label{
+    float: left;
+    margin-left: 2%;
+    height: 35px;
+}
+
+#user_is_lender_admin_label{
+    float: left;
+    margin-left: 2%;
+    height: 35px;
+}
+
+#user_is_owner_label{
+    float: left;
+    margin-left: 2%;
+    height: 35px;
+}
+
+#user_date_when_allowed_label{
+    float: left;
+    height: 35px;
+    width: 30%;
+}
+
+#user_completed_profile_label{
+    float: left;
+    margin-left: 2%;
+    height: 35px;
+}
+
+#user_is_allowed_label{
+    float: left;
+    margin-left: 2%;
+    height: 35px;
+}
+
+#user_set_pw_label{
+    float: left;
+    margin-left: 2%;
+    height: 35px;
+}
+
+.sub_head {
+    margin-top: 1%;
+    margin-bottom: 5px;
+    float: left;
     width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: #0f0f0f;
+    color: #01A38C;
+    font-weight: 500;
 }
-  
-  /* Modal Content */
-.modal-content {
-    position: relative;
-    background-color: #fefefe;
-    
-    background-color: black;
-    margin: auto;
-    padding: 0;
-    width: 90%;
-    max-width: 1200px;
-}
-  
-  /* The Close Button */
-.close {
-    color: white;
-    position: absolute;
-    top: 10px;
-    right: 25px;
-    font-size: 35px;
-    font-weight: bold;
-}
-  
-.close:hover,
-.close:focus {
-    color: #999;
-    text-decoration: none;
-    cursor: pointer;
-}
-  
-.mySlides {
-    display: none;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-  
-    img {
-        margin-bottom: -4px;
-        max-height: 700px;
-        width: auto;
-    }
-}
-  
-.cursor {
-    cursor: pointer;
-}
-  
-  /* Next & previous buttons */
-.prev,
-.next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 16px;
-    margin-top: -50px;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-    -webkit-user-select: none;
-}
-  
-  /* Position the "next button" to the right */
-.next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-}
-  
-  /* On hover, add a black background color with a little bit see-through */
-.prev:hover,
-.next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-  
-  /* Number text (1/3 etc) */
-.numbertext {
-    color: #f2f2f2;
-    font-size: 12px;
-    padding: 8px 12px;
-    position: absolute;
-    top: 0;
-}
-  
-.caption-container {
-    text-align: center;
-    background-color: black;
-    padding: 2px 16px;
-    color: white;
-}
-  
-.demo {
-    opacity: 0.6;
-}
-  
-.active,
-.demo:hover {
-    opacity: 1;
-}
-  
-img.hover-shadow {
-    transition: 0.3s;
-}
-  
-.hover-shadow:hover {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-// -----------------------------------------------------------------------------

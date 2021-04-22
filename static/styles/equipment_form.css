@@ -1,167 +1,218 @@
-#file_input {
+html, body {
+  font-size: 14px;
+  height: 100vh;
+  width: 100vw;
+  margin: 0 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+#wide_panel {
+  top: 0;
+}
+
+#text_title {
+  float: left;
+  width: 100%;
+  padding: 6.2px 12px;
+  background-color: #41BAA9;
+  border: 1px solid #01A38C;
+  font-size: 16px;
+  text-align: center;
+  color: #fff;
+  font-weight: 550;
+  cursor: auto;
+}
+
+#equipment_table {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  max-height: 40vh;
+  width: 100%;
+  overflow-x: hidden;
+  text-align: center;
+  border-radius: 6px 6px 6px 6px;
+  -webkit-box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.13);
+          box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.13);
+}
+
+.button_panel {
+  margin-top: 20px;
+  height: 32px;
+}
+
+.button_panel #file_input {
   position: absolute;
-  top: 32px;
-  left: 30px;
+  margin-top: 2px;
   width: 360px;
   padding: 2.2px 3px 2.9px 3px;
   font-size: 12px;
 }
 
-.upload_button {
+.button_panel .upload_button {
   position: absolute;
-  top: 30px;
-  left: 290px;
+  left: 260px;
   width: 100px;
 }
 
-#update_button {
+.button_panel #update_button {
   position: absolute;
   left: 420px;
-  top: 30px;
   width: 100px;
+  display: none;
 }
 
-#new_button {
+.button_panel #new_button {
   position: absolute;
   left: 550px;
-  top: 30px;
   width: 100px;
+  display: none;
 }
 
-#delete_button {
+.button_panel #delete_button {
   position: absolute;
   left: 680px;
-  top: 30px;
   width: 100px;
+  display: none;
 }
 
-#export_button {
+.button_panel #export_button {
   position: absolute;
-  left: 1070px;
-  top: 30px;
+  left: 1100px;
   width: 100px;
+  display: none;
 }
 
-#add_button {
+.button_panel #add_button {
   position: absolute;
   left: 485px;
-  top: 30px;
   width: 100px;
-  visibility: hidden;
+  display: none;
 }
 
-#cancel_button {
+.button_panel #cancel_button {
   position: absolute;
   left: 615px;
-  top: 30px;
   width: 100px;
-  visibility: hidden;
+  display: none;
 }
 
-#toast_pop_up {
-  left: 420px;
-  width: 360px;
-  position: absolute;
-  background-color: gray;
-  top: 30px;
+.input_panel {
+  position: relative;
+  margin-top: 25px;
 }
 
 #eq_inventory_number_label {
   position: absolute;
-  left: 30px;
-  top: 91.528px;
-  width: 555px;
+  width: 585px;
 }
 
 #eq_label_label {
   position: absolute;
-  left: 615px;
-  top: 91.528px;
-  width: 555px;
+  width: 585px;
+  margin-left: 615px;
 }
 
 #eq_name_label {
   position: absolute;
-  left: 30px;
-  top: 156.181px;
-  width: 555px;
+  width: 585px;
+  margin-top: 64.653px;
 }
 
 #eq_amount_label {
   position: absolute;
-  left: 615px;
-  top: 156.181px;
-  width: 555px;
+  width: 585px;
+  margin-left: 615px;
+  margin-top: 64.653px;
 }
 
 #eq_desc_label {
   position: absolute;
-  left: 30px;
-  top: 205.834px;
-  width: 555px;
+  width: 585px;
+  margin-top: 114.306px;
 }
 
 #eq_outcome_label {
   position: absolute;
-  left: 615px;
-  top: 205.834px;
-  width: 555px;
+  width: 585px;
+  margin-left: 615px;
+  margin-top: 114.306px;
 }
 
 #eq_purchase_date_label {
   position: absolute;
-  left: 30px;
-  top: 270.487px;
-  width: 555px;
+  width: 585px;
+  margin-top: 178.959px;
 }
 
 #eq_purchase_price_label {
   position: absolute;
-  left: 615px;
-  top: 270.487px;
-  width: 555px;
+  width: 585px;
+  margin-left: 615px;
+  margin-top: 178.959px;
 }
 
 #eq_annual_cost_label {
   position: absolute;
-  left: 30px;
-  top: 320.14px;
-  width: 555px;
+  width: 585px;
+  margin-top: 228.612px;
 }
 
 #eq_annual_cost_budget_label {
   position: absolute;
-  left: 615px;
-  top: 320.14px;
-  width: 555px;
+  width: 585px;
+  margin-left: 615px;
+  margin-top: 228.612px;
 }
 
 #eq_base_location_label {
   position: absolute;
-  left: 30px;
-  top: 384.793px;
-  width: 555px;
+  width: 585px;
+  margin-top: 293.265px;
 }
 
 #eq_is_mobile_label {
   position: absolute;
-  left: 615px;
-  top: 384.793px;
-  width: 555px;
+  width: 585px;
+  margin-left: 615px;
+  margin-top: 293.265px;
 }
 
 #eq_bookable_label {
   position: absolute;
-  left: 797.436px;
-  top: 384.793px;
-  width: 555px;
+  width: 585px;
+  margin-left: 797.43px;
+  margin-top: 293.265px;
+}
+
+#gallery_button {
+  position: absolute;
+  width: 90px;
+  margin-left: 979.86px;
+  margin-top: 293.265px;
+  display: none;
+}
+
+#documents_button {
+  position: absolute;
+  width: 100px;
+  margin-left: 1099.86px;
+  margin-top: 293.265px;
+  display: none;
 }
 
 #eq_owner_id_label {
   position: absolute;
-  left: 30px;
-  top: 449.446px;
   width: 360px;
+  margin-top: 357.918px;
 }
 
 #eq_owner_id_label p {
@@ -171,14 +222,14 @@
   margin-bottom: auto;
   margin-left: -25px;
   cursor: pointer;
-  display: none;
+  visibility: hidden;
 }
 
 #eq_co_owner_id_label {
   position: absolute;
-  left: 420px;
-  top: 449.446px;
   width: 360px;
+  margin-left: 410px;
+  margin-top: 357.918px;
 }
 
 #eq_co_owner_id_label p {
@@ -188,14 +239,14 @@
   margin-bottom: auto;
   margin-left: -25px;
   cursor: pointer;
-  display: none;
+  visibility: hidden;
 }
 
 #eq_supplier_id_label {
   position: absolute;
-  left: 810px;
-  top: 449.446px;
   width: 360px;
+  margin-left: 820px;
+  margin-top: 357.918px;
 }
 
 #eq_supplier_id_label p {
@@ -205,42 +256,36 @@
   margin-bottom: auto;
   margin-left: -25px;
   cursor: pointer;
-  display: none;
+  visibility: hidden;
 }
 
-#suggestions_owner {
-  z-index: 1000;
+#suggestions_panel {
   position: absolute;
-  left: 30px;
-  top: 484.099px;
-  width: 360px;
+  width: 100%;
+  margin-top: 392.571px;
+  padding-bottom: 20%;
 }
 
-#suggestions_co_owner {
-  z-index: 1000;
+#suggestions_panel #suggestions_owner {
   position: absolute;
-  left: 420px;
-  top: 484.099px;
-  width: 360px;
+  width: 380px;
 }
 
-#suggestions_supplier {
-  z-index: 1000;
+#suggestions_panel #suggestions_co_owner {
   position: absolute;
-  left: 810px;
-  top: 484.099px;
-  width: 360px;
+  width: 380px;
+  margin-left: 410px;
 }
 
-#eq_gallery {
+#suggestions_panel #suggestions_supplier {
   position: absolute;
-  width: 1140px;
-  left: 30px;
-  top: 514.099px;
-  padding-bottom: 30px;
-  overflow: hidden;
-  border-radius: 3px;
+  width: 380px;
+  margin-left: 820px;
+}
+
+#toast_pop_up {
   margin: auto;
+  text-align: center;
 }
 
 .gallery_row {
@@ -288,7 +333,7 @@
 }
 
 /* The Modal (background) */
-.modal {
+.gallery_modal {
   display: none;
   position: fixed;
   z-index: 1;
@@ -302,7 +347,7 @@
 }
 
 /* Modal Content */
-.modal-content {
+.gallery_modal-content {
   position: relative;
   background-color: #fefefe;
   background-color: black;
@@ -329,7 +374,7 @@
   cursor: pointer;
 }
 
-.mySlides {
+.gallery_slides {
   display: none;
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -338,7 +383,7 @@
   margin-right: auto;
 }
 
-.mySlides img {
+.gallery_slides img {
   margin-bottom: -4px;
   max-height: 700px;
   width: auto;
@@ -388,6 +433,7 @@
   padding: 8px 12px;
   position: absolute;
   top: 0;
+  margin-top: -30px;
 }
 
 .caption-container {
@@ -442,8 +488,9 @@ img.hover-shadow {
   background-color: #fefefe;
   margin: auto;
   padding: 0;
-  border: 1px solid #888;
-  width: 60%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   -webkit-box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.13);
           box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.13);
   -webkit-animation-name: animatetop;

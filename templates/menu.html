@@ -1,38 +1,50 @@
 <nav class="kite-menu">
-  <img src="/static/images/safari-pinned-tab.svg" alt="UHasselt Logo" class="logo">
-   <h2 class="kite-logo">REVAL Admin</h2>
-   <div class="kite-menu-trigger" id="hamburger">
-     <span></span>
-   </div>
-   <div class="kite-search-trigger">
-     <i class="fa fa-search"></i>
-   </div>
- 
-   <div class="links-wrapper">
-     <ul class="menu-links">
-       <li>
-         <a href="/equipment">Equipment</a>
-       </li>
-       <li>
-         <a href="/users">Users</a>
-       </li>
-      {% if current_user.user_is_suppliers_admin%}
-       <li>
-         <a href="/suppliers">Suppliers</a>
-       </li>
-      {% endif %}
+    <img src="/static/images/safari-pinned-tab.svg" alt="UHasselt Logo" class="logo">
+     <h2 class="kite-logo">REVAL Admin</h2>
+     <h2 class="kite-title" id="menu_title">Title</h2>
+     <div class="kite-menu-trigger" id="hamburger">
+       <span></span>
+     </div>
+     <div class="kite-search-trigger">
+       <i class="fa fa-search"></i>
+     </div>
+   
+     <div class="links-wrapper">
+       <ul class="menu-links">
+         <li>
+           <a href="/equipment">Equipment</a>
+         </li>
+        {% if current_user.user_is_admin%}
+         <li>
+           <a href="/users">Users</a>
+         </li>
+        {% endif %}
+        {% if current_user.user_is_admin or current_user.user_is_owner%}
+         <li>
+           <a href="/suppliers">Suppliers</a>
+         </li>
+        {% endif %}
+        {% if current_user.user_is_admin%}
+         <li>
+           <a href="/access-management">Access management</a>
+         </li>
+        {% endif %}
+         <li>
+           <a href="/profile">Profile</a>
+         </li>
        <!-- <li>
-         <a href="#3">News</a>
-       </li>
-       <li>
-         <a href="#4">Contact</a>
-       </li>
-       <li>
-         <a href="#5">About</a>
-       </li> -->
-       <li>
-        <a href="{{ url_for('auth.logout') }}">Logout</a>
-      </li>
-     </ul>
-   </div>
- </nav>
+         <!-- <li>
+           <a href="#3">News</a>
+         </li>
+         <li>
+           <a href="#4">Contact</a>
+         </li>
+         <li>
+           <a href="#5">About</a>
+         <!-- </li> -->
+         <li>
+          <a href="{{ url_for('auth.logout') }}">Logout</a>
+        </li>
+       </ul>
+     </div>
+   </nav>

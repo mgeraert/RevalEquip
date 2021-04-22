@@ -1,32 +1,43 @@
-var g_supplier;
+var g_suppliers;
 var g_selectedSupplier;
 var g_selectedRow = -1;
 
 var g_currentUser;
 
 $(document).ready(function () {
-    $.get("/getUserByID?" + $("#current_user_id").text(), function (data, status) {
-        g_currentUser = JSON.parse(data.slice(1, -1));
-        if (g_currentUser.user_is_suppliers_admin) {
-            getSuppliers();
+    $("#menu_title").text("Suppliers");
+
+    $.get("/users/get-permissions-by-id?" + $("#current_user_id").text(), function (data, status) {
+        g_currentUser = JSON.parse(data)[0];
+        if (g_currentUser.user_is_admin) {
+            $('#new_button').show();
+            $('#delete_button').show();
+            $('#export_button').show();
         }
+        else {
+            $('#new_button').hide();
+            $('#delete_button').hide();
+            $('#export_button').hide();
+        }
+        getSuppliers();
     });
 });
 
+// GENERATE SUPPLIERS TABLE -----------------------------------------------------------------------------------------------
 function getSuppliers(enableSelectedRow = false, enableSort = false, sortAsc = false, sortColumn = 0) {
-    $.get("/getSuppliers", function (data, status) {
-        g_supplier = JSON.parse(data);
-        if (g_supplier.length > 0) {
-            tableHTML = "<table id='blue_table' class='table_design table-sortable js-pscroll'>"
+    $.get("/suppliers/get", function (data, status) {
+        g_suppliers = JSON.parse(data);
+        if (g_suppliers.length > 0) {
+            tableHTML = "<table id='blue_table' class='table_design table-sortable'>"
             tableHTML = tableHTML.concat(generateTableHeader());
             tableHTML = tableHTML.concat("<tbody>");
-            $.each(g_supplier, function (i, item) {
+            $.each(g_suppliers, function (i, item) {
                 tableHTML = tableHTML.concat(generateTabelRow(i + 1, item));
             });
             tableHTML = tableHTML.concat("<tbody>");
             tableHTML = tableHTML.concat("</table>");
 
-            $("#suppliersTable").html(tableHTML);
+            $("#suppliers_table").html(tableHTML);
             // addRowHandlers();
             if (enableSort) {
                 sortTableByColumn(document.querySelector("table"), sortColumn, sortAsc);
@@ -99,17 +110,26 @@ function getTableDiv(content, width, rowNr) {
     out = out.concat('</div>');
     return out;
 }
+// --------------------------------------------------------------------------------------------------------------------
 
+// DO .... WHEN SUPPLIER GETS SELECTED --------------------------------------------------------------------------------
 function selectRowSupplier(row) {
+    clearTextBox();
+    loadSelectedData(row);
+}
+// --------------------------------------------------------------------------------------------------------------------
+
+// LOAD INPUT VALUES --------------------------------------------------------------------------------------------------
+function loadSelectedData(row) {
     if (typeof row == 'number') {
         rowNr = row
     } else {
         rowNr = row.rowIndex;
     }
-    var rowNr_data = getJSONFromTable(rowNr);
-    console.log(rowNr);
 
-    var table = document.getElementById("suppliersTable");
+    var rowNr_data = getJSONFromTable(rowNr);
+
+    var table = document.getElementById("suppliers_table");
     var rows = table.getElementsByTagName("tr");
 
     if (g_selectedRow > -1 && g_selectedRow < rows.length) {
@@ -121,7 +141,7 @@ function selectRowSupplier(row) {
     selectedRow = rows[rowNr];
     selectedRow.classList.add("active-row");
     g_selectedRow = rowNr;
-    g_selectedSupplier = g_supplier[rowNr_data - 1];
+    g_selectedSupplier = g_suppliers[rowNr_data - 1];
 
     $("#supplier_last_name").val(g_selectedSupplier.supplier_last_name);
     $("#supplier_name").val(g_selectedSupplier.supplier_name);
@@ -130,7 +150,114 @@ function selectRowSupplier(row) {
     $("#supplier_company").val(g_selectedSupplier.supplier_company);
     $("#supplier_comment").val(g_selectedSupplier.supplier_comment);
 }
+// --------------------------------------------------------------------------------------------------------------------
 
+// --------------------------------------------------------------------------------------------------------------------
+function getJSONFromTable(rowNr) {
+    var table = document.getElementById('blue_table').tBodies[0];
+    var jsonArr = [];
+    for (var i = 0, row; row = table.rows[i]; i++) {
+        var col = row.cells;
+        var jsonObj = {
+            elem: col[0].innerHTML
+        }
+
+        jsonArr.push(jsonObj);
+    }
+
+    var ID = getNumbersFromString(jsonArr[rowNr - 1].elem)[1];
+    return ID;
+}
+
+function getNumbersFromString(string) {
+    var regex = /\d+/g;
+    var matches = string.match(regex);
+    return matches;
+}
+// --------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------
+function clearTextBox() {
+    $("#supplier_last_name").val("");
+    $("#supplier_name").val("");
+    $("#supplier_email").val("");
+    $("#supplier_phone").val("");
+    $("#supplier_company").val("");
+    $("#supplier_comment").val("");
+}
+
+function deselectSupplier() {
+    g_selectedSupplier = undefined;
+    g_selectedRow = -1;
+}
+// --------------------------------------------------------------------------------------------------------------------
+
+// SORTING TABLE ------------------------------------------------------------------------------------------------------
+function sortTableByColumn(table, column, asc = true) {
+    // https://www.youtube.com/watch?v=8SL_hM1a0yo
+    const dirModifier = asc ? 1 : -1;
+    const tBody = table.tBodies[0];
+    const rows = Array.from(tBody.querySelectorAll("tr"));
+
+    var inputType;
+    if (column == 0) {
+        inputType = "numbers";
+    } else {
+        inputType = "names";
+    }
+
+    // sort each row
+    const sortedRows = rows.sort((a, b) => {
+        if (inputType == "names") {
+            const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+            const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+            return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
+        } else {
+            const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+            const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+            return parseFloat(aColText) > parseFloat(bColText) ? (1 * dirModifier) : (-1 * dirModifier);
+        }
+    });
+    for (i = 0; i < sortedRows.length; i++) {
+        var innerText = sortedRows[i].innerText.split("\n\t\n");
+        var name = innerText[1];
+        // console.log(i, sortedRows[i].innerText.split("\n\t\n")[0], name);
+        if (g_selectedUser != undefined) {
+            if (name == g_selectedUser.user_name) {
+                g_selectedRow = i + 1;
+            }
+        }
+    }
+    // console.log(g_selectedRow - 1);
+
+    // remove all resisting tr from table
+    while (tBody.firstChild) {
+        tBody.removeChild(tBody.firstChild);
+    }
+
+    // add sorted rows
+    tBody.append(...sortedRows);
+
+    // remember current sorting type (asc or decs)
+    table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
+    table.querySelector(`th:nth-child(${column + 1})`).classList.toggle("th-sort-asc", asc);
+    table.querySelector(`th:nth-child(${column + 1})`).classList.toggle("th-sort-desc", !asc);
+}
+
+function sortColumnUser(column) {
+    var table = document.querySelector("table");
+    var currentIsAscending = table.querySelectorAll("th")[column].className;
+    if (currentIsAscending == "") {
+        sortTableByColumn(table, column);
+    } else if (currentIsAscending == "th-sort-desc") {
+        sortTableByColumn(table, column, true);
+    } else {
+        sortTableByColumn(table, column, false);
+    }
+}
+// --------------------------------------------------------------------------------------------------------------------
+
+// UPDATE SELECTED SUPPLIER -------------------------------------------------------------------------------------------
 function updateSupplier() {
     if (g_selectedSupplier == undefined) {
         showToast('Gelieve een supplier aan te duiden.', '#B08734');
@@ -172,9 +299,9 @@ function updateSupplier() {
     argString = argString + "&supplier_comment=" + supplier_comment;
 
     if (g_selectedRow > -1) {
-        $.get("/updateSupplier" + argString, function (data, status) {
+        $.get("/suppliers/update" + argString, function (data, status) {
             if (data.localeCompare("http200") == 0) {
-                showToast('Supplier is geupdate', '#5DB034');
+                showToast("Selected supplier has been updated.");
 
                 var table_temp = document.querySelector("table");
                 const tHead = table_temp.tHead;
@@ -201,25 +328,33 @@ function updateSupplier() {
                 if (supplier_name == "") {
                     giveInputWarning("supplier_name");
                 }
-                showToast('Gelieve de velden correct in te vullen', '#B08734');
+                if (supplier_email == "") {
+                    giveInputWarning("supplier_email");
+                }
+                if (supplier_phone == "") {
+                    giveInputWarning("supplier_phone");
+                }
             }
         });
     }
 }
+// --------------------------------------------------------------------------------------------------------------------
 
+// NEW SUPPLIER -------------------------------------------------------------------------------------------------------
 function prepareNewSupplier() {
     clearTextBox();
+    deselectSupplier();
 
     var table_temp = document.querySelector("table");
     const tBody = table_temp.tBodies[0];
     const rows_temp = Array.from(tBody.querySelectorAll("tr"));
     rows_temp.forEach(tr => tr.classList.remove("active-row"));
 
-    $('#update_button').css("visibility", "hidden");
-    $('#new_button').css("visibility", "hidden");
-    $('#delete_button').css("visibility", "hidden");
-    $('#add_button').css("visibility", "visible");
-    $('#cancel_button').css("visibility", "visible");
+    $('#update_button').hide();
+    $('#new_button').hide();
+    $('#delete_button').hide();
+    $('#add_button').show();
+    $('#cancel_button').show();
 }
 
 function cancelNewSupplier() {
@@ -230,32 +365,18 @@ function cancelNewSupplier() {
     const rows_temp = Array.from(tBody.querySelectorAll("tr"));
     rows_temp.forEach(tr => tr.classList.remove("active-row"));
 
-    $('#update_button').css("visibility", "visible");
-    $('#new_button').css("visibility", "visible");
-    $('#delete_button').css("visibility", "visible");
-    $('#add_button').css("visibility", "hidden");
-    $('#cancel_button').css("visibility", "hidden");
+    $('#update_button').show();
+    $('#new_button').show();
+    $('#delete_button').show();
+    $('#add_button').hide();
+    $('#cancel_button').hide();
 }
 
 function newSupplier() {
     var supplier_last_name = $("#supplier_last_name").val();
-    argString = "?supplier_last_name=" + supplier_last_name.toUpperCase();
+    argString = "?supplier_last_name=" + supplier_last_name;
 
-    var supplier_name = "";
-    if ($("#supplier_name").val() != "") {
-        var name = $("#supplier_name").val().split(' ');
-        for (i = 0; i < name.length; i++) {
-            for (j = 0; j < name[i].length; j++) {
-                if (j == 0) {
-                    supplier_name = supplier_name + name[i][j].toUpperCase();
-                } else {
-                    supplier_name = supplier_name + name[i][j];
-                }
-            }
-            supplier_name = supplier_name + " ";
-        }
-        supplier_name = supplier_name.slice(0, -1);
-    }
+    var supplier_name = $("#supplier_name").val();
     argString = argString + "&supplier_name=" + supplier_name;
 
     var supplier_email = $("#supplier_email").val();
@@ -270,16 +391,18 @@ function newSupplier() {
     var supplier_comment = $("#supplier_comment").val();
     argString = argString + "&supplier_comment=" + supplier_comment;
 
-    $.get("/newSupplier" + argString, function (data, status) {
+    $.get("/suppliers/new" + argString, function (data, status) {
         if (data.localeCompare("http200") == 0) {
             getSuppliers();
             clearTextBox();
-            $('#update_button').css("visibility", "visible");
-            $('#new_button').css("visibility", "visible");
-            $('#delete_button').css("visibility", "visible");
-            $('#add_button').css("visibility", "hidden");
-            $('#cancel_button').css("visibility", "hidden");
-            showToast('Nieuwe supplier is aangemaakt', '#8734B0');
+
+            $('#update_button').show();
+            $('#new_button').show();
+            $('#delete_button').show();
+            $('#add_button').hide();
+            $('#cancel_button').hide();
+
+            showToast('New supplier has been added.');
         } else if (data.localeCompare("http400") == 0) {
             if (supplier_last_name == "") {
                 giveInputWarning("supplier_last_name");
@@ -287,22 +410,29 @@ function newSupplier() {
             if (supplier_name == "") {
                 giveInputWarning("supplier_name");
             }
-            showToast('Gelieve de velden correct in te vullen', '#B08734');
+            if (supplier_email == "") {
+                giveInputWarning("supplier_email");
+            }
+            if (supplier_phone == "") {
+                giveInputWarning("supplier_phone");
+            }
         }
     });
 }
+// --------------------------------------------------------------------------------------------------------------------
 
+// DELETE SUPPLIER ----------------------------------------------------------------------------------------------------
 function deleteSupplier() {
     if (g_selectedSupplier == undefined) {
-        showToast('Gelieve een gebruiker aan te duiden.', '#B08734');
+        showToast('Please select a supplier before clicking delete.');
         return;
     }
     var ID = g_selectedSupplier.ID;
     argString = "?ID=" + ID;
 
-    $.get("/deleteSupplier" + argString, function (data, status) {
+    $.get("/suppliers/delete" + argString, function (data, status) {
         if (data.localeCompare("http200") == 0) {
-            showToast('ID:' + ID + ' is verwijderd', '#B04934');
+            showToast('ID:' + ID + ' is deleted');
 
             var table_temp = document.querySelector("table");
             const tHead = table_temp.tHead;
@@ -328,96 +458,11 @@ function deleteSupplier() {
         }
     });
 }
+// --------------------------------------------------------------------------------------------------------------------
 
-function resetSupplier() {
-    clearTextBox();
-    g_selectedSupplier = undefined;
-    g_selectedRow = -1;
-
-    getSuppliers();
-    showToast('Velden gereset', '#349BB0');
-}
-
-function clearTextBox() {
-    $("#supplier_last_name").val("");
-    $("#supplier_name").val("");
-    $("#supplier_email").val("");
-    $("#supplier_phone").val("");
-    $("#supplier_company").val("");
-    $("#supplier_comment").val("");
-    g_selectedSupplier = undefined;
-    g_selectedRow = -1;
-}
-
-// https://www.youtube.com/watch?v=8SL_hM1a0yo
-function sortTableByColumn(table, column, asc = true) {
-    const dirModifier = asc ? 1 : -1;
-    const tBody = table.tBodies[0];
-    const rows = Array.from(tBody.querySelectorAll("tr"));
-
-    var inputType;
-    if (column == 0) {
-        inputType = "numbers";
-    } else {
-        inputType = "names";
-    }
-    // sort each row
-    const sortedRows = rows.sort((a, b) => {
-        if (inputType == "names") {
-            const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
-            const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
-            return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
-        } else {
-            const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
-            const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
-            return parseFloat(aColText) > parseFloat(bColText) ? (1 * dirModifier) : (-1 * dirModifier);
-        }
-    });
-    for (i = 0; i < sortedRows.length; i++) {
-        var innerText = sortedRows[i].innerText.split("\n\t\n");
-        var nameArray = innerText[1].split(" ");
-        var lastName = "";
-        for (j = 0; j < nameArray.length; j++) {
-            if (nameArray[j] == nameArray[j].toUpperCase()) {
-                lastName = lastName + nameArray[j] + " ";
-            }
-        }
-        lastName = lastName.slice(0, -1);
-        if (g_selectedSupplier != undefined) {
-            if (lastName == g_selectedSupplier.supplier_last_name) {
-                g_selectedRow = i + 1;
-            }
-        }
-    }
-
-    // remove all resisting tr from table
-    while (tBody.firstChild) {
-        tBody.removeChild(tBody.firstChild);
-    }
-
-    // add sorted rows
-    tBody.append(...sortedRows);
-
-    // remember current sorting type (asc or decs)
-    table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
-    table.querySelector(`th:nth-child(${column + 1})`).classList.toggle("th-sort-asc", asc);
-    table.querySelector(`th:nth-child(${column + 1})`).classList.toggle("th-sort-desc", !asc);
-}
-
-function sortColumnSupplier(column) {
-    var table = document.querySelector("table");
-    var currentIsAscending = table.querySelectorAll("th")[column].className;
-    if (currentIsAscending == "") {
-        sortTableByColumn(table, column);
-    } else if (currentIsAscending == "th-sort-desc") {
-        sortTableByColumn(table, column, true);
-    } else {
-        sortTableByColumn(table, column, false);
-    }
-}
-
-function showToast(text, color) {
-    const toastHTML = `<div id="toast_pop_up" style="height:32px;background-color:${color};" class="mlbutton">${text}</div>`;
+// FLASH/TOAST NOTIFICATIONS-------------------------------------------------------------------------------------------
+function showToast(text, color = '#01A38C') {
+    var toastHTML = `<div id="toast_pop_up" style="background-color:${color};" class="mlbutton">${text}</div>`;
 
     $("#toast_message").html(toastHTML);
 
@@ -425,41 +470,24 @@ function showToast(text, color) {
         $('#toast_message').fadeOut(500, function () {
             $(this).empty().show();
         });
-    }, 1500);
+    }, 2500);
 }
 
-function getJSONFromTable(rowNr) {
-    var table = document.getElementById('blue_table').tBodies[0];
-    var jsonArr = [];
-    for (var i = 0, row; row = table.rows[i]; i++) {
-        var col = row.cells;
-        var jsonObj = {
-            elem: col[0].innerHTML
-        }
-
-        jsonArr.push(jsonObj);
-    }
-
-    var ID = getNumbersFromString(jsonArr[rowNr - 1].elem)[1];// creates array from matches
-    return ID;
+function removeFlashNotification() {
+    $(".notification").remove();
 }
+// --------------------------------------------------------------------------------------------------------------------
 
-function getNumbersFromString(string) {
-    var regex = /\d+/g;
-    var matches = string.match(regex);
-    return matches;
-}
-
+// --------------------------------------------------------------------------------------------------------------------
 function giveInputWarning(inputID) {
-    console.log('#' + inputID)
+    // console.log('#' + inputID)
     var input = $('#' + inputID);
 
     input.css("border-color", "#BA604D");
-    input.css("background-color", "#E1BBB3");
     input.css("transition", "0.2s");
 
     setTimeout(function () {
         input.css("border-color", "");
-        input.css("background-color", "");
     }, 1500);
 }
+// --------------------------------------------------------------------------------------------------------------------

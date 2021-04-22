@@ -10,7 +10,7 @@
 
   <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
   <script src="{{url_for('static', filename='js/login.js')}}"></script>
-  <script src="{{url_for('static', filename='js/md5.js')}}"></script>
+  <script src="{{url_for('static', filename='js/sha256.js')}}"></script>
 
 
   <!--Font Awesome-->
@@ -18,9 +18,6 @@
 
   <!--Google Fonts-->
   <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-
-  <!--Kite Menu CSS-->
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/menu2.css') }}">
 
   <!--Favicon-->
   <link rel="shortcut icon" href="/static/images/favicon.ico">
@@ -59,7 +56,7 @@
                     </div>
                     <button id="login_button" onclick="login()" class="mlbutton">Login</button>
                 </form>
-                <a id = "reset_password" href="resetpassword">Forgot password?</a>
+                <a id = "reset_password" href="/reset-password">Forgot password?</a>
             </div>
         </div>
     </div>

@@ -1,94 +1,145 @@
-#update_button {
+html, body {
+  font-size: 14px;
+  height: 100vh;
+  width: 100vw;
+  margin: 0 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+#wide_panel {
+  top: 0;
+}
+
+#text_title {
+  float: left;
+  width: 100%;
+  padding: 6.2px 12px;
+  background-color: #41BAA9;
+  border: 1px solid #01A38C;
+  font-size: 16px;
+  text-align: center;
+  color: #fff;
+  font-weight: 550;
+  cursor: auto;
+}
+
+#suppliers_table {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  max-height: 40vh;
+  width: 100%;
+  overflow-x: hidden;
+  text-align: center;
+  border-radius: 6px 6px 6px 6px;
+  -webkit-box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.13);
+          box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.13);
+}
+
+.button_panel {
+  margin-top: 20px;
+  height: 32px;
+}
+
+.button_panel #file_input {
   position: absolute;
-  left: 420px;
-  top: 30px;
+  margin-top: 2px;
+  width: 360px;
+  padding: 2.2px 3px 2.9px 3px;
+  font-size: 12px;
+}
+
+.button_panel .upload_button {
+  position: absolute;
+  left: 260px;
   width: 100px;
 }
 
-#new_button {
+.button_panel #update_button {
+  position: absolute;
+  left: 420px;
+  width: 100px;
+}
+
+.button_panel #new_button {
   position: absolute;
   left: 550px;
-  top: 30px;
   width: 100px;
 }
 
-#delete_button {
+.button_panel #delete_button {
   position: absolute;
   left: 680px;
-  top: 30px;
   width: 100px;
 }
 
-#add_button {
+.button_panel #export_button {
+  position: absolute;
+  left: 1100px;
+  width: 100px;
+}
+
+.button_panel #add_button {
   position: absolute;
   left: 485px;
-  top: 30px;
   width: 100px;
-  visibility: hidden;
+  display: none;
 }
 
-#cancel_button {
+.button_panel #cancel_button {
   position: absolute;
   left: 615px;
-  top: 30px;
   width: 100px;
-  visibility: hidden;
+  display: none;
 }
 
-#export_button {
-  position: absolute;
-  left: 1070px;
-  top: 30px;
-  width: 100px;
-}
-
-#toast_pop_up {
-  left: 420px;
-  width: 360px;
-  position: absolute;
-  background-color: gray;
-  top: 30px;
+.input_panel {
+  position: relative;
+  margin-top: 25px;
 }
 
 #supplier_last_name_label {
-  position: absolute;
-  left: 30px;
-  top: 91.528px;
-  width: 555px;
+  float: left;
+  width: 49%;
 }
 
 #supplier_name_label {
-  position: absolute;
-  left: 615px;
-  top: 91.528px;
-  width: 555px;
+  float: left;
+  margin-left: 2%;
+  width: 49%;
 }
 
 #supplier_email_label {
-  position: absolute;
-  left: 30px;
-  top: 141.181px;
-  width: 555px;
+  float: left;
+  margin-top: 2%;
+  width: 32%;
 }
 
 #supplier_phone_label {
-  position: absolute;
-  left: 615px;
-  top: 141.181px;
-  width: 555px;
+  float: left;
+  margin-left: 2%;
+  margin-top: 2%;
+  width: 32%;
 }
 
 #supplier_company_label {
-  position: absolute;
-  left: 30px;
-  top: 190.834px;
-  width: 555px;
+  float: left;
+  margin-left: 2%;
+  margin-top: 2%;
+  width: 32%;
 }
 
 #supplier_comment_label {
-  position: absolute;
-  left: 615px;
-  top: 190.834px;
-  width: 555px;
+  float: left;
+  margin-top: 2%;
+  width: 100%;
 }
 /*# sourceMappingURL=suppliers_form.css.map */
